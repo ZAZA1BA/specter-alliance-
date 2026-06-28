@@ -105,7 +105,6 @@
             text-transform: uppercase;
         }
 
-        /* ===== GİRİŞ EKRANI ===== */
         #login-screen {
             display: block;
             position: relative;
@@ -199,7 +198,6 @@
             z-index: 1;
         }
 
-        /* ===== CHECKER EKRANI ===== */
         #checker-screen {
             display: none;
             position: relative;
@@ -533,7 +531,6 @@
             margin: 0 6px;
         }
 
-        /* ===== BINANCE TARZI ANIMASYON ===== */
         .binance-loader {
             display: none;
             text-align: center;
@@ -661,7 +658,6 @@
             </div>
             <button class="check-btn" id="check-btn">DOĞRULA</button>
             
-            <!-- Binance Tarzı Yüklenme Animasyonu -->
             <div class="binance-loader" id="binance-loader">
                 <div class="loader-text">🔍 TARANIYOR</div>
                 <div class="loader-bar">
@@ -790,10 +786,13 @@
                     return { success: false, error: 'Bu IP ile zaten kayıt yapılmış!' };
                 }
                 if (!response.ok) {
-                    return { success: false, error: 'Sunucu hatası!' };
+                    const errText = await response.text();
+                    console.error('Supabase hatası:', errText);
+                    return { success: false, error: 'Sunucu hatası: ' + response.status };
                 }
                 return { success: true, data: await response.json() };
             } catch (e) {
+                console.error('Bağlantı hatası:', e);
                 return { success: false, error: 'Bağlantı hatası!' };
             }
         }
@@ -810,7 +809,10 @@
                         }
                     }
                 );
-                if (!response.ok) return null;
+                if (!response.ok) {
+                    console.error('IP kontrol hatası:', response.status);
+                    return null;
+                }
                 const data = await response.json();
                 if (data && data.length > 0) {
                     return data[0].telegram_username;
@@ -848,6 +850,7 @@
             try {
                 const ip = await getIP();
                 userIP = ip;
+                console.log('IP:', ip);
 
                 // Önce IP ile kayıt var mı kontrol et
                 const existingUser = await checkIPInDatabase(ip);
@@ -870,6 +873,7 @@
                 }
 
                 // Yeni kayıt
+                console.log('Yeni kayıt:', username, ip);
                 const result = await logToSupabase(username, ip);
 
                 if (result.success) {
@@ -880,8 +884,10 @@
                     showToast('Kayıt başarılı!');
                 } else {
                     loginError.textContent = result.error || 'Bir hata oluştu!';
+                    showToast(result.error || 'Kayıt hatası!', true);
                 }
             } catch (e) {
+                console.error('Giriş hatası:', e);
                 loginError.textContent = 'Bağlantı hatası!';
                 showToast('Bağlantı hatası!', true);
             }
@@ -1059,6 +1065,7 @@
             const cards = parseCards(ccInput.value);
             cardCount.textContent = cards.length + ' kart';
             cardCountDisplay.textContent = cards.length + ' kart';
+            console.log('Sistem başlatıldı!');
         });
     </script>
 </body>
