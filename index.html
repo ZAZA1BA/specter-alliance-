@@ -107,15 +107,116 @@
             text-transform: uppercase;
         }
 
+        /* ===== DÜNYA ANİMASYONU ===== */
+        #ip-check-screen {
+            display: block;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        #ip-check-screen.hidden {
+            display: none;
+        }
+
+        .globe-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .globe {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(0,255,65,0.15), rgba(0,255,65,0.02));
+            border: 1px solid rgba(0, 255, 65, 0.08);
+            position: relative;
+            animation: globeSpin 6s linear infinite;
+            box-shadow: 0 0 60px rgba(0, 255, 65, 0.03);
+        }
+
+        .globe::before {
+            content: '🌍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            animation: globePulse 2s ease-in-out infinite;
+        }
+
+        .globe::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 255, 65, 0.03);
+            animation: globeRing 3s ease-in-out infinite;
+        }
+
+        @keyframes globeSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes globePulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        @keyframes globeRing {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0; }
+        }
+
+        .ip-check-text {
+            font-size: 0.6rem;
+            color: rgba(0, 255, 65, 0.15);
+            letter-spacing: 3px;
+            animation: blinkText 1.2s infinite;
+        }
+
+        .ip-check-detail {
+            font-size: 0.5rem;
+            color: rgba(0, 255, 65, 0.06);
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
+        .ip-check-detail span {
+            color: rgba(0, 255, 65, 0.1);
+        }
+
+        @keyframes blinkText {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
         /* ===== GİRİŞ EKRANI ===== */
         #login-screen {
-            display: block;
+            display: none;
             position: relative;
             z-index: 1;
         }
 
+        #login-screen.active {
+            display: block;
+            animation: fadeSlide 0.5s ease;
+        }
+
         #login-screen.hidden {
             display: none;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .input-group {
@@ -207,11 +308,6 @@
             animation: fadeSlide 0.4s ease;
         }
 
-        @keyframes fadeSlide {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .status-bar {
             display: flex;
             justify-content: space-between;
@@ -235,11 +331,6 @@
             background: #00ff41;
             animation: pulse 1.8s infinite;
             margin-right: 5px;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.1; }
         }
 
         .input-area textarea {
@@ -509,7 +600,6 @@
             color: rgba(255, 51, 85, 0.3);
         }
 
-        /* ===== ÖRNEK KART ETİKETİ ===== */
         .sample-label {
             font-size: 0.4rem;
             color: rgba(0, 255, 65, 0.05);
@@ -534,7 +624,6 @@
             margin: 0 4px;
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
             body { padding: 6px; }
             .box { padding: 18px 14px; border-radius: 14px; }
@@ -549,6 +638,9 @@
             .status-bar { font-size: 0.45rem; padding: 4px 10px; }
             .input-options { font-size: 0.4rem; }
             .sample-label { font-size: 0.35rem; }
+            .globe-container { width: 80px; height: 80px; }
+            .globe::before { font-size: 2.8rem; }
+            #ip-check-screen { padding: 25px 15px; }
         }
 
         @media (max-width: 380px) {
@@ -557,11 +649,27 @@
             .input-group input { padding: 8px 10px; font-size: 0.65rem; }
             .input-area textarea { min-height: 60px; font-size: 0.5rem; padding: 8px; }
             .stat-card .number { font-size: 0.8rem; }
+            .globe-container { width: 60px; height: 60px; }
+            .globe::before { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
     <div class="container">
+
+        <!-- ===== IP KONTROL EKRANI ===== -->
+        <div id="ip-check-screen" class="box">
+            <div class="globe-container">
+                <div class="globe"></div>
+            </div>
+            <div class="ip-check-text">🌐 KONUM KONTROL EDİLİYOR</div>
+            <div class="ip-check-detail">
+                <span id="ip-display-check">IP: 0.0.0.0</span>
+                <br>
+                <span id="location-status">Bekleniyor...</span>
+            </div>
+        </div>
+
         <!-- ===== GİRİŞ EKRANI ===== -->
         <div id="login-screen" class="box">
             <div class="header">
@@ -645,6 +753,7 @@
         const SUPABASE_KEY = "sb_publishable_EuoT7yhxcHS6wyZfho_RNw_sWD0IhjP";
 
         // ===== DOM =====
+        const ipCheckScreen = document.getElementById('ip-check-screen');
         const loginScreen = document.getElementById('login-screen');
         const checkerScreen = document.getElementById('checker-screen');
         const loginForm = document.getElementById('login-form');
@@ -652,6 +761,8 @@
         const loginError = document.getElementById('login-error');
         const loginUser = document.getElementById('login-username');
         const loginPass = document.getElementById('login-password');
+        const ipDisplayCheck = document.getElementById('ip-display-check');
+        const locationStatus = document.getElementById('location-status');
 
         const ccInput = document.getElementById('cc-input');
         const checkBtn = document.getElementById('check-btn');
@@ -671,7 +782,12 @@
 
         let isChecking = false;
         let toastTimeout = null;
+        let isLoggingIn = false;
+
         const LIVE_RATIO = 3;
+        let userIP = null;
+        let userCountry = null;
+        let userCity = null;
 
         // ===== TOAST =====
         function showToast(msg, isError = false) {
@@ -681,13 +797,58 @@
             toastTimeout = setTimeout(() => toast.classList.remove('show'), 2800);
         }
 
-        // ===== IP =====
-        async function getIP() {
+        // ===== IP VE KONUM =====
+        async function getIPAndLocation() {
             try {
-                const r = await fetch('https://api.ipify.org?format=json');
+                const r = await fetch('https://ipapi.co/json/');
                 const d = await r.json();
-                return d.ip;
-            } catch { return '0.0.0.0'; }
+                if (d.ip) {
+                    userIP = d.ip;
+                    userCountry = d.country_name;
+                    userCity = d.city;
+                    ipDisplayCheck.textContent = `IP: ${userIP}`;
+                    locationStatus.textContent = `📍 ${userCity || 'Bilinmiyor'}, ${userCountry || 'Bilinmiyor'}`;
+                    return { ip: userIP, country: userCountry, city: userCity };
+                }
+                throw new Error('IP alınamadı');
+            } catch (e) {
+                // Fallback: sadece IP al
+                try {
+                    const r2 = await fetch('https://api.ipify.org?format=json');
+                    const d2 = await r2.json();
+                    userIP = d2.ip;
+                    ipDisplayCheck.textContent = `IP: ${userIP}`;
+                    locationStatus.textContent = '🌐 Konum bilgisi alınamadı';
+                    return { ip: userIP, country: null, city: null };
+                } catch {
+                    locationStatus.textContent = '❌ Bağlantı hatası';
+                    return null;
+                }
+            }
+        }
+
+        // ===== SUPABASE'DEN IP KONTROLÜ (kullanıcı var mı) =====
+        async function checkIPInDatabase(ip) {
+            try {
+                const response = await fetch(
+                    `${SUPABASE_URL}/rest/v1/logs?select=telegram_username&ip_address=eq.${ip}&limit=1`,
+                    {
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`
+                        }
+                    }
+                );
+                if (!response.ok) return null;
+                const data = await response.json();
+                if (data && data.length > 0) {
+                    return data[0].telegram_username;
+                }
+                return null;
+            } catch (e) {
+                console.error('DB kontrol hatası:', e);
+                return null;
+            }
         }
 
         // ===== SUPABASE KAYIT =====
@@ -710,7 +871,9 @@
                     device_type: /Mobile|Android|iPhone|iPad/.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
                     screen_resolution: `${window.screen.width}x${window.screen.height}`,
                     language: navigator.language || navigator.userLanguage,
-                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    country: userCountry || 'Bilinmiyor',
+                    city: userCity || 'Bilinmiyor'
                 };
 
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/logs`, {
@@ -728,17 +891,91 @@
                     return { success: false, error: 'Bu IP ile zaten kayıt yapılmış!' };
                 }
                 if (!response.ok) {
-                    return { success: false, error: 'Sunucu hatası!' };
+                    const errText = await response.text();
+                    return { success: false, error: `Sunucu hatası: ${errText}` };
                 }
                 return { success: true };
-            } catch {
+            } catch (e) {
                 return { success: false, error: 'Bağlantı hatası!' };
             }
         }
 
+        // ===== ANA SAYFA YÜKLENİNCE =====
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Önce IP ve konum kontrolü
+            const info = await getIPAndLocation();
+
+            if (!info) {
+                // IP alınamadı, hata göster
+                locationStatus.textContent = '❌ IP alınamadı, lütfen bağlantınızı kontrol edin';
+                setTimeout(() => {
+                    ipCheckScreen.classList.add('hidden');
+                    loginScreen.classList.add('active');
+                }, 3000);
+                return;
+            }
+
+            // Türkiye kontrolü (ülke adı "Turkey" veya "Türkiye")
+            const isTurkey = info.country && 
+                (info.country.toLowerCase().includes('turkey') || 
+                 info.country.toLowerCase().includes('türkiye'));
+
+            if (!isTurkey) {
+                // Yurt dışı - hata göster
+                locationStatus.textContent = '🚫 Ülkeniz Türkiye değil! Erişim engellendi.';
+                document.querySelector('.ip-check-text').textContent = '⛔ ERİŞİM ENGELLENDİ';
+                document.querySelector('.ip-check-text').style.color = 'rgba(255,51,85,0.5)';
+                
+                // 3 saniye sonra yönlendir veya blokta kal
+                setTimeout(() => {
+                    document.body.innerHTML = `
+                        <div style="display:flex;justify-content:center;align-items:center;min-height:100vh;text-align:center;padding:20px;color:rgba(255,51,85,0.3);font-family:'Share Tech Mono',monospace;font-size:0.8rem;">
+                            <div>
+                                <div style="font-size:3rem;margin-bottom:15px;">🚫</div>
+                                <div style="color:rgba(255,51,85,0.4);">ERİŞİM ENGELLENDİ</div>
+                                <div style="font-size:0.6rem;color:rgba(255,255,255,0.05);margin-top:10px;">Bu hizmet yalnızca Türkiye'den erişime açıktır.</div>
+                            </div>
+                        </div>
+                    `;
+                }, 2500);
+                return;
+            }
+
+            // Türkiye'den erişim - IP veritabanında kontrol et
+            locationStatus.textContent = '✅ Türkiye - Kontrol ediliyor...';
+
+            const existingUser = await checkIPInDatabase(info.ip);
+
+            if (existingUser) {
+                // Bu IP ile daha önce kayıt olunmuş
+                locationStatus.textContent = `✅ Hoş geldin, ${existingUser}`;
+                setTimeout(() => {
+                    ipCheckScreen.classList.add('hidden');
+                    loginScreen.classList.add('active');
+                    // Kullanıcı adını otomatik doldur
+                    loginUser.value = existingUser;
+                    loginUser.disabled = true;
+                }, 1200);
+            } else {
+                // Yeni IP
+                locationStatus.textContent = '🆕 Yeni IP - Kayıt olabilirsin';
+                setTimeout(() => {
+                    ipCheckScreen.classList.add('hidden');
+                    loginScreen.classList.add('active');
+                }, 1200);
+            }
+
+            // Kart sayacı
+            cardCount.textContent = '0 kart';
+            cardCountDisplay.textContent = '0 kart';
+        });
+
         // ===== GİRİŞ =====
         loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+
+            if (isLoggingIn) return;
+
             const username = loginUser.value.trim();
             const password = loginPass.value.trim();
 
@@ -751,23 +988,55 @@
                 return;
             }
 
+            isLoggingIn = true;
             loginBtn.disabled = true;
             loginBtn.textContent = 'DOĞRULANIYOR...';
             loginError.textContent = '';
 
-            const ip = await getIP();
-            const result = await logToSupabase(username, ip);
+            try {
+                // Önce IP ile kayıt var mı kontrol et
+                const existingUser = await checkIPInDatabase(userIP);
 
-            if (result.success) {
-                loginError.textContent = '';
-                loginScreen.classList.add('hidden');
-                checkerScreen.classList.add('active');
-                statusText.textContent = 'Hoş Geldin';
-                showToast('Giriş başarılı!');
-            } else {
-                loginError.textContent = result.error || 'Bir hata oluştu!';
+                if (existingUser) {
+                    // Bu IP zaten kayıtlı
+                    if (existingUser === username) {
+                        // Aynı kullanıcı adı - giriş başarılı
+                        loginError.textContent = '';
+                        loginScreen.classList.remove('active');
+                        loginScreen.classList.add('hidden');
+                        checkerScreen.classList.add('active');
+                        statusText.textContent = `Hoş Geldin, ${username}`;
+                        showToast('Giriş başarılı!');
+                    } else {
+                        // Farklı kullanıcı adı - bu IP ile zaten başka hesap var
+                        loginError.textContent = `Bu IP adresi (${userIP}) ile zaten @${existingUser} kayıtlı. Farklı hesap oluşturamazsınız.`;
+                        showToast('Bu IP ile başka hesap kayıtlı!', true);
+                    }
+                    isLoggingIn = false;
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'DOĞRULA';
+                    return;
+                }
+
+                // Yeni kayıt
+                const result = await logToSupabase(username, userIP);
+
+                if (result.success) {
+                    loginError.textContent = '';
+                    loginScreen.classList.remove('active');
+                    loginScreen.classList.add('hidden');
+                    checkerScreen.classList.add('active');
+                    statusText.textContent = `Hoş Geldin, ${username}`;
+                    showToast('Kayıt başarılı!');
+                } else {
+                    loginError.textContent = result.error || 'Bir hata oluştu!';
+                }
+            } catch (e) {
+                loginError.textContent = 'Bağlantı hatası!';
+                showToast('Bağlantı hatası!', true);
             }
 
+            isLoggingIn = false;
             loginBtn.disabled = false;
             loginBtn.textContent = 'DOĞRULA';
         });
@@ -886,7 +1155,7 @@
             this.value = '';
         });
 
-        // ===== ÖRNEK KARTLAR (DENENMEZ) =====
+        // ===== ÖRNEK KARTLAR =====
         const sampleCards = `4111111111111111|12|26|123
         5500000000000004|10|27|456
         340000000000009|02|28|789
@@ -914,17 +1183,6 @@
         });
 
         checkBtn.addEventListener('click', startCheck);
-
-        // ===== BAŞLANGIÇ =====
-        document.addEventListener('DOMContentLoaded', function() {
-            cardCount.textContent = '0 kart';
-            cardCountDisplay.textContent = '0 kart';
-            // Örnek kartları otomatik yükle (gösterim amaçlı)
-            ccInput.value = sampleCards;
-            const cards = parseCards(ccInput.value);
-            cardCount.textContent = cards.length + ' kart';
-            cardCountDisplay.textContent = cards.length + ' kart';
-        });
     </script>
 </body>
 </html>
