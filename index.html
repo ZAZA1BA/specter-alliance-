@@ -2,14 +2,15 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>CC Checker - Secure Panel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -18,40 +19,42 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            padding: 10px;
             background: radial-gradient(ellipse at center, #0d1a0d 0%, #000000 100%);
             position: relative;
         }
 
         body::before {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(0,255,65,0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(0,255,65,0.03) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(0,255,65,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0,255,65,0.02) 0%, transparent 50%);
             pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             width: 100%;
-            max-width: 520px;
-            padding: 20px;
+            max-width: 480px;
+            padding: 8px;
             position: relative;
             z-index: 1;
         }
 
         /* ===== ORTAK KUTU ===== */
         .box {
-            background: rgba(16, 26, 16, 0.95);
-            border: 1px solid rgba(0, 255, 65, 0.15);
-            border-radius: 20px;
-            padding: 35px 30px;
-            box-shadow: 0 0 80px rgba(0, 255, 65, 0.04), inset 0 0 80px rgba(0, 255, 65, 0.01);
-            backdrop-filter: blur(12px);
+            background: rgba(12, 20, 12, 0.96);
+            border: 1px solid rgba(0, 255, 65, 0.08);
+            border-radius: 16px;
+            padding: 22px 18px;
+            box-shadow: 0 0 60px rgba(0, 255, 65, 0.02), inset 0 0 60px rgba(0, 255, 65, 0.005);
+            backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
         }
@@ -63,14 +66,45 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(0, 255, 65, 0.03), transparent 30%);
-            animation: rotate 12s linear infinite;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 255, 65, 0.02), transparent 30%);
+            animation: rotate 15s linear infinite;
             pointer-events: none;
         }
 
         @keyframes rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #00ff41;
+            text-shadow: 0 0 30px rgba(0, 255, 65, 0.08);
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: rgba(0, 255, 65, 0.2);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .subtitle {
+            font-size: 0.5rem;
+            color: rgba(0, 255, 65, 0.12);
+            margin-top: 4px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
         }
 
         /* ===== GİRİŞ EKRANI ===== */
@@ -84,106 +118,79 @@
             display: none;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .logo {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #00ff41;
-            text-shadow: 0 0 30px rgba(0, 255, 65, 0.15);
-            letter-spacing: 3px;
-        }
-
-        .logo span {
-            color: rgba(0, 255, 65, 0.3);
-            font-size: 1rem;
-            font-weight: 400;
-        }
-
-        .subtitle {
-            font-size: 0.6rem;
-            color: rgba(0, 255, 65, 0.25);
-            margin-top: 6px;
-            letter-spacing: 3px;
-        }
-
         .input-group {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             position: relative;
             z-index: 1;
         }
 
         .input-group label {
             display: block;
-            font-size: 0.55rem;
-            color: rgba(0, 255, 65, 0.3);
-            margin-bottom: 5px;
-            letter-spacing: 1px;
+            font-size: 0.5rem;
+            color: rgba(0, 255, 65, 0.2);
+            margin-bottom: 4px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
         .input-group input {
             width: 100%;
-            padding: 14px 16px;
-            background: rgba(0, 255, 65, 0.03);
-            border: 1px solid rgba(0, 255, 65, 0.08);
+            padding: 12px 14px;
+            background: rgba(0, 255, 65, 0.02);
+            border: 1px solid rgba(0, 255, 65, 0.05);
             border-radius: 10px;
             color: #00ff41;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             outline: none;
             transition: all 0.3s ease;
         }
 
         .input-group input:focus {
-            border-color: rgba(0, 255, 65, 0.2);
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.04);
-            background: rgba(0, 255, 65, 0.05);
+            border-color: rgba(0, 255, 65, 0.12);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.02);
+            background: rgba(0, 255, 65, 0.04);
         }
 
         .input-group input::placeholder {
-            color: rgba(0, 255, 65, 0.1);
+            color: rgba(0, 255, 65, 0.06);
         }
 
         .login-btn {
             width: 100%;
-            padding: 16px;
-            background: #00ff41;
-            color: #000;
-            border: none;
+            padding: 14px;
+            background: rgba(0, 255, 65, 0.08);
+            color: #00ff41;
+            border: 1px solid rgba(0, 255, 65, 0.08);
             border-radius: 10px;
             font-family: 'Orbitron', monospace;
             font-weight: 700;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 2px;
             position: relative;
             z-index: 1;
-            margin-top: 5px;
+            margin-top: 4px;
         }
 
         .login-btn:hover {
-            box-shadow: 0 0 50px rgba(0, 255, 65, 0.15);
-            transform: scale(1.01);
+            background: rgba(0, 255, 65, 0.12);
+            border-color: rgba(0, 255, 65, 0.15);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.03);
         }
 
         .login-btn:disabled {
-            opacity: 0.4;
+            opacity: 0.3;
             cursor: not-allowed;
         }
 
         .error-msg {
-            color: #ff3355;
-            font-size: 0.6rem;
+            color: rgba(255, 51, 85, 0.5);
+            font-size: 0.55rem;
             text-align: center;
-            min-height: 20px;
-            margin-top: 10px;
+            min-height: 18px;
+            margin-top: 8px;
             position: relative;
             z-index: 1;
         }
@@ -197,11 +204,11 @@
 
         #checker-screen.active {
             display: block;
-            animation: fadeSlide 0.5s ease;
+            animation: fadeSlide 0.4s ease;
         }
 
         @keyframes fadeSlide {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -209,49 +216,42 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
-            padding: 8px 15px;
-            background: rgba(0, 255, 65, 0.02);
-            border: 1px solid rgba(0, 255, 65, 0.05);
+            margin-bottom: 14px;
+            padding: 6px 12px;
+            background: rgba(0, 255, 65, 0.01);
+            border: 1px solid rgba(0, 255, 65, 0.03);
             border-radius: 8px;
-            font-size: 0.55rem;
-            color: rgba(0, 255, 65, 0.25);
+            font-size: 0.5rem;
+            color: rgba(0, 255, 65, 0.15);
             position: relative;
             z-index: 1;
         }
 
         .status-dot {
             display: inline-block;
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             background: #00ff41;
-            animation: pulse 1.5s infinite;
-            margin-right: 6px;
+            animation: pulse 1.8s infinite;
+            margin-right: 5px;
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.2; }
-        }
-
-        .live-ratio {
-            color: rgba(0, 255, 65, 0.4);
-            font-family: 'Orbitron', monospace;
-            font-size: 0.5rem;
-            letter-spacing: 1px;
+            50% { opacity: 0.1; }
         }
 
         .input-area textarea {
             width: 100%;
-            min-height: 120px;
-            padding: 14px;
-            background: rgba(0, 255, 65, 0.02);
-            border: 1px solid rgba(0, 255, 65, 0.06);
+            min-height: 100px;
+            padding: 12px;
+            background: rgba(0, 255, 65, 0.01);
+            border: 1px solid rgba(0, 255, 65, 0.04);
             border-radius: 10px;
             color: #00ff41;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             line-height: 1.8;
             resize: vertical;
             outline: none;
@@ -259,13 +259,14 @@
         }
 
         .input-area textarea:focus {
-            border-color: rgba(0, 255, 65, 0.15);
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.02);
-            background: rgba(0, 255, 65, 0.04);
+            border-color: rgba(0, 255, 65, 0.08);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.01);
+            background: rgba(0, 255, 65, 0.02);
         }
 
         .input-area textarea::placeholder {
-            color: rgba(0, 255, 65, 0.08);
+            color: rgba(0, 255, 65, 0.04);
+            font-size: 0.55rem;
         }
 
         .input-options {
@@ -273,34 +274,59 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 8px;
-            font-size: 0.5rem;
-            color: rgba(0, 255, 65, 0.15);
+            font-size: 0.45rem;
+            color: rgba(0, 255, 65, 0.1);
+            flex-wrap: wrap;
+            gap: 6px;
         }
 
         .input-options label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .input-options input[type="checkbox"] {
+            accent-color: #00ff41;
+            width: 11px;
+            height: 11px;
+            cursor: pointer;
+            opacity: 0.5;
+        }
+
+        .file-upload-wrap {
             display: flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
         }
 
-        .input-options input[type="checkbox"] {
-            accent-color: #00ff41;
-            width: 12px;
-            height: 12px;
+        .file-upload-wrap input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-wrap span {
+            color: rgba(0, 255, 65, 0.2);
+            font-size: 0.45rem;
+            transition: color 0.3s;
             cursor: pointer;
+        }
+
+        .file-upload-wrap span:hover {
+            color: rgba(0, 255, 65, 0.4);
         }
 
         .check-btn {
             width: 100%;
-            padding: 14px;
-            background: #00ff41;
-            color: #000;
-            border: none;
+            padding: 13px;
+            background: rgba(0, 255, 65, 0.06);
+            color: #00ff41;
+            border: 1px solid rgba(0, 255, 65, 0.06);
             border-radius: 10px;
             font-family: 'Orbitron', monospace;
             font-weight: 700;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 2px;
@@ -310,72 +336,73 @@
         }
 
         .check-btn:hover {
-            box-shadow: 0 0 50px rgba(0, 255, 65, 0.12);
-            transform: scale(1.01);
+            background: rgba(0, 255, 65, 0.08);
+            border-color: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.02);
         }
 
         .check-btn:disabled {
-            opacity: 0.4;
+            opacity: 0.3;
             cursor: not-allowed;
         }
 
         .result-area {
-            margin-top: 16px;
+            margin-top: 14px;
             display: none;
         }
 
         .result-area.active {
             display: block;
-            animation: fadeSlide 0.4s ease;
+            animation: fadeSlide 0.3s ease;
         }
 
         .result-stats {
             display: flex;
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 8px;
+            margin-bottom: 10px;
         }
 
         .stat-card {
             flex: 1;
-            background: rgba(0, 255, 65, 0.02);
-            border: 1px solid rgba(0, 255, 65, 0.04);
+            background: rgba(0, 255, 65, 0.01);
+            border: 1px solid rgba(0, 255, 65, 0.02);
             border-radius: 8px;
-            padding: 10px 8px;
+            padding: 8px 6px;
             text-align: center;
         }
 
         .stat-card .number {
             font-family: 'Orbitron', monospace;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             display: block;
         }
 
         .stat-card .number.live { color: #00ff41; }
         .stat-card .number.dead { color: #ff3355; }
-        .stat-card .number.total { color: rgba(0, 255, 65, 0.4); }
+        .stat-card .number.total { color: rgba(0, 255, 65, 0.2); }
 
         .stat-card .label {
-            font-size: 0.45rem;
-            color: rgba(0, 255, 65, 0.2);
-            letter-spacing: 1px;
+            font-size: 0.4rem;
+            color: rgba(0, 255, 65, 0.1);
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            margin-top: 3px;
+            margin-top: 2px;
         }
 
         .result-list {
-            max-height: 220px;
+            max-height: 180px;
             overflow-y: auto;
-            border: 1px solid rgba(0, 255, 65, 0.03);
+            border: 1px solid rgba(0, 255, 65, 0.02);
             border-radius: 8px;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.15);
         }
 
         .result-list::-webkit-scrollbar {
             width: 3px;
         }
         .result-list::-webkit-scrollbar-thumb {
-            background: rgba(0, 255, 65, 0.1);
+            background: rgba(0, 255, 65, 0.05);
             border-radius: 4px;
         }
 
@@ -383,43 +410,44 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 6px 12px;
-            border-bottom: 1px solid rgba(0, 255, 65, 0.02);
-            font-size: 0.55rem;
+            padding: 5px 10px;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.01);
+            font-size: 0.5rem;
             font-family: 'Share Tech Mono', monospace;
         }
 
         .result-item .cc {
-            color: rgba(0, 255, 65, 0.5);
+            color: rgba(0, 255, 65, 0.35);
             word-break: break-all;
+            font-size: 0.5rem;
         }
 
         .result-item .status-badge {
             padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.45rem;
+            border-radius: 8px;
+            font-size: 0.4rem;
             font-weight: 700;
             letter-spacing: 0.5px;
             flex-shrink: 0;
-            margin-left: 6px;
+            margin-left: 4px;
         }
 
         .status-badge.live {
-            background: rgba(0, 255, 65, 0.08);
+            background: rgba(0, 255, 65, 0.04);
             color: #00ff41;
-            border: 1px solid rgba(0, 255, 65, 0.08);
+            border: 1px solid rgba(0, 255, 65, 0.04);
         }
 
         .status-badge.dead {
-            background: rgba(255, 51, 85, 0.08);
+            background: rgba(255, 51, 85, 0.04);
             color: #ff3355;
-            border: 1px solid rgba(255, 51, 85, 0.08);
+            border: 1px solid rgba(255, 51, 85, 0.04);
         }
 
         .progress-wrap {
             width: 100%;
-            height: 2px;
-            background: rgba(0, 255, 65, 0.04);
+            height: 1.5px;
+            background: rgba(0, 255, 65, 0.02);
             border-radius: 2px;
             margin-top: 10px;
             overflow: hidden;
@@ -432,40 +460,44 @@
             width: 0%;
             background: #00ff41;
             border-radius: 2px;
-            transition: width 0.15s ease;
+            transition: width 0.2s ease;
+            opacity: 0.3;
         }
 
         .footer {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(0, 255, 65, 0.03);
-            color: rgba(0, 255, 65, 0.08);
-            font-size: 0.4rem;
-            letter-spacing: 1px;
+            gap: 10px;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 255, 65, 0.01);
+            color: rgba(0, 255, 65, 0.04);
+            font-size: 0.35rem;
+            letter-spacing: 1.5px;
             position: relative;
             z-index: 1;
+            flex-wrap: wrap;
         }
 
         .toast {
             position: fixed;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
-            transform: translateX(-50%) translateY(80px);
-            background: rgba(16, 26, 16, 0.95);
-            border: 1px solid rgba(0, 255, 65, 0.06);
+            transform: translateX(-50%) translateY(70px);
+            background: rgba(12, 20, 12, 0.95);
+            border: 1px solid rgba(0, 255, 65, 0.04);
             border-radius: 10px;
-            padding: 10px 20px;
-            color: rgba(0, 255, 65, 0.4);
-            font-size: 0.55rem;
+            padding: 10px 18px;
+            color: rgba(0, 255, 65, 0.25);
+            font-size: 0.5rem;
             font-family: 'Share Tech Mono', monospace;
             backdrop-filter: blur(12px);
             opacity: 0;
             transition: all 0.4s ease;
             z-index: 999;
             pointer-events: none;
+            max-width: 90%;
+            text-align: center;
         }
 
         .toast.show {
@@ -473,17 +505,58 @@
             transform: translateX(-50%) translateY(0);
         }
         .toast.error {
-            border-color: rgba(255, 51, 85, 0.1);
-            color: rgba(255, 51, 85, 0.4);
+            border-color: rgba(255, 51, 85, 0.06);
+            color: rgba(255, 51, 85, 0.3);
         }
 
+        /* ===== ÖRNEK KART ETİKETİ ===== */
+        .sample-label {
+            font-size: 0.4rem;
+            color: rgba(0, 255, 65, 0.05);
+            text-align: center;
+            margin-top: 6px;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sample-label span {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .sample-label span:hover {
+            color: rgba(0, 255, 65, 0.1);
+        }
+
+        .sample-label .divider {
+            color: rgba(0, 255, 65, 0.02);
+            margin: 0 4px;
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
-            .box { padding: 25px 18px; }
-            .logo { font-size: 1.4rem; }
-            .stat-card .number { font-size: 1rem; }
-            .result-item { font-size: 0.5rem; padding: 5px 8px; }
-            .input-area textarea { min-height: 90px; font-size: 0.6rem; }
-            .login-btn, .check-btn { font-size: 0.65rem; padding: 13px; }
+            body { padding: 6px; }
+            .box { padding: 18px 14px; border-radius: 14px; }
+            .logo { font-size: 1.3rem; }
+            .input-group input { padding: 10px 12px; font-size: 0.7rem; }
+            .input-area textarea { min-height: 80px; font-size: 0.55rem; padding: 10px; }
+            .stat-card .number { font-size: 0.9rem; }
+            .result-item { font-size: 0.45rem; padding: 4px 8px; }
+            .result-item .cc { font-size: 0.45rem; }
+            .login-btn, .check-btn { font-size: 0.55rem; padding: 12px; }
+            .footer { font-size: 0.3rem; gap: 6px; }
+            .status-bar { font-size: 0.45rem; padding: 4px 10px; }
+            .input-options { font-size: 0.4rem; }
+            .sample-label { font-size: 0.35rem; }
+        }
+
+        @media (max-width: 380px) {
+            .box { padding: 14px 10px; }
+            .logo { font-size: 1.1rem; }
+            .input-group input { padding: 8px 10px; font-size: 0.65rem; }
+            .input-area textarea { min-height: 60px; font-size: 0.5rem; padding: 8px; }
+            .stat-card .number { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -493,44 +566,53 @@
         <div id="login-screen" class="box">
             <div class="header">
                 <div class="logo">CC<span>CHECKER</span></div>
-                <div class="subtitle">SECURE VERIFICATION PANEL</div>
+                <div class="subtitle">Secure Verification Panel</div>
             </div>
             <form id="login-form" style="position:relative;z-index:1;">
                 <div class="input-group">
-                    <label>👤 TELEGRAM KULLANICI ADI</label>
+                    <label>TELEGRAM KULLANICI ADI</label>
                     <input type="text" id="login-username" placeholder="@username" required>
                 </div>
                 <div class="input-group">
-                    <label>🔑 ŞİFRE</label>
+                    <label>ŞİFRE</label>
                     <input type="password" id="login-password" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="login-btn" id="login-btn">🔓 DOĞRULA</button>
+                <button type="submit" class="login-btn" id="login-btn">DOĞRULA</button>
                 <div class="error-msg" id="login-error"></div>
             </form>
             <div class="footer">
-                <span>🔒 SSL SECURE</span>
+                <span>SSL SECURE</span>
                 <span>|</span>
-                <span>⚡ 256-BIT</span>
+                <span>256-BIT</span>
+                <span>|</span>
+                <span>ANON</span>
             </div>
         </div>
 
         <!-- ===== CHECKER EKRANI ===== -->
         <div id="checker-screen" class="box">
-            <div class="header" style="margin-bottom:15px;">
-                <div class="logo" style="font-size:1.4rem;">CC<span>CHECKER</span></div>
+            <div class="header" style="margin-bottom:10px;">
+                <div class="logo" style="font-size:1.3rem;">CC<span>CHECKER</span></div>
             </div>
             <div class="status-bar">
                 <span><span class="status-dot"></span><span id="status-text">Sistem Aktif</span></span>
-                <span class="live-ratio" id="live-ratio-display">LIVE ORANI: %3</span>
+                <span id="card-count-display">0 kart</span>
             </div>
             <div class="input-area">
                 <textarea id="cc-input" placeholder="Kart numaralarını girin...&#10;4111111111111111|12|26|123"></textarea>
                 <div class="input-options">
-                    <label><input type="checkbox" id="auto-format" checked> Otomatik Format</label>
+                    <label>
+                        <input type="checkbox" id="auto-format" checked>
+                        Format
+                    </label>
+                    <div class="file-upload-wrap">
+                        <input type="file" id="file-input" accept=".txt">
+                        <span>📄 TXT Yükle</span>
+                    </div>
                     <span id="card-count">0 kart</span>
                 </div>
             </div>
-            <button class="check-btn" id="check-btn">🔍 DOĞRULA</button>
+            <button class="check-btn" id="check-btn">DOĞRULA</button>
             <div class="progress-wrap" id="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
             <div class="result-area" id="result-area">
                 <div class="result-stats">
@@ -540,12 +622,17 @@
                 </div>
                 <div class="result-list" id="result-list"></div>
             </div>
+            <div class="sample-label">
+                <span id="load-sample">📋 Örnek Kartları Yükle</span>
+                <span class="divider">|</span>
+                <span style="color:rgba(0,255,65,0.03);">Deneme amaçlıdır</span>
+            </div>
             <div class="footer">
-                <span>🔒 SSL SECURE</span>
+                <span>SSL SECURE</span>
                 <span>|</span>
-                <span>⚡ 256-BIT</span>
+                <span>256-BIT</span>
                 <span>|</span>
-                <span>🛡️ ANON</span>
+                <span>ANON</span>
             </div>
         </div>
     </div>
@@ -574,11 +661,13 @@
         const deadCount = document.getElementById('dead-count');
         const totalCount = document.getElementById('total-count');
         const cardCount = document.getElementById('card-count');
+        const cardCountDisplay = document.getElementById('card-count-display');
         const progressWrap = document.getElementById('progress-wrap');
         const progressBar = document.getElementById('progress-bar');
         const toast = document.getElementById('toast');
         const statusText = document.getElementById('status-text');
-        const liveRatioDisplay = document.getElementById('live-ratio-display');
+        const fileInput = document.getElementById('file-input');
+        const loadSample = document.getElementById('load-sample');
 
         let isChecking = false;
         let toastTimeout = null;
@@ -589,7 +678,7 @@
             toast.textContent = msg;
             toast.className = 'toast show' + (isError ? ' error' : '');
             clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
+            toastTimeout = setTimeout(() => toast.classList.remove('show'), 2800);
         }
 
         // ===== IP =====
@@ -654,16 +743,16 @@
             const password = loginPass.value.trim();
 
             if (!username || !password) {
-                loginError.textContent = '❌ Tüm alanları doldurun!';
+                loginError.textContent = 'Tüm alanları doldurun!';
                 return;
             }
             if (!username.startsWith('@')) {
-                loginError.textContent = '❌ Kullanıcı adı @ ile başlamalı!';
+                loginError.textContent = 'Kullanıcı adı @ ile başlamalı!';
                 return;
             }
 
             loginBtn.disabled = true;
-            loginBtn.textContent = '⏳ DOĞRULANIYOR...';
+            loginBtn.textContent = 'DOĞRULANIYOR...';
             loginError.textContent = '';
 
             const ip = await getIP();
@@ -673,14 +762,14 @@
                 loginError.textContent = '';
                 loginScreen.classList.add('hidden');
                 checkerScreen.classList.add('active');
-                statusText.textContent = 'Hoş Geldin, ' + username;
-                showToast('✅ Giriş başarılı!');
+                statusText.textContent = 'Hoş Geldin';
+                showToast('Giriş başarılı!');
             } else {
-                loginError.textContent = '❌ ' + (result.error || 'Bir hata oluştu!');
+                loginError.textContent = result.error || 'Bir hata oluştu!';
             }
 
             loginBtn.disabled = false;
-            loginBtn.textContent = '🔓 DOĞRULA';
+            loginBtn.textContent = 'DOĞRULA';
         });
 
         // ===== CHECKER =====
@@ -739,7 +828,7 @@
 
             isChecking = true;
             checkBtn.disabled = true;
-            checkBtn.textContent = '⏳ TARANIYOR...';
+            checkBtn.textContent = 'TARANIYOR...';
             resultList.innerHTML = '';
             resultArea.classList.remove('active');
             progressWrap.classList.add('active');
@@ -768,38 +857,73 @@
                 const displayCard = masked + (card.month ? `|${card.month}|${card.year}|${card.cvv}` : '');
                 item.innerHTML = `<span class="cc">${displayCard}</span><span class="status-badge ${status}">${status.toUpperCase()}</span>`;
                 resultList.appendChild(item);
-                await new Promise(r => setTimeout(r, 200 + Math.random() * 300));
+                await new Promise(r => setTimeout(r, 3000));
             }
 
             progressWrap.classList.remove('active');
             resultArea.classList.add('active');
-            checkBtn.textContent = '🔍 YENİDEN DENE';
+            checkBtn.textContent = 'YENİDEN DENE';
             checkBtn.disabled = false;
             isChecking = false;
 
-            if (liveResults > 0) showToast(`✅ ${liveResults} LIVE kart bulundu!`);
-            else showToast('❌ Hiç LIVE kart bulunamadı.');
+            if (liveResults > 0) showToast(`${liveResults} LIVE kart bulundu!`);
+            else showToast('Hiç LIVE kart bulunamadı.');
         }
+
+        // ===== DOSYA YÜKLEME =====
+        fileInput.addEventListener('change', function(e) {
+            const file = this.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                ccInput.value = event.target.result;
+                const cards = parseCards(ccInput.value);
+                cardCount.textContent = cards.length + ' kart';
+                cardCountDisplay.textContent = cards.length + ' kart';
+                showToast(`${cards.length} kart yüklendi!`);
+            };
+            reader.readAsText(file);
+            this.value = '';
+        });
+
+        // ===== ÖRNEK KARTLAR (DENENMEZ) =====
+        const sampleCards = `4111111111111111|12|26|123
+        5500000000000004|10|27|456
+        340000000000009|02|28|789
+        6011000000000004|06|25|321
+        378282246310005|03|26|852
+        4111111111111111|12|27|951
+        5555555555554444|01|29|753
+        378734493671000|05|24|159
+        6011111111111117|09|27|357
+        3530111333300000|11|28|246`;
+
+        loadSample.addEventListener('click', function() {
+            ccInput.value = sampleCards;
+            const cards = parseCards(ccInput.value);
+            cardCount.textContent = cards.length + ' kart';
+            cardCountDisplay.textContent = cards.length + ' kart';
+            showToast('Örnek kartlar yüklendi (deneme amaçlı)');
+        });
 
         // ===== OLAY DİNLEYİCİLER =====
         ccInput.addEventListener('input', function() {
             const cards = parseCards(this.value);
             cardCount.textContent = cards.length + ' kart';
+            cardCountDisplay.textContent = cards.length + ' kart';
         });
 
         checkBtn.addEventListener('click', startCheck);
 
         // ===== BAŞLANGIÇ =====
         document.addEventListener('DOMContentLoaded', function() {
-            liveRatioDisplay.textContent = 'LIVE ORANI: %' + LIVE_RATIO;
             cardCount.textContent = '0 kart';
-            // Örnek veri
-            ccInput.value = `4111111111111111|12|26|123
-        5500000000000004|10|27|456
-        340000000000009|02|28|789
-        6011000000000004|06|25|321
-        378282246310005|03|26|852`;
-            cardCount.textContent = '5 kart';
+            cardCountDisplay.textContent = '0 kart';
+            // Örnek kartları otomatik yükle (gösterim amaçlı)
+            ccInput.value = sampleCards;
+            const cards = parseCards(ccInput.value);
+            cardCount.textContent = cards.length + ' kart';
+            cardCountDisplay.textContent = cards.length + ' kart';
         });
     </script>
 </body>
