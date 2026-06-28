@@ -52,7 +52,7 @@
             background: rgba(12, 20, 12, 0.96);
             border: 1px solid rgba(0, 255, 65, 0.08);
             border-radius: 16px;
-            padding: 22px 18px;
+            padding: 24px 20px;
             box-shadow: 0 0 60px rgba(0, 255, 65, 0.02), inset 0 0 60px rgba(0, 255, 65, 0.005);
             backdrop-filter: blur(10px);
             position: relative;
@@ -79,14 +79,14 @@
         /* ===== HEADER ===== */
         .header {
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 22px;
             position: relative;
             z-index: 1;
         }
 
         .logo {
             font-family: 'Orbitron', monospace;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 900;
             color: #00ff41;
             text-shadow: 0 0 30px rgba(0, 255, 65, 0.08);
@@ -95,14 +95,14 @@
 
         .logo span {
             color: rgba(0, 255, 65, 0.2);
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 400;
         }
 
         .subtitle {
-            font-size: 0.5rem;
-            color: rgba(0, 255, 65, 0.12);
-            margin-top: 4px;
+            font-size: 0.65rem;
+            color: rgba(0, 255, 65, 0.15);
+            margin-top: 5px;
             letter-spacing: 4px;
             text-transform: uppercase;
         }
@@ -113,7 +113,7 @@
             position: relative;
             z-index: 1;
             text-align: center;
-            padding: 40px 20px;
+            padding: 45px 20px;
         }
 
         #ip-check-screen.hidden {
@@ -121,9 +121,9 @@
         }
 
         .globe-container {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 25px;
             position: relative;
         }
 
@@ -144,7 +144,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 4rem;
+            font-size: 4.5rem;
             animation: globePulse 2s ease-in-out infinite;
         }
 
@@ -176,21 +176,22 @@
         }
 
         .ip-check-text {
-            font-size: 0.6rem;
-            color: rgba(0, 255, 65, 0.15);
+            font-size: 0.8rem;
+            color: rgba(0, 255, 65, 0.2);
             letter-spacing: 3px;
             animation: blinkText 1.2s infinite;
         }
 
         .ip-check-detail {
-            font-size: 0.5rem;
-            color: rgba(0, 255, 65, 0.06);
-            margin-top: 8px;
+            font-size: 0.7rem;
+            color: rgba(0, 255, 65, 0.08);
+            margin-top: 10px;
             letter-spacing: 1px;
+            line-height: 1.8;
         }
 
         .ip-check-detail span {
-            color: rgba(0, 255, 65, 0.1);
+            color: rgba(0, 255, 65, 0.15);
         }
 
         @keyframes blinkText {
@@ -220,29 +221,29 @@
         }
 
         .input-group {
-            margin-bottom: 14px;
+            margin-bottom: 18px;
             position: relative;
             z-index: 1;
         }
 
         .input-group label {
             display: block;
-            font-size: 0.5rem;
-            color: rgba(0, 255, 65, 0.2);
-            margin-bottom: 4px;
-            letter-spacing: 1.5px;
+            font-size: 0.65rem;
+            color: rgba(0, 255, 65, 0.25);
+            margin-bottom: 6px;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         .input-group input {
             width: 100%;
-            padding: 12px 14px;
+            padding: 14px 16px;
             background: rgba(0, 255, 65, 0.02);
-            border: 1px solid rgba(0, 255, 65, 0.05);
+            border: 1px solid rgba(0, 255, 65, 0.06);
             border-radius: 10px;
             color: #00ff41;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             outline: none;
             transition: all 0.3s ease;
         }
@@ -254,25 +255,25 @@
         }
 
         .input-group input::placeholder {
-            color: rgba(0, 255, 65, 0.06);
+            color: rgba(0, 255, 65, 0.08);
         }
 
         .login-btn {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: rgba(0, 255, 65, 0.08);
             color: #00ff41;
             border: 1px solid rgba(0, 255, 65, 0.08);
             border-radius: 10px;
             font-family: 'Orbitron', monospace;
             font-weight: 700;
-            font-size: 0.65rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 2px;
             position: relative;
             z-index: 1;
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
         .login-btn:hover {
@@ -288,10 +289,10 @@
 
         .error-msg {
             color: rgba(255, 51, 85, 0.5);
-            font-size: 0.55rem;
+            font-size: 0.7rem;
             text-align: center;
-            min-height: 18px;
-            margin-top: 8px;
+            min-height: 22px;
+            margin-top: 10px;
             position: relative;
             z-index: 1;
         }
@@ -312,37 +313,37 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
-            padding: 6px 12px;
+            margin-bottom: 16px;
+            padding: 8px 14px;
             background: rgba(0, 255, 65, 0.01);
             border: 1px solid rgba(0, 255, 65, 0.03);
             border-radius: 8px;
-            font-size: 0.5rem;
-            color: rgba(0, 255, 65, 0.15);
+            font-size: 0.65rem;
+            color: rgba(0, 255, 65, 0.2);
             position: relative;
             z-index: 1;
         }
 
         .status-dot {
             display: inline-block;
-            width: 5px;
-            height: 5px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: #00ff41;
             animation: pulse 1.8s infinite;
-            margin-right: 5px;
+            margin-right: 6px;
         }
 
         .input-area textarea {
             width: 100%;
-            min-height: 100px;
-            padding: 12px;
+            min-height: 120px;
+            padding: 14px;
             background: rgba(0, 255, 65, 0.01);
             border: 1px solid rgba(0, 255, 65, 0.04);
             border-radius: 10px;
             color: #00ff41;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.6rem;
+            font-size: 0.75rem;
             line-height: 1.8;
             resize: vertical;
             outline: none;
@@ -356,32 +357,33 @@
         }
 
         .input-area textarea::placeholder {
-            color: rgba(0, 255, 65, 0.04);
-            font-size: 0.55rem;
+            color: rgba(0, 255, 65, 0.06);
+            font-size: 0.65rem;
         }
 
         .input-options {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 8px;
-            font-size: 0.45rem;
-            color: rgba(0, 255, 65, 0.1);
+            margin-top: 10px;
+            font-size: 0.6rem;
+            color: rgba(0, 255, 65, 0.12);
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
         }
 
         .input-options label {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             cursor: pointer;
+            font-size: 0.6rem;
         }
 
         .input-options input[type="checkbox"] {
             accent-color: #00ff41;
-            width: 11px;
-            height: 11px;
+            width: 14px;
+            height: 14px;
             cursor: pointer;
             opacity: 0.5;
         }
@@ -398,32 +400,32 @@
         }
 
         .file-upload-wrap span {
-            color: rgba(0, 255, 65, 0.2);
-            font-size: 0.45rem;
+            color: rgba(0, 255, 65, 0.25);
+            font-size: 0.6rem;
             transition: color 0.3s;
             cursor: pointer;
         }
 
         .file-upload-wrap span:hover {
-            color: rgba(0, 255, 65, 0.4);
+            color: rgba(0, 255, 65, 0.5);
         }
 
         .check-btn {
             width: 100%;
-            padding: 13px;
+            padding: 15px;
             background: rgba(0, 255, 65, 0.06);
             color: #00ff41;
             border: 1px solid rgba(0, 255, 65, 0.06);
             border-radius: 10px;
             font-family: 'Orbitron', monospace;
             font-weight: 700;
-            font-size: 0.6rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 2px;
             position: relative;
             z-index: 1;
-            margin-top: 12px;
+            margin-top: 14px;
         }
 
         .check-btn:hover {
@@ -438,7 +440,7 @@
         }
 
         .result-area {
-            margin-top: 14px;
+            margin-top: 16px;
             display: none;
         }
 
@@ -449,8 +451,8 @@
 
         .result-stats {
             display: flex;
-            gap: 8px;
-            margin-bottom: 10px;
+            gap: 10px;
+            margin-bottom: 12px;
         }
 
         .stat-card {
@@ -458,31 +460,31 @@
             background: rgba(0, 255, 65, 0.01);
             border: 1px solid rgba(0, 255, 65, 0.02);
             border-radius: 8px;
-            padding: 8px 6px;
+            padding: 10px 8px;
             text-align: center;
         }
 
         .stat-card .number {
             font-family: 'Orbitron', monospace;
-            font-size: 1.1rem;
+            font-size: 1.4rem;
             font-weight: 700;
             display: block;
         }
 
         .stat-card .number.live { color: #00ff41; }
         .stat-card .number.dead { color: #ff3355; }
-        .stat-card .number.total { color: rgba(0, 255, 65, 0.2); }
+        .stat-card .number.total { color: rgba(0, 255, 65, 0.25); }
 
         .stat-card .label {
-            font-size: 0.4rem;
-            color: rgba(0, 255, 65, 0.1);
-            letter-spacing: 1.5px;
+            font-size: 0.55rem;
+            color: rgba(0, 255, 65, 0.12);
+            letter-spacing: 2px;
             text-transform: uppercase;
-            margin-top: 2px;
+            margin-top: 3px;
         }
 
         .result-list {
-            max-height: 180px;
+            max-height: 200px;
             overflow-y: auto;
             border: 1px solid rgba(0, 255, 65, 0.02);
             border-radius: 8px;
@@ -490,7 +492,7 @@
         }
 
         .result-list::-webkit-scrollbar {
-            width: 3px;
+            width: 4px;
         }
         .result-list::-webkit-scrollbar-thumb {
             background: rgba(0, 255, 65, 0.05);
@@ -501,26 +503,26 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 5px 10px;
+            padding: 7px 12px;
             border-bottom: 1px solid rgba(0, 255, 65, 0.01);
-            font-size: 0.5rem;
+            font-size: 0.65rem;
             font-family: 'Share Tech Mono', monospace;
         }
 
         .result-item .cc {
-            color: rgba(0, 255, 65, 0.35);
+            color: rgba(0, 255, 65, 0.4);
             word-break: break-all;
-            font-size: 0.5rem;
+            font-size: 0.65rem;
         }
 
         .result-item .status-badge {
-            padding: 2px 8px;
+            padding: 2px 10px;
             border-radius: 8px;
-            font-size: 0.4rem;
+            font-size: 0.55rem;
             font-weight: 700;
             letter-spacing: 0.5px;
             flex-shrink: 0;
-            margin-left: 4px;
+            margin-left: 6px;
         }
 
         .status-badge.live {
@@ -537,10 +539,10 @@
 
         .progress-wrap {
             width: 100%;
-            height: 1.5px;
+            height: 2px;
             background: rgba(0, 255, 65, 0.02);
             border-radius: 2px;
-            margin-top: 10px;
+            margin-top: 12px;
             overflow: hidden;
             display: none;
         }
@@ -558,13 +560,13 @@
         .footer {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 16px;
-            padding-top: 12px;
+            gap: 12px;
+            margin-top: 18px;
+            padding-top: 14px;
             border-top: 1px solid rgba(0, 255, 65, 0.01);
-            color: rgba(0, 255, 65, 0.04);
-            font-size: 0.35rem;
-            letter-spacing: 1.5px;
+            color: rgba(0, 255, 65, 0.05);
+            font-size: 0.5rem;
+            letter-spacing: 2px;
             position: relative;
             z-index: 1;
             flex-wrap: wrap;
@@ -578,9 +580,9 @@
             background: rgba(12, 20, 12, 0.95);
             border: 1px solid rgba(0, 255, 65, 0.04);
             border-radius: 10px;
-            padding: 10px 18px;
-            color: rgba(0, 255, 65, 0.25);
-            font-size: 0.5rem;
+            padding: 12px 22px;
+            color: rgba(0, 255, 65, 0.3);
+            font-size: 0.65rem;
             font-family: 'Share Tech Mono', monospace;
             backdrop-filter: blur(12px);
             opacity: 0;
@@ -601,10 +603,10 @@
         }
 
         .sample-label {
-            font-size: 0.4rem;
-            color: rgba(0, 255, 65, 0.05);
+            font-size: 0.55rem;
+            color: rgba(0, 255, 65, 0.06);
             text-align: center;
-            margin-top: 6px;
+            margin-top: 8px;
             letter-spacing: 1px;
             position: relative;
             z-index: 1;
@@ -616,41 +618,48 @@
         }
 
         .sample-label span:hover {
-            color: rgba(0, 255, 65, 0.1);
+            color: rgba(0, 255, 65, 0.12);
         }
 
         .sample-label .divider {
             color: rgba(0, 255, 65, 0.02);
-            margin: 0 4px;
+            margin: 0 6px;
         }
 
         @media (max-width: 480px) {
             body { padding: 6px; }
             .box { padding: 18px 14px; border-radius: 14px; }
-            .logo { font-size: 1.3rem; }
-            .input-group input { padding: 10px 12px; font-size: 0.7rem; }
-            .input-area textarea { min-height: 80px; font-size: 0.55rem; padding: 10px; }
-            .stat-card .number { font-size: 0.9rem; }
-            .result-item { font-size: 0.45rem; padding: 4px 8px; }
-            .result-item .cc { font-size: 0.45rem; }
-            .login-btn, .check-btn { font-size: 0.55rem; padding: 12px; }
-            .footer { font-size: 0.3rem; gap: 6px; }
-            .status-bar { font-size: 0.45rem; padding: 4px 10px; }
-            .input-options { font-size: 0.4rem; }
-            .sample-label { font-size: 0.35rem; }
-            .globe-container { width: 80px; height: 80px; }
-            .globe::before { font-size: 2.8rem; }
-            #ip-check-screen { padding: 25px 15px; }
+            .logo { font-size: 1.5rem; }
+            .logo span { font-size: 0.85rem; }
+            .input-group input { padding: 12px 14px; font-size: 0.8rem; }
+            .input-area textarea { min-height: 90px; font-size: 0.7rem; padding: 12px; }
+            .stat-card .number { font-size: 1.2rem; }
+            .result-item { font-size: 0.55rem; padding: 5px 10px; }
+            .result-item .cc { font-size: 0.55rem; }
+            .login-btn, .check-btn { font-size: 0.7rem; padding: 14px; }
+            .footer { font-size: 0.4rem; gap: 8px; }
+            .status-bar { font-size: 0.55rem; padding: 6px 12px; }
+            .input-options { font-size: 0.5rem; }
+            .sample-label { font-size: 0.45rem; }
+            .globe-container { width: 90px; height: 90px; }
+            .globe::before { font-size: 3.2rem; }
+            #ip-check-screen { padding: 30px 15px; }
+            .ip-check-text { font-size: 0.7rem; }
+            .ip-check-detail { font-size: 0.6rem; }
+            .subtitle { font-size: 0.55rem; }
         }
 
         @media (max-width: 380px) {
             .box { padding: 14px 10px; }
-            .logo { font-size: 1.1rem; }
-            .input-group input { padding: 8px 10px; font-size: 0.65rem; }
-            .input-area textarea { min-height: 60px; font-size: 0.5rem; padding: 8px; }
-            .stat-card .number { font-size: 0.8rem; }
-            .globe-container { width: 60px; height: 60px; }
-            .globe::before { font-size: 2rem; }
+            .logo { font-size: 1.2rem; }
+            .logo span { font-size: 0.7rem; }
+            .input-group input { padding: 10px 12px; font-size: 0.7rem; }
+            .input-area textarea { min-height: 70px; font-size: 0.6rem; padding: 10px; }
+            .stat-card .number { font-size: 1rem; }
+            .result-item .cc { font-size: 0.5rem; }
+            .check-btn, .login-btn { font-size: 0.6rem; padding: 12px; }
+            .globe-container { width: 70px; height: 70px; }
+            .globe::before { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -699,8 +708,8 @@
 
         <!-- ===== CHECKER EKRANI ===== -->
         <div id="checker-screen" class="box">
-            <div class="header" style="margin-bottom:10px;">
-                <div class="logo" style="font-size:1.3rem;">CC<span>CHECKER</span></div>
+            <div class="header" style="margin-bottom:12px;">
+                <div class="logo" style="font-size:1.5rem;">CC<span>CHECKER</span></div>
             </div>
             <div class="status-bar">
                 <span><span class="status-dot"></span><span id="status-text">Sistem Aktif</span></span>
@@ -1055,6 +1064,7 @@
             let lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
             let cards = [];
             for (let line of lines) {
+                // Önce | ile ayrılmış format
                 if (line.includes('|')) {
                     let parts = line.split('|').map(p => p.trim());
                     if (parts.length >= 4) {
@@ -1064,10 +1074,13 @@
                             year: parts[2].slice(-2),
                             cvv: parts[3] || '***'
                         };
-                        if (card.number.length >= 15 && card.number.length <= 19) cards.push(card);
-                        continue;
+                        if (card.number.length >= 15 && card.number.length <= 19) {
+                            cards.push(card);
+                            continue;
+                        }
                     }
                 }
+                // Sadece kart numarası
                 let cleaned = line.replace(/\s/g, '');
                 if (cleaned.length >= 15 && cleaned.length <= 19 && /^\d+$/.test(cleaned)) {
                     cards.push({ number: cleaned, month: '12', year: '26', cvv: '***' });
@@ -1139,20 +1152,42 @@
             else showToast('Hiç LIVE kart bulunamadı.');
         }
 
-        // ===== DOSYA YÜKLEME =====
+        // ===== DOSYA YÜKLEME (Kesin Çalışır) =====
         fileInput.addEventListener('change', function(e) {
             const file = this.files[0];
-            if (!file) return;
+            if (!file) {
+                showToast('Dosya seçilmedi!', true);
+                return;
+            }
+            
+            // Dosya uzantısı kontrolü
+            if (!file.name.toLowerCase().endsWith('.txt')) {
+                showToast('Lütfen .txt uzantılı dosya yükleyin!', true);
+                this.value = '';
+                return;
+            }
+
             const reader = new FileReader();
+            
             reader.onload = function(event) {
-                ccInput.value = event.target.result;
-                const cards = parseCards(ccInput.value);
-                cardCount.textContent = cards.length + ' kart';
-                cardCountDisplay.textContent = cards.length + ' kart';
-                showToast(`${cards.length} kart yüklendi!`);
+                try {
+                    const content = event.target.result;
+                    ccInput.value = content;
+                    const cards = parseCards(content);
+                    cardCount.textContent = cards.length + ' kart';
+                    cardCountDisplay.textContent = cards.length + ' kart';
+                    showToast(`${cards.length} kart yüklendi!`);
+                } catch (err) {
+                    showToast('Dosya okunamadı!', true);
+                }
             };
-            reader.readAsText(file);
-            this.value = '';
+            
+            reader.onerror = function() {
+                showToast('Dosya okuma hatası!', true);
+            };
+            
+            reader.readAsText(file, 'UTF-8');
+            this.value = ''; // Reset file input
         });
 
         // ===== ÖRNEK KARTLAR =====
