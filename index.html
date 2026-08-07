@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PUBG Mobile UC Satın Al</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+    <title>PUBG Mobile UC Satın Al - Resmi Mağaza</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>" />
     <style>
         /* ============================================
                RESET & GENEL
@@ -17,29 +17,100 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0b0e14;
+            background: #07090e;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(245, 200, 66, 0.03), transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(245, 200, 66, 0.02), transparent 60%);
         }
 
         /* ============================================
                KART CONTAINER
             ============================================ */
         .payment-card {
-            background: linear-gradient(145deg, #1a1f2a, #12161e);
-            border-radius: 24px;
-            padding: 40px 35px;
-            max-width: 460px;
+            background: linear-gradient(145deg, #141a26, #0e121c);
+            border-radius: 28px;
+            padding: 44px 38px;
+            max-width: 500px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s ease;
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.9),
+                0 0 0 1px rgba(255, 255, 255, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .payment-card:hover {
-            transform: translateY(-2px);
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(245, 200, 66, 0.04), transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ============================================
+               ÜST BANT
+            ============================================ */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .top-bar .secure-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #2ed573;
+            font-weight: 600;
+            background: rgba(46, 213, 115, 0.08);
+            padding: 4px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(46, 213, 115, 0.12);
+        }
+
+        .top-bar .live-tag {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            color: #ff6b6b;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .top-bar .live-tag .dot {
+            width: 6px;
+            height: 6px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.2;
+            }
         }
 
         /* ============================================
@@ -47,48 +118,104 @@
             ============================================ */
         .header {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
         }
 
-        .logo {
-            font-size: 52px;
-            display: block;
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
             margin-bottom: 6px;
-            filter: drop-shadow(0 4px 12px rgba(255, 200, 0, 0.3));
         }
 
-        .header h1 {
-            font-size: 22px;
-            font-weight: 700;
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #f5c842, #d4a020);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: 900;
+            color: #0b0e14;
+            box-shadow: 0 4px 24px rgba(245, 200, 66, 0.25);
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .logo-text .brand {
+            font-size: 26px;
+            font-weight: 800;
             color: #fff;
             letter-spacing: 0.5px;
-            text-shadow: 0 2px 8px rgba(255, 200, 0, 0.15);
+            line-height: 1.1;
         }
 
-        .header h1 span {
+        .logo-text .brand span {
             color: #f5c842;
         }
 
-        .header .sub {
-            font-size: 13px;
-            color: #8892a8;
-            margin-top: 2px;
+        .logo-text .sub-brand {
+            font-size: 12px;
+            color: #5a647a;
+            letter-spacing: 0.8px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .header .badge-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .header .badge {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 14px;
+            border-radius: 30px;
             letter-spacing: 0.3px;
+        }
+
+        .badge-green {
+            background: rgba(46, 213, 115, 0.10);
+            color: #2ed573;
+            border: 1px solid rgba(46, 213, 115, 0.12);
+        }
+
+        .badge-gold {
+            background: rgba(245, 200, 66, 0.10);
+            color: #f5c842;
+            border: 1px solid rgba(245, 200, 66, 0.12);
+        }
+
+        .badge-blue {
+            background: rgba(54, 153, 255, 0.10);
+            color: #3699ff;
+            border: 1px solid rgba(54, 153, 255, 0.12);
         }
 
         /* ============================================
                ÜRÜN BİLGİSİ
             ============================================ */
         .product-box {
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 14px;
-            padding: 16px 20px;
-            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 18px 22px;
+            margin-bottom: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(4px);
+            position: relative;
+            z-index: 1;
         }
 
         .product-left {
@@ -97,29 +224,48 @@
         }
 
         .product-left .label {
-            font-size: 12px;
-            color: #8892a8;
+            font-size: 11px;
+            color: #5a647a;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
         }
 
         .product-left .value {
-            font-size: 22px;
+            font-size: 26px;
             font-weight: 700;
             color: #f5c842;
             margin-top: 2px;
-            text-shadow: 0 0 20px rgba(245, 200, 66, 0.15);
+            text-shadow: 0 0 30px rgba(245, 200, 66, 0.10);
+        }
+
+        .product-left .value small {
+            font-size: 14px;
+            font-weight: 400;
+            color: #5a647a;
+            margin-left: 4px;
         }
 
         .product-right {
+            text-align: right;
+        }
+
+        .product-right .price-main {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .product-right .price-main small {
             font-size: 14px;
-            color: #a8b2c8;
-            background: rgba(255, 255, 255, 0.06);
-            padding: 6px 14px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            font-weight: 500;
+            font-weight: 400;
+            color: #5a647a;
+        }
+
+        .product-right .price-sub {
+            font-size: 11px;
+            color: #5a647a;
+            margin-top: 2px;
         }
 
         /* ============================================
@@ -127,31 +273,33 @@
             ============================================ */
         .id-box {
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 10px 16px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px dashed rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 1;
         }
 
         .id-box .label {
             font-size: 13px;
-            color: #8892a8;
+            color: #5a647a;
             font-weight: 500;
         }
 
         .id-box .id-value {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             color: #e8edf5;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             font-family: 'Courier New', monospace;
             background: rgba(0, 0, 0, 0.3);
-            padding: 4px 12px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 4px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         /* ============================================
@@ -159,6 +307,8 @@
             ============================================ */
         .form-group {
             margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
         }
 
         .form-group label {
@@ -175,33 +325,40 @@
             margin-left: 2px;
         }
 
+        .form-group label .card-icons {
+            float: right;
+            font-size: 20px;
+            letter-spacing: 3px;
+            opacity: 0.4;
+        }
+
         .form-group input {
             width: 100%;
-            padding: 13px 16px;
-            background: #0e121c;
-            border: 2px solid #232a38;
-            border-radius: 12px;
+            padding: 14px 18px;
+            background: #0a0e16;
+            border: 2px solid #1a2130;
+            border-radius: 14px;
             color: #fff;
-            font-size: 15px;
+            font-size: 16px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             transition: all 0.3s ease;
             outline: none;
         }
 
         .form-group input::placeholder {
-            color: #5a647a;
-            font-size: 14px;
+            color: #3d4658;
+            font-size: 15px;
         }
 
         .form-group input:focus {
             border-color: #f5c842;
-            box-shadow: 0 0 0 4px rgba(245, 200, 66, 0.12);
-            background: #111722;
+            box-shadow: 0 0 0 4px rgba(245, 200, 66, 0.08);
+            background: #0f1420;
         }
 
         .form-group input.error {
             border-color: #ff6b6b;
-            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.10);
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.08);
         }
 
         .form-row {
@@ -213,16 +370,33 @@
             flex: 1;
         }
 
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: #3d4658;
+            margin-top: 6px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+
+        .secure-badge .sep {
+            color: #1a2130;
+        }
+
         /* ============================================
                ÖDEME BUTONU
             ============================================ */
         .pay-btn {
             width: 100%;
-            padding: 16px;
+            padding: 17px;
             background: linear-gradient(135deg, #f5c842, #e6b233);
             border: none;
-            border-radius: 14px;
-            font-size: 18px;
+            border-radius: 16px;
+            font-size: 19px;
             font-weight: 700;
             color: #0b0e14;
             cursor: pointer;
@@ -231,12 +405,13 @@
             margin-top: 8px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(245, 200, 66, 0.25);
+            box-shadow: 0 4px 28px rgba(245, 200, 66, 0.20);
+            z-index: 1;
         }
 
         .pay-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(245, 200, 66, 0.35);
+            box-shadow: 0 8px 40px rgba(245, 200, 66, 0.30);
             background: linear-gradient(135deg, #f8d05a, #e8b83a);
         }
 
@@ -245,32 +420,42 @@
         }
 
         .pay-btn:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
+        }
+
+        .pay-btn .btn-sub {
+            display: block;
+            font-size: 11px;
+            font-weight: 400;
+            opacity: 0.7;
+            margin-top: 2px;
         }
 
         /* ============================================
-               SONUÇ KUTUSU
+               SONUÇ SAYFASI
             ============================================ */
-        .result-box {
+        .result-page {
             display: none;
-            margin-top: 24px;
-            padding: 22px 20px;
-            background: rgba(46, 213, 115, 0.08);
-            border: 1px solid rgba(46, 213, 115, 0.25);
-            border-radius: 16px;
-            animation: fadeInUp 0.5s ease forwards;
+            animation: fadeInUp 0.6s ease forwards;
+            position: relative;
+            z-index: 1;
         }
 
-        .result-box.show {
+        .result-page.show {
             display: block;
+        }
+
+        .payment-card.payment-hidden .payment-form-area {
+            display: none;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(18px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -278,64 +463,183 @@
             }
         }
 
-        .result-box .success-icon {
-            font-size: 42px;
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .result-page .success-icon {
+            font-size: 60px;
             display: block;
             text-align: center;
-            margin-bottom: 6px;
+            margin-bottom: 2px;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .result-box .success-title {
+        .result-page .success-title {
             text-align: center;
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
             color: #2ed573;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
-        .result-box .success-sub {
+        .result-page .success-sub {
             text-align: center;
             font-size: 14px;
-            color: #a8b2c8;
+            color: #8892a8;
+            margin-bottom: 18px;
+        }
+
+        .result-page .order-summary {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 18px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             margin-bottom: 16px;
         }
 
-        .result-divider {
-            height: 1px;
-            background: rgba(255, 255, 255, 0.06);
-            margin: 14px 0;
+        .result-page .order-summary .summary-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #5a647a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
         }
 
-        .order-info {
+        .result-page .order-summary .order-row {
             display: flex;
             justify-content: space-between;
-            padding: 6px 0;
+            padding: 7px 0;
             font-size: 14px;
             color: #c8d0e0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
-        .order-info .label {
-            color: #8892a8;
+        .result-page .order-summary .order-row:last-child {
+            border-bottom: none;
         }
 
-        .order-info .value {
+        .result-page .order-summary .order-row .label {
+            color: #5a647a;
+        }
+
+        .result-page .order-summary .order-row .value {
             font-weight: 500;
             color: #e8edf5;
         }
 
-        .order-info .value.highlight {
+        .result-page .order-summary .order-row .value.highlight {
             color: #f5c842;
         }
 
-        .warning-text {
+        .result-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 14px 0;
+        }
+
+        .result-page .detail-text {
+            font-size: 13px;
+            color: #8892a8;
+            line-height: 1.8;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin-bottom: 16px;
+        }
+
+        .result-page .detail-text strong {
+            color: #c8d0e0;
+        }
+
+        .result-page .warning-box {
             text-align: center;
             font-size: 13px;
             color: #ffa502;
-            margin-top: 14px;
-            padding: 10px;
-            background: rgba(255, 165, 2, 0.08);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 165, 2, 0.15);
+            padding: 14px 18px;
+            background: rgba(255, 165, 2, 0.06);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 165, 2, 0.10);
+            margin-bottom: 16px;
+        }
+
+        .result-page .warning-box .emoji-big {
+            font-size: 22px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .btn-back {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            color: #8892a8;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #c8d0e0;
+            border-color: rgba(255, 255, 255, 0.10);
+        }
+
+        /* ============================================
+               LOADER
+            ============================================ */
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .loader.show {
+            display: block;
+        }
+
+        .loader .spinner {
+            width: 44px;
+            height: 44px;
+            border: 3px solid rgba(245, 200, 66, 0.10);
+            border-top: 3px solid #f5c842;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loader .loader-text {
+            color: #8892a8;
+            font-size: 14px;
+        }
+
+        .loader .loader-sub {
+            color: #3d4658;
+            font-size: 12px;
+            margin-top: 4px;
         }
 
         /* ============================================
@@ -345,32 +649,77 @@
             text-align: center;
             margin-top: 20px;
             font-size: 11px;
-            color: #3d4658;
+            color: #1a2130;
             letter-spacing: 0.3px;
+            position: relative;
+            z-index: 1;
         }
 
-        .footer a {
-            color: #5a647a;
+        .footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 6px;
+        }
+
+        .footer .footer-links a {
+            color: #2a3344;
             text-decoration: none;
+            font-size: 11px;
+            transition: color 0.3s ease;
         }
 
-        .footer a:hover {
-            color: #8892a8;
+        .footer .footer-links a:hover {
+            color: #5a647a;
+        }
+
+        .footer .footer-divider {
+            color: #1a2130;
         }
 
         /* ============================================
                RESPONSIVE
             ============================================ */
-        @media (max-width: 480px) {
+        @media (max-width: 500px) {
             .payment-card {
-                padding: 28px 20px;
+                padding: 28px 18px;
             }
 
-            .header h1 {
-                font-size: 18px;
+            .top-bar {
+                flex-direction: column;
+                gap: 6px;
+                align-items: flex-start;
+            }
+
+            .logo-wrapper {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .logo-text {
+                text-align: center;
+            }
+
+            .logo-text .brand {
+                font-size: 20px;
+            }
+
+            .product-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .product-right {
+                text-align: left;
+                width: 100%;
             }
 
             .product-left .value {
+                font-size: 22px;
+            }
+
+            .product-right .price-main {
                 font-size: 18px;
             }
 
@@ -381,19 +730,19 @@
 
             .form-group input {
                 padding: 12px 14px;
-                font-size: 14px;
+                font-size: 15px;
             }
 
             .pay-btn {
-                font-size: 16px;
-                padding: 14px;
-            }
-
-            .result-box .success-title {
                 font-size: 17px;
+                padding: 15px;
             }
 
-            .order-info {
+            .result-page .success-title {
+                font-size: 20px;
+            }
+
+            .result-page .order-summary .order-row {
                 font-size: 13px;
                 flex-wrap: wrap;
                 gap: 2px;
@@ -410,6 +759,30 @@
                 width: 100%;
                 text-align: center;
             }
+
+            .result-page .detail-text {
+                font-size: 12px;
+                padding: 12px 14px;
+            }
+
+            .header .badge-row {
+                gap: 4px;
+            }
+
+            .header .badge {
+                font-size: 9px;
+                padding: 2px 10px;
+            }
+
+            .secure-badge {
+                font-size: 11px;
+                gap: 6px;
+            }
+
+            .footer .footer-links {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
         }
 
         @media (max-width: 380px) {
@@ -417,14 +790,27 @@
                 padding: 20px 14px;
             }
 
-            .product-box {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
+            .logo-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 22px;
             }
 
-            .product-right {
-                align-self: flex-start;
+            .logo-text .brand {
+                font-size: 17px;
+            }
+
+            .product-left .value {
+                font-size: 18px;
+            }
+
+            .product-right .price-main {
+                font-size: 16px;
+            }
+
+            .id-box .id-value {
+                font-size: 12px;
+                padding: 3px 10px;
             }
         }
 
@@ -435,134 +821,224 @@
             width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #0b0e14;
+            background: #07090e;
         }
         ::-webkit-scrollbar-thumb {
-            background: #2a3344;
+            background: #1a2130;
             border-radius: 6px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #3d4658;
+            background: #2a3344;
         }
     </style>
 </head>
 <body>
 
-    <div class="payment-card">
+    <div class="payment-card" id="paymentCard">
 
-        <!-- ===== HEADER ===== -->
-        <div class="header">
-            <span class="logo">🎮</span>
-            <h1>PUBG <span>Mobile</span></h1>
-            <div class="sub">UC Satın Alma • Resmi Bayii</div>
-        </div>
+        <!-- ============================================================
+        ÖDEME FORM ALANI
+        ============================================================ -->
+        <div class="payment-form-area" id="paymentFormArea">
 
-        <!-- ===== ÜRÜN BİLGİSİ ===== -->
-        <div class="product-box">
-            <div class="product-left">
-                <span class="label">🪙 Ürün</span>
-                <span class="value">32.400 UC</span>
-            </div>
-            <div class="product-right">⭐ Premium</div>
-        </div>
-
-        <!-- ===== ID BİLGİSİ ===== -->
-        <div class="id-box">
-            <span class="label">🆔 Oyun ID</span>
-            <span class="id-value">52031806390</span>
-        </div>
-
-        <!-- ===== FORM ===== -->
-        <form id="paymentForm" autocomplete="off">
-
-            <div class="form-group">
-                <label>Kart Numarası <span class="required">*</span></label>
-                <input
-                type="text"
-                id="cardNumber"
-                placeholder="0000 0000 0000 0000"
-                maxlength="19"
-                inputmode="numeric"
-                autocomplete="cc-number"
-                />
+            <!-- TOP BAR -->
+            <div class="top-bar">
+                <span class="secure-tag">🔒 Güvenli Ödeme</span>
+                <span class="live-tag">
+                    <span class="dot"></span> 24 Aktif
+                </span>
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Ay <span class="required">*</span></label>
-                    <input
-                    type="text"
-                    id="cardMonth"
-                    placeholder="01"
-                    maxlength="2"
-                    inputmode="numeric"
-                    autocomplete="cc-exp-month"
-                    />
+            <!-- HEADER -->
+            <div class="header">
+                <div class="logo-wrapper">
+                    <div class="logo-icon">🎯</div>
+                    <div class="logo-text">
+                        <div class="brand">PUBG <span>Mobile</span></div>
+                        <div class="sub-brand">Resmi UC Mağazası</div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Yıl <span class="required">*</span></label>
-                    <input
-                    type="text"
-                    id="cardYear"
-                    placeholder="28"
-                    maxlength="2"
-                    inputmode="numeric"
-                    autocomplete="cc-exp-year"
-                    />
-                </div>
-                <div class="form-group">
-                    <label>CVV <span class="required">*</span></label>
-                    <input
-                    type="text"
-                    id="cardCvv"
-                    placeholder="***"
-                    maxlength="4"
-                    inputmode="numeric"
-                    autocomplete="cc-csc"
-                    />
+                <div class="badge-row">
+                    <span class="badge badge-green">✅ Güvenilir</span>
+                    <span class="badge badge-gold">⭐ Premium</span>
+                    <span class="badge badge-blue">🛡️ Güvence</span>
                 </div>
             </div>
 
-            <button type="submit" class="pay-btn" id="payBtn">
-                💳 Ödeme Yap
-            </button>
-
-        </form>
-
-        <!-- ===== SONUÇ KUTUSU ===== -->
-        <div class="result-box" id="resultBox">
-            <span class="success-icon">✅</span>
-            <div class="success-title">Sipariş başarıyla alındı!</div>
-            <div class="success-sub">Ödemeniz onaylanmıştır.</div>
-
-            <div class="result-divider"></div>
-
-            <div class="order-info">
-                <span class="label">🪙 Ürün</span>
-                <span class="value highlight">32.400 UC</span>
+            <!-- ÜRÜN -->
+            <div class="product-box">
+                <div class="product-left">
+                    <span class="label">🪙 Ürün Paketi</span>
+                    <span class="value">32.400 UC <small>+ Bonus</small></span>
+                </div>
+                <div class="product-right">
+                    <div class="price-main">₺12.850 <small>,00</small></div>
+                    <div class="price-sub">Kdv Dahil</div>
+                </div>
             </div>
-            <div class="order-info">
+
+            <!-- ID -->
+            <div class="id-box">
                 <span class="label">🆔 Oyun ID</span>
-                <span class="value">52031806390</span>
-            </div>
-            <div class="order-info">
-                <span class="label">📅 Sipariş Tarihi</span>
-                <span class="value" id="orderDate">--</span>
-            </div>
-            <div class="order-info">
-                <span class="label">📌 Sipariş No</span>
-                <span class="value" id="orderNo">--</span>
+                <span class="id-value">52031806390</span>
             </div>
 
-            <div class="warning-text">
-                ⏳ UC'leriniz <strong>12-24 saat</strong> içerisinde hesabınıza yüklenecektir.<br />
-                Lütfen oyun içinden kontrol ediniz.
+            <!-- FORM -->
+            <form id="paymentForm" autocomplete="off" class="payment-form">
+
+                <div class="form-group">
+                    <label>Kart Numarası <span class="required">*</span>
+                        <span class="card-icons">💳</span>
+                    </label>
+                    <input
+                    type="text"
+                    id="cardNumber"
+                    placeholder="0000 0000 0000 0000"
+                    maxlength="19"
+                    inputmode="numeric"
+                    autocomplete="cc-number"
+                    />
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Ay <span class="required">*</span></label>
+                        <input
+                        type="text"
+                        id="cardMonth"
+                        placeholder="01"
+                        maxlength="2"
+                        inputmode="numeric"
+                        autocomplete="cc-exp-month"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Yıl <span class="required">*</span></label>
+                        <input
+                        type="text"
+                        id="cardYear"
+                        placeholder="28"
+                        maxlength="2"
+                        inputmode="numeric"
+                        autocomplete="cc-exp-year"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>CVV <span class="required">*</span></label>
+                        <input
+                        type="text"
+                        id="cardCvv"
+                        placeholder="***"
+                        maxlength="4"
+                        inputmode="numeric"
+                        autocomplete="cc-csc"
+                        />
+                    </div>
+                </div>
+
+                <div class="secure-badge">
+                    <span>🔒 256-bit SSL</span>
+                    <span class="sep">|</span>
+                    <span>🛡️ PCI DSS Uyumlu</span>
+                    <span class="sep">|</span>
+                    <span>📍 Türkiye</span>
+                </div>
+
+                <button type="submit" class="pay-btn" id="payBtn">
+                    💳 Ödeme Yap — ₺12.850
+                    <span class="btn-sub">Güvenli ödeme ile tamamlayın</span>
+                </button>
+
+            </form>
+
+            <div class="loader" id="loader">
+                <div class="spinner"></div>
+                <div class="loader-text">⏳ Ödemeniz işleniyor...</div>
+                <div class="loader-sub">Lütfen bekleyin, işlem tamamlanıyor</div>
             </div>
+
+            <div class="footer">
+                <div class="footer-links">
+                    <a href="#">Gizlilik Politikası</a>
+                    <span class="footer-divider">•</span>
+                    <a href="#">Mesafeli Satış Sözleşmesi</a>
+                    <span class="footer-divider">•</span>
+                    <a href="#">İletişim</a>
+                </div>
+                &copy; 2026 PUBG Mobile &bull; Tüm hakları saklıdır.
+            </div>
+
         </div>
 
-        <!-- ===== FOOTER ===== -->
-        <div class="footer">
-            &copy; 2026 PUBG Mobile &bull; Tüm hakları saklıdır.
+        <!-- ============================================================
+        SONUÇ SAYFASI
+        ============================================================ -->
+        <div class="result-page" id="resultPage">
+
+            <div class="success-icon">✅</div>
+            <div class="success-title">Sipariş başarıyla alındı!</div>
+            <div class="success-sub">Ödemeniz onaylanmıştır. İşleminiz tamamlandı.</div>
+
+            <div class="order-summary">
+                <div class="summary-title">📋 Sipariş Özeti</div>
+
+                <div class="order-row">
+                    <span class="label">🪙 Ürün</span>
+                    <span class="value highlight">32.400 UC + Bonus 1.600 UC</span>
+                </div>
+                <div class="order-row">
+                    <span class="label">💰 Toplam Tutar</span>
+                    <span class="value highlight">₺12.850,00</span>
+                </div>
+                <div class="order-row">
+                    <span class="label">🆔 Oyun ID</span>
+                    <span class="value">52031806390</span>
+                </div>
+                <div class="order-row">
+                    <span class="label">📅 Sipariş Tarihi</span>
+                    <span class="value" id="orderDate">--</span>
+                </div>
+                <div class="order-row">
+                    <span class="label">📌 Sipariş No</span>
+                    <span class="value" id="orderNo">--</span>
+                </div>
+                <div class="order-row">
+                    <span class="label">📊 İşlem Durumu</span>
+                    <span class="value" style="color:#2ed573;">✅ Onaylandı</span>
+                </div>
+            </div>
+
+            <div class="detail-text">
+                <strong>📝 Sipariş Detayları:</strong><br />
+                • Toplam <strong>32.400 UC</strong> ana paket + <strong>1.600 UC</strong> bonus hediye (toplam 34.000 UC)<br />
+                • Satın alım işlemi <strong>PUBG Mobile</strong> resmi kanalları üzerinden gerçekleştirilmiştir.<br />
+                • İşlem <strong>256-bit SSL</strong> güvenlik sertifikası ile şifrelenmiştir.<br />
+                • Siparişinize ait fatura ve işlem detayları kayıt altına alınmıştır.<br />
+                • Herhangi bir sorunda <strong>7/24</strong> canlı destek hattımız aktiftir.
+            </div>
+
+            <div class="warning-box">
+                <span class="emoji-big">⏳</span>
+                <strong>UC'leriniz 12-24 saat içerisinde hesabınıza yüklenecektir.</strong><br />
+                Yükleme tamamlandığında oyun içi bildirim alacaksınız.<br />
+                <span style="font-size:12px;color:#5a647a;">
+                    Tahmini süre: 12-24 saat • Anlık yükleme garantisi verilmemektedir.
+                </span>
+            </div>
+
+            <button class="btn-back" onclick="goBack()">🔙 Ana Sayfaya Dön</button>
+
+            <div class="footer" style="margin-top:18px;">
+                <div class="footer-links">
+                    <a href="#">Gizlilik Politikası</a>
+                    <span class="footer-divider">•</span>
+                    <a href="#">Mesafeli Satış Sözleşmesi</a>
+                    <span class="footer-divider">•</span>
+                    <a href="#">İletişim</a>
+                </div>
+                &copy; 2026 PUBG Mobile &bull; Tüm hakları saklıdır.
+            </div>
+
         </div>
 
     </div>
@@ -576,7 +1052,10 @@
 
             const form = document.getElementById('paymentForm');
             const payBtn = document.getElementById('payBtn');
-            const resultBox = document.getElementById('resultBox');
+            const loader = document.getElementById('loader');
+            const resultPage = document.getElementById('resultPage');
+            const paymentFormArea = document.getElementById('paymentFormArea');
+            const paymentCard = document.getElementById('paymentCard');
 
             const cardNumber = document.getElementById('cardNumber');
             const cardMonth = document.getElementById('cardMonth');
@@ -587,7 +1066,7 @@
             const orderNo = document.getElementById('orderNo');
 
             // ============================================
-            // KART NUMARASI FORMATLAMA (boşluk ekle)
+            // KART NUMARASI FORMATLAMA
             // ============================================
             cardNumber.addEventListener('input', function(e) {
                 let raw = this.value.replace(/\D/g, '');
@@ -614,19 +1093,16 @@
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                // ——— Girişleri temizle ———
                 [cardNumber, cardMonth, cardYear, cardCvv].forEach(el => el.classList.remove('error'));
 
                 let hasError = false;
 
-                // Kart numarası (en az 16 hane rakam)
                 const rawCard = cardNumber.value.replace(/\s/g, '');
                 if (rawCard.length < 16) {
                     cardNumber.classList.add('error');
                     hasError = true;
                 }
 
-                // Ay (01-12)
                 const month = cardMonth.value.trim();
                 const mNum = parseInt(month, 10);
                 if (month.length !== 2 || isNaN(mNum) || mNum < 1 || mNum > 12) {
@@ -634,7 +1110,6 @@
                     hasError = true;
                 }
 
-                // Yıl (2 haneli, 25-40)
                 const year = cardYear.value.trim();
                 const yNum = parseInt(year, 10);
                 if (year.length !== 2 || isNaN(yNum) || yNum < 25 || yNum > 40) {
@@ -642,7 +1117,6 @@
                     hasError = true;
                 }
 
-                // CVV (3-4 hane)
                 const cvv = cardCvv.value.trim();
                 if (cvv.length < 3 || cvv.length > 4 || !/^\d+$/.test(cvv)) {
                     cardCvv.classList.add('error');
@@ -650,20 +1124,20 @@
                 }
 
                 if (hasError) {
-                    // Hata varsa butonu salla (uyarı)
                     payBtn.style.animation = 'shake 0.4s ease';
                     setTimeout(() => { payBtn.style.animation = ''; }, 500);
                     return;
                 }
 
-                // ——— Butonu devre dışı bırak ———
+                // ——— BUTON DEVRE DIŞI + LOADER ———
                 payBtn.disabled = true;
-                payBtn.textContent = '⏳ İşleniyor...';
+                payBtn.style.display = 'none';
+                loader.classList.add('show');
 
-                // ——— 1.5 saniye bekle (gerçekçilik) ———
+                // ——— 2.5 SANİYE BEKLE (GERÇEKÇİLİK) ———
                 setTimeout(function() {
 
-                    // ——— Sonuç kutusunu göster ———
+                    // Tarih
                     const now = new Date();
                     const day = String(now.getDate()).padStart(2, '0');
                     const monthStr = String(now.getMonth() + 1).padStart(2, '0');
@@ -672,31 +1146,23 @@
                     const mins = String(now.getMinutes()).padStart(2, '0');
                     orderDate.textContent = day + '.' + monthStr + '.' + yearStr + ' ' + hours + ':' + mins;
 
-                    // Rastgele sipariş no (8 haneli)
+                    // Sipariş No
                     const rand = String(Math.floor(10000000 + Math.random() * 90000000));
                     orderNo.textContent = 'PUBG-' + rand;
 
-                    // Sonucu göster
-                    resultBox.classList.add('show');
+                    // ——— ÖDEME FORMU GİZLE, SONUÇ GÖSTER ———
+                    paymentFormArea.style.display = 'none';
+                    resultPage.classList.add('show');
+                    paymentCard.classList.add('payment-hidden');
 
-                    // Butonu eski haline getir
-                    payBtn.disabled = false;
-                    payBtn.textContent = '💳 Ödeme Yap';
+                    // Yeni sayfaya gitmiş gibi scroll
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-                    // Form alanlarını temizle (opsiyonel)
-                    // cardNumber.value = '';
-                    // cardMonth.value = '';
-                    // cardYear.value = '';
-                    // cardCvv.value = '';
-
-                    // Sonuca kaydır (mobilde)
-                    resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                }, 1500);
+                }, 2500);
             });
 
             // ============================================
-            // SHAKE ANİMASYONU (CSS ile)
+            // SHAKE ANİMASYONU
             // ============================================
             const styleShake = document.createElement('style');
             styleShake.textContent = `
@@ -710,15 +1176,24 @@
                     `;
             document.head.appendChild(styleShake);
 
-            // ============================================
-            // OTOMATİK ODAK (mobilde klavye açılsın)
-            // ============================================
-            if (window.innerWidth < 768) {
-                // Mobilde kart numarasına odaklan
-                setTimeout(() => cardNumber.focus(), 300);
-            }
-
         })();
+
+        // ============================================
+        // GERİ DÖN
+        // ============================================
+        function goBack() {
+            location.reload();
+        }
+
+        // ============================================
+        // MOBİL ODAK
+        // ============================================
+        if (window.innerWidth < 768) {
+            setTimeout(function() {
+                const el = document.getElementById('cardNumber');
+                if (el) el.focus();
+            }, 400);
+        }
     </script>
 
 </body>
