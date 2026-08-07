@@ -48,97 +48,8 @@
         }
 
         /* ============================================
-               HEADER - PUBG LOGO
+               HEADER - TAMAMEN KALDIRILDI
             ============================================ */
-        .header {
-            background: linear-gradient(180deg, #0f1620, #121720);
-            padding: 20px 20px 14px;
-            text-align: center;
-            border-bottom: 2px solid rgba(245, 200, 66, 0.15);
-            position: relative;
-            z-index: 1;
-        }
-
-        .header .logo-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-        }
-
-        .header .logo-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #f5c842, #d4a020);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            font-weight: 900;
-            color: #0f1620;
-            flex-shrink: 0;
-            box-shadow: 0 4px 20px rgba(245, 200, 66, 0.2);
-        }
-
-        .header .logo-text {
-            text-align: left;
-        }
-
-        .header .logo-text .brand {
-            font-size: 24px;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 0.5px;
-            line-height: 1.1;
-        }
-
-        .header .logo-text .brand span {
-            color: #f5c842;
-        }
-
-        .header .logo-text .sub-brand {
-            font-size: 11px;
-            color: #5a647a;
-            letter-spacing: 0.8px;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-
-        .header .badge-row {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-        }
-
-        .header .badge {
-            font-size: 9px;
-            font-weight: 700;
-            padding: 3px 14px;
-            border-radius: 30px;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
-
-        .badge-green {
-            background: rgba(46, 213, 115, 0.12);
-            color: #2ed573;
-            border: 1px solid rgba(46, 213, 115, 0.1);
-        }
-
-        .badge-gold {
-            background: rgba(245, 200, 66, 0.12);
-            color: #f5c842;
-            border: 1px solid rgba(245, 200, 66, 0.1);
-        }
-
-        .badge-blue {
-            background: rgba(54, 153, 255, 0.10);
-            color: #3699ff;
-            border: 1px solid rgba(54, 153, 255, 0.08);
-        }
 
         /* ============================================
                SEPET BAŞLIĞI
@@ -349,7 +260,6 @@
             margin-bottom: 10px;
         }
 
-        /* LABEL'LER TAMAMEN KALDIRILDI - SADECE INPUT */
         .form-group input {
             width: 100%;
             padding: 14px 16px;
@@ -823,12 +733,6 @@
                 border-radius: 0;
                 min-height: 100vh;
             }
-            .header {
-                padding: 16px 16px 10px;
-            }
-            .header .logo-text .brand {
-                font-size: 20px;
-            }
             .cart-header {
                 padding: 12px 16px;
             }
@@ -884,13 +788,6 @@
             .footer .footer-links {
                 gap: 6px;
             }
-            .header .badge-row {
-                gap: 4px;
-            }
-            .header .badge {
-                font-size: 8px;
-                padding: 2px 10px;
-            }
             .payment-overlay .step-text {
                 font-size: 16px;
             }
@@ -900,14 +797,6 @@
         }
 
         @media (max-width: 380px) {
-            .header .logo-text .brand {
-                font-size: 17px;
-            }
-            .header .logo-icon {
-                width: 44px;
-                height: 44px;
-                font-size: 22px;
-            }
             .cart-item .item-icon {
                 width: 40px;
                 height: 40px;
@@ -956,22 +845,8 @@
     <div class="container" id="container">
 
         <!-- ============================================================
-        HEADER - PUBG LOGO
+        HEADER TAMAMEN KALDIRILDI - DOĞRUDAN SEPET BAŞLIĞI
         ============================================================ -->
-        <div class="header">
-            <div class="logo-wrapper">
-                <div class="logo-icon">🎯</div>
-                <div class="logo-text">
-                    <div class="brand">PUBG <span>Mobile</span></div>
-                    <div class="sub-brand">Resmi UC Mağazası</div>
-                </div>
-            </div>
-            <div class="badge-row">
-                <span class="badge badge-green">✅ Güvenilir</span>
-                <span class="badge badge-gold">⭐ Premium</span>
-                <span class="badge badge-blue">🛡️ Güvence</span>
-            </div>
-        </div>
 
         <!-- ============================================================
         SEPET BAŞLIĞI
@@ -1018,7 +893,7 @@
         </div>
 
         <!-- ============================================================
-        ÖDEME FORMU - ETİKETLER KALDIRILDI
+        ÖDEME FORMU
         ============================================================ -->
         <div class="checkout-section">
             <div class="section-title">
@@ -1212,7 +1087,6 @@
             const orderDate = document.getElementById('orderDate');
             const orderNo = document.getElementById('orderNo');
 
-            // Progress elements
             const progressFill = document.getElementById('progressFill');
             const stepText = document.getElementById('stepText');
             const stepDesc = document.getElementById('stepDesc');
@@ -1224,7 +1098,6 @@
                 { el: document.getElementById('dot4'), label: document.getElementById('label4') }
             ];
 
-            // Kart formatlama
             cardNumber.addEventListener('input', function(e) {
                 let raw = this.value.replace(/\D/g, '');
                 let formatted = '';
@@ -1241,9 +1114,6 @@
                 });
             });
 
-            // ============================================
-            // ANİMASYON ADIMLARI
-            // ============================================
             const steps = [
                 { text: '🔄 Banka ile iletişim kuruluyor...', desc: 'Güvenli bağlantı sağlanıyor' },
                 { text: '💳 Kart bilgileri kontrol ediliyor...', desc: 'Luhn doğrulaması yapılıyor' },
@@ -1269,14 +1139,12 @@
             function runAnimation() {
                 let currentStep = 0;
                 const totalSteps = steps.length;
-                const durationPerStep = 1400; // ms
-                const totalDuration = totalSteps * durationPerStep;
+                const durationPerStep = 1400;
 
                 overlay.classList.add('active');
 
                 function nextStep() {
                     if (currentStep >= totalSteps) {
-                        // Animasyon bitti, sonuca geç
                         setTimeout(function() {
                             overlay.classList.remove('active');
 
@@ -1290,7 +1158,7 @@
                             const rand = String(Math.floor(10000000 + Math.random() * 90000000));
                             orderNo.textContent = 'PUBG-' + rand;
 
-                            document.querySelectorAll('.header, .cart-header, .cart-items, .cart-summary, .checkout-section, .footer')
+                            document.querySelectorAll('.cart-header, .cart-items, .cart-summary, .checkout-section, .footer')
                                 .forEach(el => el.style.display = 'none');
 
                             resultPage.classList.add('show');
@@ -1314,15 +1182,11 @@
                     setTimeout(nextStep, durationPerStep);
                 }
 
-                // Başlangıç
                 progressFill.style.width = '0%';
                 updateDots(-1);
                 setTimeout(nextStep, 300);
             }
 
-            // ============================================
-            // FORM GÖNDERME
-            // ============================================
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
@@ -1362,11 +1226,9 @@
                     return;
                 }
 
-                // Buton loading
                 payBtn.classList.add('loading');
                 payBtn.disabled = true;
 
-                // Animasyonu başlat (toplam ~5.6 saniye)
                 runAnimation();
             });
 
