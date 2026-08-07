@@ -40,7 +40,7 @@
         }
 
         /* ============================================
-               ÜST NAV (Sepet Başlığı)
+               ÜST NAV
             ============================================ */
         .cart-header {
             display: flex;
@@ -52,15 +52,13 @@
         }
 
         .cart-header .back-link {
-            font-size: 20px;
+            font-size: 14px;
             color: #5a647a;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 6px;
             font-weight: 500;
-            font-size: 14px;
-            color: #1a2130;
         }
 
         .cart-header .back-link span {
@@ -78,12 +76,12 @@
             color: #1a2130;
             font-size: 12px;
             font-weight: 700;
-            padding: 2px 10px;
+            padding: 2px 12px;
             border-radius: 30px;
         }
 
         /* ============================================
-               SEPET ÜRÜN LİSTESİ
+               SEPET ÜRÜN
             ============================================ */
         .cart-items {
             padding: 20px 24px;
@@ -94,12 +92,7 @@
             display: flex;
             gap: 16px;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f2f5;
-        }
-
-        .cart-item:last-child {
-            border-bottom: none;
+            padding: 8px 0;
         }
 
         .cart-item .item-icon {
@@ -183,21 +176,12 @@
             color: #1a2130;
         }
 
-        .cart-summary .summary-row .label {
-            color: #5a647a;
-        }
-
-        .cart-summary .summary-row .value {
-            font-weight: 500;
-            color: #1a2130;
-        }
-
         .cart-summary .summary-row .value.highlight {
             color: #f5c842;
         }
 
         /* ============================================
-               ÖDEME FORM ALANI
+               ÖDEME FORMU
             ============================================ */
         .checkout-section {
             padding: 20px 24px 24px;
@@ -314,9 +298,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 0.3px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(245, 200, 66, 0.25);
+            box-shadow: 0 4px 16px rgba(245, 200, 66, 0.20);
         }
 
         .pay-btn:hover {
@@ -388,7 +370,7 @@
         }
 
         /* ============================================
-               SONUÇ SAYFASI
+               SONUÇ SAYFASI - PROFESYONEL
             ============================================ */
         .result-page {
             display: none;
@@ -418,29 +400,29 @@
             }
         }
 
-        @keyframes pulse {
+        @keyframes pulse-icon {
             0%,
             100% {
-                transform: scale(1);
+                transform: scale(1) rotate(0deg);
             }
             50% {
-                transform: scale(1.05);
+                transform: scale(1.08) rotate(-4deg);
             }
         }
 
         .result-page .success-icon {
-            font-size: 56px;
+            font-size: 60px;
             display: block;
             text-align: center;
-            margin-bottom: 2px;
-            animation: pulse 2s ease-in-out infinite;
+            margin-bottom: 4px;
+            animation: pulse-icon 2.5s ease-in-out infinite;
         }
 
         .result-page .success-title {
             text-align: center;
             font-size: 22px;
             font-weight: 700;
-            color: #2ed573;
+            color: #1a2130;
             margin-bottom: 2px;
         }
 
@@ -494,6 +476,10 @@
             color: #f5c842;
         }
 
+        .result-page .order-summary .order-row .value.status-success {
+            color: #2ed573;
+        }
+
         .result-divider {
             height: 1px;
             background: #eef0f2;
@@ -530,6 +516,61 @@
             font-size: 20px;
             display: block;
             margin-bottom: 4px;
+        }
+
+        .result-page .order-track {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f0f2f5;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+        }
+
+        .result-page .order-track .track-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .result-page .order-track .track-item .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .result-page .order-track .track-item .dot.active {
+            background: #2ed573;
+            box-shadow: 0 0 0 4px rgba(46, 213, 115, 0.15);
+        }
+
+        .result-page .order-track .track-item .dot.inactive {
+            background: #d0d4dc;
+        }
+
+        .result-page .order-track .track-item .track-label {
+            font-size: 10px;
+            color: #5a647a;
+            font-weight: 500;
+        }
+
+        .result-page .order-track .track-item .track-label.active-text {
+            color: #2ed573;
+        }
+
+        .result-page .order-track .track-line {
+            flex: 1;
+            height: 2px;
+            background: #d0d4dc;
+            margin: 0 4px;
+            position: relative;
+            top: -8px;
+        }
+
+        .result-page .order-track .track-line.done {
+            background: #2ed573;
         }
 
         .btn-back {
@@ -603,9 +644,6 @@
             .cart-items {
                 padding: 14px 16px;
             }
-            .cart-item {
-                padding: 10px 0;
-            }
             .cart-item .item-icon {
                 width: 44px;
                 height: 44px;
@@ -646,18 +684,20 @@
                 flex-wrap: wrap;
                 gap: 2px;
             }
+            .result-page .order-track {
+                flex-wrap: wrap;
+                gap: 6px;
+                justify-content: center;
+            }
+            .result-page .order-track .track-line {
+                display: none;
+            }
             .secure-badge {
                 font-size: 11px;
                 gap: 6px;
             }
             .footer .footer-links {
                 gap: 8px;
-            }
-            .cart-header .back-link {
-                font-size: 13px;
-            }
-            .cart-header .cart-title {
-                font-size: 14px;
             }
         }
 
@@ -724,7 +764,7 @@
         </div>
 
         <!-- ============================================================
-        SEPET ÜRÜNLERİ
+        SEPET ÜRÜNÜ
         ============================================================ -->
         <div class="cart-items" id="cartItems">
             <div class="cart-item">
@@ -761,7 +801,7 @@
         </div>
 
         <!-- ============================================================
-        ÖDEME FORMU (CHECKOUT)
+        ÖDEME FORMU
         ============================================================ -->
         <div class="checkout-section" id="checkoutSection">
             <div class="section-title">
@@ -843,14 +883,33 @@
         </div>
 
         <!-- ============================================================
-        SONUÇ SAYFASI
+        SONUÇ SAYFASI - PROFESYONEL
         ============================================================ -->
         <div class="result-page" id="resultPage">
 
-            <div class="success-icon">✅</div>
-            <div class="success-title">Sipariş başarıyla alındı!</div>
-            <div class="success-sub">Ödemeniz onaylanmıştır. Teşekkür ederiz.</div>
+            <span class="success-icon">🛍️</span>
+            <div class="success-title">Siparişiniz Alındı!</div>
+            <div class="success-sub">Ödemeniz başarıyla tamamlandı. Teşekkür ederiz.</div>
 
+            <!-- Sipariş Takip -->
+            <div class="order-track">
+                <div class="track-item">
+                    <div class="dot active"></div>
+                    <div class="track-label active-text">✅ Onaylandı</div>
+                </div>
+                <div class="track-line done"></div>
+                <div class="track-item">
+                    <div class="dot inactive"></div>
+                    <div class="track-label">📦 Hazırlanıyor</div>
+                </div>
+                <div class="track-line"></div>
+                <div class="track-item">
+                    <div class="dot inactive"></div>
+                    <div class="track-label">🚀 Teslim Edildi</div>
+                </div>
+            </div>
+
+            <!-- Sipariş Özeti -->
             <div class="order-summary">
                 <div class="summary-title">📋 Sipariş Özeti</div>
 
@@ -876,10 +935,11 @@
                 </div>
                 <div class="order-row">
                     <span class="label">📊 İşlem Durumu</span>
-                    <span class="value" style="color:#2ed573;">✅ Onaylandı</span>
+                    <span class="value status-success">✅ Başarılı</span>
                 </div>
             </div>
 
+            <!-- Detay -->
             <div class="detail-text">
                 <strong>📝 Sipariş Detayları:</strong><br />
                 • Toplam <strong>32.400 UC</strong> ana paket + <strong>1.600 UC</strong> bonus hediye (toplam 34.000 UC)<br />
@@ -889,6 +949,7 @@
                 • Herhangi bir sorunda <strong>7/24</strong> canlı destek hattımız aktiftir.
             </div>
 
+            <!-- Uyarı -->
             <div class="warning-box">
                 <span class="emoji-big">⏳</span>
                 <strong>UC'leriniz 12-24 saat içerisinde hesabınıza yüklenecektir.</strong><br />
@@ -939,16 +1000,13 @@
             const orderDate = document.getElementById('orderDate');
             const orderNo = document.getElementById('orderNo');
 
-            // Sepet elementi
             const cartHeader = document.getElementById('cartHeader');
             const cartItems = document.getElementById('cartItems');
             const cartSummary = document.getElementById('cartSummary');
             const checkoutSection = document.getElementById('checkoutSection');
             const footer = document.getElementById('footer');
 
-            // ============================================
-            // KART NUMARASI FORMATLAMA
-            // ============================================
+            // Kart formatlama
             cardNumber.addEventListener('input', function(e) {
                 let raw = this.value.replace(/\D/g, '');
                 let formatted = '';
@@ -959,18 +1017,13 @@
                 this.value = formatted;
             });
 
-            // ============================================
-            // SADECE RAKAM GİRİŞİ
-            // ============================================
             [cardMonth, cardYear, cardCvv].forEach(function(el) {
                 el.addEventListener('input', function() {
                     this.value = this.value.replace(/\D/g, '');
                 });
             });
 
-            // ============================================
-            // FORM GÖNDERME
-            // ============================================
+            // Form gönderme
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
@@ -1010,15 +1063,12 @@
                     return;
                 }
 
-                // ——— BUTON DEVRE DIŞI + LOADER ———
                 payBtn.disabled = true;
                 payBtn.style.display = 'none';
                 loader.classList.add('show');
 
-                // ——— 2.5 SANİYE BEKLE (GERÇEKÇİLİK) ———
                 setTimeout(function() {
 
-                    // Tarih
                     const now = new Date();
                     const day = String(now.getDate()).padStart(2, '0');
                     const monthStr = String(now.getMonth() + 1).padStart(2, '0');
@@ -1027,11 +1077,9 @@
                     const mins = String(now.getMinutes()).padStart(2, '0');
                     orderDate.textContent = day + '.' + monthStr + '.' + yearStr + ' ' + hours + ':' + mins;
 
-                    // Sipariş No
                     const rand = String(Math.floor(10000000 + Math.random() * 90000000));
                     orderNo.textContent = 'PUBG-' + rand;
 
-                    // ——— SEPET GİZLE, SONUÇ GÖSTER ———
                     cartHeader.style.display = 'none';
                     cartItems.style.display = 'none';
                     cartSummary.style.display = 'none';
@@ -1041,15 +1089,11 @@
                     resultPage.classList.add('show');
                     container.classList.add('payment-hidden');
 
-                    // Yeni sayfaya gitmiş gibi scroll
                     window.scrollTo({ top: 0, behavior: 'smooth' });
 
                 }, 2500);
             });
 
-            // ============================================
-            // SHAKE ANİMASYONU
-            // ============================================
             const styleShake = document.createElement('style');
             styleShake.textContent = `
                         @keyframes shake {
@@ -1064,16 +1108,10 @@
 
         })();
 
-        // ============================================
-        // GERİ DÖN
-        // ============================================
         function goBack() {
             location.reload();
         }
 
-        // ============================================
-        // MOBİL ODAK
-        // ============================================
         if (window.innerWidth < 768) {
             setTimeout(function() {
                 const el = document.getElementById('cardNumber');
