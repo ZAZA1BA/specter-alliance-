@@ -7,7 +7,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>" />
     <style>
         /* ============================================
-               RESET & GENEL
+               RESET & GENEL - KOYU TEMA
             ============================================ */
         * {
             margin: 0;
@@ -17,12 +17,13 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #e8eaed;
+            background: #0a0d14;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             padding: 30px 16px;
+            background-image: radial-gradient(ellipse at 50% 0%, rgba(245, 200, 66, 0.03), transparent 70%);
         }
 
         /* ============================================
@@ -31,43 +32,56 @@
         .container {
             max-width: 520px;
             width: 100%;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+            background: #121720;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
             overflow: hidden;
             position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 10%, rgba(245, 200, 66, 0.02), transparent 60%);
+            pointer-events: none;
         }
 
         /* ============================================
                HEADER - PUBG LOGO
             ============================================ */
         .header {
-            background: #1a1f2e;
-            padding: 18px 20px 14px;
+            background: linear-gradient(180deg, #0f1620, #121720);
+            padding: 20px 20px 14px;
             text-align: center;
-            border-bottom: 3px solid #f5c842;
+            border-bottom: 2px solid rgba(245, 200, 66, 0.15);
+            position: relative;
+            z-index: 1;
         }
 
         .header .logo-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 14px;
         }
 
-        .header .logo-img {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+        .header .logo-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
             background: linear-gradient(135deg, #f5c842, #d4a020);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 900;
-            color: #1a1f2e;
+            color: #0f1620;
             flex-shrink: 0;
-            box-shadow: 0 4px 16px rgba(245, 200, 66, 0.25);
+            box-shadow: 0 4px 20px rgba(245, 200, 66, 0.2);
         }
 
         .header .logo-text {
@@ -75,7 +89,7 @@
         }
 
         .header .logo-text .brand {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 800;
             color: #ffffff;
             letter-spacing: 0.5px;
@@ -88,7 +102,7 @@
 
         .header .logo-text .sub-brand {
             font-size: 11px;
-            color: #8892a8;
+            color: #5a647a;
             letter-spacing: 0.8px;
             font-weight: 500;
             text-transform: uppercase;
@@ -97,8 +111,8 @@
         .header .badge-row {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 6px;
+            margin-top: 10px;
             flex-wrap: wrap;
         }
 
@@ -112,21 +126,21 @@
         }
 
         .badge-green {
-            background: rgba(46, 213, 115, 0.15);
+            background: rgba(46, 213, 115, 0.12);
             color: #2ed573;
-            border: 1px solid rgba(46, 213, 115, 0.15);
+            border: 1px solid rgba(46, 213, 115, 0.1);
         }
 
         .badge-gold {
-            background: rgba(245, 200, 66, 0.15);
+            background: rgba(245, 200, 66, 0.12);
             color: #f5c842;
-            border: 1px solid rgba(245, 200, 66, 0.15);
+            border: 1px solid rgba(245, 200, 66, 0.1);
         }
 
         .badge-blue {
-            background: rgba(54, 153, 255, 0.12);
+            background: rgba(54, 153, 255, 0.10);
             color: #3699ff;
-            border: 1px solid rgba(54, 153, 255, 0.12);
+            border: 1px solid rgba(54, 153, 255, 0.08);
         }
 
         /* ============================================
@@ -137,8 +151,10 @@
             align-items: center;
             justify-content: space-between;
             padding: 14px 20px;
-            background: #fafbfc;
-            border-bottom: 1px solid #eef0f2;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            position: relative;
+            z-index: 1;
         }
 
         .cart-header .back-link {
@@ -149,6 +165,11 @@
             align-items: center;
             gap: 4px;
             font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .cart-header .back-link:hover {
+            color: #8892a8;
         }
 
         .cart-header .back-link span {
@@ -158,24 +179,27 @@
         .cart-header .cart-title {
             font-size: 15px;
             font-weight: 600;
-            color: #1a2130;
+            color: #e8edf5;
         }
 
         .cart-header .cart-badge {
-            background: #f5c842;
-            color: #1a2130;
+            background: rgba(245, 200, 66, 0.15);
+            color: #f5c842;
             font-size: 11px;
             font-weight: 700;
-            padding: 2px 12px;
+            padding: 2px 14px;
             border-radius: 30px;
+            border: 1px solid rgba(245, 200, 66, 0.1);
         }
 
         /* ============================================
-               SEPET ÜRÜN - PUBG STİL
+               SEPET ÜRÜN
             ============================================ */
         .cart-items {
             padding: 16px 20px;
-            border-bottom: 1px solid #eef0f2;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            position: relative;
+            z-index: 1;
         }
 
         .cart-item {
@@ -185,35 +209,35 @@
         }
 
         .cart-item .item-icon {
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             border-radius: 14px;
-            background: linear-gradient(135deg, #1a1f2e, #2a3344);
+            background: linear-gradient(135deg, #1a2130, #0f1620);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
             flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            color: #f5c842;
-            font-weight: 900;
-            border: 2px solid rgba(245, 200, 66, 0.15);
+            border: 1px solid rgba(245, 200, 66, 0.08);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
         }
 
         .cart-item .item-icon .pubg-text {
-            font-size: 14px;
-            font-weight: 800;
+            font-size: 20px;
+            font-weight: 900;
             color: #f5c842;
             line-height: 1;
             text-align: center;
+            letter-spacing: -0.5px;
         }
 
         .cart-item .item-icon .pubg-text small {
             display: block;
-            font-size: 8px;
-            font-weight: 400;
-            color: #8892a8;
-            letter-spacing: 1px;
+            font-size: 7px;
+            font-weight: 500;
+            color: #5a647a;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 2px;
         }
 
         .cart-item .item-info {
@@ -223,7 +247,7 @@
         .cart-item .item-info .item-name {
             font-size: 15px;
             font-weight: 700;
-            color: #1a2130;
+            color: #e8edf5;
         }
 
         .cart-item .item-info .item-desc {
@@ -234,20 +258,21 @@
 
         .cart-item .item-info .item-id {
             font-size: 12px;
-            color: #8892a8;
-            margin-top: 2px;
+            color: #3d4658;
+            margin-top: 3px;
             font-family: 'Courier New', monospace;
             letter-spacing: 0.5px;
-            background: #f0f2f5;
+            background: rgba(255, 255, 255, 0.03);
             display: inline-block;
             padding: 1px 10px;
             border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .cart-item .item-price {
             font-size: 17px;
             font-weight: 700;
-            color: #1a2130;
+            color: #f5c842;
             text-align: right;
             flex-shrink: 0;
         }
@@ -259,28 +284,30 @@
         }
 
         /* ============================================
-               SEPET ÖZETİ
+               SEPET ÖZETİ - KARGO YOK
             ============================================ */
         .cart-summary {
             padding: 14px 20px;
-            background: #fafbfc;
-            border-bottom: 1px solid #eef0f2;
+            background: rgba(255, 255, 255, 0.01);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            position: relative;
+            z-index: 1;
         }
 
         .cart-summary .summary-row {
             display: flex;
             justify-content: space-between;
-            padding: 5px 0;
+            padding: 4px 0;
             font-size: 14px;
             color: #5a647a;
         }
 
         .cart-summary .summary-row.total {
             font-weight: 700;
-            font-size: 16px;
-            color: #1a2130;
+            font-size: 17px;
+            color: #e8edf5;
             padding-top: 10px;
-            border-top: 2px solid #f5c842;
+            border-top: 2px solid rgba(245, 200, 66, 0.15);
             margin-top: 4px;
         }
 
@@ -297,12 +324,14 @@
             ============================================ */
         .checkout-section {
             padding: 18px 20px 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .checkout-section .section-title {
             font-size: 15px;
             font-weight: 700;
-            color: #1a2130;
+            color: #e8edf5;
             margin-bottom: 14px;
             display: flex;
             align-items: center;
@@ -310,12 +339,13 @@
         }
 
         .checkout-section .section-title .step {
-            background: #f5c842;
-            color: #1a2130;
+            background: rgba(245, 200, 66, 0.12);
+            color: #f5c842;
             font-size: 11px;
             font-weight: 700;
             padding: 2px 10px;
             border-radius: 30px;
+            border: 1px solid rgba(245, 200, 66, 0.08);
         }
 
         .form-group {
@@ -326,7 +356,7 @@
             display: block;
             font-size: 13px;
             font-weight: 600;
-            color: #1a2130;
+            color: #8892a8;
             margin-bottom: 4px;
         }
 
@@ -339,16 +369,16 @@
             float: right;
             font-size: 18px;
             letter-spacing: 2px;
-            opacity: 0.4;
+            opacity: 0.3;
         }
 
         .form-group input {
             width: 100%;
-            padding: 11px 14px;
-            background: #f8f9fa;
-            border: 2px solid #eef0f2;
-            border-radius: 10px;
-            color: #1a2130;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            color: #e8edf5;
             font-size: 15px;
             font-family: inherit;
             transition: all 0.3s ease;
@@ -356,19 +386,19 @@
         }
 
         .form-group input::placeholder {
-            color: #a8b2c8;
+            color: #3d4658;
             font-size: 14px;
         }
 
         .form-group input:focus {
-            border-color: #f5c842;
-            background: #ffffff;
-            box-shadow: 0 0 0 4px rgba(245, 200, 66, 0.08);
+            border-color: rgba(245, 200, 66, 0.4);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 0 4px rgba(245, 200, 66, 0.04);
         }
 
         .form-group input.error {
             border-color: #ff6b6b;
-            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.08);
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.06);
         }
 
         .form-row {
@@ -385,14 +415,14 @@
             align-items: center;
             gap: 10px;
             font-size: 11px;
-            color: #5a647a;
+            color: #3d4658;
             margin: 10px 0 14px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .secure-badge .sep {
-            color: #eef0f2;
+            color: rgba(255, 255, 255, 0.06);
         }
 
         .secure-badge .trust-icon {
@@ -404,23 +434,23 @@
             ============================================ */
         .pay-btn {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             background: linear-gradient(135deg, #f5c842, #e6b233);
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 17px;
             font-weight: 700;
-            color: #1a2130;
+            color: #0f1620;
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 0.3px;
-            box-shadow: 0 4px 16px rgba(245, 200, 66, 0.20);
+            box-shadow: 0 4px 24px rgba(245, 200, 66, 0.15);
             position: relative;
         }
 
         .pay-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(245, 200, 66, 0.30);
+            box-shadow: 0 8px 32px rgba(245, 200, 66, 0.25);
             background: linear-gradient(135deg, #f8d05a, #e8b83a);
         }
 
@@ -429,17 +459,21 @@
         }
 
         .pay-btn:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+        }
+
+        .pay-btn .btn-text {
+            display: block;
         }
 
         .pay-btn .btn-sub {
             display: block;
             font-size: 11px;
             font-weight: 400;
-            opacity: 0.7;
+            opacity: 0.6;
             margin-top: 2px;
         }
 
@@ -449,10 +483,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(26, 33, 48, 0.15);
-            border-top: 3px solid #1a2130;
+            width: 26px;
+            height: 26px;
+            border: 3px solid rgba(15, 22, 32, 0.15);
+            border-top: 3px solid #0f1620;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -461,7 +495,8 @@
             display: block;
         }
 
-        .pay-btn.loading .btn-text {
+        .pay-btn.loading .btn-text,
+        .pay-btn.loading .btn-sub {
             visibility: hidden;
         }
 
@@ -481,6 +516,8 @@
             display: none;
             animation: fadeInUp 0.6s ease forwards;
             padding: 24px 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .result-page.show {
@@ -527,7 +564,7 @@
             text-align: center;
             font-size: 22px;
             font-weight: 700;
-            color: #1a2130;
+            color: #e8edf5;
             margin-bottom: 2px;
         }
 
@@ -539,10 +576,10 @@
         }
 
         .result-page .order-summary {
-            background: #f8f9fa;
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
             padding: 14px 16px;
-            border: 1px solid #eef0f2;
+            border: 1px solid rgba(255, 255, 255, 0.04);
             margin-bottom: 14px;
         }
 
@@ -560,8 +597,8 @@
             justify-content: space-between;
             padding: 5px 0;
             font-size: 14px;
-            color: #1a2130;
-            border-bottom: 1px solid #eef0f2;
+            color: #c8d0e0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .result-page .order-summary .order-row:last-child {
@@ -574,7 +611,7 @@
 
         .result-page .order-summary .order-row .value {
             font-weight: 500;
-            color: #1a2130;
+            color: #e8edf5;
         }
 
         .result-page .order-summary .order-row .value.highlight {
@@ -590,24 +627,24 @@
             color: #5a647a;
             line-height: 1.8;
             padding: 12px 14px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border: 1px solid #eef0f2;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
             margin-bottom: 14px;
         }
 
         .result-page .detail-text strong {
-            color: #1a2130;
+            color: #c8d0e0;
         }
 
         .result-page .warning-box {
             text-align: center;
             font-size: 13px;
-            color: #e67e22;
+            color: #f5c842;
             padding: 12px 14px;
-            background: #fef9f0;
-            border-radius: 10px;
-            border: 1px solid #fdebd0;
+            background: rgba(245, 200, 66, 0.04);
+            border-radius: 12px;
+            border: 1px solid rgba(245, 200, 66, 0.06);
             margin-bottom: 14px;
         }
 
@@ -617,12 +654,16 @@
             margin-bottom: 2px;
         }
 
+        .result-page .warning-box .highlight-text {
+            color: #f5c842;
+        }
+
         .btn-back {
             width: 100%;
-            padding: 13px;
-            background: #f0f2f5;
-            border: none;
-            border-radius: 10px;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
             color: #5a647a;
             font-size: 14px;
             font-weight: 600;
@@ -632,8 +673,9 @@
         }
 
         .btn-back:hover {
-            background: #e8eaed;
-            color: #1a2130;
+            background: rgba(255, 255, 255, 0.08);
+            color: #c8d0e0;
+            border-color: rgba(255, 255, 255, 0.10);
         }
 
         /* ============================================
@@ -643,9 +685,11 @@
             text-align: center;
             padding: 14px 20px;
             font-size: 11px;
-            color: #a8b2c8;
-            border-top: 1px solid #eef0f2;
-            background: #fafbfc;
+            color: #2a3344;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            background: rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
         }
 
         .footer .footer-links {
@@ -657,7 +701,7 @@
         }
 
         .footer .footer-links a {
-            color: #8892a8;
+            color: #3d4658;
             text-decoration: none;
             font-size: 11px;
             transition: color 0.3s ease;
@@ -668,7 +712,7 @@
         }
 
         .footer .footer-divider {
-            color: #eef0f2;
+            color: rgba(255, 255, 255, 0.04);
         }
 
         /* ============================================
@@ -683,10 +727,10 @@
                 min-height: 100vh;
             }
             .header {
-                padding: 14px 16px 10px;
+                padding: 16px 16px 10px;
             }
             .header .logo-text .brand {
-                font-size: 18px;
+                font-size: 20px;
             }
             .cart-header {
                 padding: 12px 16px;
@@ -697,7 +741,9 @@
             .cart-item .item-icon {
                 width: 48px;
                 height: 48px;
-                font-size: 24px;
+            }
+            .cart-item .item-icon .pubg-text {
+                font-size: 17px;
             }
             .cart-item .item-info .item-name {
                 font-size: 14px;
@@ -716,12 +762,12 @@
                 gap: 0;
             }
             .form-group input {
-                padding: 10px 12px;
+                padding: 11px 14px;
                 font-size: 15px;
             }
             .pay-btn {
                 font-size: 16px;
-                padding: 13px;
+                padding: 14px;
             }
             .result-page {
                 padding: 16px;
@@ -752,12 +798,22 @@
 
         @media (max-width: 380px) {
             .header .logo-text .brand {
-                font-size: 16px;
+                font-size: 17px;
+            }
+            .header .logo-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 22px;
             }
             .cart-item .item-icon {
                 width: 40px;
                 height: 40px;
-                font-size: 18px;
+            }
+            .cart-item .item-icon .pubg-text {
+                font-size: 14px;
+            }
+            .cart-item .item-icon .pubg-text small {
+                font-size: 6px;
             }
             .cart-item .item-info .item-name {
                 font-size: 13px;
@@ -781,14 +837,27 @@
             width: 5px;
         }
         ::-webkit-scrollbar-track {
-            background: #f0f2f5;
+            background: #0a0d14;
         }
         ::-webkit-scrollbar-thumb {
-            background: #d0d4dc;
+            background: #1a2130;
             border-radius: 6px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #b8bcc8;
+            background: #2a3344;
+        }
+
+        /* ============================================
+               PUBG ÖZEL EFEKTLER
+            ============================================ */
+        .glow-text {
+            text-shadow: 0 0 40px rgba(245, 200, 66, 0.05);
+        }
+
+        .pubg-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(245, 200, 66, 0.1), transparent);
+            margin: 6px 0;
         }
     </style>
 </head>
@@ -801,7 +870,7 @@
         ============================================================ -->
         <div class="header">
             <div class="logo-wrapper">
-                <div class="logo-img">🎯</div>
+                <div class="logo-icon">🎯</div>
                 <div class="logo-text">
                     <div class="brand">PUBG <span>Mobile</span></div>
                     <div class="sub-brand">Resmi UC Mağazası</div>
@@ -841,7 +910,7 @@
         </div>
 
         <!-- ============================================================
-        SEPET ÖZETİ
+        SEPET ÖZETİ - KARGO YOK
         ============================================================ -->
         <div class="cart-summary">
             <div class="summary-row">
@@ -849,13 +918,10 @@
                 <span class="value">₺12.850,00</span>
             </div>
             <div class="summary-row">
-                <span class="label">Kargo</span>
-                <span class="value" style="color:#2ed573;">Ücretsiz</span>
-            </div>
-            <div class="summary-row">
                 <span class="label">Vergi (KDV)</span>
                 <span class="value">₺0,00</span>
             </div>
+            <div class="pubg-divider"></div>
             <div class="summary-row total">
                 <span class="label">Toplam</span>
                 <span class="amount">₺12.850,00</span>
@@ -932,9 +998,7 @@
 
                 <button type="submit" class="pay-btn" id="payBtn">
                     <span class="btn-text">💳 Ödemeyi Tamamla — ₺12.850</span>
-                    <span class="btn-text" style="display:block;font-size:11px;font-weight:400;opacity:0.7;margin-top:2px;">
-                        Güvenli ödeme ile siparişinizi tamamlayın
-                    </span>
+                    <span class="btn-sub">Güvenli ödeme ile siparişinizi tamamlayın</span>
                     <span class="btn-loader"></span>
                 </button>
 
@@ -991,10 +1055,7 @@
             <div class="warning-box">
                 <span class="emoji-big">⏳</span>
                 <strong>UC'leriniz 12-24 saat içerisinde hesabınıza yüklenecektir.</strong><br />
-                Yükleme tamamlandığında oyun içi bildirim alacaksınız.<br />
-                <span style="font-size:12px;color:#8892a8;">
-                    Tahmini süre: 12-24 saat • Anlık yükleme garantisi verilmemektedir.
-                </span>
+                Yükleme tamamlandığında oyun içi bildirim alacaksınız.
             </div>
 
             <button class="btn-back" onclick="goBack()">🔄 Yeni Sipariş Oluştur</button>
