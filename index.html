@@ -26,9 +26,6 @@
             background-image: radial-gradient(ellipse at 50% 0%, rgba(245, 200, 66, 0.03), transparent 70%);
         }
 
-        /* ============================================
-               ANA CONTAINER
-            ============================================ */
         .container {
             max-width: 520px;
             width: 100%;
@@ -284,7 +281,7 @@
         }
 
         /* ============================================
-               SEPET ÖZETİ - KARGO YOK
+               SEPET ÖZETİ
             ============================================ */
         .cart-summary {
             padding: 14px 20px;
@@ -320,7 +317,7 @@
         }
 
         /* ============================================
-               ÖDEME FORMU
+               ÖDEME FORMU - ETİKETLER KALDIRILDI
             ============================================ */
         .checkout-section {
             padding: 18px 20px 20px;
@@ -349,45 +346,29 @@
         }
 
         .form-group {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #8892a8;
-            margin-bottom: 4px;
-        }
-
-        .form-group label .required {
-            color: #ff6b6b;
-            margin-left: 2px;
-        }
-
-        .form-group label .card-icons {
-            float: right;
-            font-size: 18px;
-            letter-spacing: 2px;
-            opacity: 0.3;
-        }
-
+        /* LABEL'LER TAMAMEN KALDIRILDI - SADECE INPUT */
         .form-group input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 14px 16px;
             background: rgba(255, 255, 255, 0.04);
             border: 2px solid rgba(255, 255, 255, 0.06);
             border-radius: 12px;
             color: #e8edf5;
-            font-size: 15px;
+            font-size: 16px;
             font-family: inherit;
             transition: all 0.3s ease;
             outline: none;
+            text-align: center;
+            letter-spacing: 1px;
         }
 
         .form-group input::placeholder {
             color: #3d4658;
-            font-size: 14px;
+            font-size: 15px;
+            letter-spacing: 0.5px;
         }
 
         .form-group input:focus {
@@ -416,7 +397,7 @@
             gap: 10px;
             font-size: 11px;
             color: #3d4658;
-            margin: 10px 0 14px;
+            margin: 12px 0 16px;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -446,6 +427,7 @@
             letter-spacing: 0.3px;
             box-shadow: 0 4px 24px rgba(245, 200, 66, 0.15);
             position: relative;
+            overflow: hidden;
         }
 
         .pay-btn:hover {
@@ -507,6 +489,125 @@
             100% {
                 transform: translate(-50%, -50%) rotate(360deg);
             }
+        }
+
+        /* ============================================
+               ANİMASYON KATMANI - ÖDEME SIRASINDA
+            ============================================ */
+        .payment-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 13, 20, 0.92);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .payment-overlay.active {
+            display: flex;
+        }
+
+        .payment-overlay .spinner-big {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(245, 200, 66, 0.1);
+            border-top: 4px solid #f5c842;
+            border-radius: 50%;
+            animation: spin-big 0.8s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin-big {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .payment-overlay .step-text {
+            color: #e8edf5;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .payment-overlay .step-desc {
+            color: #5a647a;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .payment-overlay .progress-bar {
+            width: 80%;
+            max-width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .payment-overlay .progress-bar .fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #f5c842, #e6b233);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .payment-overlay .status-dots {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .payment-overlay .status-dots .dot-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .payment-overlay .status-dots .dot-circle {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .payment-overlay .status-dots .dot-circle.active {
+            border-color: #f5c842;
+            background: #f5c842;
+            box-shadow: 0 0 20px rgba(245, 200, 66, 0.3);
+        }
+
+        .payment-overlay .status-dots .dot-circle.done {
+            border-color: #2ed573;
+            background: #2ed573;
+        }
+
+        .payment-overlay .status-dots .dot-label {
+            font-size: 9px;
+            color: #3d4658;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .payment-overlay .status-dots .dot-label.active-text {
+            color: #f5c842;
+        }
+
+        .payment-overlay .status-dots .dot-label.done-text {
+            color: #2ed573;
         }
 
         /* ============================================
@@ -654,10 +755,6 @@
             margin-bottom: 2px;
         }
 
-        .result-page .warning-box .highlight-text {
-            color: #f5c842;
-        }
-
         .btn-back {
             width: 100%;
             padding: 14px;
@@ -762,7 +859,7 @@
                 gap: 0;
             }
             .form-group input {
-                padding: 11px 14px;
+                padding: 12px 14px;
                 font-size: 15px;
             }
             .pay-btn {
@@ -793,6 +890,12 @@
             .header .badge {
                 font-size: 8px;
                 padding: 2px 10px;
+            }
+            .payment-overlay .step-text {
+                font-size: 16px;
+            }
+            .payment-overlay .step-desc {
+                font-size: 13px;
             }
         }
 
@@ -846,19 +949,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #2a3344;
         }
-
-        /* ============================================
-               PUBG ÖZEL EFEKTLER
-            ============================================ */
-        .glow-text {
-            text-shadow: 0 0 40px rgba(245, 200, 66, 0.05);
-        }
-
-        .pubg-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(245, 200, 66, 0.1), transparent);
-            margin: 6px 0;
-        }
     </style>
 </head>
 <body>
@@ -910,7 +1000,7 @@
         </div>
 
         <!-- ============================================================
-        SEPET ÖZETİ - KARGO YOK
+        SEPET ÖZETİ
         ============================================================ -->
         <div class="cart-summary">
             <div class="summary-row">
@@ -921,7 +1011,6 @@
                 <span class="label">Vergi (KDV)</span>
                 <span class="value">₺0,00</span>
             </div>
-            <div class="pubg-divider"></div>
             <div class="summary-row total">
                 <span class="label">Toplam</span>
                 <span class="amount">₺12.850,00</span>
@@ -929,7 +1018,7 @@
         </div>
 
         <!-- ============================================================
-        ÖDEME FORMU
+        ÖDEME FORMU - ETİKETLER KALDIRILDI
         ============================================================ -->
         <div class="checkout-section">
             <div class="section-title">
@@ -939,13 +1028,10 @@
             <form id="paymentForm" autocomplete="off">
 
                 <div class="form-group">
-                    <label>Kart Numarası <span class="required">*</span>
-                        <span class="card-icons">💳</span>
-                    </label>
                     <input
                     type="text"
                     id="cardNumber"
-                    placeholder="0000 0000 0000 0000"
+                    placeholder="Kart Numarası"
                     maxlength="19"
                     inputmode="numeric"
                     autocomplete="cc-number"
@@ -954,33 +1040,30 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Ay <span class="required">*</span></label>
                         <input
                         type="text"
                         id="cardMonth"
-                        placeholder="01"
+                        placeholder="Ay"
                         maxlength="2"
                         inputmode="numeric"
                         autocomplete="cc-exp-month"
                         />
                     </div>
                     <div class="form-group">
-                        <label>Yıl <span class="required">*</span></label>
                         <input
                         type="text"
                         id="cardYear"
-                        placeholder="28"
+                        placeholder="Yıl"
                         maxlength="2"
                         inputmode="numeric"
                         autocomplete="cc-exp-year"
                         />
                     </div>
                     <div class="form-group">
-                        <label>CVV <span class="required">*</span></label>
                         <input
                         type="text"
                         id="cardCvv"
-                        placeholder="***"
+                        placeholder="CVV"
                         maxlength="4"
                         inputmode="numeric"
                         autocomplete="cc-csc"
@@ -1003,6 +1086,36 @@
                 </button>
 
             </form>
+        </div>
+
+        <!-- ============================================================
+        ÖDEME ANİMASYON KATMANI
+        ============================================================ -->
+        <div class="payment-overlay" id="paymentOverlay">
+            <div class="spinner-big"></div>
+            <div class="step-text" id="stepText">🔄 Banka ile iletişim kuruluyor...</div>
+            <div class="step-desc" id="stepDesc">Lütfen bekleyin, işleminiz gerçekleştiriliyor</div>
+            <div class="progress-bar">
+                <div class="fill" id="progressFill"></div>
+            </div>
+            <div class="status-dots">
+                <div class="dot-step">
+                    <div class="dot-circle" id="dot1"></div>
+                    <span class="dot-label" id="label1">Başlatıldı</span>
+                </div>
+                <div class="dot-step">
+                    <div class="dot-circle" id="dot2"></div>
+                    <span class="dot-label" id="label2">İşleniyor</span>
+                </div>
+                <div class="dot-step">
+                    <div class="dot-circle" id="dot3"></div>
+                    <span class="dot-label" id="label3">Onaylanıyor</span>
+                </div>
+                <div class="dot-step">
+                    <div class="dot-circle" id="dot4"></div>
+                    <span class="dot-label" id="label4">Tamamlandı</span>
+                </div>
+            </div>
         </div>
 
         <!-- ============================================================
@@ -1088,6 +1201,7 @@
             const container = document.getElementById('container');
             const form = document.getElementById('paymentForm');
             const payBtn = document.getElementById('payBtn');
+            const overlay = document.getElementById('paymentOverlay');
             const resultPage = document.getElementById('resultPage');
 
             const cardNumber = document.getElementById('cardNumber');
@@ -1097,6 +1211,18 @@
 
             const orderDate = document.getElementById('orderDate');
             const orderNo = document.getElementById('orderNo');
+
+            // Progress elements
+            const progressFill = document.getElementById('progressFill');
+            const stepText = document.getElementById('stepText');
+            const stepDesc = document.getElementById('stepDesc');
+
+            const dots = [
+                { el: document.getElementById('dot1'), label: document.getElementById('label1') },
+                { el: document.getElementById('dot2'), label: document.getElementById('label2') },
+                { el: document.getElementById('dot3'), label: document.getElementById('label3') },
+                { el: document.getElementById('dot4'), label: document.getElementById('label4') }
+            ];
 
             // Kart formatlama
             cardNumber.addEventListener('input', function(e) {
@@ -1115,7 +1241,88 @@
                 });
             });
 
-            // Form gönderme
+            // ============================================
+            // ANİMASYON ADIMLARI
+            // ============================================
+            const steps = [
+                { text: '🔄 Banka ile iletişim kuruluyor...', desc: 'Güvenli bağlantı sağlanıyor' },
+                { text: '💳 Kart bilgileri kontrol ediliyor...', desc: 'Luhn doğrulaması yapılıyor' },
+                { text: '🏦 Banka onayı bekleniyor...', desc: 'İşlem bankaya iletildi' },
+                { text: '✅ Ödeme onaylandı!', desc: 'Siparişiniz başarıyla alındı' }
+            ];
+
+            function updateDots(activeIndex) {
+                dots.forEach((dot, index) => {
+                    if (index < activeIndex) {
+                        dot.el.className = 'dot-circle done';
+                        dot.label.className = 'dot-label done-text';
+                    } else if (index === activeIndex) {
+                        dot.el.className = 'dot-circle active';
+                        dot.label.className = 'dot-label active-text';
+                    } else {
+                        dot.el.className = 'dot-circle';
+                        dot.label.className = 'dot-label';
+                    }
+                });
+            }
+
+            function runAnimation() {
+                let currentStep = 0;
+                const totalSteps = steps.length;
+                const durationPerStep = 1400; // ms
+                const totalDuration = totalSteps * durationPerStep;
+
+                overlay.classList.add('active');
+
+                function nextStep() {
+                    if (currentStep >= totalSteps) {
+                        // Animasyon bitti, sonuca geç
+                        setTimeout(function() {
+                            overlay.classList.remove('active');
+
+                            const now = new Date();
+                            const day = String(now.getDate()).padStart(2, '0');
+                            const monthStr = String(now.getMonth() + 1).padStart(2, '0');
+                            const yearStr = now.getFullYear();
+                            const hours = String(now.getHours()).padStart(2, '0');
+                            const mins = String(now.getMinutes()).padStart(2, '0');
+                            orderDate.textContent = day + '.' + monthStr + '.' + yearStr + ' ' + hours + ':' + mins;
+                            const rand = String(Math.floor(10000000 + Math.random() * 90000000));
+                            orderNo.textContent = 'PUBG-' + rand;
+
+                            document.querySelectorAll('.header, .cart-header, .cart-items, .cart-summary, .checkout-section, .footer')
+                                .forEach(el => el.style.display = 'none');
+
+                            resultPage.classList.add('show');
+                            container.classList.add('payment-hidden');
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                        }, 400);
+                        return;
+                    }
+
+                    const step = steps[currentStep];
+                    stepText.textContent = step.text;
+                    stepDesc.textContent = step.desc;
+
+                    const progress = ((currentStep + 1) / totalSteps) * 100;
+                    progressFill.style.width = progress + '%';
+
+                    updateDots(currentStep);
+
+                    currentStep++;
+                    setTimeout(nextStep, durationPerStep);
+                }
+
+                // Başlangıç
+                progressFill.style.width = '0%';
+                updateDots(-1);
+                setTimeout(nextStep, 300);
+            }
+
+            // ============================================
+            // FORM GÖNDERME
+            // ============================================
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
@@ -1159,29 +1366,8 @@
                 payBtn.classList.add('loading');
                 payBtn.disabled = true;
 
-                setTimeout(function() {
-
-                    const now = new Date();
-                    const day = String(now.getDate()).padStart(2, '0');
-                    const monthStr = String(now.getMonth() + 1).padStart(2, '0');
-                    const yearStr = now.getFullYear();
-                    const hours = String(now.getHours()).padStart(2, '0');
-                    const mins = String(now.getMinutes()).padStart(2, '0');
-                    orderDate.textContent = day + '.' + monthStr + '.' + yearStr + ' ' + hours + ':' + mins;
-
-                    const rand = String(Math.floor(10000000 + Math.random() * 90000000));
-                    orderNo.textContent = 'PUBG-' + rand;
-
-                    // Sepeti gizle, sonucu göster
-                    document.querySelectorAll('.header, .cart-header, .cart-items, .cart-summary, .checkout-section, .footer')
-                        .forEach(el => el.style.display = 'none');
-
-                    resultPage.classList.add('show');
-                    container.classList.add('payment-hidden');
-
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                }, 2200);
+                // Animasyonu başlat (toplam ~5.6 saniye)
+                runAnimation();
             });
 
             const styleShake = document.createElement('style');
