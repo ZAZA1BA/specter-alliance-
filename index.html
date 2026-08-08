@@ -13,34 +13,22 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #0a0d14;
+            background: #eef0f2;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             padding: 30px 16px;
-            background-image: radial-gradient(ellipse at 50% 0%, rgba(245, 200, 66, 0.03), transparent 70%);
         }
 
         .container {
             max-width: 520px;
             width: 100%;
-            background: #121720;
+            background: #ffffff;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
             overflow: hidden;
             position: relative;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 10%, rgba(245, 200, 66, 0.02), transparent 60%);
-            pointer-events: none;
         }
 
         /* ============================================
@@ -51,8 +39,8 @@
             align-items: center;
             justify-content: space-between;
             padding: 14px 20px;
-            background: rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            background: #f8f9fa;
+            border-bottom: 1px solid #eef0f2;
             position: relative;
             z-index: 1;
         }
@@ -69,7 +57,7 @@
         }
 
         .cart-header .back-link:hover {
-            color: #8892a8;
+            color: #1a2130;
         }
 
         .cart-header .back-link span {
@@ -79,17 +67,16 @@
         .cart-header .cart-title {
             font-size: 15px;
             font-weight: 600;
-            color: #e8edf5;
+            color: #1a2130;
         }
 
         .cart-header .cart-badge {
-            background: rgba(245, 200, 66, 0.15);
-            color: #f5c842;
+            background: #f5c842;
+            color: #1a2130;
             font-size: 11px;
             font-weight: 700;
             padding: 2px 14px;
             border-radius: 30px;
-            border: 1px solid rgba(245, 200, 66, 0.1);
         }
 
         /* ============================================
@@ -97,7 +84,7 @@
             ============================================ */
         .cart-items {
             padding: 16px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid #eef0f2;
             position: relative;
             z-index: 1;
         }
@@ -112,16 +99,14 @@
             width: 56px;
             height: 56px;
             border-radius: 14px;
-            background: linear-gradient(135deg, #1a2130, #0f1620);
+            background: linear-gradient(135deg, #f5c842, #e6b233);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            border: 1px solid rgba(245, 200, 66, 0.08);
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
-            color: #f5c842;
+            color: #1a2130;
             line-height: 1;
             text-align: center;
             letter-spacing: -0.5px;
@@ -144,7 +129,7 @@
         .cart-item .item-info .item-name {
             font-size: 15px;
             font-weight: 700;
-            color: #e8edf5;
+            color: #1a2130;
         }
 
         .cart-item .item-info .item-desc {
@@ -155,21 +140,20 @@
 
         .cart-item .item-info .item-id {
             font-size: 12px;
-            color: #3d4658;
+            color: #8892a8;
             margin-top: 3px;
             font-family: 'Courier New', monospace;
             letter-spacing: 0.5px;
-            background: rgba(255, 255, 255, 0.03);
+            background: #f0f2f5;
             display: inline-block;
             padding: 1px 10px;
             border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .cart-item .item-price {
             font-size: 17px;
             font-weight: 700;
-            color: #f5c842;
+            color: #1a2130;
             text-align: right;
             flex-shrink: 0;
         }
@@ -185,8 +169,8 @@
             ============================================ */
         .cart-summary {
             padding: 14px 20px;
-            background: rgba(255, 255, 255, 0.01);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            background: #f8f9fa;
+            border-bottom: 1px solid #eef0f2;
             position: relative;
             z-index: 1;
         }
@@ -202,9 +186,9 @@
         .cart-summary .summary-row.total {
             font-weight: 700;
             font-size: 17px;
-            color: #e8edf5;
+            color: #1a2130;
             padding-top: 10px;
-            border-top: 2px solid rgba(245, 200, 66, 0.15);
+            border-top: 2px solid #f5c842;
             margin-top: 4px;
         }
 
@@ -217,7 +201,7 @@
             ============================================ */
         .payment-options {
             padding: 16px 20px 6px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid #eef0f2;
             position: relative;
             z-index: 1;
         }
@@ -236,28 +220,28 @@
             align-items: center;
             gap: 12px;
             padding: 10px 14px;
-            background: rgba(255, 255, 255, 0.03);
+            background: #f8f9fa;
             border-radius: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.04);
+            border: 2px solid #eef0f2;
             margin-bottom: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .payment-option:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: #f0f2f5;
         }
 
         .payment-option.active {
-            border-color: rgba(245, 200, 66, 0.4);
-            background: rgba(245, 200, 66, 0.04);
+            border-color: #f5c842;
+            background: #fefcf0;
         }
 
         .payment-option .radio-circle {
             width: 18px;
             height: 18px;
             border-radius: 50%;
-            border: 2px solid #3d4658;
+            border: 2px solid #d0d4dc;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -284,7 +268,7 @@
         .payment-option .option-info .option-name {
             font-size: 14px;
             font-weight: 600;
-            color: #e8edf5;
+            color: #1a2130;
         }
 
         .payment-option .option-info .option-desc {
@@ -297,16 +281,16 @@
             font-size: 10px;
             font-weight: 600;
             color: #2ed573;
-            background: rgba(46, 213, 115, 0.08);
+            background: #eafaf1;
             padding: 2px 10px;
             border-radius: 30px;
-            border: 1px solid rgba(46, 213, 115, 0.08);
+            border: 1px solid #d5f5e3;
         }
 
         .payment-option .option-badge.commission {
             color: #f5c842;
-            background: rgba(245, 200, 66, 0.06);
-            border-color: rgba(245, 200, 66, 0.06);
+            background: #fefcf0;
+            border-color: #fdebd0;
         }
 
         /* ============================================
@@ -321,7 +305,7 @@
         .checkout-section .section-title {
             font-size: 15px;
             font-weight: 700;
-            color: #e8edf5;
+            color: #1a2130;
             margin-bottom: 14px;
             display: flex;
             align-items: center;
@@ -329,13 +313,12 @@
         }
 
         .checkout-section .section-title .step {
-            background: rgba(245, 200, 66, 0.12);
-            color: #f5c842;
+            background: #f5c842;
+            color: #1a2130;
             font-size: 11px;
             font-weight: 700;
             padding: 2px 10px;
             border-radius: 30px;
-            border: 1px solid rgba(245, 200, 66, 0.08);
         }
 
         .form-group {
@@ -345,10 +328,10 @@
         .form-group input {
             width: 100%;
             padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 2px solid rgba(255, 255, 255, 0.06);
+            background: #f8f9fa;
+            border: 2px solid #eef0f2;
             border-radius: 12px;
-            color: #e8edf5;
+            color: #1a2130;
             font-size: 16px;
             font-family: inherit;
             transition: all 0.3s ease;
@@ -358,20 +341,20 @@
         }
 
         .form-group input::placeholder {
-            color: #3d4658;
+            color: #a8b2c8;
             font-size: 15px;
             letter-spacing: 0.5px;
         }
 
         .form-group input:focus {
-            border-color: rgba(245, 200, 66, 0.4);
-            background: rgba(255, 255, 255, 0.06);
-            box-shadow: 0 0 0 4px rgba(245, 200, 66, 0.04);
+            border-color: #f5c842;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(245, 200, 66, 0.08);
         }
 
         .form-group input.error {
             border-color: #ff6b6b;
-            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.06);
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.08);
         }
 
         .form-row {
@@ -388,14 +371,14 @@
             align-items: center;
             gap: 10px;
             font-size: 11px;
-            color: #3d4658;
+            color: #8892a8;
             margin: 12px 0 16px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .secure-badge .sep {
-            color: rgba(255, 255, 255, 0.06);
+            color: #eef0f2;
         }
 
         /* ============================================
@@ -409,7 +392,7 @@
             border-radius: 14px;
             font-size: 17px;
             font-weight: 700;
-            color: #0f1620;
+            color: #1a2130;
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 0.3px;
@@ -455,8 +438,8 @@
             transform: translate(-50%, -50%);
             width: 26px;
             height: 26px;
-            border: 3px solid rgba(15, 22, 32, 0.15);
-            border-top: 3px solid #0f1620;
+            border: 3px solid rgba(26, 33, 48, 0.15);
+            border-top: 3px solid #1a2130;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -489,14 +472,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(10, 13, 20, 0.92);
+            background: rgba(255, 255, 255, 0.96);
             z-index: 100;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             padding: 30px;
             border-radius: 20px;
-            backdrop-filter: blur(8px);
         }
 
         .payment-overlay.active {
@@ -506,7 +488,7 @@
         .payment-overlay .spinner-big {
             width: 60px;
             height: 60px;
-            border: 4px solid rgba(245, 200, 66, 0.1);
+            border: 4px solid rgba(245, 200, 66, 0.15);
             border-top: 4px solid #f5c842;
             border-radius: 50%;
             animation: spin-big 0.8s linear infinite;
@@ -523,7 +505,7 @@
         }
 
         .payment-overlay .step-text {
-            color: #e8edf5;
+            color: #1a2130;
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 6px;
@@ -541,7 +523,7 @@
             width: 80%;
             max-width: 300px;
             height: 4px;
-            background: rgba(255, 255, 255, 0.06);
+            background: #eef0f2;
             border-radius: 4px;
             overflow: hidden;
             margin-top: 10px;
@@ -572,8 +554,9 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid #d0d4dc;
             transition: all 0.5s ease;
+            background: transparent;
         }
 
         .payment-overlay .status-dots .dot-circle.active {
@@ -589,7 +572,7 @@
 
         .payment-overlay .status-dots .dot-label {
             font-size: 9px;
-            color: #3d4658;
+            color: #8892a8;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -659,7 +642,7 @@
             text-align: center;
             font-size: 22px;
             font-weight: 700;
-            color: #e8edf5;
+            color: #1a2130;
             margin-bottom: 2px;
         }
 
@@ -671,10 +654,10 @@
         }
 
         .result-page .order-summary {
-            background: rgba(255, 255, 255, 0.02);
+            background: #f8f9fa;
             border-radius: 14px;
             padding: 14px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid #eef0f2;
             margin-bottom: 14px;
         }
 
@@ -692,8 +675,8 @@
             justify-content: space-between;
             padding: 5px 0;
             font-size: 14px;
-            color: #c8d0e0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            color: #1a2130;
+            border-bottom: 1px solid #eef0f2;
         }
 
         .result-page .order-summary .order-row:last-child {
@@ -706,7 +689,7 @@
 
         .result-page .order-summary .order-row .value {
             font-weight: 500;
-            color: #e8edf5;
+            color: #1a2130;
         }
 
         .result-page .order-summary .order-row .value.highlight {
@@ -722,24 +705,24 @@
             color: #5a647a;
             line-height: 1.8;
             padding: 12px 14px;
-            background: rgba(255, 255, 255, 0.02);
+            background: #f8f9fa;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid #eef0f2;
             margin-bottom: 14px;
         }
 
         .result-page .detail-text strong {
-            color: #c8d0e0;
+            color: #1a2130;
         }
 
         .result-page .warning-box {
             text-align: center;
             font-size: 13px;
-            color: #f5c842;
+            color: #e67e22;
             padding: 12px 14px;
-            background: rgba(245, 200, 66, 0.04);
+            background: #fef9f0;
             border-radius: 12px;
-            border: 1px solid rgba(245, 200, 66, 0.06);
+            border: 1px solid #fdebd0;
             margin-bottom: 14px;
         }
 
@@ -752,8 +735,8 @@
         .btn-back {
             width: 100%;
             padding: 14px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: #f0f2f5;
+            border: none;
             border-radius: 12px;
             color: #5a647a;
             font-size: 14px;
@@ -764,9 +747,8 @@
         }
 
         .btn-back:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: #c8d0e0;
-            border-color: rgba(255, 255, 255, 0.10);
+            background: #e8eaed;
+            color: #1a2130;
         }
 
         /* ============================================
@@ -776,9 +758,9 @@
             text-align: center;
             padding: 14px 20px;
             font-size: 11px;
-            color: #2a3344;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            background: rgba(0, 0, 0, 0.2);
+            color: #a8b2c8;
+            border-top: 1px solid #eef0f2;
+            background: #fafbfc;
             position: relative;
             z-index: 1;
         }
@@ -792,7 +774,7 @@
         }
 
         .footer .footer-links a {
-            color: #3d4658;
+            color: #8892a8;
             text-decoration: none;
             font-size: 11px;
             transition: color 0.3s ease;
@@ -803,7 +785,7 @@
         }
 
         .footer .footer-divider {
-            color: rgba(255, 255, 255, 0.04);
+            color: #eef0f2;
         }
 
         /* ============================================
@@ -826,7 +808,7 @@
             .cart-item .item-icon {
                 width: 48px;
                 height: 48px;
-                font-size: 17px;
+                font-size: 16px;
             }
             .cart-item .item-info .item-name {
                 font-size: 14px;
@@ -885,7 +867,7 @@
             .cart-item .item-icon {
                 width: 40px;
                 height: 40px;
-                font-size: 14px;
+                font-size: 13px;
             }
             .cart-item .item-icon small {
                 font-size: 6px;
@@ -909,14 +891,14 @@
             width: 5px;
         }
         ::-webkit-scrollbar-track {
-            background: #0a0d14;
+            background: #f0f2f5;
         }
         ::-webkit-scrollbar-thumb {
-            background: #1a2130;
+            background: #d0d4dc;
             border-radius: 6px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #2a3344;
+            background: #b8bcc8;
         }
     </style>
 </head>
