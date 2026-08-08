@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PUBG Mobile UC Satın Al</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>" />
     <style>
         * {
             margin: 0;
@@ -515,8 +514,12 @@
         }
 
         @keyframes spin-big {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .payment-overlay .step-text {
@@ -636,10 +639,10 @@
         @keyframes pulse-icon {
             0%,
             100% {
-                transform: scale(1) rotate(0deg);
+                transform: scale(1);
             }
             50% {
-                transform: scale(1.06) rotate(-3deg);
+                transform: scale(1.06);
             }
         }
 
@@ -649,6 +652,7 @@
             text-align: center;
             margin-bottom: 4px;
             animation: pulse-icon 2.5s ease-in-out infinite;
+            color: #f5c842;
         }
 
         .result-page .success-title {
@@ -737,6 +741,12 @@
             border-radius: 12px;
             border: 1px solid rgba(245, 200, 66, 0.06);
             margin-bottom: 14px;
+        }
+
+        .result-page .warning-box .warning-icon {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 2px;
         }
 
         .btn-back {
@@ -914,18 +924,14 @@
 
     <div class="container" id="container">
 
-        <!-- ============================================================
-        SEPET BAŞLIĞI
-        ============================================================ -->
+        <!-- SEPET BAŞLIĞI -->
         <div class="cart-header">
             <a href="#" class="back-link"><span>‹</span> Alışverişe Devam</a>
             <span class="cart-title">Sepetim</span>
             <span class="cart-badge">1 Urun</span>
         </div>
 
-        <!-- ============================================================
-        SEPET ÜRÜNÜ
-        ============================================================ -->
+        <!-- SEPET ÜRÜNÜ -->
         <div class="cart-items">
             <div class="cart-item">
                 <div class="item-icon">
@@ -941,9 +947,7 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        SEPET ÖZETİ
-        ============================================================ -->
+        <!-- SEPET ÖZETİ -->
         <div class="cart-summary">
             <div class="summary-row">
                 <span class="label">Ara Toplam</span>
@@ -959,9 +963,7 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        ÖDEME SEÇENEKLERİ
-        ============================================================ -->
+        <!-- ÖDEME SEÇENEKLERİ -->
         <div class="payment-options">
             <div class="options-title">Odeme Yontemi</div>
 
@@ -993,9 +995,7 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        ÖDEME FORMU
-        ============================================================ -->
+        <!-- ÖDEME FORMU -->
         <div class="checkout-section">
             <div class="section-title">
                 <span class="step">2</span> Kart Bilgileri
@@ -1052,7 +1052,7 @@
                     <span class="sep">|</span>
                     <span>🛡️</span> PCI DSS Uyumlu
                     <span class="sep">|</span>
-                    <span>📍</span> Turkiye
+                    <span>Turkiye</span>
                 </div>
 
                 <button type="submit" class="pay-btn" id="payBtn">
@@ -1064,9 +1064,7 @@
             </form>
         </div>
 
-        <!-- ============================================================
-        ÖDEME ANİMASYON KATMANI
-        ============================================================ -->
+        <!-- ÖDEME ANİMASYON KATMANI -->
         <div class="payment-overlay" id="paymentOverlay">
             <div class="spinner-big"></div>
             <div class="step-text" id="stepText">Banka ile iletisim kuruluyor...</div>
@@ -1094,12 +1092,10 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        SONUÇ SAYFASI
-        ============================================================ -->
+        <!-- SONUÇ SAYFASI -->
         <div class="result-page" id="resultPage">
 
-            <span class="success-icon">✅</span>
+            <span class="success-icon">🛍️</span>
             <div class="success-title">Siparisiniz Alindi!</div>
             <div class="success-sub">Odemeniz basariyla tamamlandi. Tesekkur ederiz.</div>
 
@@ -1142,7 +1138,7 @@
             </div>
 
             <div class="warning-box">
-                <span style="font-size:18px;display:block;margin-bottom:2px;">⏳</span>
+                <span class="warning-icon">⏳</span>
                 <strong>UC'leriniz 12-24 saat icerisinde hesabiniza yuklenecektir.</strong><br />
                 Yukleme tamamlandiginda oyun ici bildirim alacaksiniz.
             </div>
@@ -1151,9 +1147,7 @@
 
         </div>
 
-        <!-- ============================================================
-        FOOTER
-        ============================================================ -->
+        <!-- FOOTER -->
         <div class="footer">
             <div class="footer-links">
                 <a href="#">Gizlilik Politikasi</a>
@@ -1199,9 +1193,7 @@
                 { el: document.getElementById('dot4'), label: document.getElementById('label4') }
             ];
 
-            // ============================================
-            // ODEME SECENEKLERI
-            // ============================================
+            // Ödeme seçenekleri
             document.querySelectorAll('.payment-option').forEach(function(option) {
                 option.addEventListener('click', function() {
                     document.querySelectorAll('.payment-option').forEach(function(el) {
@@ -1209,7 +1201,6 @@
                     });
                     this.classList.add('active');
 
-                    // Form basligini degistir
                     const method = this.dataset.method;
                     const title = document.querySelector('.section-title');
                     const step = title.querySelector('.step');
@@ -1227,9 +1218,7 @@
                 });
             });
 
-            // ============================================
-            // KART FORMATLAMA
-            // ============================================
+            // Kart formatlama
             cardNumber.addEventListener('input', function(e) {
                 let raw = this.value.replace(/\D/g, '');
                 let formatted = '';
@@ -1246,9 +1235,7 @@
                 });
             });
 
-            // ============================================
-            // ANIMASYON
-            // ============================================
+            // Animasyon
             const steps = [
                 { text: 'Banka ile iletisim kuruluyor...', desc: 'Guvenli baglanti saglaniyor' },
                 { text: 'Kart bilgileri kontrol ediliyor...', desc: 'Luhn dogrulamasi yapiliyor' },
@@ -1322,9 +1309,7 @@
                 setTimeout(nextStep, 300);
             }
 
-            // ============================================
-            // FORM GONDERME
-            // ============================================
+            // Form gönderme
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
@@ -1366,7 +1351,6 @@
 
                 payBtn.classList.add('loading');
                 payBtn.disabled = true;
-
                 runAnimation();
             });
 
