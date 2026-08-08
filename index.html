@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PUBG Mobile UC Satın Al</title>
+    <title>POS - Güvenli Ödeme</title>
     <style>
+        /* ============================================
+               RESET & GENEL
+            ============================================ */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +25,7 @@
         }
 
         .container {
-            max-width: 520px;
+            max-width: 480px;
             width: 100%;
             background: #ffffff;
             border-radius: 20px;
@@ -32,295 +35,144 @@
         }
 
         /* ============================================
-               SEPET BAŞLIĞI
+               HEADER - POS
             ============================================ */
-        .cart-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 20px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #eef0f2;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cart-header .back-link {
-            font-size: 13px;
-            color: #5a647a;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .cart-header .back-link:hover {
-            color: #1a2130;
-        }
-
-        .cart-header .back-link span {
-            font-size: 16px;
-        }
-
-        .cart-header .cart-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #1a2130;
-        }
-
-        .cart-header .cart-badge {
-            background: #f5c842;
-            color: #1a2130;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 2px 14px;
-            border-radius: 30px;
-        }
-
-        /* ============================================
-               SEPET ÜRÜN - DÜZELTİLDİ
-            ============================================ */
-        .cart-items {
-            padding: 16px 20px;
-            border-bottom: 1px solid #eef0f2;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cart-item {
-            display: flex;
-            gap: 14px;
-            align-items: center;
-        }
-
-        .cart-item .item-icon {
-            width: 56px;
-            height: 56px;
-            min-width: 56px;
-            border-radius: 14px;
+        .pos-header {
+            padding: 20px 24px 16px;
             background: linear-gradient(135deg, #1a2130, #0f1620);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            flex-direction: column;
-            border: 2px solid rgba(245, 200, 66, 0.15);
+            text-align: center;
+            color: #ffffff;
         }
 
-        .cart-item .item-icon .pubg-main {
-            font-size: 14px;
-            font-weight: 900;
-            color: #f5c842;
-            letter-spacing: 0.5px;
-            line-height: 1.1;
+        .pos-header .pos-icon {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 4px;
         }
 
-        .cart-item .item-icon .pubg-sub {
-            font-size: 6px;
-            font-weight: 600;
-            color: #5a647a;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-top: 1px;
-        }
-
-        .cart-item .item-info {
-            flex: 1;
-        }
-
-        .cart-item .item-info .item-name {
-            font-size: 15px;
+        .pos-header .pos-title {
+            font-size: 20px;
             font-weight: 700;
-            color: #1a2130;
+            letter-spacing: 0.5px;
         }
 
-        .cart-item .item-info .item-name .highlight {
+        .pos-header .pos-title span {
             color: #f5c842;
         }
 
-        .cart-item .item-info .item-desc {
-            font-size: 13px;
-            color: #5a647a;
+        .pos-header .pos-sub {
+            font-size: 12px;
+            color: #8892a8;
             margin-top: 2px;
         }
 
-        .cart-item .item-info .item-desc .bold {
-            font-weight: 600;
-            color: #1a2130;
-        }
-
-        .cart-item .item-info .item-id {
-            font-size: 12px;
-            color: #8892a8;
-            margin-top: 3px;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 0.5px;
-            background: #f0f2f5;
+        .pos-header .secure-badge-top {
             display: inline-block;
-            padding: 1px 10px;
-            border-radius: 4px;
-        }
-
-        .cart-item .item-price {
-            font-size: 17px;
-            font-weight: 700;
-            color: #1a2130;
-            text-align: right;
-            flex-shrink: 0;
-        }
-
-        .cart-item .item-price .currency {
-            font-size: 12px;
-            font-weight: 400;
-            color: #5a647a;
+            margin-top: 8px;
+            font-size: 10px;
+            color: #2ed573;
+            background: rgba(46, 213, 115, 0.12);
+            padding: 3px 14px;
+            border-radius: 30px;
+            border: 1px solid rgba(46, 213, 115, 0.10);
         }
 
         /* ============================================
-               SEPET ÖZETİ
+               TUTAR GİRİŞİ
             ============================================ */
-        .cart-summary {
-            padding: 14px 20px;
-            background: #f8f9fa;
+        .amount-section {
+            padding: 20px 24px;
             border-bottom: 1px solid #eef0f2;
-            position: relative;
-            z-index: 1;
         }
 
-        .cart-summary .summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 0;
-            font-size: 14px;
-            color: #5a647a;
-        }
-
-        .cart-summary .summary-row .label-bold {
-            font-weight: 600;
-            color: #1a2130;
-        }
-
-        .cart-summary .summary-row.total {
-            font-weight: 700;
-            font-size: 17px;
-            color: #1a2130;
-            padding-top: 10px;
-            border-top: 2px solid #f5c842;
-            margin-top: 4px;
-        }
-
-        .cart-summary .summary-row.total .amount {
-            color: #f5c842;
-        }
-
-        /* ============================================
-               ÖDEME SEÇENEKLERİ
-            ============================================ */
-        .payment-options {
-            padding: 16px 20px 6px;
-            border-bottom: 1px solid #eef0f2;
-            position: relative;
-            z-index: 1;
-        }
-
-        .payment-options .options-title {
+        .amount-section .amount-label {
             font-size: 13px;
             font-weight: 600;
             color: #5a647a;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            display: block;
+            margin-bottom: 6px;
         }
 
-        .payment-option {
+        .amount-section .amount-input-wrapper {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 14px;
             background: #f8f9fa;
-            border-radius: 10px;
             border: 2px solid #eef0f2;
-            margin-bottom: 6px;
+            border-radius: 14px;
+            padding: 0 16px;
+            transition: all 0.3s ease;
+        }
+
+        .amount-section .amount-input-wrapper:focus-within {
+            border-color: #f5c842;
+            box-shadow: 0 0 0 4px rgba(245, 200, 66, 0.08);
+            background: #ffffff;
+        }
+
+        .amount-section .amount-input-wrapper .currency-sign {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a2130;
+            margin-right: 8px;
+        }
+
+        .amount-section .amount-input-wrapper input {
+            width: 100%;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a2130;
+            font-family: inherit;
+        }
+
+        .amount-section .amount-input-wrapper input::placeholder {
+            color: #a8b2c8;
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        .amount-presets {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .amount-presets .preset-btn {
+            padding: 6px 14px;
+            background: #f0f2f5;
+            border: 1px solid #eef0f2;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #5a647a;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .payment-option:hover {
-            background: #f0f2f5;
-        }
-
-        .payment-option.active {
-            border-color: #f5c842;
-            background: #fefcf0;
-        }
-
-        .payment-option .radio-circle {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            border: 2px solid #d0d4dc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-
-        .payment-option.active .radio-circle {
-            border-color: #f5c842;
-        }
-
-        .payment-option.active .radio-circle::after {
-            content: '';
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
+        .amount-presets .preset-btn:hover {
             background: #f5c842;
-        }
-
-        .payment-option .option-info {
-            flex: 1;
-        }
-
-        .payment-option .option-info .option-name {
-            font-size: 14px;
-            font-weight: 600;
             color: #1a2130;
+            border-color: #f5c842;
         }
 
-        .payment-option .option-info .option-desc {
-            font-size: 12px;
-            color: #5a647a;
-            margin-top: 1px;
-        }
-
-        .payment-option .option-badge {
-            font-size: 10px;
-            font-weight: 600;
-            color: #2ed573;
-            background: #eafaf1;
-            padding: 2px 10px;
-            border-radius: 30px;
-            border: 1px solid #d5f5e3;
-        }
-
-        .payment-option .option-badge.commission {
-            color: #f5c842;
-            background: #fefcf0;
-            border-color: #fdebd0;
+        .amount-presets .preset-btn.active {
+            background: #f5c842;
+            color: #1a2130;
+            border-color: #f5c842;
         }
 
         /* ============================================
-               ÖDEME FORMU
+               ÖDEME BİLGİLERİ
             ============================================ */
-        .checkout-section {
-            padding: 18px 20px 20px;
-            position: relative;
-            z-index: 1;
+        .payment-section {
+            padding: 18px 24px 20px;
         }
 
-        .checkout-section .section-title {
+        .payment-section .section-title {
             font-size: 15px;
             font-weight: 700;
             color: #1a2130;
@@ -330,7 +182,7 @@
             gap: 8px;
         }
 
-        .checkout-section .section-title .step {
+        .payment-section .section-title .step {
             background: #f5c842;
             color: #1a2130;
             font-size: 11px;
@@ -340,17 +192,30 @@
         }
 
         .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a2130;
+            margin-bottom: 4px;
+        }
+
+        .form-group label .required {
+            color: #ff6b6b;
+            margin-left: 2px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 16px;
             background: #f8f9fa;
             border: 2px solid #eef0f2;
             border-radius: 12px;
             color: #1a2130;
-            font-size: 16px;
+            font-size: 15px;
             font-family: inherit;
             transition: all 0.3s ease;
             outline: none;
@@ -360,7 +225,7 @@
 
         .form-group input::placeholder {
             color: #a8b2c8;
-            font-size: 15px;
+            font-size: 14px;
             letter-spacing: 0.5px;
         }
 
@@ -618,11 +483,8 @@
             display: block;
         }
 
-        .container.payment-hidden .checkout-section,
-        .container.payment-hidden .cart-items,
-        .container.payment-hidden .cart-summary,
-        .container.payment-hidden .cart-header,
-        .container.payment-hidden .payment-options {
+        .container.payment-hidden .amount-section,
+        .container.payment-hidden .payment-section {
             display: none;
         }
 
@@ -653,7 +515,14 @@
             text-align: center;
             margin-bottom: 4px;
             animation: pulse-icon 2.5s ease-in-out infinite;
-            color: #f5c842;
+        }
+
+        .result-page .success-icon.success {
+            color: #2ed573;
+        }
+
+        .result-page .success-icon.fail {
+            color: #ff6b6b;
         }
 
         .result-page .success-title {
@@ -662,6 +531,14 @@
             font-weight: 700;
             color: #1a2130;
             margin-bottom: 2px;
+        }
+
+        .result-page .success-title.success {
+            color: #2ed573;
+        }
+
+        .result-page .success-title.fail {
+            color: #ff6b6b;
         }
 
         .result-page .success-sub {
@@ -718,6 +595,10 @@
             color: #2ed573;
         }
 
+        .result-page .order-summary .order-row .value.status-fail {
+            color: #ff6b6b;
+        }
+
         .result-page .detail-text {
             font-size: 13px;
             color: #5a647a;
@@ -732,28 +613,6 @@
         .result-page .detail-text .bold {
             font-weight: 600;
             color: #1a2130;
-        }
-
-        .result-page .warning-box {
-            text-align: center;
-            font-size: 13px;
-            color: #e67e22;
-            padding: 12px 14px;
-            background: #fef9f0;
-            border-radius: 12px;
-            border: 1px solid #fdebd0;
-            margin-bottom: 14px;
-        }
-
-        .result-page .warning-box .warning-icon {
-            font-size: 18px;
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        .result-page .warning-box .bold {
-            font-weight: 700;
-            color: #e67e22;
         }
 
         .btn-back {
@@ -776,31 +635,28 @@
         }
 
         /* ============================================
-               FOOTER - ALT BİLGİLER
+               FOOTER
             ============================================ */
         .footer {
             text-align: center;
-            padding: 16px 20px 14px;
-            font-size: 11px;
+            padding: 14px 20px;
+            font-size: 10px;
             color: #a8b2c8;
             border-top: 1px solid #eef0f2;
             background: #fafbfc;
-            position: relative;
-            z-index: 1;
         }
 
         .footer .footer-links {
             display: flex;
             justify-content: center;
-            gap: 14px;
-            margin-bottom: 6px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .footer .footer-links a {
             color: #8892a8;
             text-decoration: none;
-            font-size: 11px;
+            font-size: 10px;
             transition: color 0.3s ease;
         }
 
@@ -810,22 +666,6 @@
 
         .footer .footer-divider {
             color: #eef0f2;
-        }
-
-        .footer .footer-info {
-            font-size: 10px;
-            color: #b8bcc8;
-            line-height: 1.6;
-            margin-top: 4px;
-        }
-
-        .footer .footer-info .bold {
-            font-weight: 600;
-            color: #8892a8;
-        }
-
-        .footer .footer-info .highlight {
-            color: #f5c842;
         }
 
         /* ============================================
@@ -839,44 +679,28 @@
                 border-radius: 0;
                 min-height: 100vh;
             }
-            .cart-header {
-                padding: 12px 16px;
+            .pos-header {
+                padding: 16px 18px 12px;
             }
-            .cart-items {
-                padding: 12px 16px;
+            .pos-header .pos-title {
+                font-size: 17px;
             }
-            .cart-item .item-icon {
-                width: 48px;
-                height: 48px;
-                min-width: 48px;
+            .amount-section {
+                padding: 16px 18px;
             }
-            .cart-item .item-icon .pubg-main {
-                font-size: 12px;
+            .amount-section .amount-input-wrapper input {
+                font-size: 17px;
+                padding: 12px 0;
             }
-            .cart-item .item-icon .pubg-sub {
-                font-size: 5px;
-            }
-            .cart-item .item-info .item-name {
-                font-size: 14px;
-            }
-            .cart-item .item-price {
-                font-size: 15px;
-            }
-            .cart-summary {
-                padding: 10px 16px;
-            }
-            .payment-options {
-                padding: 12px 16px 4px;
-            }
-            .checkout-section {
-                padding: 14px 16px 16px;
+            .payment-section {
+                padding: 14px 18px 16px;
             }
             .form-row {
                 flex-direction: column;
                 gap: 0;
             }
             .form-group input {
-                padding: 12px 14px;
+                padding: 11px 14px;
                 font-size: 15px;
             }
             .pay-btn {
@@ -898,37 +722,24 @@
                 font-size: 10px;
                 gap: 4px;
             }
-            .footer .footer-links {
-                gap: 6px;
-            }
             .payment-overlay .step-text {
                 font-size: 16px;
             }
             .payment-overlay .step-desc {
                 font-size: 13px;
             }
-            .footer .footer-info {
-                font-size: 9px;
+            .amount-presets .preset-btn {
+                font-size: 11px;
+                padding: 4px 12px;
             }
         }
 
         @media (max-width: 380px) {
-            .cart-item .item-icon {
-                width: 40px;
-                height: 40px;
-                min-width: 40px;
+            .pos-header .pos-title {
+                font-size: 15px;
             }
-            .cart-item .item-icon .pubg-main {
-                font-size: 10px;
-            }
-            .cart-item .item-icon .pubg-sub {
-                font-size: 4px;
-            }
-            .cart-item .item-info .item-name {
-                font-size: 13px;
-            }
-            .cart-item .item-price {
-                font-size: 14px;
+            .amount-section .amount-input-wrapper input {
+                font-size: 15px;
             }
             .pay-btn {
                 font-size: 15px;
@@ -958,79 +769,45 @@
 
     <div class="container" id="container">
 
-        <!-- SEPET BAŞLIĞI -->
-        <div class="cart-header">
-            <a href="#" class="back-link"><span>‹</span> Alışverişe Devam</a>
-            <span class="cart-title">Sepetim</span>
-            <span class="cart-badge">1 Ürün</span>
+        <!-- ============================================================
+        HEADER - POS
+        ============================================================ -->
+        <div class="pos-header">
+            <span class="pos-icon">💳</span>
+            <div class="pos-title">POS <span>Ödeme</span></div>
+            <div class="pos-sub">Güvenli Sanal Pos</div>
+            <span class="secure-badge-top">✅ 256-bit SSL Güvenli</span>
         </div>
 
-        <!-- SEPET ÜRÜNÜ -->
-        <div class="cart-items">
-            <div class="cart-item">
-                <div class="item-icon">
-                    <span class="pubg-main">PUBG</span>
-                    <span class="pubg-sub">Mobile</span>
-                </div>
-                <div class="item-info">
-                    <div class="item-name"><span class="highlight">32.400</span> UC Paketi</div>
-                    <div class="item-desc"><span class="bold">Premium</span> + 1.600 Bonus UC</div>
-                    <div class="item-id">ID: 52031806390</div>
-                </div>
-                <div class="item-price">12.850 <span class="currency">TL</span></div>
+        <!-- ============================================================
+        TUTAR GİRİŞİ
+        ============================================================ -->
+        <div class="amount-section" id="amountSection">
+            <label class="amount-label">Ödeme Tutarı</label>
+            <div class="amount-input-wrapper">
+                <span class="currency-sign">₺</span>
+                <input
+                type="text"
+                id="amountInput"
+                placeholder="0,00"
+                inputmode="decimal"
+                autocomplete="off"
+                />
             </div>
-        </div>
-
-        <!-- SEPET ÖZETİ -->
-        <div class="cart-summary">
-            <div class="summary-row">
-                <span class="label-bold">Ara Toplam</span>
-                <span>12.850,00 TL</span>
-            </div>
-            <div class="summary-row">
-                <span class="label-bold">Vergi (KDV)</span>
-                <span>0,00 TL</span>
-            </div>
-            <div class="summary-row total">
-                <span class="label-bold">Toplam</span>
-                <span class="amount">12.850,00 TL</span>
+            <div class="amount-presets">
+                <button class="preset-btn" data-amount="50">50 TL</button>
+                <button class="preset-btn" data-amount="100">100 TL</button>
+                <button class="preset-btn" data-amount="250">250 TL</button>
+                <button class="preset-btn" data-amount="500">500 TL</button>
+                <button class="preset-btn" data-amount="1000">1.000 TL</button>
+                <button class="preset-btn" data-amount="2500">2.500 TL</button>
             </div>
         </div>
 
-        <!-- ÖDEME SEÇENEKLERİ -->
-        <div class="payment-options">
-            <div class="options-title">Ödeme Yöntemi</div>
-
-            <div class="payment-option active" data-method="card">
-                <div class="radio-circle"></div>
-                <div class="option-info">
-                    <div class="option-name">Kredi / Banka Kartı</div>
-                    <div class="option-desc">Visa, Mastercard, Troy</div>
-                </div>
-                <span class="option-badge">Popüler</span>
-            </div>
-
-            <div class="payment-option" data-method="transfer">
-                <div class="radio-circle"></div>
-                <div class="option-info">
-                    <div class="option-name">Havale / EFT</div>
-                    <div class="option-desc">Banka hesabına havale</div>
-                </div>
-                <span class="option-badge commission">2% Komisyon</span>
-            </div>
-
-            <div class="payment-option" data-method="papara">
-                <div class="radio-circle"></div>
-                <div class="option-info">
-                    <div class="option-name">Papara</div>
-                    <div class="option-desc">Papara cüzdan ile</div>
-                </div>
-                <span class="option-badge commission">1% Komisyon</span>
-            </div>
-        </div>
-
-        <!-- ÖDEME FORMU -->
-        <div class="checkout-section">
+        <!-- ============================================================
+        ÖDEME BİLGİLERİ
+        ============================================================ -->
+        <div class="payment-section" id="paymentSection">
             <div class="section-title">
                 <span class="step">2</span> Kart Bilgileri
             </div>
@@ -1038,10 +815,11 @@
             <form id="paymentForm" autocomplete="off">
 
                 <div class="form-group">
+                    <label>Kart Numarası <span class="required">*</span></label>
                     <input
                     type="text"
                     id="cardNumber"
-                    placeholder="Kart Numarası"
+                    placeholder="0000 0000 0000 0000"
                     maxlength="19"
                     inputmode="numeric"
                     autocomplete="cc-number"
@@ -1050,30 +828,33 @@
 
                 <div class="form-row">
                     <div class="form-group">
+                        <label>Ay <span class="required">*</span></label>
                         <input
                         type="text"
                         id="cardMonth"
-                        placeholder="Ay"
+                        placeholder="01"
                         maxlength="2"
                         inputmode="numeric"
                         autocomplete="cc-exp-month"
                         />
                     </div>
                     <div class="form-group">
+                        <label>Yıl <span class="required">*</span></label>
                         <input
                         type="text"
                         id="cardYear"
-                        placeholder="Yıl"
+                        placeholder="28"
                         maxlength="2"
                         inputmode="numeric"
                         autocomplete="cc-exp-year"
                         />
                     </div>
                     <div class="form-group">
+                        <label>CVV <span class="required">*</span></label>
                         <input
                         type="text"
                         id="cardCvv"
-                        placeholder="CVV"
+                        placeholder="***"
                         maxlength="4"
                         inputmode="numeric"
                         autocomplete="cc-csc"
@@ -1090,15 +871,17 @@
                 </div>
 
                 <button type="submit" class="pay-btn" id="payBtn">
-                    <span class="btn-text">Ödeme Yap — 12.850 TL</span>
-                    <span class="btn-sub">Güvenli ödeme ile siparişinizi tamamlayın</span>
+                    <span class="btn-text">💳 Ödeme Yap</span>
+                    <span class="btn-sub" id="payBtnSub">Güvenli ödeme ile tamamlayın</span>
                     <span class="btn-loader"></span>
                 </button>
 
             </form>
         </div>
 
-        <!-- ÖDEME ANİMASYON KATMANI -->
+        <!-- ============================================================
+        ANİMASYON KATMANI
+        ============================================================ -->
         <div class="payment-overlay" id="paymentOverlay">
             <div class="spinner-big"></div>
             <div class="step-text" id="stepText">Banka ile iletişim kuruluyor...</div>
@@ -1126,62 +909,54 @@
             </div>
         </div>
 
-        <!-- SONUÇ SAYFASI -->
+        <!-- ============================================================
+        SONUÇ SAYFASI
+        ============================================================ -->
         <div class="result-page" id="resultPage">
 
-            <span class="success-icon">🛍️</span>
-            <div class="success-title">Siparişiniz Alındı!</div>
-            <div class="success-sub">Ödemeniz başarıyla tamamlandı. Teşekkür ederiz.</div>
+            <span class="success-icon" id="resultIcon">✅</span>
+            <div class="success-title" id="resultTitle">Ödeme Başarılı!</div>
+            <div class="success-sub" id="resultSub">İşleminiz başarıyla tamamlandı.</div>
 
             <div class="order-summary">
-                <div class="summary-title">Sipariş Özeti</div>
+                <div class="summary-title">İşlem Özeti</div>
 
                 <div class="order-row">
-                    <span class="label">Ürün</span>
-                    <span class="value highlight">32.400 UC + Bonus 1.600 UC</span>
+                    <span class="label">Tutar</span>
+                    <span class="value highlight" id="resultAmount">0,00 TL</span>
                 </div>
                 <div class="order-row">
-                    <span class="label">Toplam Tutar</span>
-                    <span class="value highlight">12.850,00 TL</span>
+                    <span class="label">Kart</span>
+                    <span class="value" id="resultCard">****</span>
                 </div>
                 <div class="order-row">
-                    <span class="label">Oyun ID</span>
-                    <span class="value">52031806390</span>
+                    <span class="label">İşlem Tarihi</span>
+                    <span class="value" id="resultDate">--</span>
                 </div>
                 <div class="order-row">
-                    <span class="label">Sipariş Tarihi</span>
-                    <span class="value" id="orderDate">--</span>
+                    <span class="label">İşlem No</span>
+                    <span class="value" id="resultNo">--</span>
                 </div>
                 <div class="order-row">
-                    <span class="label">Sipariş No</span>
-                    <span class="value" id="orderNo">--</span>
-                </div>
-                <div class="order-row">
-                    <span class="label">İşlem Durumu</span>
-                    <span class="value status-success">Başarılı</span>
+                    <span class="label">Durum</span>
+                    <span class="value status-success" id="resultStatus">✅ Başarılı</span>
                 </div>
             </div>
 
-            <div class="detail-text">
-                <span class="bold">Sipariş Detayları:</span><br />
-                Toplam <span class="bold">32.400 UC</span> ana paket + <span class="bold">1.600 UC</span> bonus hediye (toplam 34.000 UC)<br />
-                Satın alım işlemi <span class="bold">PUBG Mobile</span> resmi kanalları üzerinden gerçekleştirilmiştir.<br />
+            <div class="detail-text" id="resultDetail">
+                <span class="bold">İşlem Detayları:</span><br />
+                Ödemeniz başarıyla gerçekleştirilmiştir.<br />
                 İşlem <span class="bold">256-bit SSL</span> güvenlik sertifikası ile şifrelenmiştir.<br />
-                Siparişinize ait fatura ve işlem detayları kayıt altına alınmıştır.<br />
-                Herhangi bir sorunda <span class="bold">7/24</span> canlı destek hattımız aktiftir.
+                İşlem numaranız kayıt altına alınmıştır.
             </div>
 
-            <div class="warning-box">
-                <span class="warning-icon">⏳</span>
-                <span class="bold">UC'leriniz 12-24 saat içerisinde hesabınıza yüklenecektir.</span><br />
-                Yükleme tamamlandığında oyun içi bildirim alacaksınız.
-            </div>
-
-            <button class="btn-back" onclick="goBack()">Yeni Sipariş Oluştur</button>
+            <button class="btn-back" onclick="goBack()">Yeni İşlem Yap</button>
 
         </div>
 
-        <!-- FOOTER - ALT BİLGİLER -->
+        <!-- ============================================================
+        FOOTER
+        ============================================================ -->
         <div class="footer">
             <div class="footer-links">
                 <a href="#">Gizlilik Politikası</a>
@@ -1189,18 +964,8 @@
                 <a href="#">Mesafeli Satış Sözleşmesi</a>
                 <span class="footer-divider">•</span>
                 <a href="#">İletişim</a>
-                <span class="footer-divider">•</span>
-                <a href="#">İptal & İade</a>
             </div>
-
-            <div class="footer-info">
-                <span class="bold">PUBG Mobile</span> Resmi UC Mağazası &bull; Tüm işlemler <span class="highlight">256-bit SSL</span> ile korunmaktadır.<br />
-                Müşteri Hizmetleri: <span class="bold">7/24</span> Canlı Destek &bull; <span class="bold">0850</span> 123 45 67
-            </div>
-
-            <div class="footer-info" style="margin-top:4px;font-size:9px;color:#c8ccd8;">
-                &copy; 2026 PUBG Mobile &bull; Tüm hakları saklıdır.
-            </div>
+            &copy; 2026 POS &bull; Tüm hakları saklıdır.
         </div>
 
     </div>
@@ -1212,19 +977,29 @@
         (function() {
             'use strict';
 
+            // DOM Elementleri
             const container = document.getElementById('container');
             const form = document.getElementById('paymentForm');
             const payBtn = document.getElementById('payBtn');
+            const payBtnSub = document.getElementById('payBtnSub');
             const overlay = document.getElementById('paymentOverlay');
             const resultPage = document.getElementById('resultPage');
 
+            const amountInput = document.getElementById('amountInput');
             const cardNumber = document.getElementById('cardNumber');
             const cardMonth = document.getElementById('cardMonth');
             const cardYear = document.getElementById('cardYear');
             const cardCvv = document.getElementById('cardCvv');
 
-            const orderDate = document.getElementById('orderDate');
-            const orderNo = document.getElementById('orderNo');
+            const resultIcon = document.getElementById('resultIcon');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultSub = document.getElementById('resultSub');
+            const resultAmount = document.getElementById('resultAmount');
+            const resultCard = document.getElementById('resultCard');
+            const resultDate = document.getElementById('resultDate');
+            const resultNo = document.getElementById('resultNo');
+            const resultStatus = document.getElementById('resultStatus');
+            const resultDetail = document.getElementById('resultDetail');
 
             const progressFill = document.getElementById('progressFill');
             const stepText = document.getElementById('stepText');
@@ -1237,33 +1012,46 @@
                 { el: document.getElementById('dot4'), label: document.getElementById('label4') }
             ];
 
-            // Ödeme seçenekleri
-            document.querySelectorAll('.payment-option').forEach(function(option) {
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('.payment-option').forEach(function(el) {
-                        el.classList.remove('active');
+            // ============================================
+            // TUTAR ÖN AYARLARI
+            // ============================================
+            document.querySelectorAll('.preset-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.preset-btn').forEach(function(b) {
+                        b.classList.remove('active');
                     });
                     this.classList.add('active');
-
-                    const method = this.dataset.method;
-                    const title = document.querySelector('.section-title');
-                    const step = title.querySelector('.step');
-
-                    if (method === 'card') {
-                        step.textContent = '2';
-                        title.childNodes[2].textContent = ' Kart Bilgileri';
-                    } else if (method === 'transfer') {
-                        step.textContent = '2';
-                        title.childNodes[2].textContent = ' Havale / EFT Bilgileri';
-                    } else if (method === 'papara') {
-                        step.textContent = '2';
-                        title.childNodes[2].textContent = ' Papara Bilgileri';
-                    }
+                    amountInput.value = this.dataset.amount + '.00';
+                    // Buton metnini güncelle
+                    const amount = parseFloat(this.dataset.amount).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    payBtnSub.textContent = '₺' + amount + ' güvenli ödeme ile tamamlayın';
                 });
             });
 
-            // Kart formatlama
-            cardNumber.addEventListener('input', function(e) {
+            // ============================================
+            // TUTAR FORMATLAMA
+            // ============================================
+            amountInput.addEventListener('input', function() {
+                let val = this.value.replace(/[^0-9,.]/g, '');
+                if (val) {
+                    // Buton aktifliğini kaldır
+                    document.querySelectorAll('.preset-btn').forEach(function(b) {
+                        b.classList.remove('active');
+                    });
+                    // Buton metnini güncelle
+                    const num = parseFloat(val.replace(',', '.').replace(/\./g, '')) / 100 || parseFloat(val.replace(',', '.'));
+                    if (!isNaN(num) && num > 0) {
+                        payBtnSub.textContent = '₺' + num.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' güvenli ödeme ile tamamlayın';
+                    }
+                } else {
+                    payBtnSub.textContent = 'Güvenli ödeme ile tamamlayın';
+                }
+            });
+
+            // ============================================
+            // KART FORMATLAMA
+            // ============================================
+            cardNumber.addEventListener('input', function() {
                 let raw = this.value.replace(/\D/g, '');
                 let formatted = '';
                 for (let i = 0; i < raw.length && i < 16; i++) {
@@ -1279,12 +1067,14 @@
                 });
             });
 
-            // Animasyon
+            // ============================================
+            // ANİMASYON ADIMLARI
+            // ============================================
             const steps = [
                 { text: 'Banka ile iletişim kuruluyor...', desc: 'Güvenli bağlantı sağlanıyor' },
                 { text: 'Kart bilgileri kontrol ediliyor...', desc: 'Luhn doğrulaması yapılıyor' },
                 { text: 'Banka onayı bekleniyor...', desc: 'İşlem bankaya iletildi' },
-                { text: 'Ödeme onaylandı!', desc: 'Siparişiniz başarıyla alındı' }
+                { text: 'Ödeme tamamlandı!', desc: 'İşleminiz başarıyla gerçekleştirildi' }
             ];
 
             function updateDots(activeIndex) {
@@ -1302,10 +1092,19 @@
                 });
             }
 
-            function runAnimation() {
+            // ============================================
+            // RANDOM SONUÇ (BAŞARILI / BAŞARISIZ)
+            // ============================================
+            function getRandomResult() {
+                // %70 başarılı, %30 başarısız
+                return Math.random() < 0.7;
+            }
+
+            function runAnimation(amount, card) {
                 let currentStep = 0;
                 const totalSteps = steps.length;
                 const durationPerStep = 1400;
+                const isSuccess = getRandomResult();
 
                 overlay.classList.add('active');
 
@@ -1320,11 +1119,46 @@
                             const yearStr = now.getFullYear();
                             const hours = String(now.getHours()).padStart(2, '0');
                             const mins = String(now.getMinutes()).padStart(2, '0');
-                            orderDate.textContent = day + '.' + monthStr + '.' + yearStr + ' ' + hours + ':' + mins;
-                            const rand = String(Math.floor(10000000 + Math.random() * 90000000));
-                            orderNo.textContent = 'PUBG-' + rand;
 
-                            document.querySelectorAll('.cart-header, .cart-items, .cart-summary, .payment-options, .checkout-section, .footer')
+                            // Sonuç sayfasını doldur
+                            const formattedAmount = amount.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            resultAmount.textContent = formattedAmount + ' TL';
+                            resultCard.textContent = '**** ' + card.slice(-4);
+                            resultDate.textContent = day + '.' + monthStr + '.' + yearStr + ' ' + hours + ':' + mins;
+                            resultNo.textContent = 'POS-' + String(Math.floor(10000000 + Math.random() * 90000000));
+
+                            if (isSuccess) {
+                                resultIcon.className = 'success-icon success';
+                                resultIcon.textContent = '✅';
+                                resultTitle.className = 'success-title success';
+                                resultTitle.textContent = 'Ödeme Başarılı!';
+                                resultSub.textContent = 'İşleminiz başarıyla tamamlandı.';
+                                resultStatus.className = 'value status-success';
+                                resultStatus.textContent = '✅ Başarılı';
+                                resultDetail.innerHTML = `
+                                    <span class="bold">İşlem Detayları:</span><br />
+                                    Ödemeniz başarıyla gerçekleştirilmiştir.<br />
+                                    İşlem <span class="bold">256-bit SSL</span> güvenlik sertifikası ile şifrelenmiştir.<br />
+                                    İşlem numaranız kayıt altına alınmıştır.
+                                `;
+                            } else {
+                                resultIcon.className = 'success-icon fail';
+                                resultIcon.textContent = '❌';
+                                resultTitle.className = 'success-title fail';
+                                resultTitle.textContent = 'Ödeme Başarısız!';
+                                resultSub.textContent = 'İşleminiz gerçekleştirilemedi.';
+                                resultStatus.className = 'value status-fail';
+                                resultStatus.textContent = '❌ Başarısız';
+                                resultDetail.innerHTML = `
+                                    <span class="bold">İşlem Detayları:</span><br />
+                                    Ödemeniz gerçekleştirilemedi. Lütfen kart bilgilerinizi kontrol edin.<br />
+                                    Hata kodu: <span class="bold">POS-${String(Math.floor(1000 + Math.random() * 9000))}</span><br />
+                                    Bankanızla iletişime geçin veya farklı bir kart deneyin.
+                                `;
+                            }
+
+                            // Sepeti gizle, sonucu göster
+                            document.querySelectorAll('.pos-header, .amount-section, .payment-section, .footer')
                                 .forEach(el => el.style.display = 'none');
 
                             resultPage.classList.add('show');
@@ -1353,14 +1187,30 @@
                 setTimeout(nextStep, 300);
             }
 
-            // Form gönderme
+            // ============================================
+            // FORM GÖNDERME
+            // ============================================
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
+                // Hata temizleme
                 [cardNumber, cardMonth, cardYear, cardCvv].forEach(el => el.classList.remove('error'));
 
                 let hasError = false;
 
+                // Tutar kontrolü
+                const rawAmount = amountInput.value.replace(',', '.').replace(/[^0-9.]/g, '');
+                const amount = parseFloat(rawAmount);
+                if (isNaN(amount) || amount <= 0) {
+                    amountInput.style.borderColor = '#ff6b6b';
+                    amountInput.style.boxShadow = '0 0 0 4px rgba(255,107,107,0.08)';
+                    hasError = true;
+                } else {
+                    amountInput.style.borderColor = '';
+                    amountInput.style.boxShadow = '';
+                }
+
+                // Kart kontrolü
                 const rawCard = cardNumber.value.replace(/\s/g, '');
                 if (rawCard.length < 16) {
                     cardNumber.classList.add('error');
@@ -1393,11 +1243,17 @@
                     return;
                 }
 
+                // Buton loading
                 payBtn.classList.add('loading');
                 payBtn.disabled = true;
-                runAnimation();
+
+                // Animasyonu başlat
+                runAnimation(amount, rawCard);
             });
 
+            // ============================================
+            // SHAKE ANİMASYONU
+            // ============================================
             const styleShake = document.createElement('style');
             styleShake.textContent = `
                         @keyframes shake {
@@ -1416,6 +1272,7 @@
             location.reload();
         }
 
+        // Mobil odak
         if (window.innerWidth < 768) {
             setTimeout(function() {
                 const el = document.getElementById('cardNumber');
