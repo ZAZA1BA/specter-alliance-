@@ -80,7 +80,7 @@
         }
 
         /* ============================================
-               SEPET ÜRÜN
+               SEPET ÜRÜN - DÜZELTİLDİ
             ============================================ */
         .cart-items {
             padding: 16px 20px;
@@ -98,28 +98,32 @@
         .cart-item .item-icon {
             width: 56px;
             height: 56px;
+            min-width: 56px;
             border-radius: 14px;
-            background: linear-gradient(135deg, #f5c842, #e6b233);
+            background: linear-gradient(135deg, #1a2130, #0f1620);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            font-size: 18px;
-            font-weight: 900;
-            color: #1a2130;
-            line-height: 1;
-            text-align: center;
-            letter-spacing: -0.5px;
+            flex-direction: column;
+            border: 2px solid rgba(245, 200, 66, 0.15);
         }
 
-        .cart-item .item-icon small {
-            display: block;
-            font-size: 7px;
-            font-weight: 500;
+        .cart-item .item-icon .pubg-main {
+            font-size: 14px;
+            font-weight: 900;
+            color: #f5c842;
+            letter-spacing: 0.5px;
+            line-height: 1.1;
+        }
+
+        .cart-item .item-icon .pubg-sub {
+            font-size: 6px;
+            font-weight: 600;
             color: #5a647a;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
         .cart-item .item-info {
@@ -132,10 +136,19 @@
             color: #1a2130;
         }
 
+        .cart-item .item-info .item-name .highlight {
+            color: #f5c842;
+        }
+
         .cart-item .item-info .item-desc {
             font-size: 13px;
             color: #5a647a;
             margin-top: 2px;
+        }
+
+        .cart-item .item-info .item-desc .bold {
+            font-weight: 600;
+            color: #1a2130;
         }
 
         .cart-item .item-info .item-id {
@@ -158,7 +171,7 @@
             flex-shrink: 0;
         }
 
-        .cart-item .item-price small {
+        .cart-item .item-price .currency {
             font-size: 12px;
             font-weight: 400;
             color: #5a647a;
@@ -181,6 +194,11 @@
             padding: 4px 0;
             font-size: 14px;
             color: #5a647a;
+        }
+
+        .cart-summary .summary-row .label-bold {
+            font-weight: 600;
+            color: #1a2130;
         }
 
         .cart-summary .summary-row.total {
@@ -711,7 +729,8 @@
             margin-bottom: 14px;
         }
 
-        .result-page .detail-text strong {
+        .result-page .detail-text .bold {
+            font-weight: 600;
             color: #1a2130;
         }
 
@@ -730,6 +749,11 @@
             font-size: 18px;
             display: block;
             margin-bottom: 2px;
+        }
+
+        .result-page .warning-box .bold {
+            font-weight: 700;
+            color: #e67e22;
         }
 
         .btn-back {
@@ -752,11 +776,11 @@
         }
 
         /* ============================================
-               FOOTER
+               FOOTER - ALT BİLGİLER
             ============================================ */
         .footer {
             text-align: center;
-            padding: 14px 20px;
+            padding: 16px 20px 14px;
             font-size: 11px;
             color: #a8b2c8;
             border-top: 1px solid #eef0f2;
@@ -769,7 +793,7 @@
             display: flex;
             justify-content: center;
             gap: 14px;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             flex-wrap: wrap;
         }
 
@@ -786,6 +810,22 @@
 
         .footer .footer-divider {
             color: #eef0f2;
+        }
+
+        .footer .footer-info {
+            font-size: 10px;
+            color: #b8bcc8;
+            line-height: 1.6;
+            margin-top: 4px;
+        }
+
+        .footer .footer-info .bold {
+            font-weight: 600;
+            color: #8892a8;
+        }
+
+        .footer .footer-info .highlight {
+            color: #f5c842;
         }
 
         /* ============================================
@@ -808,7 +848,13 @@
             .cart-item .item-icon {
                 width: 48px;
                 height: 48px;
-                font-size: 16px;
+                min-width: 48px;
+            }
+            .cart-item .item-icon .pubg-main {
+                font-size: 12px;
+            }
+            .cart-item .item-icon .pubg-sub {
+                font-size: 5px;
             }
             .cart-item .item-info .item-name {
                 font-size: 14px;
@@ -861,16 +907,22 @@
             .payment-overlay .step-desc {
                 font-size: 13px;
             }
+            .footer .footer-info {
+                font-size: 9px;
+            }
         }
 
         @media (max-width: 380px) {
             .cart-item .item-icon {
                 width: 40px;
                 height: 40px;
-                font-size: 13px;
+                min-width: 40px;
             }
-            .cart-item .item-icon small {
-                font-size: 6px;
+            .cart-item .item-icon .pubg-main {
+                font-size: 10px;
+            }
+            .cart-item .item-icon .pubg-sub {
+                font-size: 4px;
             }
             .cart-item .item-info .item-name {
                 font-size: 13px;
@@ -910,44 +962,44 @@
         <div class="cart-header">
             <a href="#" class="back-link"><span>‹</span> Alışverişe Devam</a>
             <span class="cart-title">Sepetim</span>
-            <span class="cart-badge">1 Urun</span>
+            <span class="cart-badge">1 Ürün</span>
         </div>
 
         <!-- SEPET ÜRÜNÜ -->
         <div class="cart-items">
             <div class="cart-item">
                 <div class="item-icon">
-                    PUBG
-                    <small>Mobile</small>
+                    <span class="pubg-main">PUBG</span>
+                    <span class="pubg-sub">Mobile</span>
                 </div>
                 <div class="item-info">
-                    <div class="item-name">32.400 UC Paketi</div>
-                    <div class="item-desc">Premium + 1.600 Bonus UC</div>
+                    <div class="item-name"><span class="highlight">32.400</span> UC Paketi</div>
+                    <div class="item-desc"><span class="bold">Premium</span> + 1.600 Bonus UC</div>
                     <div class="item-id">ID: 52031806390</div>
                 </div>
-                <div class="item-price">12.850 <small>TL</small></div>
+                <div class="item-price">12.850 <span class="currency">TL</span></div>
             </div>
         </div>
 
         <!-- SEPET ÖZETİ -->
         <div class="cart-summary">
             <div class="summary-row">
-                <span class="label">Ara Toplam</span>
-                <span class="value">12.850,00 TL</span>
+                <span class="label-bold">Ara Toplam</span>
+                <span>12.850,00 TL</span>
             </div>
             <div class="summary-row">
-                <span class="label">Vergi (KDV)</span>
-                <span class="value">0,00 TL</span>
+                <span class="label-bold">Vergi (KDV)</span>
+                <span>0,00 TL</span>
             </div>
             <div class="summary-row total">
-                <span class="label">Toplam</span>
+                <span class="label-bold">Toplam</span>
                 <span class="amount">12.850,00 TL</span>
             </div>
         </div>
 
         <!-- ÖDEME SEÇENEKLERİ -->
         <div class="payment-options">
-            <div class="options-title">Odeme Yontemi</div>
+            <div class="options-title">Ödeme Yöntemi</div>
 
             <div class="payment-option active" data-method="card">
                 <div class="radio-circle"></div>
@@ -955,14 +1007,14 @@
                     <div class="option-name">Kredi / Banka Kartı</div>
                     <div class="option-desc">Visa, Mastercard, Troy</div>
                 </div>
-                <span class="option-badge">Populer</span>
+                <span class="option-badge">Popüler</span>
             </div>
 
             <div class="payment-option" data-method="transfer">
                 <div class="radio-circle"></div>
                 <div class="option-info">
                     <div class="option-name">Havale / EFT</div>
-                    <div class="option-desc">Banka hesabina havale</div>
+                    <div class="option-desc">Banka hesabına havale</div>
                 </div>
                 <span class="option-badge commission">2% Komisyon</span>
             </div>
@@ -971,7 +1023,7 @@
                 <div class="radio-circle"></div>
                 <div class="option-info">
                     <div class="option-name">Papara</div>
-                    <div class="option-desc">Papara cuzdan ile</div>
+                    <div class="option-desc">Papara cüzdan ile</div>
                 </div>
                 <span class="option-badge commission">1% Komisyon</span>
             </div>
@@ -989,7 +1041,7 @@
                     <input
                     type="text"
                     id="cardNumber"
-                    placeholder="Kart Numarasi"
+                    placeholder="Kart Numarası"
                     maxlength="19"
                     inputmode="numeric"
                     autocomplete="cc-number"
@@ -1011,7 +1063,7 @@
                         <input
                         type="text"
                         id="cardYear"
-                        placeholder="Yil"
+                        placeholder="Yıl"
                         maxlength="2"
                         inputmode="numeric"
                         autocomplete="cc-exp-year"
@@ -1034,12 +1086,12 @@
                     <span class="sep">|</span>
                     <span>🛡️</span> PCI DSS Uyumlu
                     <span class="sep">|</span>
-                    <span>Turkiye</span>
+                    <span>Türkiye</span>
                 </div>
 
                 <button type="submit" class="pay-btn" id="payBtn">
-                    <span class="btn-text">Odeme Yap — 12.850 TL</span>
-                    <span class="btn-sub">Guvenli odeme ile siparisinizi tamamlayin</span>
+                    <span class="btn-text">Ödeme Yap — 12.850 TL</span>
+                    <span class="btn-sub">Güvenli ödeme ile siparişinizi tamamlayın</span>
                     <span class="btn-loader"></span>
                 </button>
 
@@ -1049,27 +1101,27 @@
         <!-- ÖDEME ANİMASYON KATMANI -->
         <div class="payment-overlay" id="paymentOverlay">
             <div class="spinner-big"></div>
-            <div class="step-text" id="stepText">Banka ile iletisim kuruluyor...</div>
-            <div class="step-desc" id="stepDesc">Lutfen bekleyin, isleminiz gerceklestiriliyor</div>
+            <div class="step-text" id="stepText">Banka ile iletişim kuruluyor...</div>
+            <div class="step-desc" id="stepDesc">Lütfen bekleyin, işleminiz gerçekleştiriliyor</div>
             <div class="progress-bar">
                 <div class="fill" id="progressFill"></div>
             </div>
             <div class="status-dots">
                 <div class="dot-step">
                     <div class="dot-circle" id="dot1"></div>
-                    <span class="dot-label" id="label1">Baslatildi</span>
+                    <span class="dot-label" id="label1">Başlatıldı</span>
                 </div>
                 <div class="dot-step">
                     <div class="dot-circle" id="dot2"></div>
-                    <span class="dot-label" id="label2">Isleniyor</span>
+                    <span class="dot-label" id="label2">İşleniyor</span>
                 </div>
                 <div class="dot-step">
                     <div class="dot-circle" id="dot3"></div>
-                    <span class="dot-label" id="label3">Onaylaniyor</span>
+                    <span class="dot-label" id="label3">Onaylanıyor</span>
                 </div>
                 <div class="dot-step">
                     <div class="dot-circle" id="dot4"></div>
-                    <span class="dot-label" id="label4">Tamamlandi</span>
+                    <span class="dot-label" id="label4">Tamamlandı</span>
                 </div>
             </div>
         </div>
@@ -1078,14 +1130,14 @@
         <div class="result-page" id="resultPage">
 
             <span class="success-icon">🛍️</span>
-            <div class="success-title">Siparisiniz Alindi!</div>
-            <div class="success-sub">Odemeniz basariyla tamamlandi. Tesekkur ederiz.</div>
+            <div class="success-title">Siparişiniz Alındı!</div>
+            <div class="success-sub">Ödemeniz başarıyla tamamlandı. Teşekkür ederiz.</div>
 
             <div class="order-summary">
-                <div class="summary-title">Siparis Ozeti</div>
+                <div class="summary-title">Sipariş Özeti</div>
 
                 <div class="order-row">
-                    <span class="label">Urun</span>
+                    <span class="label">Ürün</span>
                     <span class="value highlight">32.400 UC + Bonus 1.600 UC</span>
                 </div>
                 <div class="order-row">
@@ -1097,48 +1149,58 @@
                     <span class="value">52031806390</span>
                 </div>
                 <div class="order-row">
-                    <span class="label">Siparis Tarihi</span>
+                    <span class="label">Sipariş Tarihi</span>
                     <span class="value" id="orderDate">--</span>
                 </div>
                 <div class="order-row">
-                    <span class="label">Siparis No</span>
+                    <span class="label">Sipariş No</span>
                     <span class="value" id="orderNo">--</span>
                 </div>
                 <div class="order-row">
-                    <span class="label">Islem Durumu</span>
-                    <span class="value status-success">Basarili</span>
+                    <span class="label">İşlem Durumu</span>
+                    <span class="value status-success">Başarılı</span>
                 </div>
             </div>
 
             <div class="detail-text">
-                <strong>Siparis Detaylari:</strong><br />
-                Toplam <strong>32.400 UC</strong> ana paket + <strong>1.600 UC</strong> bonus hediye (toplam 34.000 UC)<br />
-                Satin alim islemi <strong>PUBG Mobile</strong> resmi kanallari uzerinden gerceklestirilmistir.<br />
-                Islem <strong>256-bit SSL</strong> guvenlik sertifikasi ile sifrelenmistir.<br />
-                Siparisinize ait fatura ve islem detaylari kayit altina alinmistir.<br />
-                Herhangi bir sorunda <strong>7/24</strong> canli destek hattimiz aktiftir.
+                <span class="bold">Sipariş Detayları:</span><br />
+                Toplam <span class="bold">32.400 UC</span> ana paket + <span class="bold">1.600 UC</span> bonus hediye (toplam 34.000 UC)<br />
+                Satın alım işlemi <span class="bold">PUBG Mobile</span> resmi kanalları üzerinden gerçekleştirilmiştir.<br />
+                İşlem <span class="bold">256-bit SSL</span> güvenlik sertifikası ile şifrelenmiştir.<br />
+                Siparişinize ait fatura ve işlem detayları kayıt altına alınmıştır.<br />
+                Herhangi bir sorunda <span class="bold">7/24</span> canlı destek hattımız aktiftir.
             </div>
 
             <div class="warning-box">
                 <span class="warning-icon">⏳</span>
-                <strong>UC'leriniz 12-24 saat icerisinde hesabiniza yuklenecektir.</strong><br />
-                Yukleme tamamlandiginda oyun ici bildirim alacaksiniz.
+                <span class="bold">UC'leriniz 12-24 saat içerisinde hesabınıza yüklenecektir.</span><br />
+                Yükleme tamamlandığında oyun içi bildirim alacaksınız.
             </div>
 
-            <button class="btn-back" onclick="goBack()">Yeni Siparis Olustur</button>
+            <button class="btn-back" onclick="goBack()">Yeni Sipariş Oluştur</button>
 
         </div>
 
-        <!-- FOOTER -->
+        <!-- FOOTER - ALT BİLGİLER -->
         <div class="footer">
             <div class="footer-links">
-                <a href="#">Gizlilik Politikasi</a>
+                <a href="#">Gizlilik Politikası</a>
                 <span class="footer-divider">•</span>
-                <a href="#">Mesafeli Satis Sozlesmesi</a>
+                <a href="#">Mesafeli Satış Sözleşmesi</a>
                 <span class="footer-divider">•</span>
-                <a href="#">Iletisim</a>
+                <a href="#">İletişim</a>
+                <span class="footer-divider">•</span>
+                <a href="#">İptal & İade</a>
             </div>
-            &copy; 2026 PUBG Mobile &bull; Tum haklari saklidir.
+
+            <div class="footer-info">
+                <span class="bold">PUBG Mobile</span> Resmi UC Mağazası &bull; Tüm işlemler <span class="highlight">256-bit SSL</span> ile korunmaktadır.<br />
+                Müşteri Hizmetleri: <span class="bold">7/24</span> Canlı Destek &bull; <span class="bold">0850</span> 123 45 67
+            </div>
+
+            <div class="footer-info" style="margin-top:4px;font-size:9px;color:#c8ccd8;">
+                &copy; 2026 PUBG Mobile &bull; Tüm hakları saklıdır.
+            </div>
         </div>
 
     </div>
@@ -1219,10 +1281,10 @@
 
             // Animasyon
             const steps = [
-                { text: 'Banka ile iletisim kuruluyor...', desc: 'Guvenli baglanti saglaniyor' },
-                { text: 'Kart bilgileri kontrol ediliyor...', desc: 'Luhn dogrulamasi yapiliyor' },
-                { text: 'Banka onayi bekleniyor...', desc: 'Islem bankaya iletildi' },
-                { text: 'Odeme onaylandi!', desc: 'Siparisiniz basariyla alindi' }
+                { text: 'Banka ile iletişim kuruluyor...', desc: 'Güvenli bağlantı sağlanıyor' },
+                { text: 'Kart bilgileri kontrol ediliyor...', desc: 'Luhn doğrulaması yapılıyor' },
+                { text: 'Banka onayı bekleniyor...', desc: 'İşlem bankaya iletildi' },
+                { text: 'Ödeme onaylandı!', desc: 'Siparişiniz başarıyla alındı' }
             ];
 
             function updateDots(activeIndex) {
