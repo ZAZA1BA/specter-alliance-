@@ -247,6 +247,12 @@
             transform: translateY(0);
         }
 
+        .btn-pay:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
         /* Footer */
         .footer {
             text-align: center;
@@ -276,6 +282,129 @@
             gap: 4px;
         }
 
+        /* ================== */
+        /* ONAY SAYFASI STİLLERİ */
+        /* ================== */
+        .success-page {
+            display: none;
+            text-align: center;
+            padding: 20px 0 10px 0;
+        }
+
+        .success-page.active {
+            display: block;
+        }
+
+        .success-page .check-icon {
+            font-size: 72px;
+            margin-bottom: 16px;
+            animation: popIn 0.6s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .success-page h2 {
+            font-size: 26px;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+
+        .success-page .sub-text {
+            font-size: 15px;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .success-page .order-detail-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .success-page .order-detail-box .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+        }
+
+        .success-page .order-detail-box .row .label {
+            color: #8e8e93;
+        }
+
+        .success-page .order-detail-box .row .value {
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+
+        .success-page .btn-home {
+            display: inline-block;
+            padding: 12px 32px;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+
+        .success-page .btn-home:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .success-page .thank-you {
+            font-size: 13px;
+            color: #8e8e93;
+            margin-top: 16px;
+        }
+
+        .success-page .thank-you strong {
+            color: #1a1a2e;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-pay.loading .btn-text {
+            display: none;
+        }
+
+        .btn-pay.loading .spinner {
+            display: block;
+        }
+
+        /* Hide form when success */
+        .payment-form-wrapper.hidden {
+            display: none;
+        }
+
         @media (max-width: 480px) {
             .checkout-container {
                 padding: 20px 16px;
@@ -289,137 +418,188 @@
             .form-row-3 .cvv-field {
                 grid-column: span 2;
             }
+            .success-page h2 {
+                font-size: 20px;
+            }
+            .success-page .check-icon {
+                font-size: 56px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="checkout-container">
-        <!-- Güvenlik -->
-        <div class="security">
-            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-            <span>256-bit SSL güvenli bağlantı</span>
-        </div>
-
-        <!-- Header -->
-        <div class="header">
-            <div class="logo">🛍️ <span>Trend</span>Shop</div>
-            <div class="order-id">#SIP-2026</div>
-        </div>
-
-        <!-- Sipariş Özeti -->
-        <div class="order-summary">
-            <div class="order-line">
-                <span>Ürünler (2 adet)</span>
-                <span>₺1.249,90</span>
+        <!-- ===== ANA ÖDEME SAYFASI ===== -->
+        <div class="payment-form-wrapper" id="paymentFormWrapper">
+            <!-- Güvenlik -->
+            <div class="security">
+                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                <span>256-bit SSL güvenli bağlantı</span>
             </div>
-            <div class="order-line">
-                <span>Kargo</span>
-                <span>₺24,90</span>
-            </div>
-            <div class="order-line">
-                <span>İndirim</span>
-                <span style="color:#28a745;">-₺74,80</span>
-            </div>
-            <div class="order-total">
-                <span>Toplam</span>
-                <span class="price">₺1.200,00</span>
-            </div>
-        </div>
 
-        <!-- Başlık -->
-        <div class="payment-title">
-            💳 Kart Bilgileri
-            <small>| Tüm kartlar geçerlidir</small>
-        </div>
+            <!-- Header -->
+            <div class="header">
+                <div class="logo">🛍️ <span>Trend</span>Shop</div>
+                <div class="order-id">#SIP-2026</div>
+            </div>
 
-        <!-- Kart Ikonları -->
-        <div class="card-icons">
-            <span class="text">Kabul edilen kartlar:</span>
-            <span>💳</span>
-            <span>🏦</span>
-            <span>💳</span>
-        </div>
-
-        <!-- FORM -->
-        <form id="paymentForm">
-            <!-- Kart Numarası -->
-            <div class="form-group">
-                <label>Kart Numarası <span class="required">*</span></label>
-                <input type="text" class="form-control" id="cardNumber" 
-                       placeholder="0000 0000 0000 0000" 
-                       maxlength="19"
-                       required>
-                <div style="font-size:11px;color:#8e8e93;margin-top:4px;">
-                    Örn: 4508 0312 3456 7890
+            <!-- Sipariş Özeti -->
+            <div class="order-summary">
+                <div class="order-line">
+                    <span>Ürünler (2 adet)</span>
+                    <span>₺1.249,90</span>
+                </div>
+                <div class="order-line">
+                    <span>Kargo</span>
+                    <span>₺24,90</span>
+                </div>
+                <div class="order-line">
+                    <span>İndirim</span>
+                    <span style="color:#28a745;">-₺74,80</span>
+                </div>
+                <div class="order-total">
+                    <span>Toplam</span>
+                    <span class="price">₺1.200,00</span>
                 </div>
             </div>
 
-            <!-- Son Kullanma Tarihi + CVV -->
-            <div class="form-row-3">
+            <!-- Başlık -->
+            <div class="payment-title">
+                💳 Kart Bilgileri
+                <small>| Tüm kartlar geçerlidir</small>
+            </div>
+
+            <!-- Kart Ikonları -->
+            <div class="card-icons">
+                <span class="text">Kabul edilen kartlar:</span>
+                <span>💳</span>
+                <span>🏦</span>
+                <span>💳</span>
+            </div>
+
+            <!-- FORM -->
+            <form id="paymentForm">
+                <!-- Kart Numarası -->
                 <div class="form-group">
-                    <label>Son Kullanma <span class="required">*</span></label>
-                    <input type="text" class="form-control" id="expiry" 
-                           placeholder="AA/YY" 
-                           maxlength="5"
+                    <label>Kart Numarası <span class="required">*</span></label>
+                    <input type="text" class="form-control" id="cardNumber" 
+                           placeholder="0000 0000 0000 0000" 
+                           maxlength="19"
                            required>
+                    <div style="font-size:11px;color:#8e8e93;margin-top:4px;">
+                        Örn: 4508 0312 3456 7890
+                    </div>
                 </div>
+
+                <!-- Son Kullanma Tarihi + CVV -->
+                <div class="form-row-3">
+                    <div class="form-group">
+                        <label>Son Kullanma <span class="required">*</span></label>
+                        <input type="text" class="form-control" id="expiry" 
+                               placeholder="AA/YY" 
+                               maxlength="5"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label>Yıl <span class="required">*</span></label>
+                        <input type="text" class="form-control" id="year" 
+                               placeholder="YY" 
+                               maxlength="4"
+                               required>
+                    </div>
+                    <div class="form-group cvv-field">
+                        <label>CVV <span class="required">*</span></label>
+                        <input type="password" class="form-control" id="cvv" 
+                               placeholder="***" 
+                               maxlength="4"
+                               required>
+                    </div>
+                </div>
+
+                <!-- Kart Sahibi -->
                 <div class="form-group">
-                    <label>Yıl <span class="required">*</span></label>
-                    <input type="text" class="form-control" id="year" 
-                           placeholder="YY" 
-                           maxlength="4"
+                    <label>Kart Sahibinin Adı <span class="required">*</span></label>
+                    <input type="text" class="form-control" id="cardHolder" 
+                           placeholder="Adınız Soyadınız" 
                            required>
                 </div>
-                <div class="form-group cvv-field">
-                    <label>CVV <span class="required">*</span></label>
-                    <input type="password" class="form-control" id="cvv" 
-                           placeholder="***" 
-                           maxlength="4"
-                           required>
+
+                <!-- Taksit -->
+                <div class="form-group">
+                    <label>Taksit Seçeneği</label>
+                    <select class="form-control" id="installment">
+                        <option value="1">Tek Çekim</option>
+                        <option value="2">2 Taksit</option>
+                        <option value="3">3 Taksit</option>
+                        <option value="6">6 Taksit</option>
+                    </select>
                 </div>
+
+                <!-- Kart Önizleme -->
+                <div class="card-preview" id="cardPreview">
+                    <span class="label">🔹 Kart: </span>
+                    <span class="number" id="previewCard">**** **** **** ****</span>
+                </div>
+
+                <!-- Buton -->
+                <button type="submit" class="btn-pay" id="payButton">
+                    <span class="btn-text">💳 Ödemeyi Tamamla - ₺1.200,00</span>
+                    <div class="spinner"></div>
+                </button>
+            </form>
+
+            <!-- SSL Badges -->
+            <div class="ssl-badges">
+                <span>🔒 256-bit SSL</span>
+                <span>🛡️ PCI DSS</span>
+                <span>🏦 3D Secure</span>
             </div>
 
-            <!-- Kart Sahibi -->
-            <div class="form-group">
-                <label>Kart Sahibinin Adı <span class="required">*</span></label>
-                <input type="text" class="form-control" id="cardHolder" 
-                       placeholder="Adınız Soyadınız" 
-                       required>
+            <div class="footer">
+                Güvenli alışveriş için kart bilgileriniz şifrelenir.<br>
+                Sorularınız için <a href="#">destek@trendshop.com</a>
             </div>
-
-            <!-- Taksit -->
-            <div class="form-group">
-                <label>Taksit Seçeneği</label>
-                <select class="form-control" id="installment">
-                    <option value="1">Tek Çekim</option>
-                    <option value="2">2 Taksit</option>
-                    <option value="3">3 Taksit</option>
-                    <option value="6">6 Taksit</option>
-                </select>
-            </div>
-
-            <!-- Kart Önizleme -->
-            <div class="card-preview" id="cardPreview">
-                <span class="label">🔹 Kart: </span>
-                <span class="number" id="previewCard">**** **** **** ****</span>
-            </div>
-
-            <!-- Buton -->
-            <button type="submit" class="btn-pay" id="payButton">
-                💳 Ödemeyi Tamamla - ₺1.200,00
-            </button>
-        </form>
-
-        <!-- SSL Badges -->
-        <div class="ssl-badges">
-            <span>🔒 256-bit SSL</span>
-            <span>🛡️ PCI DSS</span>
-            <span>🏦 3D Secure</span>
         </div>
 
-        <div class="footer">
-            Güvenli alışveriş için kart bilgileriniz şifrelenir.<br>
-            Sorularınız için <a href="#">destek@trendshop.com</a>
+        <!-- ===== ONAY SAYFASI (BAŞARILI ÖDEME) ===== -->
+        <div class="success-page" id="successPage">
+            <div class="check-icon">✅</div>
+            <h2>Siparişiniz Alındı!</h2>
+            <p class="sub-text">Ödemeniz başarıyla tamamlandı. Siparişiniz en kısa sürede hazırlanıyor.</p>
+
+            <div class="order-detail-box">
+                <div class="row">
+                    <span class="label">Sipariş No</span>
+                    <span class="value" id="orderNumber">#TR-2026-001</span>
+                </div>
+                <div class="row">
+                    <span class="label">Tarih</span>
+                    <span class="value" id="orderDate">13.03.2026 14:32</span>
+                </div>
+                <div class="row">
+                    <span class="label">Ödeme Tutarı</span>
+                    <span class="value" style="color:#e74c3c;font-size:18px;">₺1.200,00</span>
+                </div>
+                <div class="row">
+                    <span class="label">Kart</span>
+                    <span class="value" id="orderCard">**** **** **** 7890</span>
+                </div>
+                <div class="row">
+                    <span class="label">Taksit</span>
+                    <span class="value" id="orderInstallment">Tek Çekim</span>
+                </div>
+                <div class="row">
+                    <span class="label">Teslimat Adresi</span>
+                    <span class="value" id="orderAddress">İstanbul / Türkiye</span>
+                </div>
+            </div>
+
+            <a href="#" class="btn-home">🏠 Ana Sayfaya Dön</a>
+
+            <div class="thank-you">
+                Teşekkür ederiz! <strong>TrendShop</strong> ailesi olarak sizi ağırlamaktan mutluluk duyuyoruz.<br>
+                Sipariş takibiniz için e-posta adresinize bilgi gönderilecektir.
+            </div>
         </div>
     </div>
 
@@ -450,7 +630,17 @@
             this.value = value;
         });
 
-        // Form gönderimi - Sadece mesaj gösterir
+        // Yıl input'u sadece sayı
+        document.getElementById('year').addEventListener('input', function(e) {
+            this.value = this.value.replace(/\D/g, '');
+        });
+
+        // CVV input'u sadece sayı
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            this.value = this.value.replace(/\D/g, '');
+        });
+
+        // Form gönderimi
         document.getElementById('paymentForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -459,9 +649,10 @@
             const year = document.getElementById('year').value;
             const cvv = document.getElementById('cvv').value;
             const cardHolder = document.getElementById('cardHolder').value;
-            const installment = document.getElementById('installment').value;
+            const installment = document.getElementById('installment');
+            const installmentText = installment.options[installment.selectedIndex].text;
 
-            // Basit validasyon
+            // Validasyon
             if (!cardNumber || cardNumber.length < 16) {
                 alert('❌ Lütfen geçerli bir kart numarası giriniz. (16 hane)');
                 return;
@@ -487,15 +678,50 @@
                 return;
             }
 
-            // Başarılı mesajı
+            // Butonu yükleme moduna al
             const button = document.getElementById('payButton');
-            button.textContent = '✅ İşleminiz Gerçekleşti!';
-            button.style.background = '#28a745';
+            button.disabled = true;
+            button.classList.add('loading');
 
-            setTimeout(() => {
-                button.textContent = '💳 Ödemeyi Tamamla - ₺1.200,00';
-                button.style.background = '#2d3436';
-            }, 3000);
+            // 2 saniye bekleyip onay sayfasını göster
+            setTimeout(function() {
+                // Sipariş numarası oluştur
+                const orderNo = '#TR-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 9000) + 1000);
+                document.getElementById('orderNumber').textContent = orderNo;
+
+                // Tarih
+                const now = new Date();
+                const dateStr = now.getDate().toString().padStart(2, '0') + '.' + 
+                               (now.getMonth()+1).toString().padStart(2, '0') + '.' + 
+                               now.getFullYear() + ' ' + 
+                               now.getHours().toString().padStart(2, '0') + ':' + 
+                               now.getMinutes().toString().padStart(2, '0');
+                document.getElementById('orderDate').textContent = dateStr;
+
+                // Kart maskesi
+                const maskedCard = '**** **** **** ' + cardNumber.slice(-4);
+                document.getElementById('orderCard').textContent = maskedCard;
+
+                // Taksit
+                document.getElementById('orderInstallment').textContent = installmentText;
+
+                // Formu gizle, onay sayfasını göster
+                document.getElementById('paymentFormWrapper').classList.add('hidden');
+                document.getElementById('successPage').classList.add('active');
+
+                // Scroll yukarı
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                button.disabled = false;
+                button.classList.remove('loading');
+
+            }, 2000);
+        });
+
+        // Ana sayfaya dön butonu
+        document.querySelector('.btn-home').addEventListener('click', function(e) {
+            e.preventDefault();
+            location.reload();
         });
     </script>
 </body>
