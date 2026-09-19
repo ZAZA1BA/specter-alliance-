@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IBAN Havale | Resmi Banka Transferi</title>
+    <title>FinBank | Güvenli Transfer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -28,599 +24,725 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background */
         .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none; overflow: hidden;
         }
-
         .bg-animation .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: floatOrb 8s ease-in-out infinite;
+            position: absolute; border-radius: 50%; filter: blur(80px);
+            opacity: 0.4; animation: floatOrb 8s ease-in-out infinite;
         }
-
         .bg-animation .orb:nth-child(1) {
-            width: 400px;
-            height: 400px;
-            background: rgba(16, 185, 129, 0.15);
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
+            width: 400px; height: 400px; background: rgba(16, 185, 129, 0.15);
+            top: -100px; left: -100px;
         }
-
         .bg-animation .orb:nth-child(2) {
-            width: 300px;
-            height: 300px;
-            background: rgba(59, 130, 246, 0.12);
-            bottom: -50px;
-            right: -50px;
-            animation-delay: -3s;
+            width: 300px; height: 300px; background: rgba(59, 130, 246, 0.12);
+            bottom: -50px; right: -50px; animation-delay: -3s;
         }
-
         .bg-animation .orb:nth-child(3) {
-            width: 200px;
-            height: 200px;
-            background: rgba(16, 185, 129, 0.10);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: -5s;
+            width: 200px; height: 200px; background: rgba(16, 185, 129, 0.10);
+            top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -5s;
         }
-
         @keyframes floatOrb {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(30px, -30px) scale(1.1);
-            }
-            66% {
-                transform: translate(-20px, 20px) scale(0.9);
-            }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
         }
 
-        /* Particle Animation */
         .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none; overflow: hidden;
         }
-
         .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(16, 185, 129, 0.3);
-            border-radius: 50%;
+            position: absolute; width: 2px; height: 2px;
+            background: rgba(16, 185, 129, 0.3); border-radius: 50%;
             animation: floatParticle 15s linear infinite;
         }
-
         @keyframes floatParticle {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
-        .container {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 480px;
-        }
+        .container { position: relative; z-index: 1; width: 100%; max-width: 480px; }
 
-        /* Card */
         .card {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 28px;
-            padding: 40px 32px 36px;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px; padding: 40px 32px 36px;
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         .card:hover {
             transform: translateY(-2px);
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
+        .header { text-align: center; margin-bottom: 24px; }
         .header .logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
+            display: inline-flex; align-items: center; gap: 10px; margin-bottom: 8px;
         }
-
         .header .logo i {
-            font-size: 32px;
-            color: #10b981;
-            animation: pulseIcon 2s ease-in-out infinite;
+            font-size: 32px; color: #10b981; animation: pulseIcon 2s ease-in-out infinite;
         }
-
         @keyframes pulseIcon {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
-
         .header .logo span {
-            font-size: 22px;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: -0.5px;
+            font-size: 22px; font-weight: 700; color: #fff; letter-spacing: -0.5px;
         }
-
-        .header .logo span .highlight {
-            color: #10b981;
-        }
-
+        .header .logo span .highlight { color: #10b981; }
         .header .badge {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.15);
-            color: #10b981;
-            font-size: 11px;
-            font-weight: 600;
-            padding: 4px 14px;
-            border-radius: 20px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            display: inline-block; background: rgba(16, 185, 129, 0.15);
+            color: #10b981; font-size: 11px; font-weight: 600;
+            padding: 4px 14px; border-radius: 20px; letter-spacing: 0.5px;
+            text-transform: uppercase; border: 1px solid rgba(16, 185, 129, 0.2);
             animation: glowBadge 2s ease-in-out infinite;
         }
-
         @keyframes glowBadge {
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
-            }
-            50% {
-                box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
-            }
+            0%, 100% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.1); }
+            50% { box-shadow: 0 0 25px rgba(16, 185, 129, 0.25); }
         }
-
         .header .subtitle {
+            color: rgba(255, 255, 255, 0.4); font-size: 13px;
+            margin-top: 6px; font-weight: 400; letter-spacing: 0.3px;
+        }
+
+        /* ===== MOD SEÇİCİ ===== */
+        .mode-selector {
+            display: flex; gap: 8px; background: rgba(255, 255, 255, 0.03);
+            padding: 4px; border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 20px;
+        }
+        .mode-btn {
+            flex: 1; padding: 12px 8px; border-radius: 10px;
+            border: none; background: transparent;
             color: rgba(255, 255, 255, 0.4);
-            font-size: 13px;
-            margin-top: 6px;
-            font-weight: 400;
-            letter-spacing: 0.3px;
+            font-family: 'Inter', sans-serif; font-size: 13px;
+            font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
         }
-
-        /* Security Bar */
-        .security-bar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: rgba(16, 185, 129, 0.06);
-            border: 1px solid rgba(16, 185, 129, 0.10);
-            border-radius: 12px;
-            padding: 8px 16px;
-            margin-bottom: 28px;
-        }
-
-        .security-bar i {
+        .mode-btn i { font-size: 14px; }
+        .mode-btn.active {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
             color: #10b981;
-            font-size: 14px;
-            animation: pulseIcon 2s ease-in-out infinite;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
         }
+        .mode-btn:hover:not(.active) { color: rgba(255, 255, 255, 0.7); }
 
-        .security-bar span {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-        }
-
-        .security-bar .dot {
-            width: 4px;
-            height: 4px;
-            background: #10b981;
-            border-radius: 50%;
-            animation: blinkDot 1.5s ease-in-out infinite;
-        }
-
-        @keyframes blinkDot {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.2;
-            }
-        }
-
-        /* Form */
-        .form-group {
+        /* ===== AKTİF ALICI (Kayıtlı) ===== */
+        .recipient-selector {
             margin-bottom: 18px;
         }
-
-        .form-group label {
-            display: block;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-            margin-bottom: 6px;
+        .recipient-label {
+            display: flex; align-items: center; justify-content: space-between;
+            color: rgba(255, 255, 255, 0.6); font-size: 12px;
+            font-weight: 500; letter-spacing: 0.3px; text-transform: uppercase;
+            margin-bottom: 8px;
         }
-
-        .form-group .input-wrap {
-            position: relative;
-            display: flex;
-            align-items: center;
+        .recipient-label .add-new {
+            color: #10b981; font-size: 11px; cursor: pointer;
+            text-transform: none; letter-spacing: 0;
+            transition: opacity 0.3s;
+        }
+        .recipient-label .add-new:hover { opacity: 0.7; }
+        .recipients-scroll {
+            display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+        .recipients-scroll::-webkit-scrollbar { display: none; }
+        .recipient-chip {
+            flex-shrink: 0; padding: 8px 12px; border-radius: 10px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            transition: all 0.3s ease;
-            overflow: hidden;
+            cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 8px;
+            min-width: 140px;
+        }
+        .recipient-chip:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        .recipient-chip.selected {
+            background: rgba(16, 185, 129, 0.12);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+        .recipient-chip .avatar {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 11px; font-weight: 700;
+        }
+        .recipient-chip .info { display: flex; flex-direction: column; gap: 2px; }
+        .recipient-chip .info strong {
+            color: #fff; font-size: 11px; font-weight: 600;
+        }
+        .recipient-chip .info span {
+            color: rgba(255, 255, 255, 0.3); font-size: 9px;
+            font-family: monospace;
         }
 
+        .security-bar {
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; background: rgba(16, 185, 129, 0.06);
+            border: 1px solid rgba(16, 185, 129, 0.10);
+            border-radius: 12px; padding: 8px 16px;
+            margin-bottom: 24px;
+        }
+        .security-bar i {
+            color: #10b981; font-size: 14px; animation: pulseIcon 2s ease-in-out infinite;
+        }
+        .security-bar span {
+            color: rgba(255, 255, 255, 0.5); font-size: 11px;
+            font-weight: 500; letter-spacing: 0.3px;
+        }
+        .security-bar .dot {
+            width: 4px; height: 4px; background: #10b981;
+            border-radius: 50%; animation: blinkDot 1.5s ease-in-out infinite;
+        }
+        @keyframes blinkDot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        /* ===== FORM ===== */
+        .form-area { transition: opacity 0.3s ease; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label {
+            display: block; color: rgba(255, 255, 255, 0.6);
+            font-size: 12px; font-weight: 500; letter-spacing: 0.3px;
+            text-transform: uppercase; margin-bottom: 6px;
+        }
+        .form-group .input-wrap {
+            position: relative; display: flex; align-items: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px; transition: all 0.3s ease; overflow: hidden;
+        }
         .form-group .input-wrap:focus-within {
             border-color: rgba(16, 185, 129, 0.4);
             box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.08);
             background: rgba(255, 255, 255, 0.06);
         }
-
         .form-group .input-wrap .icon {
-            padding: 0 0 0 16px;
-            color: rgba(255, 255, 255, 0.2);
-            font-size: 14px;
-            transition: color 0.3s ease;
+            padding: 0 0 0 16px; color: rgba(255, 255, 255, 0.2);
+            font-size: 14px; transition: color 0.3s ease;
+        }
+        .form-group .input-wrap:focus-within .icon { color: #10b981; }
+        .form-group .input-wrap input {
+            width: 100%; padding: 14px 16px; background: transparent;
+            border: none; outline: none; color: #fff;
+            font-size: 15px; font-weight: 500;
+            font-family: 'Inter', sans-serif; letter-spacing: 0.3px;
+        }
+        .form-group .input-wrap input::placeholder {
+            color: rgba(255, 255, 255, 0.2); font-weight: 400; font-size: 14px;
+        }
+        .form-group .input-wrap .currency {
+            padding-right: 16px; color: rgba(255, 255, 255, 0.3);
+            font-size: 14px; font-weight: 600;
         }
 
-        .form-group .input-wrap:focus-within .icon {
+        /* IBAN doğrulama göstergesi */
+        .iban-status {
+            display: none; align-items: center; gap: 6px;
+            margin-top: 6px; font-size: 11px;
+            padding-left: 4px;
+        }
+        .iban-status.visible { display: flex; }
+        .iban-status.valid { color: #10b981; }
+        .iban-status.invalid { color: #ef4444; }
+        .iban-status i { font-size: 12px; }
+
+        /* Banka tespiti */
+        .bank-detected {
+            display: none; margin-top: 6px;
+            padding: 8px 12px; border-radius: 10px;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            font-size: 12px; color: #10b981;
+            align-items: center; gap: 8px;
+        }
+        .bank-detected.visible { display: flex; }
+        .bank-detected i { font-size: 14px; }
+        .bank-detected strong { color: #fff; margin-left: 4px; }
+
+        /* Hızlı tutar butonları */
+        .quick-amounts {
+            display: flex; gap: 8px; margin-top: 10px;
+        }
+        .quick-amounts button {
+            flex: 1; padding: 8px 4px; border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.5);
+            font-family: 'Inter', sans-serif; font-size: 12px;
+            font-weight: 600; cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .quick-amounts button:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.3);
             color: #10b981;
         }
+        .quick-amounts button:active { transform: scale(0.95); }
 
-        .form-group .input-wrap input {
-            width: 100%;
-            padding: 14px 16px;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #fff;
-            font-size: 15px;
-            font-weight: 500;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.3px;
+        /* İşlem ücreti */
+        .fee-info {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 14px; background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px; margin-top: 4px;
+            font-size: 12px;
+        }
+        .fee-info span { color: rgba(255, 255, 255, 0.4); }
+        .fee-info strong { color: #fff; font-weight: 600; }
+        .fee-info .free { color: #10b981; }
+
+        /* Limit göstergesi */
+        .limit-info {
+            margin-top: 14px; padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+        }
+        .limit-row {
+            display: flex; justify-content: space-between;
+            font-size: 11px; margin-bottom: 6px;
+        }
+        .limit-row span:first-child { color: rgba(255, 255, 255, 0.4); }
+        .limit-row span:last-child { color: rgba(255, 255, 255, 0.7); font-weight: 600; }
+        .limit-progress {
+            height: 4px; background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px; overflow: hidden;
+        }
+        .limit-progress .fill {
+            height: 100%; width: 45%;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            border-radius: 4px;
+            transition: width 0.5s ease;
         }
 
-        .form-group .input-wrap input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
-            font-weight: 400;
-            font-size: 14px;
-        }
-
-        .form-group .input-wrap input:focus {
-            border: none;
-            outline: none;
-        }
-
-        .form-group .input-wrap .currency {
-            padding-right: 16px;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        /* Submit Button */
         .btn-submit {
-            width: 100%;
-            padding: 16px;
+            width: 100%; padding: 16px;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border: none;
-            border-radius: 14px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
+            border: none; border-radius: 14px;
+            color: #fff; font-size: 16px; font-weight: 700;
+            font-family: 'Inter', sans-serif; cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            margin-top: 6px;
-            letter-spacing: 0.3px;
+            position: relative; overflow: hidden;
+            margin-top: 6px; letter-spacing: 0.3px;
         }
-
         .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 35px rgba(16, 185, 129, 0.3);
         }
-
-        .btn-submit:active {
-            transform: translateY(0px) scale(0.98);
-        }
-
+        .btn-submit:active { transform: translateY(0px) scale(0.98); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
         .btn-submit .btn-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-
         .btn-submit .btn-content i {
-            font-size: 18px;
-            transition: transform 0.3s ease;
+            font-size: 18px; transition: transform 0.3s ease;
         }
-
-        .btn-submit:hover .btn-content i {
-            transform: translateX(4px);
-        }
-
+        .btn-submit:hover .btn-content i { transform: translateX(4px); }
         .btn-submit .ripple {
-            position: absolute;
-            border-radius: 50%;
+            position: absolute; border-radius: 50%;
             background: rgba(255, 255, 255, 0.2);
-            transform: scale(0);
-            animation: rippleAnim 0.6s linear;
+            transform: scale(0); animation: rippleAnim 0.6s linear;
             pointer-events: none;
         }
-
         @keyframes rippleAnim {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
+            to { transform: scale(4); opacity: 0; }
         }
 
-        /* Footer */
         .footer {
-            text-align: center;
-            margin-top: 20px;
+            text-align: center; margin-top: 20px;
             color: rgba(255, 255, 255, 0.15);
-            font-size: 11px;
-            letter-spacing: 0.5px;
+            font-size: 11px; letter-spacing: 0.5px;
         }
-
         .footer a {
             color: rgba(255, 255, 255, 0.2);
-            text-decoration: none;
-            transition: color 0.3s ease;
+            text-decoration: none; transition: color 0.3s ease;
         }
+        .footer a:hover { color: rgba(255, 255, 255, 0.4); }
 
-        .footer a:hover {
+        /* ===== ONAY ADIMI ===== */
+        .confirm-state {
+            display: none; animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .confirm-state.active { display: block; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .confirm-state .confirm-title {
+            text-align: center; color: #fff;
+            font-size: 18px; font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .confirm-state .confirm-sub {
+            text-align: center; color: rgba(255, 255, 255, 0.4);
+            font-size: 13px; margin-bottom: 20px;
+        }
+        .confirm-detail {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px; padding: 16px;
+            margin-bottom: 20px;
+        }
+        .confirm-row {
+            display: flex; justify-content: space-between;
+            align-items: center; padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .confirm-row:last-child { border-bottom: none; }
+        .confirm-row span:first-child {
             color: rgba(255, 255, 255, 0.4);
+            font-size: 12px; font-weight: 500;
+        }
+        .confirm-row span:last-child {
+            color: #fff; font-size: 13px;
+            font-weight: 600; text-align: right;
+            max-width: 60%; word-break: break-all;
+        }
+        .confirm-row .accent { color: #10b981; }
+        .confirm-actions {
+            display: flex; gap: 10px;
+        }
+        .btn-confirm {
+            flex: 2; padding: 14px; border-radius: 12px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border: none; color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px; font-weight: 700;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .btn-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+        .btn-cancel {
+            flex: 1; padding: 14px; border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
         }
 
-        /* ===== SUCCESS STATE ===== */
-        .success-state {
-            display: none;
+        /* ===== SMS DOĞRULAMA ===== */
+        .sms-state {
+            display: none; animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
+        }
+        .sms-state.active { display: block; }
+        .sms-state .sms-icon {
+            width: 70px; height: 70px; margin: 0 auto 16px;
+            border-radius: 50%; background: rgba(16, 185, 129, 0.12);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            display: flex; align-items: center; justify-content: center;
+            animation: successPulse 2s ease-in-out infinite;
+        }
+        .sms-state .sms-icon i {
+            font-size: 30px; color: #10b981;
+        }
+        @keyframes successPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.1); }
+            50% { box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
+        }
+        .sms-state h3 {
+            color: #fff; font-size: 18px;
+            font-weight: 700; margin-bottom: 6px;
+        }
+        .sms-state .sms-sub {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px; margin-bottom: 4px;
+            line-height: 1.5;
+        }
+        .sms-state .sms-phone {
+            color: #10b981; font-weight: 600;
+            font-size: 13px; margin-bottom: 20px;
+            display: block;
+        }
+        .sms-inputs {
+            display: flex; gap: 8px;
+            justify-content: center; margin-bottom: 16px;
+        }
+        .sms-inputs input {
+            width: 44px; height: 54px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: #fff; font-size: 22px; font-weight: 700;
+            text-align: center; outline: none;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+        }
+        .sms-inputs input:focus {
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.08);
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .sms-inputs input.filled {
+            border-color: rgba(16, 185, 129, 0.4);
+            background: rgba(16, 185, 129, 0.08);
+        }
+        .sms-timer {
+            display: flex; align-items: center;
+            justify-content: center; gap: 8px;
+            margin-bottom: 16px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+        }
+        .sms-timer strong { color: #10b981; font-weight: 700; }
+        .sms-timer .resend {
+            color: #10b981; cursor: pointer;
+            font-weight: 600; transition: opacity 0.3s;
+        }
+        .sms-timer .resend:hover { opacity: 0.7; }
+        .btn-verify {
+            width: 100%; padding: 14px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border: none; border-radius: 12px;
+            color: #fff; font-family: 'Inter', sans-serif;
+            font-size: 14px; font-weight: 700;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .btn-verify:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+        .btn-verify:disabled {
+            opacity: 0.5; cursor: not-allowed;
+            transform: none; box-shadow: none;
+        }
+
+        /* ===== BAŞARI ===== */
+        .success-state {
+            display: none; text-align: center;
             padding: 20px 0 10px;
             animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .success-state.active {
-            display: block;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px) scale(0.96);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
+        .success-state.active { display: block; }
         .success-state .check-circle {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 16px;
-            border-radius: 50%;
+            width: 80px; height: 80px;
+            margin: 0 auto 16px; border-radius: 50%;
             background: rgba(16, 185, 129, 0.12);
             border: 2px solid rgba(16, 185, 129, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             animation: successPulse 2s ease-in-out infinite;
         }
-
         .success-state .check-circle i {
-            font-size: 36px;
-            color: #10b981;
+            font-size: 36px; color: #10b981;
             animation: checkPop 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         @keyframes checkPop {
-            0% {
-                transform: scale(0);
-            }
-            60% {
-                transform: scale(1.2);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(0); }
+            60% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
-
-        @keyframes successPulse {
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.1);
-            }
-            50% {
-                box-shadow: 0 0 0 20px rgba(16, 185, 129, 0);
-            }
-        }
-
         .success-state h2 {
-            color: #fff;
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 6px;
+            color: #fff; font-size: 22px;
+            font-weight: 700; margin-bottom: 6px;
         }
-
         .success-state .success-sub {
             color: rgba(255, 255, 255, 0.4);
-            font-size: 14px;
-            font-weight: 400;
+            font-size: 14px; font-weight: 400;
             margin-bottom: 4px;
         }
-
         .success-state .success-amount {
-            color: #10b981;
-            font-size: 28px;
-            font-weight: 800;
-            margin: 8px 0;
+            color: #10b981; font-size: 28px;
+            font-weight: 800; margin: 8px 0;
         }
-
         .success-state .success-detail {
             color: rgba(255, 255, 255, 0.3);
-            font-size: 13px;
-            line-height: 1.6;
-            max-width: 300px;
-            margin: 0 auto;
+            font-size: 13px; line-height: 1.6;
+            max-width: 320px; margin: 0 auto 16px;
         }
-
         .success-state .success-detail strong {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.6);
         }
-
+        .receipt-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 20px; border-radius: 10px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #10b981; font-family: 'Inter', sans-serif;
+            font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease;
+            margin-bottom: 12px;
+        }
+        .receipt-btn:hover {
+            background: rgba(16, 185, 129, 0.15);
+            transform: translateY(-2px);
+        }
         .success-state .timer-bar {
-            width: 100%;
-            height: 3px;
+            width: 100%; height: 3px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 3px;
-            margin: 18px auto 0;
-            overflow: hidden;
-            max-width: 250px;
+            border-radius: 3px; margin: 18px auto 0;
+            overflow: hidden; max-width: 250px;
         }
-
         .success-state .timer-bar .fill {
-            height: 100%;
-            width: 0%;
+            height: 100%; width: 0%;
             background: linear-gradient(90deg, #10b981, #34d399);
             border-radius: 3px;
             animation: fillBar 2s ease-in-out infinite alternate;
         }
-
         @keyframes fillBar {
-            0% {
-                width: 0%;
-            }
-            100% {
-                width: 100%;
-            }
+            0% { width: 0%; }
+            100% { width: 100%; }
         }
 
-        /* Loading Spinner */
+        /* ===== İŞLEM LOGU ===== */
+        .log-panel {
+            margin-top: 20px; padding: 12px 14px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            max-height: 100px; overflow-y: auto;
+            scrollbar-width: thin;
+        }
+        .log-panel::-webkit-scrollbar { width: 4px; }
+        .log-panel::-webkit-scrollbar-thumb {
+            background: rgba(16, 185, 129, 0.3); border-radius: 4px;
+        }
+        .log-line {
+            color: rgba(16, 185, 129, 0.6);
+            padding: 2px 0;
+            animation: logAppear 0.3s ease;
+        }
+        .log-line .time { color: rgba(255, 255, 255, 0.3); }
+        .log-line .ok { color: #10b981; }
+        .log-line .info { color: #60a5fa; }
+        @keyframes logAppear {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .log-panel-title {
+            display: flex; align-items: center; gap: 6px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 10px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .log-panel-title .dot-live {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: #10b981;
+            animation: blinkDot 1.5s ease-in-out infinite;
+        }
+
+        .form-area.hidden { display: none; }
+
+        /* ===== TOAST ===== */
+        .toast-container {
+            position: fixed; top: 20px; right: 20px;
+            z-index: 9999; display: flex;
+            flex-direction: column; gap: 10px;
+        }
+        .toast {
+            padding: 12px 16px; border-radius: 12px;
+            background: rgba(16, 185, 129, 0.95);
+            color: #fff; font-family: 'Inter', sans-serif;
+            font-size: 13px; font-weight: 600;
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: toastIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            max-width: 300px;
+        }
+        .toast.error {
+            background: rgba(239, 68, 68, 0.95);
+        }
+        .toast.info {
+            background: rgba(59, 130, 246, 0.95);
+        }
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateX(100%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ===== SPINNER ===== */
         .spinner {
-            display: none;
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid #fff;
+            display: none; width: 20px; height: 20px;
+            border: 2.5px solid rgba(255, 255, 255, 0.1);
+            border-top: 2.5px solid #fff;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
+        .spinner.active { display: inline-block; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .btn-text { display: inline; }
+        .btn-text.hidden { display: none; }
 
-        .spinner.active {
-            display: inline-block;
+        /* Kripto alanları */
+        .crypto-fields { display: none; }
+        .crypto-fields.active { display: block; }
+        .iban-fields { display: block; }
+        .iban-fields.hidden { display: none; }
+
+        /* Ağ seçici */
+        .network-selector {
+            display: flex; gap: 6px; margin-top: 8px;
         }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+        .network-chip {
+            flex: 1; padding: 8px 4px; border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.4);
+            font-family: 'Inter', sans-serif;
+            font-size: 10px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease;
+            display: flex; align-items: center; justify-content: center; gap: 4px;
         }
-
-        .btn-text {
-            display: inline;
+        .network-chip:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.7);
         }
-
-        .btn-text.hidden {
-            display: none;
+        .network-chip.active {
+            background: rgba(16, 185, 129, 0.12);
+            border-color: rgba(16, 185, 129, 0.4);
+            color: #10b981;
         }
+        .network-chip i { font-size: 12px; }
 
-        /* Hide form on success */
-        .form-area.hidden {
-            display: none;
-        }
-
-        /* Responsive */
         @media (max-width: 480px) {
-            .card {
-                padding: 28px 20px 24px;
-                border-radius: 20px;
-            }
-
-            .header .logo span {
-                font-size: 19px;
-            }
-
-            .form-group .input-wrap input {
-                font-size: 14px;
-                padding: 12px 14px;
-            }
-
-            .btn-submit {
-                font-size: 15px;
-                padding: 14px;
-            }
-
-            .success-state h2 {
-                font-size: 19px;
-            }
+            .card { padding: 28px 20px 24px; border-radius: 20px; }
+            .header .logo span { font-size: 19px; }
+            .form-group .input-wrap input { font-size: 14px; padding: 12px 14px; }
+            .btn-submit { font-size: 15px; padding: 14px; }
+            .success-state h2 { font-size: 19px; }
+            .sms-inputs input { width: 38px; height: 48px; font-size: 18px; }
+            .mode-btn { font-size: 11px; padding: 10px 4px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Background Animation -->
     <div class="bg-animation">
         <div class="orb"></div>
         <div class="orb"></div>
         <div class="orb"></div>
     </div>
 
-    <!-- Particles -->
     <div class="particles" id="particles"></div>
+
+    <div class="toast-container" id="toastContainer"></div>
 
     <div class="container">
         <div class="card">
 
-            <!-- Header -->
+            <!-- HEADER -->
             <div class="header">
                 <div class="logo">
                     <i class="fas fa-university"></i>
@@ -630,72 +752,240 @@
                     <i class="fas fa-shield-alt" style="margin-right:4px;font-size:10px;"></i>
                     Güvenli Transfer
                 </div>
-                <div class="subtitle">Resmi Banka Havale Sistemi</div>
+                <div class="subtitle">Resmi Banka Transfer Sistemi</div>
             </div>
 
-            <!-- Security Bar -->
+            <!-- MOD SEÇİCİ -->
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="iban" onclick="switchMode('iban')">
+                    <i class="fas fa-building-columns"></i> IBAN / Havale
+                </button>
+                <button class="mode-btn" data-mode="crypto" onclick="switchMode('crypto')">
+                    <i class="fab fa-bitcoin"></i> Kripto Transfer
+                </button>
+            </div>
+
+            <!-- KAYITLI ALICILAR -->
+            <div class="recipient-selector">
+                <div class="recipient-label">
+                    <span><i class="fas fa-star" style="margin-right:4px;color:#fbbf24;font-size:10px;"></i> Kayıtlı Alıcılar</span>
+                    <span class="add-new" onclick="showToast('Yeni alıcı ekleme yakında', 'info')">+ Yeni Ekle</span>
+                </div>
+                <div class="recipients-scroll" id="recipientsScroll">
+                    <div class="recipient-chip" onclick="selectRecipient('Ahmet Yılmaz', 'TR12 0006 4000 0011 2345 6789 01', 'AY')">
+                        <div class="avatar">AY</div>
+                        <div class="info">
+                            <strong>Ahmet Yılmaz</strong>
+                            <span>TR12 **** 6789</span>
+                        </div>
+                    </div>
+                    <div class="recipient-chip" onclick="selectRecipient('Zeynep Kaya', 'TR33 0006 1005 1978 6457 8413 26', 'ZK')">
+                        <div class="avatar" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">ZK</div>
+                        <div class="info">
+                            <strong>Zeynep Kaya</strong>
+                            <span>TR33 **** 8413</span>
+                        </div>
+                    </div>
+                    <div class="recipient-chip" onclick="selectRecipient('Mehmet Demir', 'TR45 0011 1000 0000 0011 2345 67', 'MD')">
+                        <div class="avatar" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">MD</div>
+                        <div class="info">
+                            <strong>Mehmet Demir</strong>
+                            <span>TR45 **** 2345</span>
+                        </div>
+                    </div>
+                    <div class="recipient-chip" onclick="selectCryptoRecipient('0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', 'ETH')">
+                        <div class="avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                            <i class="fab fa-ethereum" style="font-size:12px;"></i>
+                        </div>
+                        <div class="info">
+                            <strong>Binance Wallet</strong>
+                            <span>0x742d****0bEb</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECURITY BAR -->
             <div class="security-bar">
                 <i class="fas fa-lock"></i>
-                <span>256-bit SSL Şifreleme Aktif</span>
+                <span id="securityText">256-bit SSL Şifreleme Aktif</span>
                 <span class="dot"></span>
                 <i class="fas fa-check-circle" style="color:#10b981;font-size:12px;"></i>
             </div>
 
-            <!-- FORM -->
+            <!-- ===== FORM ===== -->
             <div class="form-area" id="formArea">
-                <div class="form-group">
-                    <label><i class="far fa-credit-card" style="margin-right:4px;"></i> IBAN</label>
-                    <div class="input-wrap">
-                        <span class="icon"><i class="fas fa-building-columns"></i></span>
-                        <input type="text" id="ibanInput" placeholder="TR00 0000 0000 0000 0000 0000 00" />
+
+                <!-- IBAN ALANLARI -->
+                <div class="iban-fields" id="ibanFields">
+                    <div class="form-group">
+                        <label><i class="far fa-credit-card" style="margin-right:4px;"></i> IBAN</label>
+                        <div class="input-wrap">
+                            <span class="icon"><i class="fas fa-building-columns"></i></span>
+                            <input type="text" id="ibanInput" placeholder="TR00 0000 0000 0000 0000 0000 00" maxlength="32" />
+                        </div>
+                        <div class="iban-status" id="ibanStatus">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Geçerli IBAN</span>
+                        </div>
+                        <div class="bank-detected" id="bankDetected">
+                            <i class="fas fa-university"></i>
+                            <span>Banka:</span> <strong id="bankName">-</strong>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="far fa-user" style="margin-right:4px;"></i> Alıcı Adı Soyadı</label>
+                        <div class="input-wrap">
+                            <span class="icon"><i class="fas fa-user"></i></span>
+                            <input type="text" id="nameInput" placeholder="Ahmet Yılmaz" />
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label><i class="far fa-user" style="margin-right:4px;"></i> Alıcı Adı Soyadı</label>
-                    <div class="input-wrap">
-                        <span class="icon"><i class="fas fa-user"></i></span>
-                        <input type="text" id="nameInput" placeholder="Ahmet Yılmaz" />
+                <!-- KRİPTO ALANLARI -->
+                <div class="crypto-fields" id="cryptoFields">
+                    <div class="form-group">
+                        <label><i class="fab fa-bitcoin" style="margin-right:4px;"></i> Cüzdan Adresi</label>
+                        <div class="input-wrap">
+                            <span class="icon"><i class="fas fa-wallet"></i></span>
+                            <input type="text" id="walletInput" placeholder="0x... veya bc1..." />
+                        </div>
+                        <div class="network-selector" id="networkSelector">
+                            <div class="network-chip active" data-network="TRC20" onclick="selectNetwork('TRC20')">
+                                <i class="fas fa-coins"></i> TRC20
+                            </div>
+                            <div class="network-chip" data-network="ERC20" onclick="selectNetwork('ERC20')">
+                                <i class="fab fa-ethereum"></i> ERC20
+                            </div>
+                            <div class="network-chip" data-network="BEP20" onclick="selectNetwork('BEP20')">
+                                <i class="fas fa-cube"></i> BEP20
+                            </div>
+                            <div class="network-chip" data-network="BTC" onclick="selectNetwork('BTC')">
+                                <i class="fab fa-bitcoin"></i> BTC
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="far fa-user" style="margin-right:4px;"></i> Alıcı Adı</label>
+                        <div class="input-wrap">
+                            <span class="icon"><i class="fas fa-user"></i></span>
+                            <input type="text" id="cryptoNameInput" placeholder="Cüzdan Sahibi" />
+                        </div>
                     </div>
                 </div>
 
+                <!-- TUTAR (Her iki modda ortak) -->
                 <div class="form-group">
                     <label><i class="fas fa-coins" style="margin-right:4px;"></i> Gönderilecek Tutar</label>
                     <div class="input-wrap">
-                        <span class="icon"><i class="fas fa-turkish-lira-sign"></i></span>
+                        <span class="icon"><i class="fas fa-turkish-lira-sign" id="currencyIcon"></i></span>
                         <input type="text" id="amountInput" placeholder="1.000,00" />
-                        <span class="currency">TRY</span>
+                        <span class="currency" id="currencyLabel">TRY</span>
+                    </div>
+                    <div class="quick-amounts">
+                        <button onclick="setAmount(100)">100 ₺</button>
+                        <button onclick="setAmount(500)">500 ₺</button>
+                        <button onclick="setAmount(1000)">1.000 ₺</button>
+                        <button onclick="setAmount(5000)">5.000 ₺</button>
+                    </div>
+                    <div class="fee-info">
+                        <span>İşlem Ücreti</span>
+                        <strong class="free" id="feeAmount">Ücretsiz</strong>
+                    </div>
+                </div>
+
+                <!-- LİMİT -->
+                <div class="limit-info">
+                    <div class="limit-row">
+                        <span>Günlük İşlem Limiti</span>
+                        <span id="limitText">4.500 / 10.000 ₺</span>
+                    </div>
+                    <div class="limit-progress">
+                        <div class="fill" id="limitFill" style="width: 45%"></div>
                     </div>
                 </div>
 
                 <button class="btn-submit" id="submitBtn">
                     <span class="btn-content">
-                        <span class="btn-text" id="btnText">Gönder</span>
+                        <span class="btn-text" id="btnText">Devam Et</span>
                         <span class="spinner" id="btnSpinner"></span>
                         <i class="fas fa-arrow-right" id="btnIcon"></i>
                     </span>
                 </button>
+
+                <!-- İŞLEM LOGU -->
+                <div class="log-panel" id="logPanel">
+                    <div class="log-panel-title">
+                        <div class="dot-live"></div>
+                        İşlem Kayıtları
+                    </div>
+                    <div id="logContent">
+                        <div class="log-line"><span class="time">[SİSTEM]</span> <span class="ok">Bağlantı kuruldu - SSL/TLS 1.3</span></div>
+                    </div>
+                </div>
             </div>
 
-            <!-- SUCCESS STATE -->
+            <!-- ===== ONAY ADIMI ===== -->
+            <div class="confirm-state" id="confirmState">
+                <div class="confirm-title">İşlemi Onaylayın</div>
+                <div class="confirm-sub">Bilgilerinizi kontrol edin</div>
+
+                <div class="confirm-detail" id="confirmDetail">
+                    <!-- Dinamik doldurulur -->
+                </div>
+
+                <div class="confirm-actions">
+                    <button class="btn-cancel" onclick="goBack()">İptal</button>
+                    <button class="btn-confirm" id="confirmBtn">Onayla ve Gönder</button>
+                </div>
+            </div>
+
+            <!-- ===== SMS DOĞRULAMA ===== -->
+            <div class="sms-state" id="smsState">
+                <div class="sms-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>SMS Doğrulama</h3>
+                <div class="sms-sub">Kayıtlı telefon numaranıza gönderilen 6 haneli kodu girin</div>
+                <span class="sms-phone">+90 5** *** ** 45</span>
+
+                <div class="sms-inputs" id="smsInputs">
+                    <input type="text" maxlength="1" inputmode="numeric" />
+                    <input type="text" maxlength="1" inputmode="numeric" />
+                    <input type="text" maxlength="1" inputmode="numeric" />
+                    <input type="text" maxlength="1" inputmode="numeric" />
+                    <input type="text" maxlength="1" inputmode="numeric" />
+                    <input type="text" maxlength="1" inputmode="numeric" />
+                </div>
+
+                <div class="sms-timer">
+                    Kalan süre: <strong id="smsCountdown">02:59</strong>
+                    <span class="resend" onclick="resendSms()">Tekrar Gönder</span>
+                </div>
+
+                <button class="btn-verify" id="verifyBtn" disabled>Doğrula ve Gönder</button>
+            </div>
+
+            <!-- ===== BAŞARI ===== -->
             <div class="success-state" id="successState">
                 <div class="check-circle">
                     <i class="fas fa-check"></i>
                 </div>
-                <h2>✓ İşlem Alındı</h2>
-                <div class="success-sub">Paranız işleme alındı</div>
+                <h2 id="successTitle">✓ İşlem Alındı</h2>
+                <div class="success-sub" id="successSub">Paranız işleme alındı</div>
                 <div class="success-amount" id="displayAmount">0,00 ₺</div>
-                <div class="success-detail">
-                    <strong id="displayName">Ahmet Yılmaz</strong> adlı kişiye
-                    <strong id="displayIban">TR00 0000 0000 0000 0000 0000 00</strong>
-                    IBAN'ına gönderiminiz <strong>Fast</strong> şekilde işleme alınmıştır.
-                    <br /><br />
-                    2-5 dk içinde hesabınıza yansıtılacaktır.
+                <div class="success-detail" id="successDetail">
+                    <!-- Dinamik -->
                 </div>
+                <button class="receipt-btn" onclick="downloadReceipt()">
+                    <i class="fas fa-file-pdf"></i> Makbuz İndir
+                </button>
                 <div class="timer-bar"><div class="fill"></div></div>
             </div>
 
-            <!-- Footer -->
+            <!-- FOOTER -->
             <div class="footer">
                 <span>© 2026 FinBank | </span>
                 <a href="#" onclick="event.preventDefault();">Gizlilik Politikası</a>
@@ -707,7 +997,7 @@
     </div>
 
     <script>
-        // ===== PARTICLES =====
+        // ==================== PARTICLES ====================
         (function createParticles() {
             const container = document.getElementById('particles');
             for (let i = 0; i < 40; i++) {
@@ -721,21 +1011,255 @@
             }
         })();
 
-        // ===== DOM REFS =====
+        // ==================== DOM ====================
         const formArea = document.getElementById('formArea');
+        const confirmState = document.getElementById('confirmState');
+        const smsState = document.getElementById('smsState');
         const successState = document.getElementById('successState');
+        
         const ibanInput = document.getElementById('ibanInput');
         const nameInput = document.getElementById('nameInput');
         const amountInput = document.getElementById('amountInput');
+        const walletInput = document.getElementById('walletInput');
+        const cryptoNameInput = document.getElementById('cryptoNameInput');
+        
         const submitBtn = document.getElementById('submitBtn');
         const btnText = document.getElementById('btnText');
         const btnSpinner = document.getElementById('btnSpinner');
         const btnIcon = document.getElementById('btnIcon');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const verifyBtn = document.getElementById('verifyBtn');
+        
+        const ibanStatus = document.getElementById('ibanStatus');
+        const bankDetected = document.getElementById('bankDetected');
+        const bankName = document.getElementById('bankName');
+        const currencyIcon = document.getElementById('currencyIcon');
+        const currencyLabel = document.getElementById('currencyLabel');
+        const feeAmount = document.getElementById('feeAmount');
+        const logContent = document.getElementById('logContent');
+        const confirmDetail = document.getElementById('confirmDetail');
         const displayAmount = document.getElementById('displayAmount');
-        const displayName = document.getElementById('displayName');
-        const displayIban = document.getElementById('displayIban');
+        const successDetail = document.getElementById('successDetail');
+        const successTitle = document.getElementById('successTitle');
+        const successSub = document.getElementById('successSub');
+        const limitFill = document.getElementById('limitFill');
+        const limitText = document.getElementById('limitText');
 
-        // ===== RIPPLE EFFECT =====
+        // ==================== STATE ====================
+        let currentMode = 'iban';
+        let currentNetwork = 'TRC20';
+        let transferData = {};
+        let limitUsed = 4500;
+        const limitMax = 10000;
+
+        // ==================== BANKALAR ====================
+        const BANKS = {
+            "00010": "Ziraat Bankası", "00012": "Halkbank", "00015": "Vakıfbank",
+            "00046": "Akbank", "00059": "Şekerbank", "00062": "Garanti BBVA",
+            "00064": "İş Bankası", "00067": "Yapı Kredi", "00092": "Denizbank",
+            "00103": "ING Bank", "00111": "Finansbank", "00123": "HSBC",
+            "00134": "TEB", "00135": "Anadolubank", "00143": "Odeabank",
+            "00146": "Kuveyt Türk", "00203": "Albaraka Türk", "00205": "Türkiye Finans",
+            "00109": "ICBC Turkey", "00115": "QNB Finansbank", "00123": "HSBC Turkey",
+            "00129": "Alternatif Bank", "00132": "Burgan Bank", "00138": "Diler Yatırım",
+            "00139": "Bank of China", "00141": "Aktif Yatırım", "00142": "Fibabanka"
+        };
+
+        // ==================== LOG ====================
+        function addLog(message, type = 'ok') {
+            const time = new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const line = document.createElement('div');
+            line.className = 'log-line';
+            line.innerHTML = `<span class="time">[${time}]</span> <span class="${type}">${message}</span>`;
+            logContent.appendChild(line);
+            logContent.parentElement.scrollTop = logContent.parentElement.scrollHeight;
+            
+            // Max 20 satır tut
+            while (logContent.children.length > 20) {
+                logContent.removeChild(logContent.firstChild);
+            }
+        }
+
+        // ==================== TOAST ====================
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'error' ? 'exclamation-circle' : type === 'info' ? 'info-circle' : 'check-circle';
+            toast.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // ==================== IBAN DOĞRULAMA ====================
+        function validateIBAN(iban) {
+            iban = iban.replace(/\s/g, '').toUpperCase();
+            if (!/^TR\d{24}$/.test(iban)) return false;
+            
+            const rearranged = iban.slice(4) + iban.slice(0, 4);
+            const numeric = rearranged.replace(/[A-Z]/g, c => c.charCodeAt(0) - 55);
+            
+            let remainder = 0;
+            for (let i = 0; i < numeric.length; i++) {
+                remainder = (remainder * 10 + parseInt(numeric[i])) % 97;
+            }
+            return remainder === 1;
+        }
+
+        // ==================== IBAN FORMAT ====================
+        ibanInput.addEventListener('input', function() {
+            let val = this.value.replace(/\s/g, '').toUpperCase();
+            val = val.replace(/[^A-Z0-9]/g, '');
+            let formatted = '';
+            for (let i = 0; i < val.length; i++) {
+                if (i > 0 && i % 4 === 0) formatted += ' ';
+                formatted += val[i];
+            }
+            this.value = formatted;
+            
+            // Doğrulama
+            const cleanIban = val;
+            if (cleanIban.length >= 26) {
+                if (validateIBAN(cleanIban)) {
+                    ibanStatus.className = 'iban-status visible valid';
+                    ibanStatus.innerHTML = '<i class="fas fa-check-circle"></i><span>Geçerli IBAN</span>';
+                    addLog('IBAN doğrulandı', 'ok');
+                    
+                    // Banka tespiti
+                    const bankCode = cleanIban.slice(4, 9);
+                    const detectedBank = BANKS[bankCode] || 'Bilinmiyor';
+                    bankName.textContent = detectedBank;
+                    bankDetected.classList.add('visible');
+                } else {
+                    ibanStatus.className = 'iban-status visible invalid';
+                    ibanStatus.innerHTML = '<i class="fas fa-times-circle"></i><span>Geçersiz IBAN</span>';
+                    bankDetected.classList.remove('visible');
+                }
+            } else {
+                ibanStatus.classList.remove('visible');
+                bankDetected.classList.remove('visible');
+            }
+        });
+
+        // ==================== MOD DEĞİŞTİR ====================
+        function switchMode(mode) {
+            currentMode = mode;
+            
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.mode === mode);
+            });
+            
+            const ibanFields = document.getElementById('ibanFields');
+            const cryptoFields = document.getElementById('cryptoFields');
+            
+            if (mode === 'iban') {
+                ibanFields.classList.remove('hidden');
+                cryptoFields.classList.remove('active');
+                currencyIcon.className = 'fas fa-turkish-lira-sign';
+                currencyLabel.textContent = 'TRY';
+                amountInput.placeholder = '1.000,00';
+                addLog('IBAN/Havale modu aktif', 'info');
+            } else {
+                ibanFields.classList.add('hidden');
+                cryptoFields.classList.add('active');
+                currencyIcon.className = 'fas fa-dollar-sign';
+                currencyLabel.textContent = 'USDT';
+                amountInput.placeholder = '100,00';
+                addLog('Kripto transfer modu aktif', 'info');
+            }
+            showToast(mode === 'iban' ? 'IBAN Modu' : 'Kripto Modu', 'info');
+        }
+
+        // ==================== AĞ SEÇİMİ ====================
+        function selectNetwork(network) {
+            currentNetwork = network;
+            document.querySelectorAll('.network-chip').forEach(chip => {
+                chip.classList.toggle('active', chip.dataset.network === network);
+            });
+            addLog(`Ağ seçildi: ${network}`, 'info');
+        }
+
+        // ==================== KAYITLI ALICI ====================
+        function selectRecipient(name, iban, initials) {
+            switchMode('iban');
+            nameInput.value = name;
+            ibanInput.value = iban;
+            ibanInput.dispatchEvent(new Event('input'));
+            
+            document.querySelectorAll('.recipient-chip').forEach(chip => chip.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            addLog(`Alıcı seçildi: ${name}`, 'ok');
+            showToast(`Alıcı seçildi: ${name}`);
+        }
+
+        function selectCryptoRecipient(address, network) {
+            switchMode('crypto');
+            walletInput.value = address;
+            selectNetwork(network);
+            
+            document.querySelectorAll('.recipient-chip').forEach(chip => chip.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            addLog(`Kripto alıcı seçildi: ${network}`, 'ok');
+            showToast(`Kripto cüzdan seçildi`);
+        }
+
+        // ==================== TUTAR ====================
+        function setAmount(amount) {
+            amountInput.value = amount.toLocaleString('tr-TR');
+            updateFee();
+            addLog(`Tutar seçildi: ${amount}`, 'info');
+        }
+
+        amountInput.addEventListener('input', function() {
+            let val = this.value.replace(/[^0-9,]/g, '');
+            this.value = val;
+            updateFee();
+        });
+
+        function updateFee() {
+            const amount = parseFloat(amountInput.value.replace(/\./g, '').replace(',', '.')) || 0;
+            
+            if (currentMode === 'crypto') {
+                feeAmount.textContent = '0.5 USDT';
+                feeAmount.classList.remove('free');
+                return;
+            }
+            
+            if (amount <= 1000) {
+                feeAmount.textContent = 'Ücretsiz';
+                feeAmount.classList.add('free');
+            } else if (amount <= 5000) {
+                const fee = amount * 0.001;
+                feeAmount.textContent = fee.toFixed(2) + ' ₺';
+                feeAmount.classList.remove('free');
+            } else {
+                const fee = amount * 0.002;
+                feeAmount.textContent = fee.toFixed(2) + ' ₺';
+                feeAmount.classList.remove('free');
+            }
+        }
+
+        // ==================== LİMİT ====================
+        function updateLimit() {
+            const amount = parseFloat(amountInput.value.replace(/\./g, '').replace(',', '.')) || 0;
+            const newUsed = Math.min(limitUsed + amount, limitMax);
+            const percent = (newUsed / limitMax) * 100;
+            limitFill.style.width = Math.min(percent, 100) + '%';
+            
+            if (currentMode === 'crypto') {
+                limitText.textContent = `${(newUsed / 1000).toFixed(1)}K / 10K USDT`;
+            } else {
+                limitText.textContent = `${newUsed.toLocaleString('tr-TR')} / ${limitMax.toLocaleString('tr-TR')} ₺`;
+            }
+        }
+
+        // ==================== SUBMIT ====================
         submitBtn.addEventListener('click', function(e) {
             const rect = this.getBoundingClientRect();
             const ripple = document.createElement('span');
@@ -748,80 +1272,354 @@
             setTimeout(() => ripple.remove(), 600);
         });
 
-        // ===== SUBMIT =====
-        submitBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            const iban = ibanInput.value.trim() || 'TR00 0000 0000 0000 0000 0000 00';
-            const name = nameInput.value.trim() || 'Ahmet Yılmaz';
-            const amount = amountInput.value.trim() || '1.000,00';
-
-            // BUTON LOADING
+        submitBtn.addEventListener('click', function() {
+            // Validasyon
+            let valid = true;
+            let data = { mode: currentMode };
+            
+            if (currentMode === 'iban') {
+                const iban = ibanInput.value.replace(/\s/g, '');
+                const name = nameInput.value.trim();
+                const amount = amountInput.value.trim();
+                
+                if (!validateIBAN(iban)) {
+                    showToast('Geçerli bir IBAN girin', 'error');
+                    valid = false;
+                } else if (!name) {
+                    showToast('Alıcı adı gerekli', 'error');
+                    valid = false;
+                } else if (!amount) {
+                    showToast('Tutar gerekli', 'error');
+                    valid = false;
+                } else {
+                    data.iban = ibanInput.value;
+                    data.name = name;
+                    data.amount = amount;
+                    data.currency = 'TRY';
+                }
+            } else {
+                const wallet = walletInput.value.trim();
+                const name = cryptoNameInput.value.trim() || 'Cüzdan Sahibi';
+                const amount = amountInput.value.trim();
+                
+                if (!wallet) {
+                    showToast('Cüzdan adresi gerekli', 'error');
+                    valid = false;
+                } else if (!amount) {
+                    showToast('Tutar gerekli', 'error');
+                    valid = false;
+                } else {
+                    data.wallet = wallet;
+                    data.name = name;
+                    data.amount = amount;
+                    data.currency = 'USDT';
+                    data.network = currentNetwork;
+                }
+            }
+            
+            if (!valid) return;
+            
+            transferData = data;
+            
+            // Loading
             btnText.classList.add('hidden');
             btnSpinner.classList.add('active');
             btnIcon.style.display = 'none';
             submitBtn.disabled = true;
-            submitBtn.style.opacity = '0.8';
-
-            // Simulate processing
+            
+            addLog('İşlem hazırlanıyor...', 'info');
+            
             setTimeout(() => {
-                // Show success
-                formArea.classList.add('hidden');
-                successState.classList.add('active');
-
-                // Fill success data
-                displayAmount.textContent = amount + ' ₺';
-                displayName.textContent = name;
-                displayIban.textContent = iban;
-
-                // Reset button
                 btnText.classList.remove('hidden');
                 btnSpinner.classList.remove('active');
                 btnIcon.style.display = 'inline';
                 submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
-
-                // Play success sound vibe
-                const checkCircle = document.querySelector('.check-circle i');
-                checkCircle.style.animation = 'none';
-                setTimeout(() => {
-                    checkCircle.style.animation = 'checkPop 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-                }, 10);
-
-                // Reset after 15s? No, user sees success.
-            }, 2800);
+                
+                // Onay ekranına geç
+                showConfirm();
+            }, 1200);
         });
 
-        // ===== KEYBOARD ENTER =====
-        document.querySelectorAll('input').forEach(inp => {
-            inp.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') submitBtn.click();
+        // ==================== ONAY EKRANI ====================
+        function showConfirm() {
+            formArea.classList.add('hidden');
+            smsState.classList.remove('active');
+            successState.classList.remove('active');
+            confirmState.classList.add('active');
+            
+            // Onay detaylarını doldur
+            let html = '';
+            
+            if (currentMode === 'iban') {
+                html = `
+                    <div class="confirm-row">
+                        <span>Alıcı</span>
+                        <span>${transferData.name}</span>
+                    </div>
+                    <div class="confirm-row">
+                        <span>IBAN</span>
+                        <span>${transferData.iban}</span>
+                    </div>
+                    <div class="confirm-row">
+                        <span>Banka</span>
+                        <span>${bankName.textContent}</span>
+                    </div>
+                    <div class="confirm-row">
+                        <span>Tutar</span>
+                        <span class="accent">${transferData.amount} ₺</span>
+                    </div>
+                    <div class="confirm-row">
+                        <span>İşlem Ücreti</span>
+                        <span>${feeAmount.textContent}</span>
+                    </div>
+                `;
+            } else {
+                html = `
+                    <div class="confirm-row">
+                        <span>Alıcı</span>
+                        <span>${transferData.name}</span>
+                    </div>
+                    <div class="confirm-row">
+                        <span>Cüzdan</span>
+                        <span>${transferData.wallet.substring(0, 20)}...${transferData.wallet.slice(-6)}</span>
+                    </div>
+                    <div class="confirm-row">
+                        <span>Ağ</span>
+                        <span>${transferData.network}</span>
+                    </div>
+                    <div class="confirm-row">
+                        <span>Tutar</span>
+                        <span class="accent">${transferData.amount} USDT</span>
+                    </div>
+                    <div class="confirm-row">
+                        <span>Ağ Ücreti</span>
+                        <span>0.5 USDT</span>
+                    </div>
+                `;
+            }
+            
+            confirmDetail.innerHTML = html;
+            addLog('Onay bekleniyor...', 'info');
+        }
+
+        // ==================== ONAY BUTONU ====================
+        confirmBtn.addEventListener('click', function() {
+            confirmState.classList.remove('active');
+            showSms();
+        });
+
+        // ==================== GERİ ====================
+        function goBack() {
+            confirmState.classList.remove('active');
+            smsState.classList.remove('active');
+            formArea.classList.remove('hidden');
+            addLog('İşlem iptal edildi', 'info');
+            showToast('İşlem iptal edildi', 'info');
+        }
+
+        // ==================== SMS ====================
+        function showSms() {
+            smsState.classList.add('active');
+            formArea.classList.add('hidden');
+            
+            // SMS inputları sıfırla
+            document.querySelectorAll('.sms-inputs input').forEach(inp => {
+                inp.value = '';
+                inp.classList.remove('filled');
+            });
+            verifyBtn.disabled = true;
+            
+            addLog('SMS doğrulama kodu gönderildi', 'info');
+            showToast('SMS kodu gönderildi');
+            
+            // İlk inputa focus
+            setTimeout(() => {
+                document.querySelector('.sms-inputs input').focus();
+            }, 300);
+            
+            // Countdown
+            startSmsCountdown();
+        }
+
+        // SMS Input davranışı
+        document.querySelectorAll('.sms-inputs input').forEach((input, idx) => {
+            input.addEventListener('input', function(e) {
+                const val = this.value.replace(/[^0-9]/g, '');
+                this.value = val;
+                
+                if (val) {
+                    this.classList.add('filled');
+                    // Sonraki inputa geç
+                    const inputs = document.querySelectorAll('.sms-inputs input');
+                    if (idx < inputs.length - 1) {
+                        inputs[idx + 1].focus();
+                    }
+                } else {
+                    this.classList.remove('filled');
+                }
+                
+                checkSmsComplete();
+            });
+            
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && !this.value) {
+                    const inputs = document.querySelectorAll('.sms-inputs input');
+                    if (idx > 0) {
+                        inputs[idx - 1].focus();
+                    }
+                }
             });
         });
 
-        // ===== AUTO FORMAT IBAN (basic) =====
-        ibanInput.addEventListener('input', function(e) {
-            let val = this.value.replace(/\s/g, '').toUpperCase();
-            // Just uppercase and trim spaces
-            let formatted = '';
-            for (let i = 0; i < val.length; i++) {
-                if (i > 0 && i % 4 === 0) formatted += ' ';
-                formatted += val[i];
+        function checkSmsComplete() {
+            const inputs = document.querySelectorAll('.sms-inputs input');
+            const allFilled = Array.from(inputs).every(inp => inp.value.length === 1);
+            verifyBtn.disabled = !allFilled;
+            
+            if (allFilled) {
+                addLog('Kod girildi, doğrulanıyor...', 'info');
             }
-            if (formatted !== this.value) {
-                this.value = formatted;
-            }
+        }
+
+        let smsTimer = null;
+        function startSmsCountdown() {
+            let seconds = 179; // 2:59
+            if (smsTimer) clearInterval(smsTimer);
+            
+            smsTimer = setInterval(() => {
+                seconds--;
+                const m = Math.floor(seconds / 60);
+                const s = seconds % 60;
+                document.getElementById('smsCountdown').textContent = 
+                    `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+                
+                if (seconds <= 0) {
+                    clearInterval(smsTimer);
+                    document.getElementById('smsCountdown').textContent = '00:00';
+                }
+            }, 1000);
+        }
+
+        function resendSms() {
+            showToast('Yeni kod gönderildi');
+            addLog('SMS kodu yeniden gönderildi', 'info');
+            startSmsCountdown();
+        }
+
+        // ==================== DOĞRULA VE GÖNDER ====================
+        verifyBtn.addEventListener('click', function() {
+            verifyBtn.disabled = true;
+            verifyBtn.textContent = 'Doğrulanıyor...';
+            addLog('Kod doğrulanıyor...', 'info');
+            
+            setTimeout(() => {
+                addLog('Doğrulama başarılı', 'ok');
+                addLog('İşlem gönderiliyor...', 'info');
+                
+                verifyBtn.textContent = 'Doğrula ve Gönder';
+                
+                setTimeout(() => {
+                    showSuccess();
+                }, 1000);
+            }, 1500);
         });
 
-        // ===== AMOUNT FORMAT (basic) =====
-        amountInput.addEventListener('input', function(e) {
-            let val = this.value.replace(/[^0-9,]/g, '');
-            // allow only numbers and comma
-            this.value = val;
-        });
+        // ==================== BAŞARI ====================
+        function showSuccess() {
+            smsState.classList.remove('active');
+            successState.classList.add('active');
+            
+            const amount = transferData.amount;
+            
+            if (currentMode === 'iban') {
+                displayAmount.textContent = amount + ' ₺';
+                successTitle.textContent = '✓ İşlem Alındı';
+                successSub.textContent = 'Paranız işleme alındı';
+                successDetail.innerHTML = `
+                    <strong>${transferData.name}</strong> adlı kişiye
+                    <strong>${transferData.iban.substring(0, 8)}...${transferData.iban.slice(-4)}</strong>
+                    IBAN'ına gönderiminiz <strong>FAST</strong> şekilde işleme alınmıştır.
+                    <br><br>
+                    2-5 dk içinde hesabınıza yansıtılacaktır.
+                `;
+            } else {
+                displayAmount.textContent = amount + ' USDT';
+                successTitle.textContent = '✓ Transfer Başlatıldı';
+                successSub.textContent = 'Kripto transferiniz işleniyor';
+                successDetail.innerHTML = `
+                    <strong>${transferData.network}</strong> ağı üzerinden
+                    <strong>${transferData.wallet.substring(0, 10)}...${transferData.wallet.slice(-6)}</strong>
+                    adresine transfer başlatıldı.
+                    <br><br>
+                    Ağ onayı bekleniyor. Ortalama süre: <strong>1-3 dakika</strong>
+                `;
+            }
+            
+            addLog('İşlem başarıyla tamamlandı', 'ok');
+            showToast('İşlem başarıyla tamamlandı!');
+            
+            updateLimit();
+        }
 
-        console.log('💎 FinBank | Resmi Havale Sistemi');
-        console.log('📌 Tüm işlemler simüle edilmiştir.');
+        // ==================== MAKBUZ ====================
+        function downloadReceipt() {
+            const receipt = {
+                tarih: new Date().toLocaleString('tr-TR'),
+                islem_no: 'TRX' + Date.now(),
+                mod: currentMode === 'iban' ? 'IBAN/Havale' : 'Kripto Transfer',
+                alici: transferData.name,
+                hesap: currentMode === 'iban' ? transferData.iban : transferData.wallet,
+                ag: currentMode === 'iban' ? bankName.textContent : transferData.network,
+                tutar: transferData.amount + ' ' + (currentMode === 'iban' ? 'TRY' : 'USDT'),
+                durum: 'Başarılı',
+                banka: 'FinBank A.Ş.'
+            };
+            
+            const text = `
+╔══════════════════════════════════════════════╗
+║           FİNBANK İŞLEM MAKBUZU              ║
+╚══════════════════════════════════════════════╝
+
+İşlem No      : ${receipt.islem_no}
+Tarih         : ${receipt.tarih}
+İşlem Tipi    : ${receipt.mod}
+Durum         : ${receipt.durum}
+
+─────────────────────────────────────────────
+ALICI BİLGİLERİ
+─────────────────────────────────────────────
+Alıcı         : ${receipt.alici}
+${currentMode === 'iban' ? 'IBAN' : 'Cüzdan'}          : ${receipt.hesap}
+${currentMode === 'iban' ? 'Banka' : 'Ağ'}         : ${receipt.ag}
+
+─────────────────────────────────────────────
+TUTAR
+─────────────────────────────────────────────
+Gönderilen    : ${receipt.tutar}
+
+─────────────────────────────────────────────
+Bu makbuz bilgilendirme amaçlıdır.
+FinBank A.Ş. - Tüm hakları saklıdır.
+İletişim: 0850 000 00 00
+            `;
+            
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `FinBank_Makbuz_${receipt.islem_no}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showToast('Makbuz indirildi');
+            addLog('Makbuz oluşturuldu', 'ok');
+        }
+
+        // ==================== INIT ====================
+        setTimeout(() => addLog('Sistem hazır - İşlem bekleniyor', 'ok'), 500);
+        setTimeout(() => addLog('Güvenli bağlantı aktif', 'info'), 1500);
+
+        console.log('💎 FinBank | Resmi Transfer Sistemi v2.0');
     </script>
 </body>
 </html>
