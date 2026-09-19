@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FinBank | Güvenli Transfer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', sans-serif;
+            /* #13 - Daha gerçekçi banka fontu */
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -22,6 +24,15 @@
                 radial-gradient(ellipse at 50% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 70%);
             padding: 20px;
             overflow-x: hidden;
+            transition: background 0.6s ease;
+        }
+
+        /* #25 - İşlem sırasında arka plan değişimi */
+        body.processing {
+            background: #1a0a0e;
+            background-image:
+                radial-gradient(ellipse at 10% 20%, rgba(239, 68, 68, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 80%, rgba(220, 38, 38, 0.08) 0%, transparent 50%);
         }
 
         .bg-animation {
@@ -31,6 +42,7 @@
         .bg-animation .orb {
             position: absolute; border-radius: 50%; filter: blur(80px);
             opacity: 0.4; animation: floatOrb 8s ease-in-out infinite;
+            transition: background 0.6s ease;
         }
         .bg-animation .orb:nth-child(1) {
             width: 400px; height: 400px; background: rgba(16, 185, 129, 0.15);
@@ -44,6 +56,9 @@
             width: 200px; height: 200px; background: rgba(16, 185, 129, 0.10);
             top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -5s;
         }
+        body.processing .bg-animation .orb:nth-child(1) { background: rgba(239, 68, 68, 0.15); }
+        body.processing .bg-animation .orb:nth-child(2) { background: rgba(220, 38, 38, 0.12); }
+        body.processing .bg-animation .orb:nth-child(3) { background: rgba(239, 68, 68, 0.10); }
         @keyframes floatOrb {
             0%, 100% { transform: translate(0, 0) scale(1); }
             33% { transform: translate(30px, -30px) scale(1.1); }
@@ -58,7 +73,9 @@
             position: absolute; width: 2px; height: 2px;
             background: rgba(16, 185, 129, 0.3); border-radius: 50%;
             animation: floatParticle 15s linear infinite;
+            transition: background 0.6s ease;
         }
+        body.processing .particle { background: rgba(239, 68, 68, 0.3); }
         @keyframes floatParticle {
             0% { transform: translateY(100vh) scale(0); opacity: 0; }
             10%, 90% { opacity: 1; }
@@ -80,7 +97,41 @@
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
-        .header { text-align: center; margin-bottom: 24px; }
+        .header { text-align: center; margin-bottom: 24px; position: relative; }
+
+        /* #17 - Bildirim Zili */
+        .notification-bell {
+            position: absolute;
+            top: 0; right: 0;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px;
+        }
+        .notification-bell:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: #10b981;
+        }
+        .notification-bell .badge-dot {
+            position: absolute;
+            top: -2px; right: -2px;
+            min-width: 16px; height: 16px;
+            padding: 0 4px;
+            background: #ef4444;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid #0a0e1a;
+        }
+
         .header .logo {
             display: inline-flex; align-items: center; gap: 10px; margin-bottom: 8px;
         }
@@ -111,7 +162,6 @@
             margin-top: 6px; font-weight: 400; letter-spacing: 0.3px;
         }
 
-        /* ===== MOD SEÇİCİ ===== */
         .mode-selector {
             display: flex; gap: 8px; background: rgba(255, 255, 255, 0.03);
             padding: 4px; border-radius: 14px;
@@ -122,7 +172,7 @@
             flex: 1; padding: 12px 8px; border-radius: 10px;
             border: none; background: transparent;
             color: rgba(255, 255, 255, 0.4);
-            font-family: 'Inter', sans-serif; font-size: 13px;
+            font-family: inherit; font-size: 13px;
             font-weight: 600; cursor: pointer;
             transition: all 0.3s ease;
             display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -135,10 +185,7 @@
         }
         .mode-btn:hover:not(.active) { color: rgba(255, 255, 255, 0.7); }
 
-        /* ===== AKTİF ALICI (Kayıtlı) ===== */
-        .recipient-selector {
-            margin-bottom: 18px;
-        }
+        .recipient-selector { margin-bottom: 18px; }
         .recipient-label {
             display: flex; align-items: center; justify-content: space-between;
             color: rgba(255, 255, 255, 0.6); font-size: 12px;
@@ -210,7 +257,6 @@
             50% { opacity: 0.2; }
         }
 
-        /* ===== FORM ===== */
         .form-area { transition: opacity 0.3s ease; }
         .form-group { margin-bottom: 18px; }
         .form-group label {
@@ -238,7 +284,7 @@
             width: 100%; padding: 14px 16px; background: transparent;
             border: none; outline: none; color: #fff;
             font-size: 15px; font-weight: 500;
-            font-family: 'Inter', sans-serif; letter-spacing: 0.3px;
+            font-family: inherit; letter-spacing: 0.3px;
         }
         .form-group .input-wrap input::placeholder {
             color: rgba(255, 255, 255, 0.2); font-weight: 400; font-size: 14px;
@@ -248,7 +294,6 @@
             font-size: 14px; font-weight: 600;
         }
 
-        /* IBAN doğrulama göstergesi */
         .iban-status {
             display: none; align-items: center; gap: 6px;
             margin-top: 6px; font-size: 11px;
@@ -259,7 +304,6 @@
         .iban-status.invalid { color: #ef4444; }
         .iban-status i { font-size: 12px; }
 
-        /* Banka tespiti */
         .bank-detected {
             display: none; margin-top: 6px;
             padding: 8px 12px; border-radius: 10px;
@@ -272,7 +316,6 @@
         .bank-detected i { font-size: 14px; }
         .bank-detected strong { color: #fff; margin-left: 4px; }
 
-        /* Hızlı tutar butonları */
         .quick-amounts {
             display: flex; gap: 8px; margin-top: 10px;
         }
@@ -281,7 +324,7 @@
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             color: rgba(255, 255, 255, 0.5);
-            font-family: 'Inter', sans-serif; font-size: 12px;
+            font-family: inherit; font-size: 12px;
             font-weight: 600; cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -292,7 +335,6 @@
         }
         .quick-amounts button:active { transform: scale(0.95); }
 
-        /* İşlem ücreti */
         .fee-info {
             display: flex; justify-content: space-between; align-items: center;
             padding: 10px 14px; background: rgba(255, 255, 255, 0.03);
@@ -303,7 +345,6 @@
         .fee-info strong { color: #fff; font-weight: 600; }
         .fee-info .free { color: #10b981; }
 
-        /* Limit göstergesi */
         .limit-info {
             margin-top: 14px; padding: 12px 14px;
             background: rgba(255, 255, 255, 0.03);
@@ -331,7 +372,7 @@
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             border: none; border-radius: 14px;
             color: #fff; font-size: 16px; font-weight: 700;
-            font-family: 'Inter', sans-serif; cursor: pointer;
+            font-family: inherit; cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative; overflow: hidden;
             margin-top: 6px; letter-spacing: 0.3px;
@@ -370,7 +411,6 @@
         }
         .footer a:hover { color: rgba(255, 255, 255, 0.4); }
 
-        /* ===== ONAY ADIMI ===== */
         .confirm-state {
             display: none; animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -417,7 +457,7 @@
             flex: 2; padding: 14px; border-radius: 12px;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             border: none; color: #fff;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 14px; font-weight: 700;
             cursor: pointer; transition: all 0.3s ease;
         }
@@ -430,7 +470,7 @@
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             color: rgba(255, 255, 255, 0.6);
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 14px; font-weight: 600;
             cursor: pointer; transition: all 0.3s ease;
         }
@@ -439,7 +479,6 @@
             color: #fff;
         }
 
-        /* ===== SMS DOĞRULAMA ===== */
         .sms-state {
             display: none; animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
@@ -484,7 +523,7 @@
             border-radius: 12px;
             color: #fff; font-size: 22px; font-weight: 700;
             text-align: center; outline: none;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             transition: all 0.2s ease;
         }
         .sms-inputs input:focus {
@@ -513,7 +552,7 @@
             width: 100%; padding: 14px;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             border: none; border-radius: 12px;
-            color: #fff; font-family: 'Inter', sans-serif;
+            color: #fff; font-family: inherit;
             font-size: 14px; font-weight: 700;
             cursor: pointer; transition: all 0.3s ease;
         }
@@ -526,7 +565,6 @@
             transform: none; box-shadow: none;
         }
 
-        /* ===== BAŞARI ===== */
         .success-state {
             display: none; text-align: center;
             padding: 20px 0 10px;
@@ -576,7 +614,7 @@
             padding: 10px 20px; border-radius: 10px;
             background: rgba(16, 185, 129, 0.1);
             border: 1px solid rgba(16, 185, 129, 0.2);
-            color: #10b981; font-family: 'Inter', sans-serif;
+            color: #10b981; font-family: inherit;
             font-size: 13px; font-weight: 600;
             cursor: pointer; transition: all 0.3s ease;
             margin-bottom: 12px;
@@ -602,7 +640,6 @@
             100% { width: 100%; }
         }
 
-        /* ===== İŞLEM LOGU ===== */
         .log-panel {
             margin-top: 20px; padding: 12px 14px;
             background: rgba(0, 0, 0, 0.3);
@@ -644,7 +681,6 @@
 
         .form-area.hidden { display: none; }
 
-        /* ===== TOAST ===== */
         .toast-container {
             position: fixed; top: 20px; right: 20px;
             z-index: 9999; display: flex;
@@ -653,7 +689,7 @@
         .toast {
             padding: 12px 16px; border-radius: 12px;
             background: rgba(16, 185, 129, 0.95);
-            color: #fff; font-family: 'Inter', sans-serif;
+            color: #fff; font-family: inherit;
             font-size: 13px; font-weight: 600;
             display: flex; align-items: center; gap: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -672,7 +708,6 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        /* ===== SPINNER ===== */
         .spinner {
             display: none; width: 20px; height: 20px;
             border: 2.5px solid rgba(255, 255, 255, 0.1);
@@ -685,13 +720,11 @@
         .btn-text { display: inline; }
         .btn-text.hidden { display: none; }
 
-        /* Kripto alanları */
         .crypto-fields { display: none; }
         .crypto-fields.active { display: block; }
         .iban-fields { display: block; }
         .iban-fields.hidden { display: none; }
 
-        /* Ağ seçici */
         .network-selector {
             display: flex; gap: 6px; margin-top: 8px;
         }
@@ -700,7 +733,7 @@
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
             color: rgba(255, 255, 255, 0.4);
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 10px; font-weight: 600;
             cursor: pointer; transition: all 0.2s ease;
             display: flex; align-items: center; justify-content: center; gap: 4px;
@@ -716,6 +749,93 @@
         }
         .network-chip i { font-size: 12px; }
 
+        /* #17 - Bildirim Paneli */
+        .notification-panel {
+            position: absolute;
+            top: 44px; right: 0;
+            width: 280px;
+            background: rgba(20, 25, 40, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 12px;
+            z-index: 100;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            display: none;
+            animation: fadeInUp 0.3s ease;
+        }
+        .notification-panel.active { display: block; }
+        .notification-panel .notif-title {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .notif-item {
+            display: flex;
+            gap: 10px;
+            padding: 10px 8px;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+            cursor: pointer;
+        }
+        .notif-item:hover { background: rgba(255, 255, 255, 0.04); }
+        .notif-item .notif-icon {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.15);
+            display: flex; align-items: center; justify-content: center;
+            color: #10b981; font-size: 13px;
+            flex-shrink: 0;
+        }
+        .notif-item .notif-content {
+            flex: 1;
+            display: flex; flex-direction: column; gap: 3px;
+        }
+        .notif-item .notif-content strong {
+            color: #fff; font-size: 12px; font-weight: 600;
+        }
+        .notif-item .notif-content span {
+            color: rgba(255, 255, 255, 0.4); font-size: 11px;
+            line-height: 1.4;
+        }
+        .notif-item .notif-time {
+            color: rgba(255, 255, 255, 0.25); font-size: 10px;
+        }
+
+        /* #11 - PDF makbuz yükleniyor overlay */
+        .pdf-loading {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center; justify-content: center;
+            z-index: 10000;
+        }
+        .pdf-loading.active { display: flex; }
+        .pdf-loading-content {
+            text-align: center;
+            color: #fff;
+        }
+        .pdf-loading-content .pdf-spinner {
+            width: 50px; height: 50px;
+            border: 4px solid rgba(16, 185, 129, 0.2);
+            border-top: 4px solid #10b981;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+        .pdf-loading-content p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
         @media (max-width: 480px) {
             .card { padding: 28px 20px 24px; border-radius: 20px; }
             .header .logo span { font-size: 19px; }
@@ -724,6 +844,7 @@
             .success-state h2 { font-size: 19px; }
             .sms-inputs input { width: 38px; height: 48px; font-size: 18px; }
             .mode-btn { font-size: 11px; padding: 10px 4px; }
+            .notification-panel { width: 260px; }
         }
     </style>
 </head>
@@ -739,11 +860,57 @@
 
     <div class="toast-container" id="toastContainer"></div>
 
+    <div class="pdf-loading" id="pdfLoading">
+        <div class="pdf-loading-content">
+            <div class="pdf-spinner"></div>
+            <p>PDF makbuz oluşturuluyor...</p>
+        </div>
+    </div>
+
     <div class="container">
         <div class="card">
 
             <!-- HEADER -->
             <div class="header">
+                <!-- #17 - Bildirim Zili -->
+                <button class="notification-bell" onclick="toggleNotifications(event)">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge-dot" id="notifCount">3</span>
+                </button>
+
+                <!-- #17 - Bildirim Paneli -->
+                <div class="notification-panel" id="notificationPanel">
+                    <div class="notif-title">Bildirimler</div>
+                    <div class="notif-item">
+                        <div class="notif-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="notif-content">
+                            <strong>İşlem Tamamlandı</strong>
+                            <span>Mehmet Demir'e 500₺ gönderildi</span>
+                            <span class="notif-time">2 dk önce</span>
+                        </div>
+                    </div>
+                    <div class="notif-item">
+                        <div class="notif-icon" style="background:rgba(59,130,246,0.15);color:#60a5fa">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="notif-content">
+                            <strong>Güvenlik Uyarısı</strong>
+                            <span>Yeni bir cihazdan giriş yapıldı</span>
+                            <span class="notif-time">1 saat önce</span>
+                        </div>
+                    </div>
+                    <div class="notif-item">
+                        <div class="notif-icon" style="background:rgba(251,191,36,0.15);color:#fbbf24">
+                            <i class="fas fa-percent"></i>
+                        </div>
+                        <div class="notif-content">
+                            <strong>Kampanya</strong>
+                            <span>Havale ücretleri bu hafta ücretsiz!</span>
+                            <span class="notif-time">3 saat önce</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="logo">
                     <i class="fas fa-university"></i>
                     <span>Fin<span class="highlight">Bank</span></span>
@@ -813,10 +980,9 @@
                 <i class="fas fa-check-circle" style="color:#10b981;font-size:12px;"></i>
             </div>
 
-            <!-- ===== FORM ===== -->
+            <!-- FORM -->
             <div class="form-area" id="formArea">
 
-                <!-- IBAN ALANLARI -->
                 <div class="iban-fields" id="ibanFields">
                     <div class="form-group">
                         <label><i class="far fa-credit-card" style="margin-right:4px;"></i> IBAN</label>
@@ -843,7 +1009,6 @@
                     </div>
                 </div>
 
-                <!-- KRİPTO ALANLARI -->
                 <div class="crypto-fields" id="cryptoFields">
                     <div class="form-group">
                         <label><i class="fab fa-bitcoin" style="margin-right:4px;"></i> Cüzdan Adresi</label>
@@ -876,7 +1041,6 @@
                     </div>
                 </div>
 
-                <!-- TUTAR (Her iki modda ortak) -->
                 <div class="form-group">
                     <label><i class="fas fa-coins" style="margin-right:4px;"></i> Gönderilecek Tutar</label>
                     <div class="input-wrap">
@@ -896,14 +1060,13 @@
                     </div>
                 </div>
 
-                <!-- LİMİT -->
                 <div class="limit-info">
                     <div class="limit-row">
                         <span>Günlük İşlem Limiti</span>
-                        <span id="limitText">4.500 / 10.000 ₺</span>
+                        <span id="limitText">0 / 2.000.000 ₺</span>
                     </div>
                     <div class="limit-progress">
-                        <div class="fill" id="limitFill" style="width: 45%"></div>
+                        <div class="fill" id="limitFill" style="width: 0%"></div>
                     </div>
                 </div>
 
@@ -915,7 +1078,6 @@
                     </span>
                 </button>
 
-                <!-- İŞLEM LOGU -->
                 <div class="log-panel" id="logPanel">
                     <div class="log-panel-title">
                         <div class="dot-live"></div>
@@ -927,13 +1089,12 @@
                 </div>
             </div>
 
-            <!-- ===== ONAY ADIMI ===== -->
+            <!-- ONAY ADIMI -->
             <div class="confirm-state" id="confirmState">
                 <div class="confirm-title">İşlemi Onaylayın</div>
                 <div class="confirm-sub">Bilgilerinizi kontrol edin</div>
 
                 <div class="confirm-detail" id="confirmDetail">
-                    <!-- Dinamik doldurulur -->
                 </div>
 
                 <div class="confirm-actions">
@@ -942,7 +1103,7 @@
                 </div>
             </div>
 
-            <!-- ===== SMS DOĞRULAMA ===== -->
+            <!-- SMS DOĞRULAMA -->
             <div class="sms-state" id="smsState">
                 <div class="sms-icon">
                     <i class="fas fa-mobile-alt"></i>
@@ -968,7 +1129,7 @@
                 <button class="btn-verify" id="verifyBtn" disabled>Doğrula ve Gönder</button>
             </div>
 
-            <!-- ===== BAŞARI ===== -->
+            <!-- BAŞARI -->
             <div class="success-state" id="successState">
                 <div class="check-circle">
                     <i class="fas fa-check"></i>
@@ -977,10 +1138,9 @@
                 <div class="success-sub" id="successSub">Paranız işleme alındı</div>
                 <div class="success-amount" id="displayAmount">0,00 ₺</div>
                 <div class="success-detail" id="successDetail">
-                    <!-- Dinamik -->
                 </div>
                 <button class="receipt-btn" onclick="downloadReceipt()">
-                    <i class="fas fa-file-pdf"></i> Makbuz İndir
+                    <i class="fas fa-file-pdf"></i> Makbuz İndir (PDF)
                 </button>
                 <div class="timer-bar"><div class="fill"></div></div>
             </div>
@@ -1011,25 +1171,113 @@
             }
         })();
 
+        // ==================== #3 SES EFEKTLERİ ====================
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                } catch(e) {
+                    return null;
+                }
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        // Tıklama sesi
+        function playClick() {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.type = 'sine';
+            osc.frequency.value = 800;
+            gain.gain.setValueAtTime(0.08, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + 0.08);
+        }
+
+        // Başarı sesi (3 nota)
+        function playSuccess() {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            [523.25, 659.25, 783.99].forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                const startTime = ctx.currentTime + i * 0.12;
+                gain.gain.setValueAtTime(0.001, startTime);
+                gain.gain.exponentialRampToValueAtTime(0.12, startTime + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
+                osc.start(startTime);
+                osc.stop(startTime + 0.3);
+            });
+        }
+
+        // Hata sesi
+        function playError() {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            [400, 300].forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = 'square';
+                osc.frequency.value = freq;
+                const startTime = ctx.currentTime + i * 0.1;
+                gain.gain.setValueAtTime(0.06, startTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.1);
+                osc.start(startTime);
+                osc.stop(startTime + 0.12);
+            });
+        }
+
+        // Bildirim sesi
+        function playNotification() {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.type = 'sine';
+            osc.frequency.value = 1200;
+            gain.gain.setValueAtTime(0.05, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + 0.15);
+        }
+
         // ==================== DOM ====================
         const formArea = document.getElementById('formArea');
         const confirmState = document.getElementById('confirmState');
         const smsState = document.getElementById('smsState');
         const successState = document.getElementById('successState');
-        
+
         const ibanInput = document.getElementById('ibanInput');
         const nameInput = document.getElementById('nameInput');
         const amountInput = document.getElementById('amountInput');
         const walletInput = document.getElementById('walletInput');
         const cryptoNameInput = document.getElementById('cryptoNameInput');
-        
+
         const submitBtn = document.getElementById('submitBtn');
         const btnText = document.getElementById('btnText');
         const btnSpinner = document.getElementById('btnSpinner');
         const btnIcon = document.getElementById('btnIcon');
         const confirmBtn = document.getElementById('confirmBtn');
         const verifyBtn = document.getElementById('verifyBtn');
-        
+
         const ibanStatus = document.getElementById('ibanStatus');
         const bankDetected = document.getElementById('bankDetected');
         const bankName = document.getElementById('bankName');
@@ -1049,8 +1297,8 @@
         let currentMode = 'iban';
         let currentNetwork = 'TRC20';
         let transferData = {};
-        let limitUsed = 4500;
-        const limitMax = 10000;
+        let limitUsed = 0;
+        const LIMIT_MAX = 2000000; // #limit - 2.000.000 ₺
 
         // ==================== BANKALAR ====================
         const BANKS = {
@@ -1060,9 +1308,9 @@
             "00103": "ING Bank", "00111": "Finansbank", "00123": "HSBC",
             "00134": "TEB", "00135": "Anadolubank", "00143": "Odeabank",
             "00146": "Kuveyt Türk", "00203": "Albaraka Türk", "00205": "Türkiye Finans",
-            "00109": "ICBC Turkey", "00115": "QNB Finansbank", "00123": "HSBC Turkey",
-            "00129": "Alternatif Bank", "00132": "Burgan Bank", "00138": "Diler Yatırım",
-            "00139": "Bank of China", "00141": "Aktif Yatırım", "00142": "Fibabanka"
+            "00109": "ICBC Turkey", "00115": "QNB Finansbank",
+            "00129": "Alternatif Bank", "00132": "Burgan Bank",
+            "00141": "Aktif Yatırım", "00142": "Fibabanka"
         };
 
         // ==================== LOG ====================
@@ -1073,8 +1321,7 @@
             line.innerHTML = `<span class="time">[${time}]</span> <span class="${type}">${message}</span>`;
             logContent.appendChild(line);
             logContent.parentElement.scrollTop = logContent.parentElement.scrollHeight;
-            
-            // Max 20 satır tut
+
             while (logContent.children.length > 20) {
                 logContent.removeChild(logContent.firstChild);
             }
@@ -1088,6 +1335,10 @@
             const icon = type === 'error' ? 'exclamation-circle' : type === 'info' ? 'info-circle' : 'check-circle';
             toast.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
             container.appendChild(toast);
+
+            if (type === 'error') playError();
+            else if (type === 'info') playNotification();
+
             setTimeout(() => {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateX(100%)';
@@ -1095,14 +1346,30 @@
             }, 3000);
         }
 
+        // ==================== #17 BİLDİRİM PANELİ ====================
+        function toggleNotifications(event) {
+            event.stopPropagation();
+            playClick();
+            const panel = document.getElementById('notificationPanel');
+            panel.classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(e) {
+            const panel = document.getElementById('notificationPanel');
+            const bell = document.querySelector('.notification-bell');
+            if (panel.classList.contains('active') && !panel.contains(e.target) && !bell.contains(e.target)) {
+                panel.classList.remove('active');
+            }
+        });
+
         // ==================== IBAN DOĞRULAMA ====================
         function validateIBAN(iban) {
             iban = iban.replace(/\s/g, '').toUpperCase();
             if (!/^TR\d{24}$/.test(iban)) return false;
-            
+
             const rearranged = iban.slice(4) + iban.slice(0, 4);
             const numeric = rearranged.replace(/[A-Z]/g, c => c.charCodeAt(0) - 55);
-            
+
             let remainder = 0;
             for (let i = 0; i < numeric.length; i++) {
                 remainder = (remainder * 10 + parseInt(numeric[i])) % 97;
@@ -1110,7 +1377,6 @@
             return remainder === 1;
         }
 
-        // ==================== IBAN FORMAT ====================
         ibanInput.addEventListener('input', function() {
             let val = this.value.replace(/\s/g, '').toUpperCase();
             val = val.replace(/[^A-Z0-9]/g, '');
@@ -1120,16 +1386,14 @@
                 formatted += val[i];
             }
             this.value = formatted;
-            
-            // Doğrulama
+
             const cleanIban = val;
             if (cleanIban.length >= 26) {
                 if (validateIBAN(cleanIban)) {
                     ibanStatus.className = 'iban-status visible valid';
                     ibanStatus.innerHTML = '<i class="fas fa-check-circle"></i><span>Geçerli IBAN</span>';
                     addLog('IBAN doğrulandı', 'ok');
-                    
-                    // Banka tespiti
+
                     const bankCode = cleanIban.slice(4, 9);
                     const detectedBank = BANKS[bankCode] || 'Bilinmiyor';
                     bankName.textContent = detectedBank;
@@ -1147,15 +1411,16 @@
 
         // ==================== MOD DEĞİŞTİR ====================
         function switchMode(mode) {
+            playClick();
             currentMode = mode;
-            
+
             document.querySelectorAll('.mode-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.mode === mode);
             });
-            
+
             const ibanFields = document.getElementById('ibanFields');
             const cryptoFields = document.getElementById('cryptoFields');
-            
+
             if (mode === 'iban') {
                 ibanFields.classList.remove('hidden');
                 cryptoFields.classList.remove('active');
@@ -1174,8 +1439,8 @@
             showToast(mode === 'iban' ? 'IBAN Modu' : 'Kripto Modu', 'info');
         }
 
-        // ==================== AĞ SEÇİMİ ====================
         function selectNetwork(network) {
+            playClick();
             currentNetwork = network;
             document.querySelectorAll('.network-chip').forEach(chip => {
                 chip.classList.toggle('active', chip.dataset.network === network);
@@ -1183,34 +1448,35 @@
             addLog(`Ağ seçildi: ${network}`, 'info');
         }
 
-        // ==================== KAYITLI ALICI ====================
         function selectRecipient(name, iban, initials) {
+            playClick();
             switchMode('iban');
             nameInput.value = name;
             ibanInput.value = iban;
             ibanInput.dispatchEvent(new Event('input'));
-            
+
             document.querySelectorAll('.recipient-chip').forEach(chip => chip.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
-            
+
             addLog(`Alıcı seçildi: ${name}`, 'ok');
             showToast(`Alıcı seçildi: ${name}`);
         }
 
         function selectCryptoRecipient(address, network) {
+            playClick();
             switchMode('crypto');
             walletInput.value = address;
             selectNetwork(network);
-            
+
             document.querySelectorAll('.recipient-chip').forEach(chip => chip.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
-            
+
             addLog(`Kripto alıcı seçildi: ${network}`, 'ok');
             showToast(`Kripto cüzdan seçildi`);
         }
 
-        // ==================== TUTAR ====================
         function setAmount(amount) {
+            playClick();
             amountInput.value = amount.toLocaleString('tr-TR');
             updateFee();
             addLog(`Tutar seçildi: ${amount}`, 'info');
@@ -1224,13 +1490,13 @@
 
         function updateFee() {
             const amount = parseFloat(amountInput.value.replace(/\./g, '').replace(',', '.')) || 0;
-            
+
             if (currentMode === 'crypto') {
                 feeAmount.textContent = '0.5 USDT';
                 feeAmount.classList.remove('free');
                 return;
             }
-            
+
             if (amount <= 1000) {
                 feeAmount.textContent = 'Ücretsiz';
                 feeAmount.classList.add('free');
@@ -1245,22 +1511,22 @@
             }
         }
 
-        // ==================== LİMİT ====================
         function updateLimit() {
             const amount = parseFloat(amountInput.value.replace(/\./g, '').replace(',', '.')) || 0;
-            const newUsed = Math.min(limitUsed + amount, limitMax);
-            const percent = (newUsed / limitMax) * 100;
+            const newUsed = Math.min(limitUsed + amount, LIMIT_MAX);
+            const percent = (newUsed / LIMIT_MAX) * 100;
             limitFill.style.width = Math.min(percent, 100) + '%';
-            
+
             if (currentMode === 'crypto') {
-                limitText.textContent = `${(newUsed / 1000).toFixed(1)}K / 10K USDT`;
+                limitText.textContent = `${(newUsed / 1000).toFixed(1)}K / 2M ₺`;
             } else {
-                limitText.textContent = `${newUsed.toLocaleString('tr-TR')} / ${limitMax.toLocaleString('tr-TR')} ₺`;
+                limitText.textContent = `${newUsed.toLocaleString('tr-TR')} / ${LIMIT_MAX.toLocaleString('tr-TR')} ₺`;
             }
         }
 
         // ==================== SUBMIT ====================
         submitBtn.addEventListener('click', function(e) {
+            playClick();
             const rect = this.getBoundingClientRect();
             const ripple = document.createElement('span');
             ripple.className = 'ripple';
@@ -1273,15 +1539,14 @@
         });
 
         submitBtn.addEventListener('click', function() {
-            // Validasyon
             let valid = true;
             let data = { mode: currentMode };
-            
+
             if (currentMode === 'iban') {
                 const iban = ibanInput.value.replace(/\s/g, '');
                 const name = nameInput.value.trim();
                 const amount = amountInput.value.trim();
-                
+
                 if (!validateIBAN(iban)) {
                     showToast('Geçerli bir IBAN girin', 'error');
                     valid = false;
@@ -1301,7 +1566,7 @@
                 const wallet = walletInput.value.trim();
                 const name = cryptoNameInput.value.trim() || 'Cüzdan Sahibi';
                 const amount = amountInput.value.trim();
-                
+
                 if (!wallet) {
                     showToast('Cüzdan adresi gerekli', 'error');
                     valid = false;
@@ -1316,40 +1581,36 @@
                     data.network = currentNetwork;
                 }
             }
-            
+
             if (!valid) return;
-            
+
             transferData = data;
-            
-            // Loading
+
             btnText.classList.add('hidden');
             btnSpinner.classList.add('active');
             btnIcon.style.display = 'none';
             submitBtn.disabled = true;
-            
+
             addLog('İşlem hazırlanıyor...', 'info');
-            
+
             setTimeout(() => {
                 btnText.classList.remove('hidden');
                 btnSpinner.classList.remove('active');
                 btnIcon.style.display = 'inline';
                 submitBtn.disabled = false;
-                
-                // Onay ekranına geç
+
                 showConfirm();
             }, 1200);
         });
 
-        // ==================== ONAY EKRANI ====================
         function showConfirm() {
             formArea.classList.add('hidden');
             smsState.classList.remove('active');
             successState.classList.remove('active');
             confirmState.classList.add('active');
-            
-            // Onay detaylarını doldur
+
             let html = '';
-            
+
             if (currentMode === 'iban') {
                 html = `
                     <div class="confirm-row">
@@ -1397,19 +1658,19 @@
                     </div>
                 `;
             }
-            
+
             confirmDetail.innerHTML = html;
             addLog('Onay bekleniyor...', 'info');
         }
 
-        // ==================== ONAY BUTONU ====================
         confirmBtn.addEventListener('click', function() {
+            playClick();
             confirmState.classList.remove('active');
             showSms();
         });
 
-        // ==================== GERİ ====================
         function goBack() {
+            playClick();
             confirmState.classList.remove('active');
             smsState.classList.remove('active');
             formArea.classList.remove('hidden');
@@ -1421,35 +1682,31 @@
         function showSms() {
             smsState.classList.add('active');
             formArea.classList.add('hidden');
-            
-            // SMS inputları sıfırla
+
             document.querySelectorAll('.sms-inputs input').forEach(inp => {
                 inp.value = '';
                 inp.classList.remove('filled');
             });
             verifyBtn.disabled = true;
-            
+
             addLog('SMS doğrulama kodu gönderildi', 'info');
             showToast('SMS kodu gönderildi');
-            
-            // İlk inputa focus
+
             setTimeout(() => {
                 document.querySelector('.sms-inputs input').focus();
             }, 300);
-            
-            // Countdown
+
             startSmsCountdown();
         }
 
-        // SMS Input davranışı
         document.querySelectorAll('.sms-inputs input').forEach((input, idx) => {
             input.addEventListener('input', function(e) {
                 const val = this.value.replace(/[^0-9]/g, '');
                 this.value = val;
-                
+
                 if (val) {
                     this.classList.add('filled');
-                    // Sonraki inputa geç
+                    playClick();
                     const inputs = document.querySelectorAll('.sms-inputs input');
                     if (idx < inputs.length - 1) {
                         inputs[idx + 1].focus();
@@ -1457,10 +1714,10 @@
                 } else {
                     this.classList.remove('filled');
                 }
-                
+
                 checkSmsComplete();
             });
-            
+
             input.addEventListener('keydown', function(e) {
                 if (e.key === 'Backspace' && !this.value) {
                     const inputs = document.querySelectorAll('.sms-inputs input');
@@ -1475,7 +1732,7 @@
             const inputs = document.querySelectorAll('.sms-inputs input');
             const allFilled = Array.from(inputs).every(inp => inp.value.length === 1);
             verifyBtn.disabled = !allFilled;
-            
+
             if (allFilled) {
                 addLog('Kod girildi, doğrulanıyor...', 'info');
             }
@@ -1483,16 +1740,16 @@
 
         let smsTimer = null;
         function startSmsCountdown() {
-            let seconds = 179; // 2:59
+            let seconds = 179;
             if (smsTimer) clearInterval(smsTimer);
-            
+
             smsTimer = setInterval(() => {
                 seconds--;
                 const m = Math.floor(seconds / 60);
                 const s = seconds % 60;
-                document.getElementById('smsCountdown').textContent = 
+                document.getElementById('smsCountdown').textContent =
                     `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-                
+
                 if (seconds <= 0) {
                     clearInterval(smsTimer);
                     document.getElementById('smsCountdown').textContent = '00:00';
@@ -1501,23 +1758,24 @@
         }
 
         function resendSms() {
+            playClick();
             showToast('Yeni kod gönderildi');
             addLog('SMS kodu yeniden gönderildi', 'info');
             startSmsCountdown();
         }
 
-        // ==================== DOĞRULA VE GÖNDER ====================
         verifyBtn.addEventListener('click', function() {
+            playClick();
             verifyBtn.disabled = true;
             verifyBtn.textContent = 'Doğrulanıyor...';
             addLog('Kod doğrulanıyor...', 'info');
-            
+
             setTimeout(() => {
                 addLog('Doğrulama başarılı', 'ok');
                 addLog('İşlem gönderiliyor...', 'info');
-                
+
                 verifyBtn.textContent = 'Doğrula ve Gönder';
-                
+
                 setTimeout(() => {
                     showSuccess();
                 }, 1000);
@@ -1526,11 +1784,17 @@
 
         // ==================== BAŞARI ====================
         function showSuccess() {
+            // #25 - Arka plan kırmızıya döner
+            document.body.classList.add('processing');
+
             smsState.classList.remove('active');
             successState.classList.add('active');
-            
+
+            // #3 - Başarı sesi
+            playSuccess();
+
             const amount = transferData.amount;
-            
+
             if (currentMode === 'iban') {
                 displayAmount.textContent = amount + ' ₺';
                 successTitle.textContent = '✓ İşlem Alındı';
@@ -1554,72 +1818,182 @@
                     Ağ onayı bekleniyor. Ortalama süre: <strong>1-3 dakika</strong>
                 `;
             }
-            
+
             addLog('İşlem başarıyla tamamlandı', 'ok');
             showToast('İşlem başarıyla tamamlandı!');
-            
+
+            limitUsed = Math.min(limitUsed + parseFloat(transferData.amount.replace(/\./g, '').replace(',', '.') || 0), LIMIT_MAX);
             updateLimit();
+
+            // Arka planı 4 saniye sonra normale döndür
+            setTimeout(() => {
+                document.body.classList.remove('processing');
+            }, 4000);
         }
 
-        // ==================== MAKBUZ ====================
-        function downloadReceipt() {
-            const receipt = {
-                tarih: new Date().toLocaleString('tr-TR'),
-                islem_no: 'TRX' + Date.now(),
-                mod: currentMode === 'iban' ? 'IBAN/Havale' : 'Kripto Transfer',
-                alici: transferData.name,
-                hesap: currentMode === 'iban' ? transferData.iban : transferData.wallet,
-                ag: currentMode === 'iban' ? bankName.textContent : transferData.network,
-                tutar: transferData.amount + ' ' + (currentMode === 'iban' ? 'TRY' : 'USDT'),
-                durum: 'Başarılı',
-                banka: 'FinBank A.Ş.'
-            };
-            
-            const text = `
-╔══════════════════════════════════════════════╗
-║           FİNBANK İŞLEM MAKBUZU              ║
-╚══════════════════════════════════════════════╝
+        // ==================== #11 PDF MAKBUZ ====================
+        async function downloadReceipt() {
+            playClick();
+            const loading = document.getElementById('pdfLoading');
+            loading.classList.add('active');
 
-İşlem No      : ${receipt.islem_no}
-Tarih         : ${receipt.tarih}
-İşlem Tipi    : ${receipt.mod}
-Durum         : ${receipt.durum}
+            addLog('PDF makbuz oluşturuluyor...', 'info');
 
-─────────────────────────────────────────────
-ALICI BİLGİLERİ
-─────────────────────────────────────────────
-Alıcı         : ${receipt.alici}
-${currentMode === 'iban' ? 'IBAN' : 'Cüzdan'}          : ${receipt.hesap}
-${currentMode === 'iban' ? 'Banka' : 'Ağ'}         : ${receipt.ag}
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
 
-─────────────────────────────────────────────
-TUTAR
-─────────────────────────────────────────────
-Gönderilen    : ${receipt.tutar}
+                const now = new Date();
+                const txNo = 'TX' + Date.now().toString().slice(-10);
+                const tarih = now.toLocaleString('tr-TR');
 
-─────────────────────────────────────────────
-Bu makbuz bilgilendirme amaçlıdır.
-FinBank A.Ş. - Tüm hakları saklıdır.
-İletişim: 0850 000 00 00
-            `;
-            
-            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `FinBank_Makbuz_${receipt.islem_no}.txt`;
-            a.click();
-            URL.revokeObjectURL(url);
-            
-            showToast('Makbuz indirildi');
-            addLog('Makbuz oluşturuldu', 'ok');
+                // Başlık arka planı
+                doc.setFillColor(16, 185, 129);
+                doc.rect(0, 0, 210, 40, 'F');
+
+                // Logo / Başlık
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(24);
+                doc.setFont(undefined, 'bold');
+                doc.text('FİNBANK', 105, 20, { align: 'center' });
+
+                doc.setFontSize(11);
+                doc.setFont(undefined, 'normal');
+                doc.text('İşlem Makbuzu', 105, 30, { align: 'center' });
+
+                // İçerik
+                doc.setTextColor(40, 40, 40);
+                doc.setFontSize(11);
+
+                let y = 55;
+                const lineHeight = 8;
+
+                // İşlem Bilgileri
+                doc.setFont(undefined, 'bold');
+                doc.setFontSize(13);
+                doc.text('İŞLEM BİLGİLERİ', 20, y);
+                y += 3;
+                doc.setDrawColor(16, 185, 129);
+                doc.setLineWidth(0.5);
+                doc.line(20, y, 190, y);
+                y += lineHeight;
+
+                doc.setFont(undefined, 'normal');
+                doc.setFontSize(11);
+
+                doc.text('İşlem No:', 20, y);
+                doc.setFont(undefined, 'bold');
+                doc.text(txNo, 80, y);
+                y += lineHeight;
+                doc.setFont(undefined, 'normal');
+
+                doc.text('Tarih:', 20, y);
+                doc.setFont(undefined, 'bold');
+                doc.text(tarih, 80, y);
+                y += lineHeight;
+                doc.setFont(undefined, 'normal');
+
+                doc.text('İşlem Tipi:', 20, y);
+                doc.setFont(undefined, 'bold');
+                doc.text(currentMode === 'iban' ? 'IBAN / Havale' : 'Kripto Transfer', 80, y);
+                y += lineHeight;
+                doc.setFont(undefined, 'normal');
+
+                doc.text('Durum:', 20, y);
+                doc.setFont(undefined, 'bold');
+                doc.setTextColor(16, 185, 129);
+                doc.text('BAŞARILI', 80, y);
+                doc.setTextColor(40, 40, 40);
+                y += lineHeight * 2;
+
+                // Alıcı Bilgileri
+                doc.setFont(undefined, 'bold');
+                doc.setFontSize(13);
+                doc.text('ALICI BİLGİLERİ', 20, y);
+                y += 3;
+                doc.setDrawColor(16, 185, 129);
+                doc.line(20, y, 190, y);
+                y += lineHeight;
+
+                doc.setFont(undefined, 'normal');
+                doc.setFontSize(11);
+
+                doc.text('Alıcı Adı:', 20, y);
+                doc.setFont(undefined, 'bold');
+                doc.text(transferData.name, 80, y);
+                y += lineHeight;
+                doc.setFont(undefined, 'normal');
+
+                if (currentMode === 'iban') {
+                    doc.text('IBAN:', 20, y);
+                    doc.setFont(undefined, 'bold');
+                    doc.text(transferData.iban, 80, y);
+                    y += lineHeight;
+                    doc.setFont(undefined, 'normal');
+
+                    doc.text('Banka:', 20, y);
+                    doc.setFont(undefined, 'bold');
+                    doc.text(bankName.textContent, 80, y);
+                    y += lineHeight;
+                } else {
+                    doc.text('Cüzdan:', 20, y);
+                    doc.setFont(undefined, 'bold');
+                    doc.text(transferData.wallet.substring(0, 40), 80, y);
+                    y += lineHeight;
+                    doc.setFont(undefined, 'normal');
+
+                    doc.text('Ağ:', 20, y);
+                    doc.setFont(undefined, 'bold');
+                    doc.text(transferData.network, 80, y);
+                    y += lineHeight;
+                }
+                doc.setFont(undefined, 'normal');
+                y += lineHeight;
+
+                // Tutar
+                doc.setFont(undefined, 'bold');
+                doc.setFontSize(13);
+                doc.text('TUTAR', 20, y);
+                y += 3;
+                doc.setDrawColor(16, 185, 129);
+                doc.line(20, y, 190, y);
+                y += lineHeight;
+
+                doc.setFont(undefined, 'normal');
+                doc.setFontSize(11);
+                doc.text('Gönderilen Tutar:', 20, y);
+                doc.setFont(undefined, 'bold');
+                doc.setFontSize(14);
+                doc.setTextColor(16, 185, 129);
+                doc.text(transferData.amount + ' ' + (currentMode === 'iban' ? 'TRY' : 'USDT'), 80, y);
+                doc.setTextColor(40, 40, 40);
+                y += lineHeight * 2;
+
+                // Alt bilgi
+                doc.setFontSize(9);
+                doc.setTextColor(120, 120, 120);
+                doc.setFont(undefined, 'italic');
+                doc.text('Bu makbuz bilgilendirme amaçlıdır.', 105, 270, { align: 'center' });
+                doc.text('FinBank A.Ş. - Tüm hakları saklıdır.', 105, 278, { align: 'center' });
+                doc.text('İletişim: 0850 000 00 00', 105, 286, { align: 'center' });
+
+                doc.save(`FinBank_Makbuz_${txNo}.pdf`);
+
+                loading.classList.remove('active');
+                showToast('PDF makbuz indirildi');
+                addLog('PDF makbuz oluşturuldu', 'ok');
+            } catch(e) {
+                loading.classList.remove('active');
+                showToast('PDF oluşturulamadı', 'error');
+                addLog('PDF hatası: ' + e.message, 'error');
+            }
         }
 
         // ==================== INIT ====================
         setTimeout(() => addLog('Sistem hazır - İşlem bekleniyor', 'ok'), 500);
         setTimeout(() => addLog('Güvenli bağlantı aktif', 'info'), 1500);
 
-        console.log('💎 FinBank | Resmi Transfer Sistemi v2.0');
+        console.log('💎 FinBank | Resmi Transfer Sistemi v2.1');
     </script>
 </body>
 </html>
