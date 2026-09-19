@@ -11,7 +11,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* #13 - Daha gerçekçi banka fontu */
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
             min-height: 100vh;
             display: flex;
@@ -27,7 +26,6 @@
             transition: background 0.6s ease;
         }
 
-        /* #25 - İşlem sırasında arka plan değişimi */
         body.processing {
             background: #1a0a0e;
             background-image:
@@ -73,13 +71,30 @@
             position: absolute; width: 2px; height: 2px;
             background: rgba(16, 185, 129, 0.3); border-radius: 50%;
             animation: floatParticle 15s linear infinite;
-            transition: background 0.6s ease;
         }
         body.processing .particle { background: rgba(239, 68, 68, 0.3); }
         @keyframes floatParticle {
             0% { transform: translateY(100vh) scale(0); opacity: 0; }
             10%, 90% { opacity: 1; }
             100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* #21 - Loading Bar */
+        .top-loader {
+            position: fixed; top: 0; left: 0;
+            height: 3px; width: 0%;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            z-index: 99999;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+        .top-loader.active {
+            animation: loadingBar 1.5s ease-in-out infinite;
+        }
+        @keyframes loadingBar {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
         }
 
         .container { position: relative; z-index: 1; width: 100%; max-width: 480px; }
@@ -99,7 +114,6 @@
 
         .header { text-align: center; margin-bottom: 24px; position: relative; }
 
-        /* #17 - Bildirim Zili */
         .notification-bell {
             position: absolute;
             top: 0; right: 0;
@@ -151,15 +165,117 @@
             color: #10b981; font-size: 11px; font-weight: 600;
             padding: 4px 14px; border-radius: 20px; letter-spacing: 0.5px;
             text-transform: uppercase; border: 1px solid rgba(16, 185, 129, 0.2);
-            animation: glowBadge 2s ease-in-out infinite;
-        }
-        @keyframes glowBadge {
-            0%, 100% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.1); }
-            50% { box-shadow: 0 0 25px rgba(16, 185, 129, 0.25); }
         }
         .header .subtitle {
             color: rgba(255, 255, 255, 0.4); font-size: 13px;
             margin-top: 6px; font-weight: 400; letter-spacing: 0.3px;
+        }
+
+        /* ===== YENİ: BAKİYE GÖSTERGESİ ===== */
+        .balance-badge {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+        .balance-badge .label {
+            display: flex; align-items: center; gap: 8px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .balance-badge .label i {
+            color: #10b981; font-size: 14px;
+        }
+        .balance-badge .amount {
+            color: #10b981; font-size: 18px; font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        /* ===== #13 - KREDİ KARTI GÖRSELİ ===== */
+        .card-visual {
+            position: relative;
+            padding: 18px 20px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+            margin-bottom: 20px;
+            min-height: 100px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+        }
+        .card-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -20%;
+            width: 200px; height: 200px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+        }
+        .card-visual::after {
+            content: '';
+            position: absolute;
+            bottom: -30%; left: -10%;
+            width: 150px; height: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+        .card-visual .card-chip-icon {
+            width: 32px; height: 24px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border-radius: 5px;
+            position: relative;
+            margin-bottom: 12px;
+            box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+        }
+        .card-visual .card-chip-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 0;
+            width: 100%; height: 1px;
+            background: rgba(0, 0, 0, 0.15);
+        }
+        .card-visual .card-chip-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 1px; height: 100%;
+            background: rgba(0, 0, 0, 0.15);
+            transform: translateY(-50%);
+        }
+        .card-visual .card-number-visual {
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        .card-visual .card-bottom {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            position: relative;
+            z-index: 1;
+        }
+        .card-visual .card-holder-name {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .card-visual .card-expiry {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 10px;
+            font-family: 'Courier New', monospace;
+        }
+        .card-visual .card-brand {
+            color: #fff;
+            font-size: 20px;
+            opacity: 0.9;
         }
 
         .mode-selector {
@@ -183,7 +299,6 @@
             color: #10b981;
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
         }
-        .mode-btn:hover:not(.active) { color: rgba(255, 255, 255, 0.7); }
 
         .recipient-selector { margin-bottom: 18px; }
         .recipient-label {
@@ -195,9 +310,7 @@
         .recipient-label .add-new {
             color: #10b981; font-size: 11px; cursor: pointer;
             text-transform: none; letter-spacing: 0;
-            transition: opacity 0.3s;
         }
-        .recipient-label .add-new:hover { opacity: 0.7; }
         .recipients-scroll {
             display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px;
             scrollbar-width: none;
@@ -211,10 +324,6 @@
             display: flex; align-items: center; gap: 8px;
             min-width: 140px;
         }
-        .recipient-chip:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(16, 185, 129, 0.3);
-        }
         .recipient-chip.selected {
             background: rgba(16, 185, 129, 0.12);
             border-color: rgba(16, 185, 129, 0.4);
@@ -226,13 +335,8 @@
             color: #fff; font-size: 11px; font-weight: 700;
         }
         .recipient-chip .info { display: flex; flex-direction: column; gap: 2px; }
-        .recipient-chip .info strong {
-            color: #fff; font-size: 11px; font-weight: 600;
-        }
-        .recipient-chip .info span {
-            color: rgba(255, 255, 255, 0.3); font-size: 9px;
-            font-family: monospace;
-        }
+        .recipient-chip .info strong { color: #fff; font-size: 11px; font-weight: 600; }
+        .recipient-chip .info span { color: rgba(255, 255, 255, 0.3); font-size: 9px; font-family: monospace; }
 
         .security-bar {
             display: flex; align-items: center; justify-content: center;
@@ -241,21 +345,8 @@
             border-radius: 12px; padding: 8px 16px;
             margin-bottom: 24px;
         }
-        .security-bar i {
-            color: #10b981; font-size: 14px; animation: pulseIcon 2s ease-in-out infinite;
-        }
-        .security-bar span {
-            color: rgba(255, 255, 255, 0.5); font-size: 11px;
-            font-weight: 500; letter-spacing: 0.3px;
-        }
-        .security-bar .dot {
-            width: 4px; height: 4px; background: #10b981;
-            border-radius: 50%; animation: blinkDot 1.5s ease-in-out infinite;
-        }
-        @keyframes blinkDot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.2; }
-        }
+        .security-bar i { color: #10b981; font-size: 14px; }
+        .security-bar span { color: rgba(255, 255, 255, 0.5); font-size: 11px; font-weight: 500; }
 
         .form-area { transition: opacity 0.3s ease; }
         .form-group { margin-bottom: 18px; }
@@ -284,7 +375,7 @@
             width: 100%; padding: 14px 16px; background: transparent;
             border: none; outline: none; color: #fff;
             font-size: 15px; font-weight: 500;
-            font-family: inherit; letter-spacing: 0.3px;
+            font-family: inherit;
         }
         .form-group .input-wrap input::placeholder {
             color: rgba(255, 255, 255, 0.2); font-weight: 400; font-size: 14px;
@@ -296,24 +387,20 @@
 
         .iban-status {
             display: none; align-items: center; gap: 6px;
-            margin-top: 6px; font-size: 11px;
-            padding-left: 4px;
+            margin-top: 6px; font-size: 11px; padding-left: 4px;
         }
         .iban-status.visible { display: flex; }
         .iban-status.valid { color: #10b981; }
         .iban-status.invalid { color: #ef4444; }
-        .iban-status i { font-size: 12px; }
 
         .bank-detected {
-            display: none; margin-top: 6px;
-            padding: 8px 12px; border-radius: 10px;
-            background: rgba(16, 185, 129, 0.08);
+            display: none; margin-top: 6px; padding: 8px 12px;
+            border-radius: 10px; background: rgba(16, 185, 129, 0.08);
             border: 1px solid rgba(16, 185, 129, 0.15);
             font-size: 12px; color: #10b981;
             align-items: center; gap: 8px;
         }
         .bank-detected.visible { display: flex; }
-        .bank-detected i { font-size: 14px; }
         .bank-detected strong { color: #fff; margin-left: 4px; }
 
         .quick-amounts {
@@ -333,7 +420,6 @@
             border-color: rgba(16, 185, 129, 0.3);
             color: #10b981;
         }
-        .quick-amounts button:active { transform: scale(0.95); }
 
         .fee-info {
             display: flex; justify-content: space-between; align-items: center;
@@ -361,7 +447,7 @@
             border-radius: 4px; overflow: hidden;
         }
         .limit-progress .fill {
-            height: 100%; width: 45%;
+            height: 100%; width: 0%;
             background: linear-gradient(90deg, #10b981, #34d399);
             border-radius: 4px;
             transition: width 0.5s ease;
@@ -375,45 +461,107 @@
             font-family: inherit; cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative; overflow: hidden;
-            margin-top: 6px; letter-spacing: 0.3px;
+            margin-top: 6px;
         }
         .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 35px rgba(16, 185, 129, 0.3);
         }
-        .btn-submit:active { transform: translateY(0px) scale(0.98); }
         .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
         .btn-submit .btn-content {
             display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-        .btn-submit .btn-content i {
-            font-size: 18px; transition: transform 0.3s ease;
-        }
-        .btn-submit:hover .btn-content i { transform: translateX(4px); }
-        .btn-submit .ripple {
-            position: absolute; border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(0); animation: rippleAnim 0.6s linear;
-            pointer-events: none;
-        }
-        @keyframes rippleAnim {
-            to { transform: scale(4); opacity: 0; }
         }
 
         .footer {
             text-align: center; margin-top: 20px;
             color: rgba(255, 255, 255, 0.15);
-            font-size: 11px; letter-spacing: 0.5px;
+            font-size: 11px;
         }
-        .footer a {
-            color: rgba(255, 255, 255, 0.2);
-            text-decoration: none; transition: color 0.3s ease;
-        }
-        .footer a:hover { color: rgba(255, 255, 255, 0.4); }
+        .footer a { color: rgba(255, 255, 255, 0.2); text-decoration: none; }
 
-        .confirm-state {
-            display: none; animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        /* ===== #2 - İŞLEM ADIMLARI ANİMASYONU ===== */
+        .processing-steps {
+            display: none;
+            margin-top: 20px;
+            padding: 16px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
         }
+        .processing-steps.active { display: block; animation: fadeInUp 0.4s ease; }
+        .processing-steps .step {
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 0;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .processing-steps .step i {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+        .processing-steps .step.active {
+            color: #fff;
+        }
+        .processing-steps .step.active i {
+            color: #10b981;
+            animation: pulseIcon 1s ease-in-out infinite;
+        }
+        .processing-steps .step.done {
+            color: rgba(16, 185, 129, 0.7);
+        }
+        .processing-steps .step.done i {
+            color: #10b981;
+        }
+
+        /* ===== #23 - PROGRESS YÜZDESİ ===== */
+        .progress-circle-wrap {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .progress-circle-wrap.active { display: block; }
+        .progress-circle {
+            position: relative;
+            width: 100px; height: 100px;
+            margin: 0 auto 12px;
+        }
+        .progress-circle svg {
+            width: 100px; height: 100px;
+            transform: rotate(-90deg);
+        }
+        .progress-circle .circle-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.05);
+            stroke-width: 6;
+        }
+        .progress-circle .circle-fill {
+            fill: none;
+            stroke: url(#progressGradient);
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 0.4s ease;
+        }
+        .progress-circle .percent-text {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: 800;
+            color: #10b981;
+        }
+        .progress-circle-wrap .status-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* ===== ONAY ===== */
+        .confirm-state { display: none; animation: fadeInUp 0.5s ease; }
         .confirm-state.active { display: block; }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px) scale(0.96); }
@@ -440,47 +588,98 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
         .confirm-row:last-child { border-bottom: none; }
-        .confirm-row span:first-child {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 12px; font-weight: 500;
-        }
-        .confirm-row span:last-child {
-            color: #fff; font-size: 13px;
-            font-weight: 600; text-align: right;
-            max-width: 60%; word-break: break-all;
-        }
+        .confirm-row span:first-child { color: rgba(255, 255, 255, 0.4); font-size: 12px; }
+        .confirm-row span:last-child { color: #fff; font-size: 13px; font-weight: 600; text-align: right; max-width: 60%; word-break: break-all; }
         .confirm-row .accent { color: #10b981; }
-        .confirm-actions {
-            display: flex; gap: 10px;
-        }
+        .confirm-actions { display: flex; gap: 10px; }
         .btn-confirm {
             flex: 2; padding: 14px; border-radius: 12px;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             border: none; color: #fff;
-            font-family: inherit;
-            font-size: 14px; font-weight: 700;
+            font-family: inherit; font-size: 14px; font-weight: 700;
             cursor: pointer; transition: all 0.3s ease;
-        }
-        .btn-confirm:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
         }
         .btn-cancel {
             flex: 1; padding: 14px; border-radius: 12px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             color: rgba(255, 255, 255, 0.6);
-            font-family: inherit;
-            font-size: 14px; font-weight: 600;
-            cursor: pointer; transition: all 0.3s ease;
-        }
-        .btn-cancel:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
+            font-family: inherit; font-size: 14px; font-weight: 600;
+            cursor: pointer;
         }
 
+        /* ===== #16 - İŞLEM ŞİFRESİ ===== */
+        .password-state {
+            display: none; text-align: center;
+            animation: fadeInUp 0.5s ease;
+        }
+        .password-state.active { display: block; }
+        .password-state .lock-icon {
+            width: 70px; height: 70px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.12);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            display: flex; align-items: center; justify-content: center;
+            animation: successPulse 2s ease-in-out infinite;
+        }
+        .password-state .lock-icon i {
+            font-size: 30px; color: #10b981;
+        }
+        @keyframes successPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.1); }
+            50% { box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
+        }
+        .password-state h3 {
+            color: #fff; font-size: 18px;
+            font-weight: 700; margin-bottom: 6px;
+        }
+        .password-state .password-sub {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px; margin-bottom: 20px;
+        }
+        .password-input-wrap {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        .password-input-wrap input {
+            width: 100%;
+            padding: 14px 46px 14px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s ease;
+            letter-spacing: 3px;
+        }
+        .password-input-wrap input:focus {
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.08);
+        }
+        .password-input-wrap .toggle-pw {
+            position: absolute;
+            right: 14px; top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-verify {
+            width: 100%; padding: 14px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border: none; border-radius: 12px;
+            color: #fff; font-family: inherit;
+            font-size: 14px; font-weight: 700;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+
+        /* ===== SMS ===== */
         .sms-state {
-            display: none; animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: none; animation: fadeInUp 0.5s ease;
             text-align: center;
         }
         .sms-state.active { display: block; }
@@ -489,33 +688,12 @@
             border-radius: 50%; background: rgba(16, 185, 129, 0.12);
             border: 2px solid rgba(16, 185, 129, 0.2);
             display: flex; align-items: center; justify-content: center;
-            animation: successPulse 2s ease-in-out infinite;
         }
-        .sms-state .sms-icon i {
-            font-size: 30px; color: #10b981;
-        }
-        @keyframes successPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.1); }
-            50% { box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
-        }
-        .sms-state h3 {
-            color: #fff; font-size: 18px;
-            font-weight: 700; margin-bottom: 6px;
-        }
-        .sms-state .sms-sub {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 13px; margin-bottom: 4px;
-            line-height: 1.5;
-        }
-        .sms-state .sms-phone {
-            color: #10b981; font-weight: 600;
-            font-size: 13px; margin-bottom: 20px;
-            display: block;
-        }
-        .sms-inputs {
-            display: flex; gap: 8px;
-            justify-content: center; margin-bottom: 16px;
-        }
+        .sms-state .sms-icon i { font-size: 30px; color: #10b981; }
+        .sms-state h3 { color: #fff; font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+        .sms-state .sms-sub { color: rgba(255, 255, 255, 0.4); font-size: 13px; margin-bottom: 4px; line-height: 1.5; }
+        .sms-state .sms-phone { color: #10b981; font-weight: 600; font-size: 13px; margin-bottom: 20px; display: block; }
+        .sms-inputs { display: flex; gap: 8px; justify-content: center; margin-bottom: 16px; }
         .sms-inputs input {
             width: 44px; height: 54px;
             background: rgba(255, 255, 255, 0.04);
@@ -524,12 +702,6 @@
             color: #fff; font-size: 22px; font-weight: 700;
             text-align: center; outline: none;
             font-family: inherit;
-            transition: all 0.2s ease;
-        }
-        .sms-inputs input:focus {
-            border-color: rgba(16, 185, 129, 0.5);
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.08);
-            background: rgba(255, 255, 255, 0.06);
         }
         .sms-inputs input.filled {
             border-color: rgba(16, 185, 129, 0.4);
@@ -542,33 +714,13 @@
             color: rgba(255, 255, 255, 0.4);
             font-size: 12px;
         }
-        .sms-timer strong { color: #10b981; font-weight: 700; }
-        .sms-timer .resend {
-            color: #10b981; cursor: pointer;
-            font-weight: 600; transition: opacity 0.3s;
-        }
-        .sms-timer .resend:hover { opacity: 0.7; }
-        .btn-verify {
-            width: 100%; padding: 14px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border: none; border-radius: 12px;
-            color: #fff; font-family: inherit;
-            font-size: 14px; font-weight: 700;
-            cursor: pointer; transition: all 0.3s ease;
-        }
-        .btn-verify:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-        }
-        .btn-verify:disabled {
-            opacity: 0.5; cursor: not-allowed;
-            transform: none; box-shadow: none;
-        }
+        .sms-timer strong { color: #10b981; }
 
+        /* ===== BAŞARI ===== */
         .success-state {
             display: none; text-align: center;
             padding: 20px 0 10px;
-            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.6s ease;
         }
         .success-state.active { display: block; }
         .success-state .check-circle {
@@ -581,34 +733,16 @@
         }
         .success-state .check-circle i {
             font-size: 36px; color: #10b981;
-            animation: checkPop 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        @keyframes checkPop {
-            0% { transform: scale(0); }
-            60% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        .success-state h2 {
-            color: #fff; font-size: 22px;
-            font-weight: 700; margin-bottom: 6px;
-        }
-        .success-state .success-sub {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 14px; font-weight: 400;
-            margin-bottom: 4px;
-        }
-        .success-state .success-amount {
-            color: #10b981; font-size: 28px;
-            font-weight: 800; margin: 8px 0;
-        }
+        .success-state h2 { color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+        .success-state .success-sub { color: rgba(255, 255, 255, 0.4); font-size: 14px; margin-bottom: 4px; }
+        .success-state .success-amount { color: #10b981; font-size: 28px; font-weight: 800; margin: 8px 0; }
         .success-state .success-detail {
             color: rgba(255, 255, 255, 0.3);
             font-size: 13px; line-height: 1.6;
             max-width: 320px; margin: 0 auto 16px;
         }
-        .success-state .success-detail strong {
-            color: rgba(255, 255, 255, 0.6);
-        }
+        .success-state .success-detail strong { color: rgba(255, 255, 255, 0.6); }
         .receipt-btn {
             display: inline-flex; align-items: center; gap: 8px;
             padding: 10px 20px; border-radius: 10px;
@@ -616,71 +750,281 @@
             border: 1px solid rgba(16, 185, 129, 0.2);
             color: #10b981; font-family: inherit;
             font-size: 13px; font-weight: 600;
-            cursor: pointer; transition: all 0.3s ease;
-            margin-bottom: 12px;
-        }
-        .receipt-btn:hover {
-            background: rgba(16, 185, 129, 0.15);
-            transform: translateY(-2px);
-        }
-        .success-state .timer-bar {
-            width: 100%; height: 3px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 3px; margin: 18px auto 0;
-            overflow: hidden; max-width: 250px;
-        }
-        .success-state .timer-bar .fill {
-            height: 100%; width: 0%;
-            background: linear-gradient(90deg, #10b981, #34d399);
-            border-radius: 3px;
-            animation: fillBar 2s ease-in-out infinite alternate;
-        }
-        @keyframes fillBar {
-            0% { width: 0%; }
-            100% { width: 100%; }
+            cursor: pointer; margin-bottom: 12px;
         }
 
-        .log-panel {
-            margin-top: 20px; padding: 12px 14px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            max-height: 100px; overflow-y: auto;
-            scrollbar-width: thin;
+        /* ===== #25 - KONFETİ ===== */
+        .confetti-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
         }
-        .log-panel::-webkit-scrollbar { width: 4px; }
-        .log-panel::-webkit-scrollbar-thumb {
+        .confetti {
+            position: absolute;
+            width: 8px; height: 14px;
+            top: -20px;
+            animation: confettiFall linear forwards;
+            border-radius: 2px;
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* ===== GİRİŞ / KAYIT ===== */
+        .auth-state { display: none; animation: fadeInUp 0.5s ease; }
+        .auth-state.active { display: block; }
+        .auth-state .auth-title {
+            text-align: center; color: #fff;
+            font-size: 20px; font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .auth-state .auth-sub {
+            text-align: center; color: rgba(255, 255, 255, 0.4);
+            font-size: 13px; margin-bottom: 24px;
+        }
+        .auth-tabs {
+            display: flex; gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px; border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 20px;
+        }
+        .auth-tab {
+            flex: 1; padding: 10px; border-radius: 10px;
+            border: none; background: transparent;
+            color: rgba(255, 255, 255, 0.4);
+            font-family: inherit; font-size: 13px;
+            font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .auth-tab.active {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            color: #10b981;
+        }
+        .auth-error {
+            display: none;
+            padding: 10px 14px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 10px;
+            color: #ef4444;
+            font-size: 12px;
+            margin-bottom: 14px;
+            align-items: center; gap: 8px;
+        }
+        .auth-error.visible { display: flex; }
+
+        /* ===== ADMİN PANEL ===== */
+        .admin-state { display: none; animation: fadeInUp 0.5s ease; }
+        .admin-state.active { display: block; }
+        .admin-state .admin-header {
+            text-align: center; margin-bottom: 20px;
+        }
+        .admin-state .admin-header i {
+            font-size: 40px; color: #fbbf24;
+            margin-bottom: 10px;
+        }
+        .admin-state .admin-header h2 {
+            color: #fff; font-size: 20px; font-weight: 700;
+        }
+        .admin-state .admin-header p {
+            color: rgba(255, 255, 255, 0.4); font-size: 12px;
+            margin-top: 4px;
+        }
+        .admin-users {
+            max-height: 300px; overflow-y: auto;
+            margin-bottom: 16px;
+        }
+        .admin-users::-webkit-scrollbar { width: 4px; }
+        .admin-users::-webkit-scrollbar-thumb {
             background: rgba(16, 185, 129, 0.3); border-radius: 4px;
         }
-        .log-line {
-            color: rgba(16, 185, 129, 0.6);
-            padding: 2px 0;
-            animation: logAppear 0.3s ease;
+        .admin-user-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-size: 12px;
         }
-        .log-line .time { color: rgba(255, 255, 255, 0.3); }
-        .log-line .ok { color: #10b981; }
-        .log-line .info { color: #60a5fa; }
-        @keyframes logAppear {
-            from { opacity: 0; transform: translateX(-10px); }
-            to { opacity: 1; transform: translateX(0); }
+        .admin-user-item .u-info strong { color: #fff; display: block; font-size: 13px; }
+        .admin-user-item .u-info span { color: rgba(255, 255, 255, 0.4); font-size: 11px; }
+        .admin-user-item .u-balance { color: #10b981; font-weight: 700; }
+        .btn-add-balance {
+            padding: 6px 12px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            color: #10b981;
+            font-family: inherit;
+            font-size: 11px; font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
-        .log-panel-title {
-            display: flex; align-items: center; gap: 6px;
+        .btn-add-balance:hover {
+            background: rgba(16, 185, 129, 0.25);
+        }
+
+        /* ===== PROFİL ===== */
+        .profile-state { display: none; animation: fadeInUp 0.5s ease; }
+        .profile-state.active { display: block; }
+        .profile-header {
+            text-align: center; margin-bottom: 20px;
+        }
+        .profile-avatar {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            font-size: 32px;
+            font-weight: 800;
+            margin: 0 auto 12px;
+            border: 3px solid rgba(16, 185, 129, 0.2);
+        }
+        .profile-header h2 {
+            color: #fff; font-size: 18px; font-weight: 700;
+        }
+        .profile-header p {
+            color: rgba(255, 255, 255, 0.4); font-size: 12px;
+            margin-top: 4px;
+        }
+        .profile-stats {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .profile-stat {
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .profile-stat .stat-value {
+            color: #10b981; font-size: 18px;
+            font-weight: 800; margin-bottom: 4px;
+        }
+        .profile-stat .stat-label {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 10px; text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== YENİ: ÜST MENÜ ===== */
+        .top-nav {
+            display: flex; gap: 6px;
+            margin-bottom: 16px;
+        }
+        .nav-btn {
+            flex: 1; padding: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
             color: rgba(255, 255, 255, 0.5);
-            font-size: 10px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 1px;
+            font-family: inherit;
+            font-size: 11px; font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+        }
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .nav-btn.active {
+            background: rgba(16, 185, 129, 0.12);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: #10b981;
+        }
+
+        /* ===== SESSION TIMEOUT SAYACI ===== */
+        .session-timer {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            padding: 8px 14px;
+            background: rgba(20, 25, 40, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            font-weight: 600;
+            z-index: 9000;
+            display: none;
+            align-items: center; gap: 6px;
+        }
+        .session-timer.visible { display: flex; }
+        .session-timer i { color: #10b981; font-size: 12px; }
+        .session-timer strong { color: #10b981; }
+
+        /* ===== BAKİYE YETERSİZ MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center; justify-content: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-box {
+            background: rgba(20, 25, 40, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 28px 24px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 0.4s ease;
+        }
+        .modal-box .modal-icon {
+            width: 60px; height: 60px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.12);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .modal-box .modal-icon i {
+            font-size: 26px; color: #ef4444;
+        }
+        .modal-box h3 {
+            color: #fff; font-size: 17px; font-weight: 700;
             margin-bottom: 8px;
         }
-        .log-panel-title .dot-live {
-            width: 6px; height: 6px; border-radius: 50%;
-            background: #10b981;
-            animation: blinkDot 1.5s ease-in-out infinite;
+        .modal-box p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px; line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .modal-box .modal-actions {
+            display: flex; gap: 10px;
+        }
+        .modal-box .modal-btn {
+            flex: 1; padding: 12px;
+            border-radius: 10px; border: none;
+            font-family: inherit; font-size: 13px; font-weight: 700;
+            cursor: pointer; transition: all 0.2s ease;
+        }
+        .modal-box .modal-btn.primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+        }
+        .modal-box .modal-btn.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        .form-area.hidden { display: none; }
-
+        /* TOAST */
         .toast-container {
             position: fixed; top: 20px; right: 20px;
             z-index: 9999; display: flex;
@@ -693,16 +1037,12 @@
             font-size: 13px; font-weight: 600;
             display: flex; align-items: center; gap: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: toastIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: toastIn 0.4s ease;
             backdrop-filter: blur(10px);
             max-width: 300px;
         }
-        .toast.error {
-            background: rgba(239, 68, 68, 0.95);
-        }
-        .toast.info {
-            background: rgba(59, 130, 246, 0.95);
-        }
+        .toast.error { background: rgba(239, 68, 68, 0.95); }
+        .toast.info { background: rgba(59, 130, 246, 0.95); }
         @keyframes toastIn {
             from { opacity: 0; transform: translateX(100%); }
             to { opacity: 1; transform: translateX(0); }
@@ -717,12 +1057,10 @@
         }
         .spinner.active { display: inline-block; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .btn-text { display: inline; }
         .btn-text.hidden { display: none; }
 
         .crypto-fields { display: none; }
         .crypto-fields.active { display: block; }
-        .iban-fields { display: block; }
         .iban-fields.hidden { display: none; }
 
         .network-selector {
@@ -735,21 +1073,15 @@
             color: rgba(255, 255, 255, 0.4);
             font-family: inherit;
             font-size: 10px; font-weight: 600;
-            cursor: pointer; transition: all 0.2s ease;
+            cursor: pointer;
             display: flex; align-items: center; justify-content: center; gap: 4px;
-        }
-        .network-chip:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.7);
         }
         .network-chip.active {
             background: rgba(16, 185, 129, 0.12);
             border-color: rgba(16, 185, 129, 0.4);
             color: #10b981;
         }
-        .network-chip i { font-size: 12px; }
 
-        /* #17 - Bildirim Paneli */
         .notification-panel {
             position: absolute;
             top: 44px; right: 0;
@@ -767,23 +1099,18 @@
         .notification-panel.active { display: block; }
         .notification-panel .notif-title {
             color: rgba(255, 255, 255, 0.5);
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
             margin-bottom: 10px;
             padding-bottom: 8px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         .notif-item {
-            display: flex;
-            gap: 10px;
+            display: flex; gap: 10px;
             padding: 10px 8px;
             border-radius: 8px;
-            transition: background 0.2s ease;
             cursor: pointer;
         }
-        .notif-item:hover { background: rgba(255, 255, 255, 0.04); }
         .notif-item .notif-icon {
             width: 32px; height: 32px;
             border-radius: 50%;
@@ -793,47 +1120,62 @@
             flex-shrink: 0;
         }
         .notif-item .notif-content {
-            flex: 1;
-            display: flex; flex-direction: column; gap: 3px;
+            flex: 1; display: flex; flex-direction: column; gap: 3px;
         }
-        .notif-item .notif-content strong {
-            color: #fff; font-size: 12px; font-weight: 600;
+        .notif-item .notif-content strong { color: #fff; font-size: 12px; font-weight: 600; }
+        .notif-item .notif-content span { color: rgba(255, 255, 255, 0.4); font-size: 11px; line-height: 1.4; }
+        .notif-item .notif-time { color: rgba(255, 255, 255, 0.25); font-size: 10px; }
+
+        .log-panel {
+            margin-top: 20px; padding: 12px 14px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            max-height: 100px; overflow-y: auto;
         }
-        .notif-item .notif-content span {
-            color: rgba(255, 255, 255, 0.4); font-size: 11px;
-            line-height: 1.4;
+        .log-panel::-webkit-scrollbar { width: 4px; }
+        .log-panel::-webkit-scrollbar-thumb { background: rgba(16, 185, 129, 0.3); border-radius: 4px; }
+        .log-line { color: rgba(16, 185, 129, 0.6); padding: 2px 0; }
+        .log-line .time { color: rgba(255, 255, 255, 0.3); }
+        .log-line .ok { color: #10b981; }
+        .log-line .info { color: #60a5fa; }
+        .log-panel-title {
+            display: flex; align-items: center; gap: 6px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 10px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 8px;
         }
-        .notif-item .notif-time {
-            color: rgba(255, 255, 255, 0.25); font-size: 10px;
+        .log-panel-title .dot-live {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: #10b981;
+            animation: blinkDot 1.5s ease-in-out infinite;
+        }
+        @keyframes blinkDot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
         }
 
-        /* #11 - PDF makbuz yükleniyor overlay */
-        .pdf-loading {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            display: none;
-            align-items: center; justify-content: center;
-            z-index: 10000;
-        }
-        .pdf-loading.active { display: flex; }
-        .pdf-loading-content {
-            text-align: center;
+        .form-area.hidden { display: none; }
+
+        /* Kategori seçici */
+        .category-select {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
             color: #fff;
-        }
-        .pdf-loading-content .pdf-spinner {
-            width: 50px; height: 50px;
-            border: 4px solid rgba(16, 185, 129, 0.2);
-            border-top: 4px solid #10b981;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 16px;
-        }
-        .pdf-loading-content p {
+            font-family: inherit;
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
+            outline: none;
+            cursor: pointer;
+        }
+        .category-select option {
+            background: #0a0e1a;
+            color: #fff;
         }
 
         @media (max-width: 480px) {
@@ -845,10 +1187,15 @@
             .sms-inputs input { width: 38px; height: 48px; font-size: 18px; }
             .mode-btn { font-size: 11px; padding: 10px 4px; }
             .notification-panel { width: 260px; }
+            .progress-circle, .progress-circle svg { width: 80px; height: 80px; }
+            .progress-circle .percent-text { font-size: 16px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- #21 - TOP LOADER -->
+    <div class="top-loader" id="topLoader"></div>
 
     <div class="bg-animation">
         <div class="orb"></div>
@@ -857,13 +1204,37 @@
     </div>
 
     <div class="particles" id="particles"></div>
-
     <div class="toast-container" id="toastContainer"></div>
+    <div class="confetti-container" id="confettiContainer"></div>
 
-    <div class="pdf-loading" id="pdfLoading">
-        <div class="pdf-loading-content">
-            <div class="pdf-spinner"></div>
-            <p>PDF makbuz oluşturuluyor...</p>
+    <!-- SVG Gradient Tanımı -->
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#10b981" />
+                <stop offset="100%" stop-color="#34d399" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- #4 - SESSION TIMEOUT -->
+    <div class="session-timer" id="sessionTimer">
+        <i class="fas fa-clock"></i>
+        <span>Oturum: <strong id="sessionCountdown">15:00</strong></span>
+    </div>
+
+    <!-- BAKİYE YETERSİZ MODAL -->
+    <div class="modal-overlay" id="balanceModal">
+        <div class="modal-box">
+            <div class="modal-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3>Yetersiz Bakiye</h3>
+            <p>Bu işlemi gerçekleştirmek için hesabınızda yeterli bakiye bulunmuyor. Lütfen bakiye yükleyin.</p>
+            <div class="modal-actions">
+                <button class="modal-btn secondary" onclick="closeModal()">İptal</button>
+                <button class="modal-btn primary" onclick="closeModal(); showToast('Bakiye yükleme talimatı için müşteri hizmetlerini arayın', 'info')">Tamam</button>
+            </div>
         </div>
     </div>
 
@@ -872,13 +1243,11 @@
 
             <!-- HEADER -->
             <div class="header">
-                <!-- #17 - Bildirim Zili -->
                 <button class="notification-bell" onclick="toggleNotifications(event)">
                     <i class="fas fa-bell"></i>
                     <span class="badge-dot" id="notifCount">3</span>
                 </button>
 
-                <!-- #17 - Bildirim Paneli -->
                 <div class="notification-panel" id="notificationPanel">
                     <div class="notif-title">Bildirimler</div>
                     <div class="notif-item">
@@ -922,197 +1291,397 @@
                 <div class="subtitle">Resmi Banka Transfer Sistemi</div>
             </div>
 
-            <!-- MOD SEÇİCİ -->
-            <div class="mode-selector">
-                <button class="mode-btn active" data-mode="iban" onclick="switchMode('iban')">
-                    <i class="fas fa-building-columns"></i> IBAN / Havale
-                </button>
-                <button class="mode-btn" data-mode="crypto" onclick="switchMode('crypto')">
-                    <i class="fab fa-bitcoin"></i> Kripto Transfer
-                </button>
-            </div>
+            <!-- ===== GİRİŞ / KAYIT EKRANI ===== -->
+            <div class="auth-state active" id="authState">
+                <div class="auth-title">Hoş Geldiniz</div>
+                <div class="auth-sub">Hesabınıza giriş yapın veya kayıt olun</div>
 
-            <!-- KAYITLI ALICILAR -->
-            <div class="recipient-selector">
-                <div class="recipient-label">
-                    <span><i class="fas fa-star" style="margin-right:4px;color:#fbbf24;font-size:10px;"></i> Kayıtlı Alıcılar</span>
-                    <span class="add-new" onclick="showToast('Yeni alıcı ekleme yakında', 'info')">+ Yeni Ekle</span>
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Giriş Yap</button>
+                    <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Kayıt Ol</button>
                 </div>
-                <div class="recipients-scroll" id="recipientsScroll">
-                    <div class="recipient-chip" onclick="selectRecipient('Ahmet Yılmaz', 'TR12 0006 4000 0011 2345 6789 01', 'AY')">
-                        <div class="avatar">AY</div>
-                        <div class="info">
-                            <strong>Ahmet Yılmaz</strong>
-                            <span>TR12 **** 6789</span>
-                        </div>
-                    </div>
-                    <div class="recipient-chip" onclick="selectRecipient('Zeynep Kaya', 'TR33 0006 1005 1978 6457 8413 26', 'ZK')">
-                        <div class="avatar" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">ZK</div>
-                        <div class="info">
-                            <strong>Zeynep Kaya</strong>
-                            <span>TR33 **** 8413</span>
-                        </div>
-                    </div>
-                    <div class="recipient-chip" onclick="selectRecipient('Mehmet Demir', 'TR45 0011 1000 0000 0011 2345 67', 'MD')">
-                        <div class="avatar" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">MD</div>
-                        <div class="info">
-                            <strong>Mehmet Demir</strong>
-                            <span>TR45 **** 2345</span>
-                        </div>
-                    </div>
-                    <div class="recipient-chip" onclick="selectCryptoRecipient('0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', 'ETH')">
-                        <div class="avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                            <i class="fab fa-ethereum" style="font-size:12px;"></i>
-                        </div>
-                        <div class="info">
-                            <strong>Binance Wallet</strong>
-                            <span>0x742d****0bEb</span>
-                        </div>
-                    </div>
+
+                <div class="auth-error" id="authError">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="authErrorText"></span>
                 </div>
-            </div>
 
-            <!-- SECURITY BAR -->
-            <div class="security-bar">
-                <i class="fas fa-lock"></i>
-                <span id="securityText">256-bit SSL Şifreleme Aktif</span>
-                <span class="dot"></span>
-                <i class="fas fa-check-circle" style="color:#10b981;font-size:12px;"></i>
-            </div>
-
-            <!-- FORM -->
-            <div class="form-area" id="formArea">
-
-                <div class="iban-fields" id="ibanFields">
+                <!-- Giriş Formu -->
+                <div id="loginForm">
                     <div class="form-group">
-                        <label><i class="far fa-credit-card" style="margin-right:4px;"></i> IBAN</label>
-                        <div class="input-wrap">
-                            <span class="icon"><i class="fas fa-building-columns"></i></span>
-                            <input type="text" id="ibanInput" placeholder="TR00 0000 0000 0000 0000 0000 00" maxlength="32" />
-                        </div>
-                        <div class="iban-status" id="ibanStatus">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Geçerli IBAN</span>
-                        </div>
-                        <div class="bank-detected" id="bankDetected">
-                            <i class="fas fa-university"></i>
-                            <span>Banka:</span> <strong id="bankName">-</strong>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="far fa-user" style="margin-right:4px;"></i> Alıcı Adı Soyadı</label>
+                        <label><i class="fas fa-user" style="margin-right:4px;"></i> Kullanıcı Adı</label>
                         <div class="input-wrap">
                             <span class="icon"><i class="fas fa-user"></i></span>
-                            <input type="text" id="nameInput" placeholder="Ahmet Yılmaz" />
+                            <input type="text" id="loginUsername" placeholder="Kullanıcı adınız" />
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock" style="margin-right:4px;"></i> Şifre</label>
+                        <div class="input-wrap">
+                            <span class="icon"><i class="fas fa-lock"></i></span>
+                            <input type="password" id="loginPassword" placeholder="Şifreniz" />
+                        </div>
+                    </div>
+                    <button class="btn-submit" onclick="handleLogin()">
+                        <span class="btn-content">
+                            <span>Giriş Yap</span>
+                            <i class="fas fa-sign-in-alt"></i>
+                        </span>
+                    </button>
                 </div>
 
-                <div class="crypto-fields" id="cryptoFields">
+                <!-- Kayıt Formu -->
+                <div id="registerForm" style="display:none">
                     <div class="form-group">
-                        <label><i class="fab fa-bitcoin" style="margin-right:4px;"></i> Cüzdan Adresi</label>
-                        <div class="input-wrap">
-                            <span class="icon"><i class="fas fa-wallet"></i></span>
-                            <input type="text" id="walletInput" placeholder="0x... veya bc1..." />
-                        </div>
-                        <div class="network-selector" id="networkSelector">
-                            <div class="network-chip active" data-network="TRC20" onclick="selectNetwork('TRC20')">
-                                <i class="fas fa-coins"></i> TRC20
-                            </div>
-                            <div class="network-chip" data-network="ERC20" onclick="selectNetwork('ERC20')">
-                                <i class="fab fa-ethereum"></i> ERC20
-                            </div>
-                            <div class="network-chip" data-network="BEP20" onclick="selectNetwork('BEP20')">
-                                <i class="fas fa-cube"></i> BEP20
-                            </div>
-                            <div class="network-chip" data-network="BTC" onclick="selectNetwork('BTC')">
-                                <i class="fab fa-bitcoin"></i> BTC
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="far fa-user" style="margin-right:4px;"></i> Alıcı Adı</label>
+                        <label><i class="fas fa-user" style="margin-right:4px;"></i> Kullanıcı Adı</label>
                         <div class="input-wrap">
                             <span class="icon"><i class="fas fa-user"></i></span>
-                            <input type="text" id="cryptoNameInput" placeholder="Cüzdan Sahibi" />
+                            <input type="text" id="regUsername" placeholder="Kullanıcı adı" />
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope" style="margin-right:4px;"></i> E-posta</label>
+                        <div class="input-wrap">
+                            <span class="icon"><i class="fas fa-envelope"></i></span>
+                            <input type="email" id="regEmail" placeholder="ornek@mail.com" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock" style="margin-right:4px;"></i> Şifre</label>
+                        <div class="input-wrap">
+                            <span class="icon"><i class="fas fa-lock"></i></span>
+                            <input type="password" id="regPassword" placeholder="En az 6 karakter" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock" style="margin-right:4px;"></i> Şifre (Tekrar)</label>
+                        <div class="input-wrap">
+                            <span class="icon"><i class="fas fa-lock"></i></span>
+                            <input type="password" id="regPassword2" placeholder="Şifre tekrarı" />
+                        </div>
+                    </div>
+                    <button class="btn-submit" onclick="handleRegister()">
+                        <span class="btn-content">
+                            <span>Kayıt Ol</span>
+                            <i class="fas fa-user-plus"></i>
+                        </span>
+                    </button>
                 </div>
 
-                <div class="form-group">
-                    <label><i class="fas fa-coins" style="margin-right:4px;"></i> Gönderilecek Tutar</label>
-                    <div class="input-wrap">
-                        <span class="icon"><i class="fas fa-turkish-lira-sign" id="currencyIcon"></i></span>
-                        <input type="text" id="amountInput" placeholder="1.000,00" />
-                        <span class="currency" id="currencyLabel">TRY</span>
-                    </div>
-                    <div class="quick-amounts">
-                        <button onclick="setAmount(100)">100 ₺</button>
-                        <button onclick="setAmount(500)">500 ₺</button>
-                        <button onclick="setAmount(1000)">1.000 ₺</button>
-                        <button onclick="setAmount(5000)">5.000 ₺</button>
-                    </div>
-                    <div class="fee-info">
-                        <span>İşlem Ücreti</span>
-                        <strong class="free" id="feeAmount">Ücretsiz</strong>
-                    </div>
-                </div>
-
-                <div class="limit-info">
-                    <div class="limit-row">
-                        <span>Günlük İşlem Limiti</span>
-                        <span id="limitText">0 / 2.000.000 ₺</span>
-                    </div>
-                    <div class="limit-progress">
-                        <div class="fill" id="limitFill" style="width: 0%"></div>
-                    </div>
-                </div>
-
-                <button class="btn-submit" id="submitBtn">
-                    <span class="btn-content">
-                        <span class="btn-text" id="btnText">Devam Et</span>
-                        <span class="spinner" id="btnSpinner"></span>
-                        <i class="fas fa-arrow-right" id="btnIcon"></i>
-                    </span>
-                </button>
-
-                <div class="log-panel" id="logPanel">
-                    <div class="log-panel-title">
-                        <div class="dot-live"></div>
-                        İşlem Kayıtları
-                    </div>
-                    <div id="logContent">
-                        <div class="log-line"><span class="time">[SİSTEM]</span> <span class="ok">Bağlantı kuruldu - SSL/TLS 1.3</span></div>
-                    </div>
+                <div class="security-bar" style="margin-top:20px">
+                    <i class="fas fa-lock"></i>
+                    <span>256-bit SSL Şifreleme Aktif</span>
+                    <span class="dot" style="width:4px;height:4px;background:#10b981;border-radius:50%"></span>
+                    <i class="fas fa-check-circle" style="color:#10b981;font-size:12px;"></i>
                 </div>
             </div>
 
-            <!-- ONAY ADIMI -->
+            <!-- ===== ANA UYGULAMA ===== -->
+            <div id="appState" style="display:none">
+
+                <!-- ÜST NAVİGASYON -->
+                <div class="top-nav">
+                    <button class="nav-btn active" onclick="showSection('transfer')">
+                        <i class="fas fa-paper-plane"></i> Transfer
+                    </button>
+                    <button class="nav-btn" onclick="showSection('profile')">
+                        <i class="fas fa-user-circle"></i> Profil
+                    </button>
+                    <button class="nav-btn" id="adminNavBtn" onclick="showSection('admin')" style="display:none">
+                        <i class="fas fa-crown"></i> Admin
+                    </button>
+                    <button class="nav-btn" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i> Çıkış
+                    </button>
+                </div>
+
+                <!-- BAKİYE GÖSTERGESİ -->
+                <div class="balance-badge">
+                    <div class="label">
+                        <i class="fas fa-wallet"></i>
+                        Kullanılabilir Bakiye
+                    </div>
+                    <div class="amount" id="balanceAmount">0,00 ₺</div>
+                </div>
+
+                <!-- ===== TRANSFER BÖLÜMÜ ===== -->
+                <div id="transferSection">
+
+                    <!-- #13 - KREDİ KARTI GÖRSELİ -->
+                    <div class="card-visual">
+                        <div class="card-chip-icon"></div>
+                        <div class="card-number-visual">•••• •••• •••• 4532</div>
+                        <div class="card-bottom">
+                            <div class="card-holder-name" id="cardHolderName">AHMET YILMAZ</div>
+                            <div class="card-expiry">12/28</div>
+                            <div class="card-brand"><i class="fab fa-cc-visa"></i></div>
+                        </div>
+                    </div>
+
+                    <!-- MOD SEÇİCİ -->
+                    <div class="mode-selector">
+                        <button class="mode-btn active" data-mode="iban" onclick="switchMode('iban')">
+                            <i class="fas fa-building-columns"></i> IBAN / Havale
+                        </button>
+                        <button class="mode-btn" data-mode="crypto" onclick="switchMode('crypto')">
+                            <i class="fab fa-bitcoin"></i> Kripto
+                        </button>
+                    </div>
+
+                    <!-- KAYITLI ALICILAR -->
+                    <div class="recipient-selector">
+                        <div class="recipient-label">
+                            <span><i class="fas fa-star" style="margin-right:4px;color:#fbbf24;font-size:10px;"></i> Kayıtlı Alıcılar</span>
+                            <span class="add-new" onclick="showToast('Yeni alıcı ekleme yakında', 'info')">+ Yeni Ekle</span>
+                        </div>
+                        <div class="recipients-scroll">
+                            <div class="recipient-chip" onclick="selectRecipient('Ahmet Yılmaz', 'TR12 0006 4000 0011 2345 6789 01', 'AY')">
+                                <div class="avatar">AY</div>
+                                <div class="info">
+                                    <strong>Ahmet Yılmaz</strong>
+                                    <span>TR12 **** 6789</span>
+                                </div>
+                            </div>
+                            <div class="recipient-chip" onclick="selectRecipient('Zeynep Kaya', 'TR33 0006 1005 1978 6457 8413 26', 'ZK')">
+                                <div class="avatar" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">ZK</div>
+                                <div class="info">
+                                    <strong>Zeynep Kaya</strong>
+                                    <span>TR33 **** 8413</span>
+                                </div>
+                            </div>
+                            <div class="recipient-chip" onclick="selectRecipient('Mehmet Demir', 'TR45 0011 1000 0000 0011 2345 67', 'MD')">
+                                <div class="avatar" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">MD</div>
+                                <div class="info">
+                                    <strong>Mehmet Demir</strong>
+                                    <span>TR45 **** 2345</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FORM -->
+                    <div class="form-area" id="formArea">
+                        <div class="iban-fields" id="ibanFields">
+                            <div class="form-group">
+                                <label><i class="far fa-credit-card" style="margin-right:4px;"></i> IBAN</label>
+                                <div class="input-wrap">
+                                    <span class="icon"><i class="fas fa-building-columns"></i></span>
+                                    <input type="text" id="ibanInput" placeholder="TR00 0000 0000 0000 0000 0000 00" maxlength="32" />
+                                </div>
+                                <div class="iban-status" id="ibanStatus">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Geçerli IBAN</span>
+                                </div>
+                                <div class="bank-detected" id="bankDetected">
+                                    <i class="fas fa-university"></i>
+                                    <span>Banka:</span> <strong id="bankName">-</strong>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label><i class="far fa-user" style="margin-right:4px;"></i> Alıcı Adı Soyadı</label>
+                                <div class="input-wrap">
+                                    <span class="icon"><i class="fas fa-user"></i></span>
+                                    <input type="text" id="nameInput" placeholder="Ahmet Yılmaz" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="crypto-fields" id="cryptoFields">
+                            <div class="form-group">
+                                <label><i class="fab fa-bitcoin" style="margin-right:4px;"></i> Cüzdan Adresi</label>
+                                <div class="input-wrap">
+                                    <span class="icon"><i class="fas fa-wallet"></i></span>
+                                    <input type="text" id="walletInput" placeholder="0x... veya bc1..." />
+                                </div>
+                                <div class="network-selector">
+                                    <div class="network-chip active" data-network="TRC20" onclick="selectNetwork('TRC20')">
+                                        <i class="fas fa-coins"></i> TRC20
+                                    </div>
+                                    <div class="network-chip" data-network="ERC20" onclick="selectNetwork('ERC20')">
+                                        <i class="fab fa-ethereum"></i> ERC20
+                                    </div>
+                                    <div class="network-chip" data-network="BEP20" onclick="selectNetwork('BEP20')">
+                                        <i class="fas fa-cube"></i> BEP20
+                                    </div>
+                                    <div class="network-chip" data-network="BTC" onclick="selectNetwork('BTC')">
+                                        <i class="fab fa-bitcoin"></i> BTC
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-tag" style="margin-right:4px;"></i> İşlem Kategorisi</label>
+                            <select class="category-select" id="categorySelect">
+                                <option>Kira Ödemesi</option>
+                                <option>Fatura Ödemesi</option>
+                                <option>Aile Transferi</option>
+                                <option>İş Ödemesi</option>
+                                <option>Diğer</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-coins" style="margin-right:4px;"></i> Gönderilecek Tutar</label>
+                            <div class="input-wrap">
+                                <span class="icon"><i class="fas fa-turkish-lira-sign" id="currencyIcon"></i></span>
+                                <input type="text" id="amountInput" placeholder="1.000,00" />
+                                <span class="currency" id="currencyLabel">TRY</span>
+                            </div>
+                            <div class="quick-amounts">
+                                <button onclick="setAmount(100)">100 ₺</button>
+                                <button onclick="setAmount(500)">500 ₺</button>
+                                <button onclick="setAmount(1000)">1.000 ₺</button>
+                                <button onclick="setAmount(5000)">5.000 ₺</button>
+                            </div>
+                            <div class="fee-info">
+                                <span>İşlem Ücreti</span>
+                                <strong class="free" id="feeAmount">Ücretsiz</strong>
+                            </div>
+                        </div>
+
+                        <div class="limit-info">
+                            <div class="limit-row">
+                                <span>Günlük İşlem Limiti</span>
+                                <span id="limitText">0 / 2.000.000 ₺</span>
+                            </div>
+                            <div class="limit-progress">
+                                <div class="fill" id="limitFill" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <button class="btn-submit" id="submitBtn">
+                            <span class="btn-content">
+                                <span class="btn-text" id="btnText">Devam Et</span>
+                                <span class="spinner" id="btnSpinner"></span>
+                                <i class="fas fa-arrow-right" id="btnIcon"></i>
+                            </span>
+                        </button>
+
+                        <!-- #2 - İŞLEM ADIMLARI -->
+                        <div class="processing-steps" id="processingSteps">
+                            <div class="step" id="step1"><i class="fas fa-circle"></i> Bilgiler alındı</div>
+                            <div class="step" id="step2"><i class="fas fa-circle"></i> Banka ile iletişim kuruluyor</div>
+                            <div class="step" id="step3"><i class="fas fa-circle"></i> Transfer onaylanıyor</div>
+                            <div class="step" id="step4"><i class="fas fa-circle"></i> İşlem tamamlandı</div>
+                        </div>
+
+                        <!-- #23 - PROGRESS YÜZDESİ -->
+                        <div class="progress-circle-wrap" id="progressWrap">
+                            <div class="progress-circle">
+                                <svg>
+                                    <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+                                    <circle class="circle-fill" id="progressCircle" cx="50" cy="50" r="45"></circle>
+                                </svg>
+                                <div class="percent-text" id="percentText">0%</div>
+                            </div>
+                            <div class="status-text" id="progressStatus">İşleniyor...</div>
+                        </div>
+
+                        <div class="log-panel">
+                            <div class="log-panel-title">
+                                <div class="dot-live"></div>
+                                İşlem Kayıtları
+                            </div>
+                            <div id="logContent">
+                                <div class="log-line"><span class="time">[SİSTEM]</span> <span class="ok">Bağlantı kuruldu - SSL/TLS 1.3</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== PROFİL BÖLÜMÜ ===== -->
+                <div id="profileSection" style="display:none">
+                    <div class="profile-header">
+                        <div class="profile-avatar" id="profileAvatar">?</div>
+                        <h2 id="profileUsername">-</h2>
+                        <p id="profileEmail">-</p>
+                    </div>
+
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="stat-value" id="profileBalance">0 ₺</div>
+                            <div class="stat-label">Bakiye</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="stat-value" id="profileTransfers">0</div>
+                            <div class="stat-label">İşlem</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="stat-value" id="profileLimit">2M ₺</div>
+                            <div class="stat-label">Günlük Limit</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="stat-value">Aktif</div>
+                            <div class="stat-label">Hesap Durumu</div>
+                        </div>
+                    </div>
+
+                    <div class="fee-info" style="padding:14px">
+                        <span>Kayıt Tarihi</span>
+                        <strong id="profileCreated">-</strong>
+                    </div>
+                </div>
+
+                <!-- ===== ADMİN PANEL ===== -->
+                <div id="adminSection" style="display:none">
+                    <div class="admin-state active">
+                        <div class="admin-header">
+                            <i class="fas fa-crown"></i>
+                            <h2>Admin Paneli</h2>
+                            <p>Kullanıcı yönetimi ve bakiye kontrolü</p>
+                        </div>
+
+                        <div class="fee-info" style="margin-bottom:14px">
+                            <span>Toplam Kullanıcı</span>
+                            <strong id="adminTotalUsers">0</strong>
+                        </div>
+
+                        <div class="admin-users" id="adminUsersList">
+                            <!-- Dinamik -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ===== #16 - İŞLEM ŞİFRESİ ===== -->
+            <div class="password-state" id="passwordState">
+                <div class="lock-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>İşlem Şifresi</h3>
+                <div class="password-sub">Güvenliğiniz için işlem şifrenizi girin</div>
+
+                <div class="password-input-wrap">
+                    <input type="password" id="txPassword" placeholder="••••••" maxlength="6" />
+                    <i class="fas fa-eye toggle-pw" id="togglePw" onclick="togglePassword()"></i>
+                </div>
+
+                <button class="btn-verify" id="pwVerifyBtn" onclick="verifyTxPassword()">
+                    Onayla ve Devam Et
+                </button>
+            </div>
+
+            <!-- ONAY -->
             <div class="confirm-state" id="confirmState">
                 <div class="confirm-title">İşlemi Onaylayın</div>
                 <div class="confirm-sub">Bilgilerinizi kontrol edin</div>
-
-                <div class="confirm-detail" id="confirmDetail">
-                </div>
-
+                <div class="confirm-detail" id="confirmDetail"></div>
                 <div class="confirm-actions">
                     <button class="btn-cancel" onclick="goBack()">İptal</button>
                     <button class="btn-confirm" id="confirmBtn">Onayla ve Gönder</button>
                 </div>
             </div>
 
-            <!-- SMS DOĞRULAMA -->
+            <!-- SMS -->
             <div class="sms-state" id="smsState">
-                <div class="sms-icon">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
+                <div class="sms-icon"><i class="fas fa-mobile-alt"></i></div>
                 <h3>SMS Doğrulama</h3>
                 <div class="sms-sub">Kayıtlı telefon numaranıza gönderilen 6 haneli kodu girin</div>
                 <span class="sms-phone">+90 5** *** ** 45</span>
-
-                <div class="sms-inputs" id="smsInputs">
+                <div class="sms-inputs">
                     <input type="text" maxlength="1" inputmode="numeric" />
                     <input type="text" maxlength="1" inputmode="numeric" />
                     <input type="text" maxlength="1" inputmode="numeric" />
@@ -1120,32 +1689,24 @@
                     <input type="text" maxlength="1" inputmode="numeric" />
                     <input type="text" maxlength="1" inputmode="numeric" />
                 </div>
-
                 <div class="sms-timer">
                     Kalan süre: <strong id="smsCountdown">02:59</strong>
-                    <span class="resend" onclick="resendSms()">Tekrar Gönder</span>
                 </div>
-
                 <button class="btn-verify" id="verifyBtn" disabled>Doğrula ve Gönder</button>
             </div>
 
             <!-- BAŞARI -->
             <div class="success-state" id="successState">
-                <div class="check-circle">
-                    <i class="fas fa-check"></i>
-                </div>
+                <div class="check-circle"><i class="fas fa-check"></i></div>
                 <h2 id="successTitle">✓ İşlem Alındı</h2>
                 <div class="success-sub" id="successSub">Paranız işleme alındı</div>
                 <div class="success-amount" id="displayAmount">0,00 ₺</div>
-                <div class="success-detail" id="successDetail">
-                </div>
+                <div class="success-detail" id="successDetail"></div>
                 <button class="receipt-btn" onclick="downloadReceipt()">
                     <i class="fas fa-file-pdf"></i> Makbuz İndir (PDF)
                 </button>
-                <div class="timer-bar"><div class="fill"></div></div>
             </div>
 
-            <!-- FOOTER -->
             <div class="footer">
                 <span>© 2026 FinBank | </span>
                 <a href="#" onclick="event.preventDefault();">Gizlilik Politikası</a>
@@ -1171,136 +1732,403 @@
             }
         })();
 
-        // ==================== #3 SES EFEKTLERİ ====================
+        // ==================== SES EFEKTLERİ ====================
         let audioCtx = null;
-
         function getAudioContext() {
             if (!audioCtx) {
-                try {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                } catch(e) {
-                    return null;
-                }
+                try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+                catch(e) { return null; }
             }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+            if (audioCtx.state === 'suspended') audioCtx.resume();
             return audioCtx;
         }
-
-        // Tıklama sesi
         function playClick() {
-            const ctx = getAudioContext();
-            if (!ctx) return;
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.type = 'sine';
-            osc.frequency.value = 800;
+            const ctx = getAudioContext(); if (!ctx) return;
+            const osc = ctx.createOscillator(), gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.type = 'sine'; osc.frequency.value = 800;
             gain.gain.setValueAtTime(0.08, ctx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
-            osc.start(ctx.currentTime);
-            osc.stop(ctx.currentTime + 0.08);
+            osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.08);
         }
-
-        // Başarı sesi (3 nota)
         function playSuccess() {
-            const ctx = getAudioContext();
-            if (!ctx) return;
+            const ctx = getAudioContext(); if (!ctx) return;
             [523.25, 659.25, 783.99].forEach((freq, i) => {
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.type = 'sine';
-                osc.frequency.value = freq;
-                const startTime = ctx.currentTime + i * 0.12;
-                gain.gain.setValueAtTime(0.001, startTime);
-                gain.gain.exponentialRampToValueAtTime(0.12, startTime + 0.01);
-                gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
-                osc.start(startTime);
-                osc.stop(startTime + 0.3);
+                const osc = ctx.createOscillator(), gain = ctx.createGain();
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.type = 'sine'; osc.frequency.value = freq;
+                const t = ctx.currentTime + i * 0.12;
+                gain.gain.setValueAtTime(0.001, t);
+                gain.gain.exponentialRampToValueAtTime(0.12, t + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+                osc.start(t); osc.stop(t + 0.3);
             });
         }
-
-        // Hata sesi
         function playError() {
-            const ctx = getAudioContext();
-            if (!ctx) return;
+            const ctx = getAudioContext(); if (!ctx) return;
             [400, 300].forEach((freq, i) => {
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.type = 'square';
-                osc.frequency.value = freq;
-                const startTime = ctx.currentTime + i * 0.1;
-                gain.gain.setValueAtTime(0.06, startTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.1);
-                osc.start(startTime);
-                osc.stop(startTime + 0.12);
+                const osc = ctx.createOscillator(), gain = ctx.createGain();
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.type = 'square'; osc.frequency.value = freq;
+                const t = ctx.currentTime + i * 0.1;
+                gain.gain.setValueAtTime(0.06, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+                osc.start(t); osc.stop(t + 0.12);
             });
         }
-
-        // Bildirim sesi
         function playNotification() {
-            const ctx = getAudioContext();
-            if (!ctx) return;
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.type = 'sine';
-            osc.frequency.value = 1200;
+            const ctx = getAudioContext(); if (!ctx) return;
+            const osc = ctx.createOscillator(), gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.type = 'sine'; osc.frequency.value = 1200;
             gain.gain.setValueAtTime(0.05, ctx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
-            osc.start(ctx.currentTime);
-            osc.stop(ctx.currentTime + 0.15);
+            osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.15);
         }
 
+        // ==================== #25 TİTREŞİM ====================
+        function vibrate(pattern) {
+            if (navigator.vibrate) navigator.vibrate(pattern);
+        }
+
+        // ==================== #21 TOP LOADER ====================
+        function showLoader() {
+            const l = document.getElementById('topLoader');
+            l.style.width = '0%';
+            l.classList.add('active');
+            setTimeout(() => { l.style.width = '100%'; }, 100);
+            setTimeout(() => {
+                l.classList.remove('active');
+                l.style.width = '0%';
+            }, 1500);
+        }
+
+        // ==================== VERİTABANI (localStorage) ====================
+        const DB = {
+            users: JSON.parse(localStorage.getItem('finbank_users') || '{}'),
+            currentUser: null,
+            IP_BLACKLIST: JSON.parse(localStorage.getItem('finbank_ips') || '{}'),
+
+            save() {
+                localStorage.setItem('finbank_users', JSON.stringify(this.users));
+                localStorage.setItem('finbank_ips', JSON.stringify(this.IP_BLACKLIST));
+            },
+
+            getUserIP() {
+                // Basit IP simülasyonu (gerçek IP için API gerekir)
+                // Aynı tarayıcıda hep aynı IP döner
+                let ip = localStorage.getItem('finbank_my_ip');
+                if (!ip) {
+                    ip = '192.168.' + Math.floor(Math.random()*255) + '.' + Math.floor(Math.random()*255);
+                    localStorage.setItem('finbank_my_ip', ip);
+                }
+                return ip;
+            }
+        };
+
+        // Admin bilgileri
+        const ADMIN_USERNAME = 'zazatreva31';
+        const ADMIN_PASSWORD = 'zazatreva3131';
+
         // ==================== DOM ====================
+        const authState = document.getElementById('authState');
+        const appState = document.getElementById('appState');
+        const transferSection = document.getElementById('transferSection');
+        const profileSection = document.getElementById('profileSection');
+        const adminSection = document.getElementById('adminSection');
+
         const formArea = document.getElementById('formArea');
+        const passwordState = document.getElementById('passwordState');
         const confirmState = document.getElementById('confirmState');
         const smsState = document.getElementById('smsState');
         const successState = document.getElementById('successState');
 
-        const ibanInput = document.getElementById('ibanInput');
-        const nameInput = document.getElementById('nameInput');
-        const amountInput = document.getElementById('amountInput');
-        const walletInput = document.getElementById('walletInput');
-        const cryptoNameInput = document.getElementById('cryptoNameInput');
+        // ==================== AUTH ====================
+        function switchAuthTab(tab) {
+            playClick();
+            document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+            document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+            document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
+            document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
+            hideAuthError();
+        }
 
-        const submitBtn = document.getElementById('submitBtn');
-        const btnText = document.getElementById('btnText');
-        const btnSpinner = document.getElementById('btnSpinner');
-        const btnIcon = document.getElementById('btnIcon');
-        const confirmBtn = document.getElementById('confirmBtn');
-        const verifyBtn = document.getElementById('verifyBtn');
+        function showAuthError(msg) {
+            document.getElementById('authErrorText').textContent = msg;
+            document.getElementById('authError').classList.add('visible');
+            playError();
+            vibrate([100, 50, 100]);
+        }
 
-        const ibanStatus = document.getElementById('ibanStatus');
-        const bankDetected = document.getElementById('bankDetected');
-        const bankName = document.getElementById('bankName');
-        const currencyIcon = document.getElementById('currencyIcon');
-        const currencyLabel = document.getElementById('currencyLabel');
-        const feeAmount = document.getElementById('feeAmount');
-        const logContent = document.getElementById('logContent');
-        const confirmDetail = document.getElementById('confirmDetail');
-        const displayAmount = document.getElementById('displayAmount');
-        const successDetail = document.getElementById('successDetail');
-        const successTitle = document.getElementById('successTitle');
-        const successSub = document.getElementById('successSub');
-        const limitFill = document.getElementById('limitFill');
-        const limitText = document.getElementById('limitText');
+        function hideAuthError() {
+            document.getElementById('authError').classList.remove('visible');
+        }
 
-        // ==================== STATE ====================
+        function handleRegister() {
+            playClick();
+            const username = document.getElementById('regUsername').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const password2 = document.getElementById('regPassword2').value;
+
+            // Validasyon
+            if (!username || username.length < 3) return showAuthError('Kullanıcı adı en az 3 karakter olmalı');
+            if (!email || !email.includes('@')) return showAuthError('Geçerli bir e-posta girin');
+            if (!password || password.length < 6) return showAuthError('Şifre en az 6 karakter olmalı');
+            if (password !== password2) return showAuthError('Şifreler uyuşmuyor');
+            if (DB.users[username]) return showAuthError('Bu kullanıcı adı zaten kullanılıyor');
+
+            // IP kontrolü - Her IP sadece 1 hesap
+            const myIP = DB.getUserIP();
+            if (DB.IP_BLACKLIST[myIP]) {
+                return showAuthError('Bu IP adresi ile zaten bir hesap oluşturulmuş. Her IP sadece bir hesap açabilir.');
+            }
+
+            // Kayıt
+            showLoader();
+            DB.users[username] = {
+                username,
+                email,
+                password,
+                balance: 0,
+                isAdmin: username === ADMIN_USERNAME,
+                transfers: 0,
+                createdAt: new Date().toISOString(),
+                ip: myIP
+            };
+            DB.IP_BLACKLIST[myIP] = username;
+            DB.save();
+
+            setTimeout(() => {
+                playSuccess();
+                vibrate([50, 30, 50]);
+                showToast('Kayıt başarılı! Giriş yapılıyor...');
+                setTimeout(() => {
+                    DB.currentUser = username;
+                    showApp();
+                }, 800);
+            }, 800);
+        }
+
+        function handleLogin() {
+            playClick();
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!username || !password) return showAuthError('Kullanıcı adı ve şifre gerekli');
+
+            const user = DB.users[username];
+            if (!user || user.password !== password) {
+                return showAuthError('Kullanıcı adı veya şifre hatalı');
+            }
+
+            showLoader();
+            setTimeout(() => {
+                playSuccess();
+                DB.currentUser = username;
+                showApp();
+            }, 600);
+        }
+
+        function showApp() {
+            authState.classList.remove('active');
+            appState.style.display = 'block';
+
+            const user = DB.users[DB.currentUser];
+            updateBalanceDisplay();
+            updateProfile();
+            updateCardHolder();
+
+            // Admin butonunu göster
+            const adminBtn = document.getElementById('adminNavBtn');
+            if (user.isAdmin) {
+                adminBtn.style.display = 'flex';
+            } else {
+                adminBtn.style.display = 'none';
+            }
+
+            // Session timer başlat
+            startSessionTimer();
+
+            showToast(`Hoş geldin, ${user.username}!`);
+        }
+
+        function handleLogout() {
+            playClick();
+            DB.currentUser = null;
+            document.body.classList.remove('processing');
+            appState.style.display = 'none';
+            authState.classList.add('active');
+            formArea.classList.remove('hidden');
+            passwordState.classList.remove('active');
+            confirmState.classList.remove('active');
+            smsState.classList.remove('active');
+            successState.classList.remove('active');
+            profileSection.style.display = 'none';
+            adminSection.style.display = 'none';
+            transferSection.style.display = 'block';
+            stopSessionTimer();
+            showToast('Çıkış yapıldı', 'info');
+        }
+
+        // ==================== BAKİYE ====================
+        function updateBalanceDisplay() {
+            const user = DB.users[DB.currentUser];
+            if (!user) return;
+            const amount = user.balance.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('balanceAmount').textContent = amount + ' ₺';
+        }
+
+        function updateCardHolder() {
+            const user = DB.users[DB.currentUser];
+            if (user) {
+                document.getElementById('cardHolderName').textContent = user.username.toUpperCase();
+            }
+        }
+
+        function updateProfile() {
+            const user = DB.users[DB.currentUser];
+            if (!user) return;
+            const initials = user.username.substring(0, 2).toUpperCase();
+            document.getElementById('profileAvatar').textContent = initials;
+            document.getElementById('profileUsername').textContent = user.username;
+            document.getElementById('profileEmail').textContent = user.email;
+            document.getElementById('profileBalance').textContent = user.balance.toLocaleString('tr-TR') + ' ₺';
+            document.getElementById('profileTransfers').textContent = user.transfers;
+            document.getElementById('profileCreated').textContent = new Date(user.createdAt).toLocaleDateString('tr-TR');
+        }
+
+        // ==================== BÖLÜM DEĞİŞTİR ====================
+        function showSection(section) {
+            playClick();
+            transferSection.style.display = section === 'transfer' ? 'block' : 'none';
+            profileSection.style.display = section === 'profile' ? 'block' : 'none';
+            adminSection.style.display = section === 'admin' ? 'block' : 'none';
+
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.nav-btn').classList.add('active');
+
+            if (section === 'profile') updateProfile();
+            if (section === 'admin') loadAdminPanel();
+        }
+
+        // ==================== ADMİN PANEL ====================
+        function loadAdminPanel() {
+            const list = document.getElementById('adminUsersList');
+            list.innerHTML = '';
+
+            const users = Object.values(DB.users).filter(u => !u.isAdmin);
+            document.getElementById('adminTotalUsers').textContent = users.length;
+
+            if (users.length === 0) {
+                list.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;font-size:12px">Henüz kullanıcı yok</div>';
+                return;
+            }
+
+            users.forEach(u => {
+                const item = document.createElement('div');
+                item.className = 'admin-user-item';
+                item.innerHTML = `
+                    <div class="u-info">
+                        <strong>${u.username}</strong>
+                        <span>${u.email}</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <div class="u-balance">${u.balance.toLocaleString('tr-TR')} ₺</div>
+                        <button class="btn-add-balance" onclick="addBalance('${u.username}')">
+                            <i class="fas fa-plus"></i> Bakiye
+                        </button>
+                    </div>
+                `;
+                list.appendChild(button => {});
+                list.appendChild(item);
+            });
+        }
+
+        function addBalance(username) {
+            const amountStr = prompt(`${username} kullanıcısına yüklenecek bakiye (₺):`, '1000');
+            if (!amountStr) return;
+            const amount = parseFloat(amountStr.replace(',', '.'));
+            if (isNaN(amount) || amount <= 0) {
+                showToast('Geçersiz tutar', 'error');
+                return;
+            }
+
+            DB.users[username].balance += amount;
+            DB.save();
+            loadAdminPanel();
+            updateBalanceDisplay();
+            playSuccess();
+            vibrate([50, 30, 50]);
+            showToast(`${username} kullanıcısına ${amount.toLocaleString('tr-TR')} ₺ yüklendi`);
+        }
+
+        // ==================== TRANSFER ====================
         let currentMode = 'iban';
         let currentNetwork = 'TRC20';
         let transferData = {};
         let limitUsed = 0;
-        const LIMIT_MAX = 2000000; // #limit - 2.000.000 ₺
+        const LIMIT_MAX = 2000000;
 
-        // ==================== BANKALAR ====================
+        function switchMode(mode) {
+            playClick();
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.mode === mode);
+            });
+            document.getElementById('ibanFields').classList.toggle('hidden', mode !== 'iban');
+            document.getElementById('cryptoFields').classList.toggle('active', mode === 'crypto');
+            if (mode === 'iban') {
+                document.getElementById('currencyIcon').className = 'fas fa-turkish-lira-sign';
+                document.getElementById('currencyLabel').textContent = 'TRY';
+            } else {
+                document.getElementById('currencyIcon').className = 'fas fa-dollar-sign';
+                document.getElementById('currencyLabel').textContent = 'USDT';
+            }
+        }
+
+        function selectNetwork(network) {
+            playClick();
+            currentNetwork = network;
+            document.querySelectorAll('.network-chip').forEach(chip => {
+                chip.classList.toggle('active', chip.dataset.network === network);
+            });
+        }
+
+        function selectRecipient(name, iban, initials) {
+            playClick();
+            switchMode('iban');
+            document.getElementById('nameInput').value = name;
+            document.getElementById('ibanInput').value = iban;
+            document.getElementById('ibanInput').dispatchEvent(new Event('input'));
+        }
+
+        function setAmount(amount) {
+            playClick();
+            document.getElementById('amountInput').value = amount.toLocaleString('tr-TR');
+            updateFee();
+        }
+
+        function updateFee() {
+            const amount = parseFloat(document.getElementById('amountInput').value.replace(/\./g, '').replace(',', '.')) || 0;
+            if (currentMode === 'crypto') {
+                document.getElementById('feeAmount').textContent = '0.5 USDT';
+                document.getElementById('feeAmount').classList.remove('free');
+                return;
+            }
+            if (amount <= 1000) {
+                document.getElementById('feeAmount').textContent = 'Ücretsiz';
+                document.getElementById('feeAmount').classList.add('free');
+            } else if (amount <= 5000) {
+                document.getElementById('feeAmount').textContent = (amount * 0.001).toFixed(2) + ' ₺';
+                document.getElementById('feeAmount').classList.remove('free');
+            } else {
+                document.getElementById('feeAmount').textContent = (amount * 0.002).toFixed(2) + ' ₺';
+                document.getElementById('feeAmount').classList.remove('free');
+            }
+        }
+
+        // IBAN doğrulama
         const BANKS = {
             "00010": "Ziraat Bankası", "00012": "Halkbank", "00015": "Vakıfbank",
             "00046": "Akbank", "00059": "Şekerbank", "00062": "Garanti BBVA",
@@ -1308,68 +2136,14 @@
             "00103": "ING Bank", "00111": "Finansbank", "00123": "HSBC",
             "00134": "TEB", "00135": "Anadolubank", "00143": "Odeabank",
             "00146": "Kuveyt Türk", "00203": "Albaraka Türk", "00205": "Türkiye Finans",
-            "00109": "ICBC Turkey", "00115": "QNB Finansbank",
-            "00129": "Alternatif Bank", "00132": "Burgan Bank",
-            "00141": "Aktif Yatırım", "00142": "Fibabanka"
+            "00109": "ICBC Turkey", "00115": "QNB Finansbank"
         };
 
-        // ==================== LOG ====================
-        function addLog(message, type = 'ok') {
-            const time = new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            const line = document.createElement('div');
-            line.className = 'log-line';
-            line.innerHTML = `<span class="time">[${time}]</span> <span class="${type}">${message}</span>`;
-            logContent.appendChild(line);
-            logContent.parentElement.scrollTop = logContent.parentElement.scrollHeight;
-
-            while (logContent.children.length > 20) {
-                logContent.removeChild(logContent.firstChild);
-            }
-        }
-
-        // ==================== TOAST ====================
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            const icon = type === 'error' ? 'exclamation-circle' : type === 'info' ? 'info-circle' : 'check-circle';
-            toast.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
-            container.appendChild(toast);
-
-            if (type === 'error') playError();
-            else if (type === 'info') playNotification();
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(100%)';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        // ==================== #17 BİLDİRİM PANELİ ====================
-        function toggleNotifications(event) {
-            event.stopPropagation();
-            playClick();
-            const panel = document.getElementById('notificationPanel');
-            panel.classList.toggle('active');
-        }
-
-        document.addEventListener('click', function(e) {
-            const panel = document.getElementById('notificationPanel');
-            const bell = document.querySelector('.notification-bell');
-            if (panel.classList.contains('active') && !panel.contains(e.target) && !bell.contains(e.target)) {
-                panel.classList.remove('active');
-            }
-        });
-
-        // ==================== IBAN DOĞRULAMA ====================
         function validateIBAN(iban) {
             iban = iban.replace(/\s/g, '').toUpperCase();
             if (!/^TR\d{24}$/.test(iban)) return false;
-
             const rearranged = iban.slice(4) + iban.slice(0, 4);
             const numeric = rearranged.replace(/[A-Z]/g, c => c.charCodeAt(0) - 55);
-
             let remainder = 0;
             for (let i = 0; i < numeric.length; i++) {
                 remainder = (remainder * 10 + parseInt(numeric[i])) % 97;
@@ -1377,9 +2151,8 @@
             return remainder === 1;
         }
 
-        ibanInput.addEventListener('input', function() {
-            let val = this.value.replace(/\s/g, '').toUpperCase();
-            val = val.replace(/[^A-Z0-9]/g, '');
+        document.getElementById('ibanInput').addEventListener('input', function() {
+            let val = this.value.replace(/\s/g, '').toUpperCase().replace(/[^A-Z0-9]/g, '');
             let formatted = '';
             for (let i = 0; i < val.length; i++) {
                 if (i > 0 && i % 4 === 0) formatted += ' ';
@@ -1387,16 +2160,13 @@
             }
             this.value = formatted;
 
-            const cleanIban = val;
-            if (cleanIban.length >= 26) {
-                if (validateIBAN(cleanIban)) {
+            const ibanStatus = document.getElementById('ibanStatus');
+            const bankDetected = document.getElementById('bankDetected');
+            if (val.length >= 26) {
+                if (validateIBAN(val)) {
                     ibanStatus.className = 'iban-status visible valid';
-                    ibanStatus.innerHTML = '<i class="fas fa-check-circle"></i><span>Geçerli IBAN</span>';
-                    addLog('IBAN doğrulandı', 'ok');
-
-                    const bankCode = cleanIban.slice(4, 9);
-                    const detectedBank = BANKS[bankCode] || 'Bilinmiyor';
-                    bankName.textContent = detectedBank;
+                    const bankCode = val.slice(4, 9);
+                    document.getElementById('bankName').textContent = BANKS[bankCode] || 'Bilinmiyor';
                     bankDetected.classList.add('visible');
                 } else {
                     ibanStatus.className = 'iban-status visible invalid';
@@ -1409,261 +2179,135 @@
             }
         });
 
-        // ==================== MOD DEĞİŞTİR ====================
-        function switchMode(mode) {
-            playClick();
-            currentMode = mode;
-
-            document.querySelectorAll('.mode-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.mode === mode);
-            });
-
-            const ibanFields = document.getElementById('ibanFields');
-            const cryptoFields = document.getElementById('cryptoFields');
-
-            if (mode === 'iban') {
-                ibanFields.classList.remove('hidden');
-                cryptoFields.classList.remove('active');
-                currencyIcon.className = 'fas fa-turkish-lira-sign';
-                currencyLabel.textContent = 'TRY';
-                amountInput.placeholder = '1.000,00';
-                addLog('IBAN/Havale modu aktif', 'info');
-            } else {
-                ibanFields.classList.add('hidden');
-                cryptoFields.classList.add('active');
-                currencyIcon.className = 'fas fa-dollar-sign';
-                currencyLabel.textContent = 'USDT';
-                amountInput.placeholder = '100,00';
-                addLog('Kripto transfer modu aktif', 'info');
-            }
-            showToast(mode === 'iban' ? 'IBAN Modu' : 'Kripto Modu', 'info');
-        }
-
-        function selectNetwork(network) {
-            playClick();
-            currentNetwork = network;
-            document.querySelectorAll('.network-chip').forEach(chip => {
-                chip.classList.toggle('active', chip.dataset.network === network);
-            });
-            addLog(`Ağ seçildi: ${network}`, 'info');
-        }
-
-        function selectRecipient(name, iban, initials) {
-            playClick();
-            switchMode('iban');
-            nameInput.value = name;
-            ibanInput.value = iban;
-            ibanInput.dispatchEvent(new Event('input'));
-
-            document.querySelectorAll('.recipient-chip').forEach(chip => chip.classList.remove('selected'));
-            event.currentTarget.classList.add('selected');
-
-            addLog(`Alıcı seçildi: ${name}`, 'ok');
-            showToast(`Alıcı seçildi: ${name}`);
-        }
-
-        function selectCryptoRecipient(address, network) {
-            playClick();
-            switchMode('crypto');
-            walletInput.value = address;
-            selectNetwork(network);
-
-            document.querySelectorAll('.recipient-chip').forEach(chip => chip.classList.remove('selected'));
-            event.currentTarget.classList.add('selected');
-
-            addLog(`Kripto alıcı seçildi: ${network}`, 'ok');
-            showToast(`Kripto cüzdan seçildi`);
-        }
-
-        function setAmount(amount) {
-            playClick();
-            amountInput.value = amount.toLocaleString('tr-TR');
-            updateFee();
-            addLog(`Tutar seçildi: ${amount}`, 'info');
-        }
-
-        amountInput.addEventListener('input', function() {
-            let val = this.value.replace(/[^0-9,]/g, '');
-            this.value = val;
+        document.getElementById('amountInput').addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9,]/g, '');
             updateFee();
         });
-
-        function updateFee() {
-            const amount = parseFloat(amountInput.value.replace(/\./g, '').replace(',', '.')) || 0;
-
-            if (currentMode === 'crypto') {
-                feeAmount.textContent = '0.5 USDT';
-                feeAmount.classList.remove('free');
-                return;
-            }
-
-            if (amount <= 1000) {
-                feeAmount.textContent = 'Ücretsiz';
-                feeAmount.classList.add('free');
-            } else if (amount <= 5000) {
-                const fee = amount * 0.001;
-                feeAmount.textContent = fee.toFixed(2) + ' ₺';
-                feeAmount.classList.remove('free');
-            } else {
-                const fee = amount * 0.002;
-                feeAmount.textContent = fee.toFixed(2) + ' ₺';
-                feeAmount.classList.remove('free');
-            }
-        }
-
-        function updateLimit() {
-            const amount = parseFloat(amountInput.value.replace(/\./g, '').replace(',', '.')) || 0;
-            const newUsed = Math.min(limitUsed + amount, LIMIT_MAX);
-            const percent = (newUsed / LIMIT_MAX) * 100;
-            limitFill.style.width = Math.min(percent, 100) + '%';
-
-            if (currentMode === 'crypto') {
-                limitText.textContent = `${(newUsed / 1000).toFixed(1)}K / 2M ₺`;
-            } else {
-                limitText.textContent = `${newUsed.toLocaleString('tr-TR')} / ${LIMIT_MAX.toLocaleString('tr-TR')} ₺`;
-            }
-        }
 
         // ==================== SUBMIT ====================
-        submitBtn.addEventListener('click', function(e) {
+        document.getElementById('submitBtn').addEventListener('click', function() {
             playClick();
-            const rect = this.getBoundingClientRect();
-            const ripple = document.createElement('span');
-            ripple.className = 'ripple';
-            const size = Math.max(rect.width, rect.height);
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-            this.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 600);
-        });
+            vibrate(30);
 
-        submitBtn.addEventListener('click', function() {
+            const user = DB.users[DB.currentUser];
             let valid = true;
             let data = { mode: currentMode };
 
             if (currentMode === 'iban') {
-                const iban = ibanInput.value.replace(/\s/g, '');
-                const name = nameInput.value.trim();
-                const amount = amountInput.value.trim();
+                const iban = document.getElementById('ibanInput').value.replace(/\s/g, '');
+                const name = document.getElementById('nameInput').value.trim();
+                const amount = document.getElementById('amountInput').value.trim();
 
-                if (!validateIBAN(iban)) {
-                    showToast('Geçerli bir IBAN girin', 'error');
-                    valid = false;
-                } else if (!name) {
-                    showToast('Alıcı adı gerekli', 'error');
-                    valid = false;
-                } else if (!amount) {
-                    showToast('Tutar gerekli', 'error');
-                    valid = false;
-                } else {
-                    data.iban = ibanInput.value;
+                if (!validateIBAN(iban)) { showToast('Geçerli bir IBAN girin', 'error'); valid = false; }
+                else if (!name) { showToast('Alıcı adı gerekli', 'error'); valid = false; }
+                else if (!amount) { showToast('Tutar gerekli', 'error'); valid = false; }
+                else {
+                    data.iban = document.getElementById('ibanInput').value;
                     data.name = name;
                     data.amount = amount;
                     data.currency = 'TRY';
+                    data.category = document.getElementById('categorySelect').value;
                 }
             } else {
-                const wallet = walletInput.value.trim();
-                const name = cryptoNameInput.value.trim() || 'Cüzdan Sahibi';
-                const amount = amountInput.value.trim();
-
-                if (!wallet) {
-                    showToast('Cüzdan adresi gerekli', 'error');
-                    valid = false;
-                } else if (!amount) {
-                    showToast('Tutar gerekli', 'error');
-                    valid = false;
-                } else {
+                const wallet = document.getElementById('walletInput').value.trim();
+                const amount = document.getElementById('amountInput').value.trim();
+                if (!wallet) { showToast('Cüzdan adresi gerekli', 'error'); valid = false; }
+                else if (!amount) { showToast('Tutar gerekli', 'error'); valid = false; }
+                else {
                     data.wallet = wallet;
-                    data.name = name;
                     data.amount = amount;
                     data.currency = 'USDT';
                     data.network = currentNetwork;
                 }
             }
 
-            if (!valid) return;
+            if (!valid) {
+                playError();
+                vibrate([100, 50, 100]);
+                return;
+            }
+
+            // BAKİYE KONTROLÜ
+            const numericAmount = parseFloat(data.amount.replace(/\./g, '').replace(',', '.')) || 0;
+            if (user.balance < numericAmount) {
+                playError();
+                vibrate([100, 50, 100]);
+                document.getElementById('balanceModal').classList.add('active');
+                return;
+            }
 
             transferData = data;
+            transferData.numericAmount = numericAmount;
 
-            btnText.classList.add('hidden');
-            btnSpinner.classList.add('active');
-            btnIcon.style.display = 'none';
-            submitBtn.disabled = true;
-
-            addLog('İşlem hazırlanıyor...', 'info');
-
-            setTimeout(() => {
-                btnText.classList.remove('hidden');
-                btnSpinner.classList.remove('active');
-                btnIcon.style.display = 'inline';
-                submitBtn.disabled = false;
-
-                showConfirm();
-            }, 1200);
+            // #16 - İŞLEM ŞİFRESİ İSTE
+            showPasswordStep();
         });
 
-        function showConfirm() {
+        // ==================== #16 İŞLEM ŞİFRESİ ====================
+        function showPasswordStep() {
             formArea.classList.add('hidden');
-            smsState.classList.remove('active');
-            successState.classList.remove('active');
+            passwordState.classList.add('active');
+            document.getElementById('txPassword').value = '';
+            setTimeout(() => document.getElementById('txPassword').focus(), 300);
+        }
+
+        function togglePassword() {
+            const inp = document.getElementById('txPassword');
+            const icon = document.getElementById('togglePw');
+            if (inp.type === 'password') {
+                inp.type = 'text';
+                icon.className = 'fas fa-eye-slash toggle-pw';
+            } else {
+                inp.type = 'password';
+                icon.className = 'fas fa-eye toggle-pw';
+            }
+        }
+
+        function verifyTxPassword() {
+            playClick();
+            const pw = document.getElementById('txPassword').value;
+            if (pw.length < 4) {
+                showToast('İşlem şifresi en az 4 haneli olmalı', 'error');
+                playError();
+                return;
+            }
+
+            document.getElementById('pwVerifyBtn').textContent = 'Doğrulanıyor...';
+            document.getElementById('pwVerifyBtn').disabled = true;
+
+            setTimeout(() => {
+                document.getElementById('pwVerifyBtn').textContent = 'Onayla ve Devam Et';
+                document.getElementById('pwVerifyBtn').disabled = false;
+                showConfirm();
+            }, 800);
+        }
+
+        // ==================== ONAY ====================
+        function showConfirm() {
+            passwordState.classList.remove('active');
             confirmState.classList.add('active');
 
             let html = '';
-
             if (currentMode === 'iban') {
                 html = `
-                    <div class="confirm-row">
-                        <span>Alıcı</span>
-                        <span>${transferData.name}</span>
-                    </div>
-                    <div class="confirm-row">
-                        <span>IBAN</span>
-                        <span>${transferData.iban}</span>
-                    </div>
-                    <div class="confirm-row">
-                        <span>Banka</span>
-                        <span>${bankName.textContent}</span>
-                    </div>
-                    <div class="confirm-row">
-                        <span>Tutar</span>
-                        <span class="accent">${transferData.amount} ₺</span>
-                    </div>
-                    <div class="confirm-row">
-                        <span>İşlem Ücreti</span>
-                        <span>${feeAmount.textContent}</span>
-                    </div>
+                    <div class="confirm-row"><span>Alıcı</span><span>${transferData.name}</span></div>
+                    <div class="confirm-row"><span>IBAN</span><span>${transferData.iban}</span></div>
+                    <div class="confirm-row"><span>Kategori</span><span>${transferData.category}</span></div>
+                    <div class="confirm-row"><span>Tutar</span><span class="accent">${transferData.amount} ₺</span></div>
+                    <div class="confirm-row"><span>Ücret</span><span>${document.getElementById('feeAmount').textContent}</span></div>
                 `;
             } else {
                 html = `
-                    <div class="confirm-row">
-                        <span>Alıcı</span>
-                        <span>${transferData.name}</span>
-                    </div>
-                    <div class="confirm-row">
-                        <span>Cüzdan</span>
-                        <span>${transferData.wallet.substring(0, 20)}...${transferData.wallet.slice(-6)}</span>
-                    </div>
-                    <div class="confirm-row">
-                        <span>Ağ</span>
-                        <span>${transferData.network}</span>
-                    </div>
-                    <div class="confirm-row">
-                        <span>Tutar</span>
-                        <span class="accent">${transferData.amount} USDT</span>
-                    </div>
-                    <div class="confirm-row">
-                        <span>Ağ Ücreti</span>
-                        <span>0.5 USDT</span>
-                    </div>
+                    <div class="confirm-row"><span>Cüzdan</span><span>${transferData.wallet.substring(0,20)}...</span></div>
+                    <div class="confirm-row"><span>Ağ</span><span>${transferData.network}</span></div>
+                    <div class="confirm-row"><span>Tutar</span><span class="accent">${transferData.amount} USDT</span></div>
+                    <div class="confirm-row"><span>Ücret</span><span>0.5 USDT</span></div>
                 `;
             }
-
-            confirmDetail.innerHTML = html;
-            addLog('Onay bekleniyor...', 'info');
+            document.getElementById('confirmDetail').innerHTML = html;
         }
 
-        confirmBtn.addEventListener('click', function() {
+        document.getElementById('confirmBtn').addEventListener('click', function() {
             playClick();
             confirmState.classList.remove('active');
             showSms();
@@ -1672,58 +2316,39 @@
         function goBack() {
             playClick();
             confirmState.classList.remove('active');
-            smsState.classList.remove('active');
+            passwordState.classList.remove('active');
             formArea.classList.remove('hidden');
-            addLog('İşlem iptal edildi', 'info');
-            showToast('İşlem iptal edildi', 'info');
         }
 
         // ==================== SMS ====================
         function showSms() {
             smsState.classList.add('active');
-            formArea.classList.add('hidden');
-
             document.querySelectorAll('.sms-inputs input').forEach(inp => {
                 inp.value = '';
                 inp.classList.remove('filled');
             });
-            verifyBtn.disabled = true;
-
-            addLog('SMS doğrulama kodu gönderildi', 'info');
-            showToast('SMS kodu gönderildi');
-
-            setTimeout(() => {
-                document.querySelector('.sms-inputs input').focus();
-            }, 300);
-
+            document.getElementById('verifyBtn').disabled = true;
+            vibrate([50, 30, 50]);
+            playNotification();
+            setTimeout(() => document.querySelector('.sms-inputs input').focus(), 300);
             startSmsCountdown();
         }
 
         document.querySelectorAll('.sms-inputs input').forEach((input, idx) => {
-            input.addEventListener('input', function(e) {
+            input.addEventListener('input', function() {
                 const val = this.value.replace(/[^0-9]/g, '');
                 this.value = val;
-
                 if (val) {
                     this.classList.add('filled');
                     playClick();
                     const inputs = document.querySelectorAll('.sms-inputs input');
-                    if (idx < inputs.length - 1) {
-                        inputs[idx + 1].focus();
-                    }
-                } else {
-                    this.classList.remove('filled');
-                }
-
+                    if (idx < inputs.length - 1) inputs[idx + 1].focus();
+                } else this.classList.remove('filled');
                 checkSmsComplete();
             });
-
             input.addEventListener('keydown', function(e) {
-                if (e.key === 'Backspace' && !this.value) {
-                    const inputs = document.querySelectorAll('.sms-inputs input');
-                    if (idx > 0) {
-                        inputs[idx - 1].focus();
-                    }
+                if (e.key === 'Backspace' && !this.value && idx > 0) {
+                    document.querySelectorAll('.sms-inputs input')[idx - 1].focus();
                 }
             });
         });
@@ -1731,269 +2356,310 @@
         function checkSmsComplete() {
             const inputs = document.querySelectorAll('.sms-inputs input');
             const allFilled = Array.from(inputs).every(inp => inp.value.length === 1);
-            verifyBtn.disabled = !allFilled;
-
-            if (allFilled) {
-                addLog('Kod girildi, doğrulanıyor...', 'info');
-            }
+            document.getElementById('verifyBtn').disabled = !allFilled;
         }
 
         let smsTimer = null;
         function startSmsCountdown() {
             let seconds = 179;
             if (smsTimer) clearInterval(smsTimer);
-
             smsTimer = setInterval(() => {
                 seconds--;
                 const m = Math.floor(seconds / 60);
                 const s = seconds % 60;
                 document.getElementById('smsCountdown').textContent =
                     `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+                if (seconds <= 0) clearInterval(smsTimer);
+            }, 1000);
+        }
 
-                if (seconds <= 0) {
-                    clearInterval(smsTimer);
-                    document.getElementById('smsCountdown').textContent = '00:00';
+        document.getElementById('verifyBtn').addEventListener('click', function() {
+            playClick();
+            this.disabled = true;
+            this.textContent = 'Doğrulanıyor...';
+
+            setTimeout(() => {
+                this.textContent = 'Doğrula ve Gönder';
+                showProcessing();
+            }, 1200);
+        });
+
+        // ==================== #2 İŞLEM ADIMLARI + #23 PROGRESS ====================
+        function showProcessing() {
+            smsState.classList.remove('active');
+            formArea.classList.remove('hidden');
+
+            const steps = document.getElementById('processingSteps');
+            const progressWrap = document.getElementById('progressWrap');
+            const circle = document.getElementById('progressCircle');
+            const percentText = document.getElementById('percentText');
+            const statusText = document.getElementById('progressStatus');
+
+            steps.classList.add('active');
+            progressWrap.classList.add('active');
+            document.body.classList.add('processing');
+
+            // Progress animasyonu
+            let percent = 0;
+            const totalDuration = 5000; // 5 saniye
+            const interval = 50;
+            const increment = 100 / (totalDuration / interval);
+
+            const stepMessages = [
+                'Bilgiler alındı',
+                'Banka ile iletişim kuruluyor',
+                'Transfer onaylanıyor',
+                'İşlem tamamlandı'
+            ];
+
+            const progressInterval = setInterval(() => {
+                percent += increment;
+                if (percent >= 100) {
+                    percent = 100;
+                    clearInterval(progressInterval);
+                }
+
+                // Circle güncelle
+                const offset = 283 - (283 * percent / 100);
+                circle.style.strokeDashoffset = offset;
+                percentText.textContent = Math.round(percent) + '%';
+
+                // Step güncelle
+                const stepIndex = Math.min(Math.floor(percent / 25), 3);
+                for (let i = 0; i < 4; i++) {
+                    const stepEl = document.getElementById('step' + (i + 1));
+                    if (i < stepIndex) {
+                        stepEl.classList.remove('active');
+                        stepEl.classList.add('done');
+                        stepEl.querySelector('i').className = 'fas fa-check-circle';
+                    } else if (i === stepIndex) {
+                        stepEl.classList.add('active');
+                        stepEl.classList.remove('done');
+                        stepEl.querySelector('i').className = 'fas fa-circle';
+                        statusText.textContent = stepMessages[i];
+                    }
+                }
+
+                if (percent >= 100) {
+                    document.getElementById('step4').classList.remove('active');
+                    document.getElementById('step4').classList.add('done');
+                    document.getElementById('step4').querySelector('i').className = 'fas fa-check-circle';
+                    statusText.textContent = 'İşlem tamamlandı';
+                }
+            }, interval);
+
+            // İşlem tamamlandığında
+            setTimeout(() => {
+                steps.classList.remove('active');
+                progressWrap.classList.remove('active');
+                circle.style.strokeDashoffset = 283;
+                percentText.textContent = '0%';
+                document.body.classList.remove('processing');
+
+                // Bakiyeden düş
+                const user = DB.users[DB.currentUser];
+                user.balance -= transferData.numericAmount;
+                user.transfers += 1;
+                DB.save();
+                updateBalanceDisplay();
+                updateProfile();
+
+                showSuccess();
+            }, 5200);
+        }
+
+        // ==================== BAŞARI + #25 KONFETİ ====================
+        function showSuccess() {
+            successState.classList.add('active');
+            playSuccess();
+            vibrate([100, 50, 100, 50, 200]);
+
+            // Konfeti
+            showConfetti();
+
+            const amount = transferData.amount;
+            document.getElementById('displayAmount').textContent = amount + ' ₺';
+            document.getElementById('successDetail').innerHTML = `
+                <strong>${transferData.name || 'Alıcı'}</strong> adlı kişiye
+                <strong>${transferData.iban ? transferData.iban.substring(0, 8) + '...' + transferData.iban.slice(-4) : transferData.wallet.substring(0, 10)}</strong>
+                ${currentMode === 'iban' ? 'IBAN\'ına' : 'adresine'}
+                gönderiminiz <strong>FAST</strong> şekilde işleme alınmıştır.
+                <br><br>
+                2-5 dk içinde hesabınıza yansıtılacaktır.
+            `;
+
+            showToast('İşlem başarıyla tamamlandı!');
+        }
+
+        function showConfetti() {
+            const colors = ['#10b981', '#34d399', '#fbbf24', '#60a5fa', '#a78bfa', '#f472b6'];
+            for (let i = 0; i < 80; i++) {
+                setTimeout(() => {
+                    const c = document.createElement('div');
+                    c.className = 'confetti';
+                    c.style.left = Math.random() * 100 + '%';
+                    c.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    c.style.animationDuration = (2 + Math.random() * 2) + 's';
+                    c.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.getElementById('confettiContainer').appendChild(c);
+                    setTimeout(() => c.remove(), 4500);
+                }, i * 20);
+            }
+        }
+
+        // ==================== PDF MAKBUZ ====================
+        async function downloadReceipt() {
+            playClick();
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const now = new Date();
+            const txNo = 'TX' + Date.now().toString().slice(-10);
+
+            doc.setFillColor(16, 185, 129);
+            doc.rect(0, 0, 210, 40, 'F');
+
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(24);
+            doc.setFont(undefined, 'bold');
+            doc.text('FİNBANK', 105, 20, { align: 'center' });
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            doc.text('İşlem Makbuzu', 105, 30, { align: 'center' });
+
+            doc.setTextColor(40, 40, 40);
+            doc.setFontSize(12);
+            let y = 55;
+            doc.setFont(undefined, 'bold');
+            doc.text('İŞLEM BİLGİLERİ', 20, y);
+            doc.line(20, y + 2, 190, y + 2);
+            y += 12;
+            doc.setFont(undefined, 'normal');
+            doc.text('İşlem No:', 20, y);
+            doc.setFont(undefined, 'bold');
+            doc.text(txNo, 80, y); y += 8;
+            doc.setFont(undefined, 'normal');
+            doc.text('Tarih:', 20, y);
+            doc.text(now.toLocaleString('tr-TR'), 80, y); y += 8;
+            doc.text('Tür:', 20, y);
+            doc.text(currentMode === 'iban' ? 'IBAN/Havale' : 'Kripto', 80, y); y += 15;
+
+            doc.setFont(undefined, 'bold');
+            doc.text('ALICI', 20, y);
+            doc.line(20, y + 2, 190, y + 2);
+            y += 12;
+            doc.setFont(undefined, 'normal');
+            doc.text('Ad:', 20, y);
+            doc.text(transferData.name || '-', 80, y); y += 8;
+            doc.text(currentMode === 'iban' ? 'IBAN:' : 'Cüzdan:', 20, y);
+            doc.text((transferData.iban || transferData.wallet).substring(0, 35), 80, y); y += 15;
+
+            doc.setFont(undefined, 'bold');
+            doc.setFontSize(14);
+            doc.setTextColor(16, 185, 129);
+            doc.text(`TUTAR: ${transferData.amount} ${currentMode === 'iban' ? 'TRY' : 'USDT'}`, 105, y, { align: 'center' });
+            y += 20;
+
+            doc.setTextColor(120, 120, 120);
+            doc.setFontSize(9);
+            doc.setFont(undefined, 'italic');
+            doc.text('FinBank A.Ş. - Bilgilendirme amaçlıdır.', 105, 280, { align: 'center' });
+
+            doc.save(`FinBank_Makbuz_${txNo}.pdf`);
+            showToast('Makbuz indirildi');
+        }
+
+        // ==================== #4 SESSION TIMEOUT ====================
+        let sessionTimerInterval = null;
+        let sessionSeconds = 15 * 60; // 15 dakika
+
+        function startSessionTimer() {
+            sessionSeconds = 15 * 60;
+            document.getElementById('sessionTimer').classList.add('visible');
+            if (sessionTimerInterval) clearInterval(sessionTimerInterval);
+
+            sessionTimerInterval = setInterval(() => {
+                sessionSeconds--;
+                const m = Math.floor(sessionSeconds / 60);
+                const s = sessionSeconds % 60;
+                document.getElementById('sessionCountdown').textContent =
+                    `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+                if (sessionSeconds <= 0) {
+                    clearInterval(sessionTimerInterval);
+                    showToast('Oturum süreniz doldu', 'error');
+                    vibrate([200, 100, 200]);
+                    setTimeout(() => handleLogout(), 2000);
                 }
             }, 1000);
         }
 
-        function resendSms() {
-            playClick();
-            showToast('Yeni kod gönderildi');
-            addLog('SMS kodu yeniden gönderildi', 'info');
-            startSmsCountdown();
+        function stopSessionTimer() {
+            if (sessionTimerInterval) clearInterval(sessionTimerInterval);
+            document.getElementById('sessionTimer').classList.remove('visible');
         }
 
-        verifyBtn.addEventListener('click', function() {
+        function resetSession() {
+            if (DB.currentUser) sessionSeconds = 15 * 60;
+        }
+
+        document.addEventListener('mousemove', resetSession);
+        document.addEventListener('keypress', resetSession);
+        document.addEventListener('click', resetSession);
+
+        // ==================== YARDIMCILAR ====================
+        function toggleNotifications(e) {
+            e.stopPropagation();
             playClick();
-            verifyBtn.disabled = true;
-            verifyBtn.textContent = 'Doğrulanıyor...';
-            addLog('Kod doğrulanıyor...', 'info');
+            document.getElementById('notificationPanel').classList.toggle('active');
+        }
 
-            setTimeout(() => {
-                addLog('Doğrulama başarılı', 'ok');
-                addLog('İşlem gönderiliyor...', 'info');
-
-                verifyBtn.textContent = 'Doğrula ve Gönder';
-
-                setTimeout(() => {
-                    showSuccess();
-                }, 1000);
-            }, 1500);
+        document.addEventListener('click', function(e) {
+            const panel = document.getElementById('notificationPanel');
+            const bell = document.querySelector('.notification-bell');
+            if (panel.classList.contains('active') && !panel.contains(e.target) && !bell.contains(e.target)) {
+                panel.classList.remove('active');
+            }
         });
 
-        // ==================== BAŞARI ====================
-        function showSuccess() {
-            // #25 - Arka plan kırmızıya döner
-            document.body.classList.add('processing');
-
-            smsState.classList.remove('active');
-            successState.classList.add('active');
-
-            // #3 - Başarı sesi
-            playSuccess();
-
-            const amount = transferData.amount;
-
-            if (currentMode === 'iban') {
-                displayAmount.textContent = amount + ' ₺';
-                successTitle.textContent = '✓ İşlem Alındı';
-                successSub.textContent = 'Paranız işleme alındı';
-                successDetail.innerHTML = `
-                    <strong>${transferData.name}</strong> adlı kişiye
-                    <strong>${transferData.iban.substring(0, 8)}...${transferData.iban.slice(-4)}</strong>
-                    IBAN'ına gönderiminiz <strong>FAST</strong> şekilde işleme alınmıştır.
-                    <br><br>
-                    2-5 dk içinde hesabınıza yansıtılacaktır.
-                `;
-            } else {
-                displayAmount.textContent = amount + ' USDT';
-                successTitle.textContent = '✓ Transfer Başlatıldı';
-                successSub.textContent = 'Kripto transferiniz işleniyor';
-                successDetail.innerHTML = `
-                    <strong>${transferData.network}</strong> ağı üzerinden
-                    <strong>${transferData.wallet.substring(0, 10)}...${transferData.wallet.slice(-6)}</strong>
-                    adresine transfer başlatıldı.
-                    <br><br>
-                    Ağ onayı bekleniyor. Ortalama süre: <strong>1-3 dakika</strong>
-                `;
-            }
-
-            addLog('İşlem başarıyla tamamlandı', 'ok');
-            showToast('İşlem başarıyla tamamlandı!');
-
-            limitUsed = Math.min(limitUsed + parseFloat(transferData.amount.replace(/\./g, '').replace(',', '.') || 0), LIMIT_MAX);
-            updateLimit();
-
-            // Arka planı 4 saniye sonra normale döndür
+        function showToast(msg, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'error' ? 'exclamation-circle' : type === 'info' ? 'info-circle' : 'check-circle';
+            toast.innerHTML = `<i class="fas fa-${icon}"></i> ${msg}`;
+            container.appendChild(toast);
+            if (type === 'error') playError();
             setTimeout(() => {
-                document.body.classList.remove('processing');
-            }, 4000);
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
         }
 
-        // ==================== #11 PDF MAKBUZ ====================
-        async function downloadReceipt() {
+        function closeModal() {
             playClick();
-            const loading = document.getElementById('pdfLoading');
-            loading.classList.add('active');
-
-            addLog('PDF makbuz oluşturuluyor...', 'info');
-
-            try {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-
-                const now = new Date();
-                const txNo = 'TX' + Date.now().toString().slice(-10);
-                const tarih = now.toLocaleString('tr-TR');
-
-                // Başlık arka planı
-                doc.setFillColor(16, 185, 129);
-                doc.rect(0, 0, 210, 40, 'F');
-
-                // Logo / Başlık
-                doc.setTextColor(255, 255, 255);
-                doc.setFontSize(24);
-                doc.setFont(undefined, 'bold');
-                doc.text('FİNBANK', 105, 20, { align: 'center' });
-
-                doc.setFontSize(11);
-                doc.setFont(undefined, 'normal');
-                doc.text('İşlem Makbuzu', 105, 30, { align: 'center' });
-
-                // İçerik
-                doc.setTextColor(40, 40, 40);
-                doc.setFontSize(11);
-
-                let y = 55;
-                const lineHeight = 8;
-
-                // İşlem Bilgileri
-                doc.setFont(undefined, 'bold');
-                doc.setFontSize(13);
-                doc.text('İŞLEM BİLGİLERİ', 20, y);
-                y += 3;
-                doc.setDrawColor(16, 185, 129);
-                doc.setLineWidth(0.5);
-                doc.line(20, y, 190, y);
-                y += lineHeight;
-
-                doc.setFont(undefined, 'normal');
-                doc.setFontSize(11);
-
-                doc.text('İşlem No:', 20, y);
-                doc.setFont(undefined, 'bold');
-                doc.text(txNo, 80, y);
-                y += lineHeight;
-                doc.setFont(undefined, 'normal');
-
-                doc.text('Tarih:', 20, y);
-                doc.setFont(undefined, 'bold');
-                doc.text(tarih, 80, y);
-                y += lineHeight;
-                doc.setFont(undefined, 'normal');
-
-                doc.text('İşlem Tipi:', 20, y);
-                doc.setFont(undefined, 'bold');
-                doc.text(currentMode === 'iban' ? 'IBAN / Havale' : 'Kripto Transfer', 80, y);
-                y += lineHeight;
-                doc.setFont(undefined, 'normal');
-
-                doc.text('Durum:', 20, y);
-                doc.setFont(undefined, 'bold');
-                doc.setTextColor(16, 185, 129);
-                doc.text('BAŞARILI', 80, y);
-                doc.setTextColor(40, 40, 40);
-                y += lineHeight * 2;
-
-                // Alıcı Bilgileri
-                doc.setFont(undefined, 'bold');
-                doc.setFontSize(13);
-                doc.text('ALICI BİLGİLERİ', 20, y);
-                y += 3;
-                doc.setDrawColor(16, 185, 129);
-                doc.line(20, y, 190, y);
-                y += lineHeight;
-
-                doc.setFont(undefined, 'normal');
-                doc.setFontSize(11);
-
-                doc.text('Alıcı Adı:', 20, y);
-                doc.setFont(undefined, 'bold');
-                doc.text(transferData.name, 80, y);
-                y += lineHeight;
-                doc.setFont(undefined, 'normal');
-
-                if (currentMode === 'iban') {
-                    doc.text('IBAN:', 20, y);
-                    doc.setFont(undefined, 'bold');
-                    doc.text(transferData.iban, 80, y);
-                    y += lineHeight;
-                    doc.setFont(undefined, 'normal');
-
-                    doc.text('Banka:', 20, y);
-                    doc.setFont(undefined, 'bold');
-                    doc.text(bankName.textContent, 80, y);
-                    y += lineHeight;
-                } else {
-                    doc.text('Cüzdan:', 20, y);
-                    doc.setFont(undefined, 'bold');
-                    doc.text(transferData.wallet.substring(0, 40), 80, y);
-                    y += lineHeight;
-                    doc.setFont(undefined, 'normal');
-
-                    doc.text('Ağ:', 20, y);
-                    doc.setFont(undefined, 'bold');
-                    doc.text(transferData.network, 80, y);
-                    y += lineHeight;
-                }
-                doc.setFont(undefined, 'normal');
-                y += lineHeight;
-
-                // Tutar
-                doc.setFont(undefined, 'bold');
-                doc.setFontSize(13);
-                doc.text('TUTAR', 20, y);
-                y += 3;
-                doc.setDrawColor(16, 185, 129);
-                doc.line(20, y, 190, y);
-                y += lineHeight;
-
-                doc.setFont(undefined, 'normal');
-                doc.setFontSize(11);
-                doc.text('Gönderilen Tutar:', 20, y);
-                doc.setFont(undefined, 'bold');
-                doc.setFontSize(14);
-                doc.setTextColor(16, 185, 129);
-                doc.text(transferData.amount + ' ' + (currentMode === 'iban' ? 'TRY' : 'USDT'), 80, y);
-                doc.setTextColor(40, 40, 40);
-                y += lineHeight * 2;
-
-                // Alt bilgi
-                doc.setFontSize(9);
-                doc.setTextColor(120, 120, 120);
-                doc.setFont(undefined, 'italic');
-                doc.text('Bu makbuz bilgilendirme amaçlıdır.', 105, 270, { align: 'center' });
-                doc.text('FinBank A.Ş. - Tüm hakları saklıdır.', 105, 278, { align: 'center' });
-                doc.text('İletişim: 0850 000 00 00', 105, 286, { align: 'center' });
-
-                doc.save(`FinBank_Makbuz_${txNo}.pdf`);
-
-                loading.classList.remove('active');
-                showToast('PDF makbuz indirildi');
-                addLog('PDF makbuz oluşturuldu', 'ok');
-            } catch(e) {
-                loading.classList.remove('active');
-                showToast('PDF oluşturulamadı', 'error');
-                addLog('PDF hatası: ' + e.message, 'error');
-            }
+            document.getElementById('balanceModal').classList.remove('active');
         }
 
         // ==================== INIT ====================
-        setTimeout(() => addLog('Sistem hazır - İşlem bekleniyor', 'ok'), 500);
-        setTimeout(() => addLog('Güvenli bağlantı aktif', 'info'), 1500);
+        // Admin hesabını başlangıçta oluştur
+        if (!DB.users[ADMIN_USERNAME]) {
+            DB.users[ADMIN_USERNAME] = {
+                username: ADMIN_USERNAME,
+                email: 'admin@finbank.com',
+                password: ADMIN_PASSWORD,
+                balance: 999999999,
+                isAdmin: true,
+                transfers: 0,
+                createdAt: new Date().toISOString(),
+                ip: '127.0.0.1'
+            };
+            DB.save();
+        }
 
-        console.log('💎 FinBank | Resmi Transfer Sistemi v2.1');
+        console.log('💎 FinBank v3.0');
+        console.log('👑 Admin: zazatreva31');
     </script>
 </body>
 </html>
